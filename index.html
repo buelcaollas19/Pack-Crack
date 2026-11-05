@@ -3163,8 +3163,10 @@ document.addEventListener("visibilitychange",()=>{if(document.visibilityState===
 const uniq=()=>Object.keys(S.owned).filter(id=>S.owned[id]>0&&BYID[id]);
 const clubValue=()=>uniq().reduce((a,id)=>a+BYID[id].value,0);
 const totalTitles=()=>Object.values(S.titles).reduce((a,b)=>a+b,0);
+/* cuentas que no aparecen en el ranking global */
+const RANK_HIDE=["elbola"];
 async function pushRank(){
-  if(!ACC||ACC.offline||!DB||CAN_WRITE===false)return;
+  if(!ACC||ACC.offline||!DB||CAN_WRITE===false||RANK_HIDE.includes(ACC.key))return;
   const body={alias:ACC.user,club:S.club||"",value:Math.round(clubValue()*10)/10,titles:totalTitles(),rating:teamRating().ovr,cards:uniq().length};
   const j=JSON.stringify(body);if(j===lastRankJSON)return;
   try{if(DB.supabase)await sbRPC("cds_rank_set",{...SBA(),p_alias:body.alias,p_club:body.club,p_value:body.value,p_titles:body.titles,p_rating:body.rating,p_cards:body.cards});else await DB.doc("clasificacion/"+ACC.key).set({...body,updated:Date.now()});lastRankJSON=j}catch(e){}
@@ -3213,7 +3215,7 @@ let SB_RANK_T=null,SB_GIFT_T=null;
 async function sbConnect(){
   try{await sbRPC("cds_rank",{},7000)}catch(e){return}   /* sin servidor: modo sin conexión */
   DB={supabase:true};
-  const pull=async()=>{try{const rows=await sbRPC("cds_rank",{});RANK=(rows||[]).map(x=>({...x,value:+x.value||0}));RANK_STATE="ok";if(TAB==="ranking"&&ACC&&!$("#layer").innerHTML)render(true)}catch(e){if(!RANK){RANK_STATE="slow";if(TAB==="ranking"&&ACC)render(true)}}};
+  const pull=async()=>{try{const rows=await sbRPC("cds_rank",{});RANK=(rows||[]).map(x=>({...x,value:+x.value||0})).filter(r=>!RANK_HIDE.includes(r.id));RANK_STATE="ok";if(TAB==="ranking"&&ACC&&!$("#layer").innerHTML)render(true)}catch(e){if(!RANK){RANK_STATE="slow";if(TAB==="ranking"&&ACC)render(true)}}};
   pull();clearInterval(SB_RANK_T);SB_RANK_T=setInterval(()=>{if(document.visibilityState!=="hidden")pull()},45000);
 }
 function sbWatchGifts(apply){
@@ -4829,7 +4831,7 @@ async function connect(){
     if(!d)return;DB=d;
     if(u){try{UID=await u.id()}catch(e){}try{CAN_WRITE=await u.can("data.write")}catch(e){CAN_WRITE=null}}
     const t=setTimeout(()=>{RANK_STATE="slow";if(TAB==="ranking"&&ACC)render(true)},10000);
-    DB.collection("clasificacion").orderBy("value","desc").limit(50).onSnapshot(snap=>{if(!snap.metadata.fromCache)clearTimeout(t);RANK=snap.docs.map(x=>({id:x.id,...x.data()}));RANK_STATE="ok";if(TAB==="ranking"&&ACC&&!$("#layer").innerHTML)render(true)},
+    DB.collection("clasificacion").orderBy("value","desc").limit(50).onSnapshot(snap=>{if(!snap.metadata.fromCache)clearTimeout(t);RANK=snap.docs.map(x=>({id:x.id,...x.data()})).filter(r=>!RANK_HIDE.includes(r.id));RANK_STATE="ok";if(TAB==="ranking"&&ACC&&!$("#layer").innerHTML)render(true)},
       ()=>{clearTimeout(t);RANK_STATE="off";if(TAB==="ranking"&&ACC)render(true)});
   }catch(e){DB=null}
 }
