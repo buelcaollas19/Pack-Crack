@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://buelcaollas19.github.io/Pack-Crack/sitemap.xml
