@@ -3154,7 +3154,7 @@ async function pushRemote(){
   if(ACC.offline||!DB||CAN_WRITE===false){setSaveState("local");return}
   if(remoteBusy){remoteAgain=true;return}
   remoteBusy=true;setSaveState("saving");
-  try{await DB.doc("partidas/"+ACC.key).set({user:ACC.user,state:JSON.stringify(S),updated:S.updated});setSaveState("ok")}
+  try{if(DB.supabase)await sbRPC("cds_save",{...SBA(),p_state:JSON.stringify(S),p_updated:S.updated});else await DB.doc("partidas/"+ACC.key).set({user:ACC.user,state:JSON.stringify(S),updated:S.updated});setSaveState("ok")}
   catch(e){setSaveState("error");if(e&&e.code==="invalid_argument")CAN_WRITE=false}
   remoteBusy=false;if(remoteAgain){remoteAgain=false;pushRemote()}
 }
@@ -3167,7 +3167,7 @@ async function pushRank(){
   if(!ACC||ACC.offline||!DB||CAN_WRITE===false)return;
   const body={alias:ACC.user,club:S.club||"",value:Math.round(clubValue()*10)/10,titles:totalTitles(),rating:teamRating().ovr,cards:uniq().length};
   const j=JSON.stringify(body);if(j===lastRankJSON)return;
-  try{await DB.doc("clasificacion/"+ACC.key).set({...body,updated:Date.now()});lastRankJSON=j}catch(e){}
+  try{if(DB.supabase)await sbRPC("cds_rank_set",{...SBA(),p_alias:body.alias,p_club:body.club,p_value:body.value,p_titles:body.titles,p_rating:body.rating,p_cards:body.cards});else await DB.doc("clasificacion/"+ACC.key).set({...body,updated:Date.now()});lastRankJSON=j}catch(e){}
 }
 function addCoins(n){
   S.coins+=n;
@@ -3193,6 +3193,36 @@ async function hashPass(key,pass,salt){
   return hex(await crypto.subtle.deriveBits({name:"PBKDF2",salt:enc.encode(salt+":"+key),iterations:150000,hash:"SHA-256"},k,256));
 }
 
+
+/* ===================== SERVIDOR DE CUENTAS (web pública: Supabase) =====================
+   Dentro de Claude se usa la base de datos del artifact; fuera (GitHub Pages) se usa Supabase.
+   Solo se llama a funciones RPC protegidas: las tablas no son accesibles directamente. */
+const SB_URL="https://dkpwaoctkjhfeqlbttgr.supabase.co",SB_KEY="sb_publishable_SVuE18wnJlGKp3sWqNwJXQ_8rniwB3B";
+const SBM=!(window.claude&&window.claude.use)&&!!SB_URL&&location.protocol!=="file:"||(typeof window.__SB_TEST!=="undefined");
+async function sbRPC(fn,args,timeout=15000){
+  const c=typeof AbortController!=="undefined"?new AbortController():null,t=c?setTimeout(()=>c.abort(),timeout):0;
+  try{
+    const r=await fetch(SB_URL+"/rest/v1/rpc/"+fn,{method:"POST",headers:{apikey:SB_KEY,"Content-Type":"application/json",Accept:"application/json"},body:JSON.stringify(args||{}),signal:c?c.signal:undefined});
+    const tx=await r.text();
+    if(!r.ok){const e=new Error("Servidor "+r.status+": "+tx.slice(0,200));e.status=r.status;throw e}
+    return tx?JSON.parse(tx):null;
+  }finally{if(t)clearTimeout(t)}
+}
+const SBA=()=>ACC&&!ACC.offline?{p_key:ACC.key,p_hash:ACC.hash}:null;
+let SB_RANK_T=null,SB_GIFT_T=null;
+async function sbConnect(){
+  try{await sbRPC("cds_rank",{},7000)}catch(e){return}   /* sin servidor: modo sin conexión */
+  DB={supabase:true};
+  const pull=async()=>{try{const rows=await sbRPC("cds_rank",{});RANK=(rows||[]).map(x=>({...x,value:+x.value||0}));RANK_STATE="ok";if(TAB==="ranking"&&ACC&&!$("#layer").innerHTML)render(true)}catch(e){if(!RANK){RANK_STATE="slow";if(TAB==="ranking"&&ACC)render(true)}}};
+  pull();clearInterval(SB_RANK_T);SB_RANK_T=setInterval(()=>{if(document.visibilityState!=="hidden")pull()},45000);
+}
+function sbWatchGifts(apply){
+  clearInterval(SB_GIFT_T);
+  const poll=async()=>{const a=SBA();if(!a)return;try{const items=await sbRPC("cds_gifts",a);if(Array.isArray(items)&&items.length)apply(items)}catch(e){}};
+  poll();SB_GIFT_T=setInterval(()=>{if(document.visibilityState!=="hidden")poll()},60000);
+  const vis=()=>{if(document.visibilityState==="visible")poll()};document.addEventListener("visibilitychange",vis);
+  return()=>{clearInterval(SB_GIFT_T);document.removeEventListener("visibilitychange",vis)};
+}
 
 /* ===================== AUDIO: música original y efectos ===================== */
 const AU={ctx:null,timer:null,step:0,next:0,playing:false,
@@ -4654,11 +4684,13 @@ $("#muteBtn").onclick=()=>{S.set.music=!S.set.music;if(S.set.music)AU.startMusic
 /* ===================== ACCESO: REGISTRO E INICIO DE SESIÓN ===================== */
 (function zig(){const n=22,pts=[];for(let i=0;i<=n;i++)pts.push(`${(i/n*100).toFixed(2)}% ${i%2?0:2.2}%`);for(let i=n;i>=0;i--)pts.push(`${(i/n*100).toFixed(2)}% ${i%2?100:97.8}%`);document.documentElement.style.setProperty("--zig",`polygon(${pts.join(",")})`)})();
 let AUTH_TAB="login";
+/* progreso jugado sin cuenta en este dispositivo (para importarlo al registrarse) */
+function localProgress(){try{const c=readCache("local");if(c&&c.starter)return c;const o=JSON.parse(localStorage.getItem("crack-de-sobres-v2")||"null");return o&&o.starter?o:null}catch(e){return null}}
 function authHTML(mode){
   const showcase=["icono","leyenda","elite","oro"].map(r=>pick(BYRAR[r]));
   const pos=[["6%","12%","-8deg"],["74%","8%","7deg"],["2%","62%","6deg"],["78%","60%","-6deg"]];
   const offline=!DB&&mode!=="loading";
-  const oldLocal=(()=>{try{const o=JSON.parse(localStorage.getItem("crack-de-sobres-v2")||"null");return o&&o.starter?o:null}catch(e){return null}})();
+  const oldLocal=localProgress();
   return `<div class="overlay auth" role="dialog" aria-modal="true" aria-label="Acceso">
    <div class="auth-bg">${showcase.map((p,i)=>`<div style="position:absolute;left:${pos[i][0]};top:${pos[i][1]};transform:rotate(${pos[i][2]})"><div style="--r2:${pos[i][2]};animation:floaty ${6+i}s ease-in-out infinite">${cardHTML(p,{cw:140})}</div></div>`).join("")}</div>
    <div class="auth-box">
@@ -4705,28 +4737,43 @@ function showAuth(mode="form"){
         if(pass!==$("#aPass2").value)return fail("Las contraseñas no coinciden.");
         if(club.length<2)return fail("Ponle un nombre a tu club (mínimo 2 letras).");
         if(CAN_WRITE===false)return fail("Tu acceso es solo de lectura: no puedes crear una cuenta.");
+        const salt=randSalt();let hash;
+        if(DB.supabase){
+          hash=await hashPass(key,pass,salt);
+          const r=await sbRPC("cds_register",{p_user:user,p_key:key,p_salt:salt,p_hash:hash});
+          if(r!=="ok")return fail(r==="exists"?"Ese usuario ya existe. Elige otro o inicia sesión.":"No se pudo crear la cuenta. Revisa el usuario e inténtalo de nuevo.");
+        }else{
         const ref=DB.doc("cuentas/"+key),lease=await ref.acquire({holder:UID||key,ttlMs:5000});
         if(!lease.acquired)return fail("Alguien está registrando ese usuario ahora mismo. Prueba en unos segundos.");
         const ex=await ref.get();if(ex.exists)return fail("Ese usuario ya existe. Elige otro o inicia sesión.");
-        const salt=randSalt(),hash=await hashPass(key,pass,salt);
+        hash=await hashPass(key,pass,salt);
         await ref.set({user,salt,hash,created:Date.now()});
+        }
         const imp=$("#aImport");let base=freshState();
-        if(imp&&imp.checked){try{base=normState(JSON.parse(localStorage.getItem("crack-de-sobres-v2")))}catch(e){}}
+        if(imp&&imp.checked){try{const lp=localProgress();if(lp)base=normState(lp)}catch(e){}}
         S=base;S.alias=user;S.club=club;
         startSession({user,key,hash},true);
       }else{
+        if(DB.supabase){
+          const a=await sbRPC("cds_salt",{p_key:key}),acc=Array.isArray(a)?a[0]:a;
+          if(!acc||!acc.salt)return fail("No existe ningún mánager con ese usuario. Revisa cómo lo escribiste o regístrate.");
+          const hash=await hashPass(key,pass,acc.salt);
+          if(!(await sbRPC("cds_check",{p_key:key,p_hash:hash})))return fail("Contraseña incorrecta.");
+          await loadAccount({user:acc.usr||user,key,hash});
+        }else{
         const s=await DB.doc("cuentas/"+key).get();
         if(!s.exists)return fail("No existe ningún mánager con ese usuario. Revisa cómo lo escribiste o regístrate.");
         const acc=s.data(),hash=await hashPass(key,pass,acc.salt);
         if(hash!==acc.hash)return fail("Contraseña incorrecta.");
         await loadAccount({user:acc.user,key,hash});
+        }
       }
     }catch(ex){console.error(ex);fail("No se pudo conectar con el servidor del juego. Inténtalo de nuevo.")}
   };
 }
 async function loadAccount(sess){
   let remote=null;
-  try{const p=await DB.doc("partidas/"+sess.key).get();if(p.exists)remote=p.data()}catch(e){}
+  try{if(DB.supabase)remote=await sbRPC("cds_load",{p_key:sess.key,p_hash:sess.hash});else{const p=await DB.doc("partidas/"+sess.key).get();if(p.exists)remote=p.data()}}catch(e){}
   const local=readCache(sess.key);
   let st=freshState();
   if(remote&&remote.state){try{st=normState(JSON.parse(remote.state))}catch(e){}}
@@ -4743,16 +4790,17 @@ let giftUnsub=null;
 function watchGifts(){
   if(giftUnsub){giftUnsub();giftUnsub=null}
   if(!DB||!ACC||ACC.offline)return;
-  try{giftUnsub=DB.doc("regalos/"+ACC.key).onSnapshot(snap=>{
-    if(!snap.exists||!ACC)return;const items=(snap.data().items||[]);let got=0,notes=[];
+  const apply=items=>{
+    if(!ACC||!Array.isArray(items))return;let got=0,notes=[];
     let unl=false;
     items.forEach(it=>{if(!it||!it.id||S.gifts.includes(it.id))return;const c=Math.max(0,Math.floor(+it.coins||0));S.gifts.push(it.id);if(c){S.coins+=c;got+=c}if(it.unlock==="all"){unlockAll();unl=true}if(it.note)notes.push(it.note)});
     if(unl){save();setTop();rewardScene({kind:"unlock",big:true,title:"Todo el contenido del juego",sub:esc(notes.join(" ")),lines:[["Cartas",`${uniq().length} de ${PLAYERS.length}`],["Torneos","Todos"],["Copas de penaltis","Las 23"]]});if(!$("#layer").innerHTML)render(true)}
     if(got){save();setTop();rewardScene({kind:"gift",big:got>=1e6,title:"Has recibido monedas",sub:esc(notes.join(" ")),total:got});if(!$("#layer").innerHTML)render(true)}
-  },()=>{})}catch(e){}
+  };
+  try{giftUnsub=DB.supabase?sbWatchGifts(apply):DB.doc("regalos/"+ACC.key).onSnapshot(snap=>{if(snap.exists)apply(snap.data().items||[])},()=>{})}catch(e){}
 }
 function startSession(sess,isNew,pushNow){
-  ACC={user:sess.user,key:sess.key};lastRankJSON="";
+  ACC={user:sess.user,key:sess.key,hash:sess.hash};lastRankJSON="";
   writeSession({user:sess.user,key:sess.key,hash:sess.hash});
   enterGame();
   if(isNew||pushNow)save();else setSaveState("ok");
@@ -4774,6 +4822,7 @@ function logout(){
   if(giftUnsub){giftUnsub();giftUnsub=null}writeSession(null);ACC=null;S=freshState();setSaveState("idle");AUTH_TAB="login";showAuth();setTop();
 }
 async function connect(){
+  if(SBM)return sbConnect();
   if(!window.claude||!window.claude.use)return;
   try{
     const [u,d]=await Promise.all([window.claude.use("user"),window.claude.use("db")]);
@@ -4791,7 +4840,8 @@ async function boot(){
   const sess=readSession();
   if(sess&&sess.offline&&!DB){enterOffline();return}
   if(sess&&!sess.offline&&DB){
-    try{const s=await DB.doc("cuentas/"+sess.key).get();if(s.exists&&s.data().hash===sess.hash){await loadAccount(sess);return}}catch(e){}
+    try{if(DB.supabase){if(await sbRPC("cds_check",{p_key:sess.key,p_hash:sess.hash})){await loadAccount(sess);return}}
+      else{const s=await DB.doc("cuentas/"+sess.key).get();if(s.exists&&s.data().hash===sess.hash){await loadAccount(sess);return}}}catch(e){}
     writeSession(null);
   }
   showAuth();
