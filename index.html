@@ -1852,7 +1852,7 @@ nav.tabs::before{content:"";position:absolute;left:0;right:0;top:0;height:1px;po
 }
 
 /* === 22_soon.css === */
-.soon-online{position:relative;display:flex;align-items:center;gap:14px;margin:12px 0;padding:14px 16px;border-radius:16px;overflow:hidden;
+.soon-online{position:relative;display:flex;align-items:flex-start;gap:14px;margin:12px 0;padding:14px 16px;border-radius:16px;overflow:hidden;
  background:linear-gradient(110deg,rgba(71,214,207,.16),rgba(138,123,255,.16) 55%,rgba(255,216,77,.12));border:1px solid rgba(255,255,255,.14);box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 10px 28px rgba(0,0,0,.35)}
 .soon-online:after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,transparent 35%,rgba(255,255,255,.12) 50%,transparent 65%);transform:translateX(-100%);animation:soShine 4.5s ease-in-out infinite;pointer-events:none}
 @keyframes soShine{0%,55%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
@@ -1865,6 +1865,10 @@ nav.tabs::before{content:"";position:absolute;left:0;right:0;top:0;height:1px;po
 .so-tag{flex:0 0 auto;font-style:normal;font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;padding:6px 10px;border-radius:999px;color:#231a05;background:linear-gradient(180deg,#ffe58a,#f2c14e);box-shadow:0 2px 0 #b98a1d}
 @media (max-width:480px){.soon-online{padding:12px;gap:10px}.so-ic{flex-basis:40px;height:40px}.so-tx b{font-size:17px}.so-tag{display:none}}
 @media (prefers-reduced-motion:reduce){.soon-online:after{animation:none}}
+.so-list{list-style:none;margin:8px 0 0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px 18px}
+.so-list li{display:flex;gap:8px;align-items:flex-start;font-size:13.5px;line-height:1.35;opacity:.9}
+.so-list i{font-style:normal;flex:0 0 auto}
+@media (max-width:700px){.so-list{grid-template-columns:1fr}}
 
 /* === 30_cards.css === */
 /* ===== Cartas v2: escudo con marco metálico en relieve, arte por rareza, lámina holográfica ===== */
@@ -4413,7 +4417,8 @@ function viewInicio(){
     <button class="tile t-rank" data-go="ranking">${bigIc("ranking")}<b>Ranking</b><span>Compite por el club más valioso</span></button>
    </div>
    <div class="mn-ticker" aria-label="Noticias"><b class="mn-live"><i></i>Última hora</b><div class="mn-tkw"><div class="mn-tkr">${[0,1].map(k=>`<span${k?' aria-hidden="true"':""}>${news.map(n=>`<em>●</em>${esc(n)}`).join("")}</span>`).join("")}</div></div></div>
-   <div class="soon-online" role="note"><div class="so-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 5h16v10H9l-5 4z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M8 9h8M8 12h5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div><div class="so-tx"><small>Próximamente</small><b>Modo online</b><span>Chat con todos los mánagers y desafíos de penaltis 1 contra 1 apostando monedas.</span></div><em class="so-tag">Muy pronto</em></div>
+   <div class="soon-online" role="note"><div class="so-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3l2.6 5.6 6.1.7-4.5 4.2 1.2 6L12 16.6 6.6 19.5l1.2-6L3.3 9.3l6.1-.7z" fill="currentColor"/></svg></div><div class="so-tx"><small>Próximamente · a partir del 10 de noviembre</small><b>Gran actualización</b>
+    <ul class="so-list"><li><i>💬</i>Modo online: chat con todos los mánagers</li><li><i>⚔️</i>Desafíos de penaltis 1 contra 1 apostando monedas</li><li><i>🎮</i>Partidos interactivos: decide tú en los momentos clave</li><li><i>🃏</i>Muchos más sobres y 4 rarezas nuevas, media hasta 200</li><li><i>🏆</i>Muchos más torneos y más de 50 Copas de Penaltis</li><li><i>⚡</i>Mejor rendimiento en móviles</li></ul></div><em class="so-tag">10 nov</em></div>
    <div class="two mn-two">
     <div class="panel mn-album"><div class="mn-ph"><h3>Álbum</h3><span class="note num">${own} / ${tot}</span></div>
      <div class="mn-album-in">
