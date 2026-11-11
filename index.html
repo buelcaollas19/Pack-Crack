@@ -11612,7 +11612,7 @@ function arMatch(cfg,onEnd){
     else if(BTN[act]!==undefined){IN.bk.add(e.code);press(act);e.preventDefault()}
     else if(act==="switch"){IN.ev|=AR_B.sw;e.preventDefault()}
     else if(act==="tackle"){IN.ev|=AR_B.tk;e.preventDefault()}
-    else if(act==="tactic"){IN.tac=true;e.preventDefault()}};
+    else if(act==="tactic"){e.preventDefault()}/* tácticas retiradas */};
   const ku=e=>{if(AR_CAP)return;const act=arKeyAct(e.code);if(!act)return;
     if(MV[act]){IN.keys.delete(e.code);recalcK();e.preventDefault()}
     else if(BTN[act]!==undefined){IN.bk.delete(e.code);let still=false;IN.bk.forEach(k=>{if(arKeyAct(k)===act)still=true});if(!still)release(act);e.preventDefault()}};
@@ -11669,7 +11669,7 @@ function arMatch(cfg,onEnd){
     if(Math.abs(mx-SB.mx)+Math.abs(my-SB.my)>.05||rise||fall||inp.e)SB.last=G.t;
     if(m<.05){SB.mx=SB.my=SB.mm=0}else{SB.mx=mx/m;SB.my=my/m;SB.mm=Math.min(1,m)}
     SB.b=b;const h=hum(tm);if(!h)return;const tb=teamBall(tm);
-    if((inp.e&24)===24){const g0=gk(tm);g0.tac=(g0.tac+1)%4;inp={mx:inp.mx,my:inp.my,b:inp.b,e:0}}/* táctica de la CPU de tu equipo: defensiva → equilibrada → ofensiva → ultraofensiva */
+    if((inp.e&24)===24){/* tácticas retiradas: siempre equilibrada */inp={mx:inp.mx,my:inp.my,b:inp.b,e:0}}/* táctica de la CPU de tu equipo: defensiva → equilibrada → ofensiva → ultraofensiva */
     if(rise&1){SB.t0[0]=G.t;if(!tb)doSwitch(tm)}
     if(rise&2){SB.t0[1]=G.t;if(!tb)doTackle(h)}
     if(rise&4){SB.t0[2]=G.t;if(ball.owner===h)doSkill(h);else doSprint(h)}
@@ -11689,7 +11689,7 @@ function arMatch(cfg,onEnd){
       if(!touch){cdHud=document.createElement("div");cdHud.style.cssText="position:absolute;left:50%;bottom:44px;transform:translateX(-50%);padding:3px 10px;border-radius:99px;background:rgba(0,0,0,.55);color:#fff;font:700 .8rem var(--display,sans-serif);letter-spacing:.04em;pointer-events:none;white-space:nowrap";ov.appendChild(cdHud)}}
     const show=own&&t>0;cdEl.style.display=show?"grid":"none";btnEl.drib.firstElementChild.style.visibility=show?"hidden":"";if(show){cdEl.style.background=`conic-gradient(rgba(0,0,0,.66) ${Math.round(f*360)}deg,rgba(0,0,0,0) 0)`;cdEl.textContent=t.toFixed(1)}
     if(cdHud){cdHud.style.display=own||t>0?"block":"none";cdHud.textContent=t>0?`REGATE ${t.toFixed(1)} s`:"REGATE LISTO";cdHud.style.opacity=t>0?".95":".55";cdHud.style.color=t>0?"#ffd84d":"#9fffb4"}}
-  function syncBtns(){syncCd();syncTac();tacB.style.display=G.tut?"none":"";const has=!!myBall(),dn=(IN.down.pass?1:0)|(IN.down.shot?2:0)|(IN.down.drib?4:0);if(has===lastHas&&dn===lastDn)return;
+  function syncBtns(){syncCd();syncTac();tacB.style.display="none";const has=!!myBall(),dn=(IN.down.pass?1:0)|(IN.down.shot?2:0)|(IN.down.drib?4:0);if(has===lastHas&&dn===lastDn)return;
     if(has!==lastHas){lastHas=has;const lab=has?["Pase","Tiro","Regate"]:["Cambiar","Entrada","Sprint"];btnEl.pass.firstElementChild.textContent=lab[0];btnEl.shot.firstElementChild.textContent=lab[1];btnEl.drib.firstElementChild.textContent=lab[2];ov.classList.toggle("def",!has)}
     if(dn!==lastDn){lastDn=dn;btnEl.pass.classList.toggle("dn",!!(dn&1));btnEl.shot.classList.toggle("dn",!!(dn&2));btnEl.drib.classList.toggle("dn",!!(dn&4))}}
   /* ---------- vista y orientación ---------- */
@@ -12367,7 +12367,6 @@ const AR_ACTS=[
   {k:"drib",n:"Regate / sprint",h:"Con balón: finta · sin balón: sprint",d:["KeyL","ShiftLeft"]},
   {k:"switch",n:"Cambiar jugador",d:["KeyQ","KeyE"]},
   {k:"tackle",n:"Entrada",d:["KeyU",""]},
-  {k:"tactic",n:"Táctica de tu equipo",h:"Cicla defensiva · equilibrada · ofensiva · ultraofensiva",d:["KeyT",""]},
   {k:"pause",n:"Pausa",h:"Esc también pausa siempre",d:["KeyP",""]}];
 const AR_ACT=Object.fromEntries(AR_ACTS.map(a=>[a.k,a]));
 const AR_KEY_OK=c=>typeof c==="string"&&/^[A-Za-z0-9]{1,24}$/.test(c)&&c!=="Escape";
@@ -12825,7 +12824,7 @@ function pvRT(chan,on){
 /* ---------- transporte: WebRTC P2P ---------- */
 function pvRTC(host,sig,on){
   let pc=null,u=null,r=null;const pend=[];
-  try{pc=new RTCPeerConnection({iceServers:window.__PVP_ICE||[{urls:["stun:stun.l.google.com:19302","stun:stun.cloudflare.com:3478"]}]})}catch(e){return null}
+  try{pc=new RTCPeerConnection({iceServers:window.__PVP_ICE||(typeof pvIce==="function"?pvIce():[{urls:["stun:stun.l.google.com:19302","stun:stun.cloudflare.com:3478"]}])})}catch(e){return null}
   const setup=c=>{c.binaryType="arraybuffer";c.onmessage=e=>on("msg",e.data);c.onopen=()=>on("state");c.onclose=()=>on("state")};
   if(host){u=pc.createDataChannel("u",{ordered:false,maxRetransmits:0});r=pc.createDataChannel("r",{ordered:true});setup(u);setup(r)}
   else pc.ondatachannel=e=>{const c=e.channel;if(c.label==="u")u=c;else r=c;setup(c);on("state")};
@@ -13383,6 +13382,23 @@ function plLobby(entry){
   X.show=()=>{OL.playing=true;show()};X.destroy=destroy;X.pdbg=()=>({p2p:!!(rtc&&rtc.rOk()),rt:!!(rt&&rt.up),peer:X.peer,sh:X.sh.map(s=>s.map(x=>x.h).join("")),shown:X.shown.slice()});
   show();
 }
+
+/* ===================== SERVIDOR TURN (Metered) para los partidos en directo =====================
+   Solo se usa si la conexión directa P2P no es posible; así se evita el relevo por Supabase. */
+const TURN_URL="https://crackdesobres.metered.live/api/v1/turn/credentials?apiKey=2dde5179903ad6ac0fce5e88964b926dcfd1";
+const ICE_STUN=[{urls:["stun:stun.l.google.com:19302","stun:stun.cloudflare.com:3478"]}];
+let ICE_TURN=null,ICE_AT=0,ICE_BUSY=null;
+function iceRefresh(){
+  if(ICE_BUSY||(ICE_TURN&&Date.now()-ICE_AT<30*60*1000))return ICE_BUSY;
+  const c=typeof AbortController!=="undefined"?new AbortController():null,t=c?setTimeout(()=>c.abort(),4000):0;
+  ICE_BUSY=fetch(TURN_URL,{signal:c?c.signal:undefined}).then(r=>r.ok?r.json():null).then(j=>{
+    if(Array.isArray(j)&&j.length){ICE_TURN=j.filter(s=>s&&s.urls);ICE_AT=Date.now()}
+  }).catch(()=>{}).finally(()=>{if(t)clearTimeout(t);ICE_BUSY=null});
+  return ICE_BUSY;
+}
+function pvIce(){iceRefresh();return ICE_TURN&&ICE_TURN.length?ICE_STUN.concat(ICE_TURN):ICE_STUN}
+/* se piden por adelantado (web pública) para que estén listas al empezar un partido */
+if(typeof SBM!=="undefined"&&SBM){setTimeout(iceRefresh,3000);document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible")iceRefresh()})}
 
 /* ===================== INTERFAZ «NOCTURNA»: transiciones y microinteracciones (solo presentación) =====================
    · Cambio de pestaña: entrada escalonada de la vista + barrido de luz y el indicador del dock se desliza desde la pestaña anterior.
