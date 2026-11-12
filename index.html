@@ -11444,7 +11444,9 @@ const arIdleRate=tr=>Math.round((2000+8000*Math.pow(clamp(+tr||0,0,20000)/100,.7
    Lo acumulado ANTES de comprar se queda a la tasa antigua: la compra liquida primero (arIdleSettle) y solo las horas siguientes van ×2. */
 const AR_IDLE_UP=250000,AR_IDLE_LV=4;   /* 4 mejoras de +×0,25 a 250.000 cada una (máximo ×2) */
 const arIdleMul=()=>1+.25*(AR().idX||0);
-const arIdleRateNow=tr=>arIdleRate(tr)*arIdleMul();
+/* el multiplicador del equipo (media del once, el mismo de amistosos, torneos y premio diario) también multiplica la recompensa pasiva */
+const arTeamMul=()=>{try{return econMult(teamRating().ovr)||1}catch(e){return 1}};
+const arIdleRateNow=tr=>Math.round(arIdleRate(tr)*arIdleMul()*arTeamMul());
 function arIdleSettle(){const A=AR();if(!A.on)return A;const now=arNow();
   if(!A.idT||A.idT>now)A.idT=now;
   const dh=Math.min(Math.max(0,(now-A.idT)/36e5),AR_IDLE_H-A.idH);A.idT=now;
@@ -11454,7 +11456,7 @@ function arIdleInfo(){const A=arIdleSettle(),rate=arIdleRateNow(A.tr),left=Math.
   return {rate,coins:Math.floor(A.idC+1e-6),h:A.idH,left,leftMs:left*36e5,full:left<=1e-6,max:Math.round(AR_IDLE_H*rate)}}
 function arIdleBuy(){const A=AR();if(!A.on||A.idX>=AR_IDLE_LV)return;
   if(S.coins<AR_IDLE_UP){toast(`Te faltan ${fmt(AR_IDLE_UP-S.coins)} monedas para la mejora.`);return}
-  const m0=arIdleMul(),m1=m0+.25,r=arIdleRate(A.tr),fx=m=>'×'+String(m).replace('.',',');
+  const m0=arIdleMul(),m1=m0+.25,r=arIdleRate(A.tr)*arTeamMul(),fx=m=>'×'+String(m).replace('.',',');
   openSheet(`<div class="ar-up-sheet"><div class="sheet-h"><h3>Mejorar monedas por hora</h3><button class="btn small" data-close>Cancelar</button></div>
    <p>Mejora ${A.idX+1} de ${AR_IDLE_LV}: pagas <b class="num">${fmt(AR_IDLE_UP)}</b> monedas y tu recompensa pasiva pasa de <b>${fx(m0)}</b> a <b>${fx(m1)}</b> para siempre (máximo ×2).</p>
    <p class="note">Ahora: <b class="num">${fmt(r*m0)}/h</b> → con la mejora: <b class="num">${fmt(r*m1)}/h</b> (y seguirá subiendo con tus trofeos). Lo ya acumulado se queda a la tasa actual.</p>
@@ -11467,7 +11469,7 @@ function arIdleClaim(){const A=AR();if(!A.on)return;const i=arIdleInfo();if(i.co
   rewardScene({kind:"gift",big:i.coins>=1e6,title:"Recompensa pasiva",sub:`${fdec(i.h,1)} h de monedas acumuladas a ${fmt(i.rate)}/h`,total:i.coins,lines:[["Tasa",fmt(i.rate)+" /h"],["Horas",fdec(i.h,1)+" de "+AR_IDLE_H]]})}
 const arIdleTime=ms=>{const h=Math.floor(ms/36e5),d=Math.floor(h/24),m=Math.floor(ms%36e5/6e4);return d?`${d} d ${h%24} h`:h?`${h} h ${String(m).padStart(2,"0")} min`:`${m} min`};
 function arIdleHTML(){const i=arIdleInfo();
-  return `<div class="ar-idle panel" id="arIdle"><div class="ar-idle-h"><div><h3>Recompensa pasiva</h3><span class="note">Se acumula aunque no juegues, hasta ${AR_IDLE_H} h</span></div><b class="ar-idle-r num">+${fmt(i.rate)}<small>/h</small>${AR().idX?'<em class="ar-idle-x">×'+String(arIdleMul()).replace('.',',')+'</em>':""}</b></div>
+  return `<div class="ar-idle panel" id="arIdle"><div class="ar-idle-h"><div><h3>Recompensa pasiva</h3><span class="note">Se acumula aunque no juegues, hasta ${AR_IDLE_H} h${arTeamMul()>1?` · incluye el multiplicador del equipo <b class="num">${fmtX(arTeamMul())}</b>`:""}</span></div><b class="ar-idle-r num">+${fmt(i.rate)}<small>/h</small>${AR().idX?'<em class="ar-idle-x">×'+String(arIdleMul()).replace('.',',')+'</em>':""}</b></div>
    <div class="ar-idle-m"><span class="ar-idle-c"><i class="ar-coin" aria-hidden="true"></i><b class="num" id="arIdC">${fmt(i.coins)}</b></span><button class="btn primary" id="arIdClaim"${i.coins<1?" disabled":""}>Reclamar</button></div>
    <div class="ar-bar ar-idle-bar" role="img" aria-label="${fdec(i.h,1)} de ${AR_IDLE_H} horas acumuladas"><i id="arIdBar" style="width:${Math.round(i.h/AR_IDLE_H*100)}%"></i><span class="num" id="arIdH">${fdec(i.h,1)} / ${AR_IDLE_H} h</span></div>
    ${AR().idX>=AR_IDLE_LV?"":`<button class="btn ar-idle-up" id="arIdUp"${S.coins<AR_IDLE_UP?' aria-disabled="true"':""}>Mejorar a ×${String(arIdleMul()+.25).replace('.',',')} · <b class="num">${fmt(AR_IDLE_UP)}</b> <small>(${AR().idX||0}/${AR_IDLE_LV})</small></button>`}
@@ -11482,10 +11484,12 @@ function arTrophyDelta(win,gd,skill,a){
   /* derrota: 25 en la 1.ª arena y de 33 a 46 después (+1 por cada gol de diferencia por encima de 1, máx. +4); la ronda de habilidad resta el 60 %.
      Proporción derrota/victoria 0,45-0,85 (v1: 0,5-0,9): con la CPU subiendo de nivel con los trofeos, cada arena cuesta un número de partidas parecido al de antes. */
   const base=a===0?25:clamp(32+a,33,46);return -Math.round(skill?base*.6:base+Math.min(4,Math.max(0,-gd-1)))}
+/* racha: cada victoria seguida sin perder suma ×0,15 a los trofeos de la siguiente victoria (1.ª ×1, 2.ª ×1,15, 3.ª ×1,30... hasta ×5 como máximo) */
+const arStreakMul=k=>Math.min(5,1+.15*Math.max(0,k|0)),arMulTxt=m=>'×'+(Math.round(m*100)/100).toString().replace('.',',');
 /* aplica el resultado de una partida (una sola vez por id de partida) y devuelve el resumen */
 function arApplyResult(id,res){
   const A=arIdleSettle();if(A.lastId===id)return null;A.lastId=id;
-  const a0=arIdxOf(A.tr),win=res.win,d=arTrophyDelta(win,res.gf-res.ga,res.skill,a0),floor=AR_LIST[a0].min;
+  const a0=arIdxOf(A.tr),win=res.win,sm=win?arStreakMul(A.streak):1,d=Math.round(arTrophyDelta(win,res.gf-res.ga,res.skill,a0)*sm),floor=AR_LIST[a0].min;
   const tr0=A.tr;A.tr=Math.max(floor,A.tr+d);A.best=Math.max(A.best,A.tr);
   if(win){A.w++;A.streak++}else{A.l++;A.streak=0}if(res.skill)A.d++;A.gf+=res.gf;A.ga+=res.ga;
   S.stats.pj++;win?S.stats.g++:S.stats.p++;S.stats.gf+=res.gf;S.stats.gc+=res.ga;
@@ -11499,7 +11503,7 @@ function arApplyResult(id,res){
     ups.push({a:A.ar,pk,res,ex});}
   A.live=null;A.log.push({w:win?1:0,s:res.gf+"-"+res.ga+(res.skill?"*":""),d,t:Date.now()});A.log=A.log.slice(-8);
   save();
-  return {win,d,tr0,tr:A.tr,chest,chestMsg,ups,a0,a1}}
+  return {win,d,sm,tr0,tr:A.tr,chest,chestMsg,ups,a0,a1}}
 
 /* ---------- vista principal ---------- */
 let AR_TICK=null,AR_ROAD=false,AR_RUN=false;
@@ -11543,7 +11547,7 @@ function viewArenas(){
     <div class="ar-hero-top"><span class="region">Modo Arenas · Arena ${a+1} de ${AR_LIST.length}</span>${infoBtn("arenas")}</div>
     <div class="ar-hero-main">${arArenaBadge(a,"big")}
      <div class="ar-hero-t"><h3>${esc(cur.n)}</h3>
-      <div class="ar-tro"><span class="ar-cup" aria-hidden="true">${UI.cup}</span><b class="num" id="arTr">${fmt(A.tr)}</b><small>trofeos</small>${A.streak>=2?`<em class="ar-streak">Racha ${A.streak}</em>`:""}</div>
+      <div class="ar-tro"><span class="ar-cup" aria-hidden="true">${UI.cup}</span><b class="num" id="arTr">${fmt(A.tr)}</b><small>trofeos</small>${A.streak>=1?`<em class="ar-streak">Racha ${A.streak} · próxima victoria ${arMulTxt(arStreakMul(A.streak))} trofeos</em>`:""}</div>
       <div class="ar-bar" role="img" aria-label="${nx?`${A.tr-cur.min} de ${nx.min-cur.min} trofeos hacia ${esc(nx.n)}`:"Arena máxima"}"><i style="width:${Math.round(prog*100)}%"></i><span class="num">${nx?`${fmt(A.tr)} / ${fmt(nx.min)}`:"¡Arena máxima!"}</span></div>
       <p class="note">${nx?`Siguiente: <b>${esc(nx.n)}</b> · premio: sobre de la arena y ${arExclOf(a+1).length} exclusivos`:`Récord: ${fmt(A.best)} trofeos`}</p></div></div>
     <div class="ar-play-row">
@@ -11648,7 +11652,7 @@ function arStartMatch(){const A=AR(),a=arIdxOf(A.tr),seed=Math.floor(R()*1e9),id
 function arAbandonPending(){const A=AR();if(!A.live)return;const id=A.live.id;const r=arApplyResult(id,{win:false,gf:0,ga:1,skill:false});A.live=null;save();
   if(r){toast(`Partida abandonada: cuenta como derrota (${r.d} trofeos).`);render(true)}}
 function arAfter(r,res,opp){render(true);setTop();if(!r)return;
-  const lines=[["Resultado",`${res.gf} - ${res.ga}${res.skill?` (ronda ${res.sk||""})`:""}`],["Trofeos",`${r.d>0?"+":""}${r.d} → ${fmt(r.tr)}`]];
+  const lines=[["Resultado",`${res.gf} - ${res.ga}${res.skill?` (ronda ${res.sk||""})`:""}`],["Trofeos",`${r.d>0?"+":""}${r.d}${r.sm>1?` (racha ${arMulTxt(r.sm)})`:""} → ${fmt(r.tr)}`]];
   if(r.chest)lines.push(["Sobre",AR_CH[r.chest.t].n]);
   const extra=r.chest?`<div class="ar-rs-chest">${arChestSVG(r.chest.t,"rdy")}<span>${esc(AR_CH[r.chest.t].n)} al hueco libre</span></div>`:
     r.chestMsg==="full"?`<p class="ar-rs-warn">Tus 5 huecos están llenos: esta victoria no da sobre. Abre alguno para liberar sitio.</p>`:
@@ -11669,7 +11673,7 @@ function arShowPack(pk,res,onDone){clearPackTimers();if(!res.length){onDone&&onD
   legacyOpen(pk,res,best,onDone)}
 
 /* ---------- información, tipos de escena y sonidos ---------- */
-INFO.arenas=["Modo Arenas","Partidos arcade de 2 minutos contra la CPU en los que controlas a tu jugador: mueve con el joystick o WASD/flechas, pasa (J / Espacio), tira manteniendo para cargar potencia (K) y regatea (L / Mayús). Con balón puedes elegir el regate: en el móvil mantén Regate y desliza (↑ Sombrero, ↗↖ Caño, → Elástica, ← Recorte, ↘↙ Bicicleta, ↓ Ruleta; si solo tocas, se elige solo) y en el ordenador pulsa 1-6. El Sombrero pasa el balón por encima del rival y tu jugador lo rodea solo. Justo después de un regate es muy difícil que te roben (recarga de 5 s). En defensa: Pase cambia de jugador, Tiro hace una entrada y Regate es un sprint de presión. Las estadísticas de tus cartas solo dan un pequeño extra de velocidad y precisión (máx. ±3 %). Ganar da +50 a +60 trofeos (+50 si se decide en la ronda de habilidad) y un sobre de victoria que hay que esperar para abrir; perder resta 25 en la primera arena y de 33 a 50 en las demás (nunca bajas de tu arena). Las arenas van de 0 a 14.600 trofeos. Si hay empate, se decide en una ronda de habilidad de penaltis y paradas. La CPU mejora con tus trofeos siguiendo la misma curva que la Copa de Penaltis. Sobres de victoria: Plata (62 %, 3 h), Oro (28 %, 8 h), Mágico (8,5 %, 12 h) y Legendario (1,5 %, 24 h); 5 huecos, uno se desbloquea a la vez y hasta 5 sobres cada 8 h; también puedes abrirlos ya pagando monedas. Las monedas de los sobres se multiplican con tu multiplicador. Recompensa pasiva: la casilla de monedas por hora se llena sola con la hora del dispositivo (también sin jugar), hasta 100 h; la tasa sube con tus trofeos (2.000/h con 0, 10.000/h con 100, unas 78.000/h con 2.000 y unas 338.000/h con 14.600) y se cobra con Reclamar. Mejora única: por 1.000.000 de monedas la tasa va ×2 para siempre (máximo ×2); lo acumulado antes de comprarla se queda a la tasa anterior. Si la hora del dispositivo se atrasa, no se acumula nada hasta recuperarla."+"\u0020Abandonar o recargar a mitad de partido cuenta como derrota."];
+INFO.arenas=["Modo Arenas","Partidos arcade de 2 minutos contra la CPU en los que controlas a tu jugador: mueve con el joystick o WASD/flechas, pasa (J / Espacio), tira manteniendo para cargar potencia (K) y regatea (L / Mayús). Con balón puedes elegir el regate: en el móvil mantén Regate y desliza (↑ Sombrero, ↗↖ Caño, → Elástica, ← Recorte, ↘↙ Bicicleta, ↓ Ruleta; si solo tocas, se elige solo) y en el ordenador pulsa 1-6. El Sombrero pasa el balón por encima del rival y tu jugador lo rodea solo. Justo después de un regate es muy difícil que te roben (recarga de 5 s). En defensa: Pase cambia de jugador, Tiro hace una entrada y Regate es un sprint de presión. Las estadísticas de tus cartas solo dan un pequeño extra de velocidad y precisión (máx. ±3 %). Ganar da +50 a +60 trofeos (+50 si se decide en la ronda de habilidad), multiplicados por la racha: cada victoria seguida sin perder suma ×0,15 (2.ª victoria ×1,15, 3.ª ×1,30... hasta ×5 como máximo; al perder vuelve a ×1). Las monedas por hora se multiplican también por el multiplicador del equipo (media del once) y un sobre de victoria que hay que esperar para abrir; perder resta 25 en la primera arena y de 33 a 50 en las demás (nunca bajas de tu arena). Las arenas van de 0 a 14.600 trofeos. Si hay empate, se decide en una ronda de habilidad de penaltis y paradas. La CPU mejora con tus trofeos siguiendo la misma curva que la Copa de Penaltis. Sobres de victoria: Plata (62 %, 3 h), Oro (28 %, 8 h), Mágico (8,5 %, 12 h) y Legendario (1,5 %, 24 h); 5 huecos, uno se desbloquea a la vez y hasta 5 sobres cada 8 h; también puedes abrirlos ya pagando monedas. Las monedas de los sobres se multiplican con tu multiplicador. Recompensa pasiva: la casilla de monedas por hora se llena sola con la hora del dispositivo (también sin jugar), hasta 100 h; la tasa sube con tus trofeos (2.000/h con 0, 10.000/h con 100, unas 78.000/h con 2.000 y unas 338.000/h con 14.600) y se cobra con Reclamar. Mejora única: por 1.000.000 de monedas la tasa va ×2 para siempre (máximo ×2); lo acumulado antes de comprarla se queda a la tasa anterior. Si la hora del dispositivo se atrasa, no se acumula nada hasta recuperarla."+"\u0020Abandonar o recargar a mitad de partido cuenta como derrota."];
 RS_KIND.arunl=["¡Nuevo modo!","#ffd84d"];RS_EMB.arunl=RS_TROPHY;RS_KIND.arena=["¡Sobre abierto!","#ffc94a"];RS_KIND.arenaw=["Victoria","#5fe08f"];RS_KIND.arenaup=["¡Nueva arena!","#ffd84d"];
 RS_EMB.arenaup=RS_TROPHY;RS_EMB.arenaw=RS_STAR;
 Object.assign(AU,{
