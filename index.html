@@ -3971,6 +3971,7 @@ nav.tabs::before{content:"";position:absolute;left:0;right:0;top:0;height:1px;po
 /* guía de regates al mantener el botón Regate con balón (desliza hacia una de ellas) */
 .ar-dg{position:absolute;width:0;height:0;pointer-events:none;z-index:6;display:none}
 .ar-dg i{position:absolute;left:calc(var(--x)*var(--r));top:calc(var(--y)*var(--r));transform:translate(-50%,-50%);font:800 .68rem/1 var(--display,system-ui,sans-serif);font-style:normal;color:#fff;background:rgba(10,14,20,.78);border:1px solid rgba(255,255,255,.28);padding:.32em .5em;border-radius:999px;white-space:nowrap;text-shadow:0 1px 2px #000}
+.ar-idle-tm{display:inline-block;margin-top:6px;font-size:.74rem;font-weight:800;padding:3px 9px;border-radius:99px;background:rgba(255,206,74,.16);color:#ffd96a;border:1px solid rgba(255,206,74,.4)}
 
 /* === 97_rank.css === */
 /* ===================== RANKING POR APARTADOS ===================== */
@@ -5332,6 +5333,60 @@ input[type=checkbox]{accent-color:var(--u-acc)}
 .pwa-dl svg{width:20px;height:20px}
 .pwa-sheet .pwa-dl{margin-top:4px}
 .pwa-desk .com-box{width:min(480px,100%)}
+
+/* === a6_fusion.css === */
+/* ===== Fusión (Club) ===== */
+.mn-fusion{display:flex;align-items:center;gap:14px;width:100%;margin:14px 0;padding:16px 18px;border-radius:18px;border:1px solid rgba(255,214,90,.45);cursor:pointer;text-align:left;color:#fff;
+ background:linear-gradient(120deg,#2a1450 0%,#5a1f8a 45%,#b8742a 100%);box-shadow:0 10px 28px rgba(90,31,138,.35),inset 0 1px 0 rgba(255,255,255,.18);position:relative;overflow:hidden}
+.mn-fusion::after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,transparent 30%,rgba(255,255,255,.18) 50%,transparent 70%);transform:translateX(-100%);animation:fusShine 3.2s ease-in-out infinite}
+@keyframes fusShine{60%,100%{transform:translateX(100%)}}
+@media (prefers-reduced-motion:reduce){.mn-fusion::after{animation:none}}
+.mn-fus-ic{flex:0 0 auto;width:52px;height:52px;border-radius:14px;display:grid;place-items:center;font-size:1.7rem;background:rgba(0,0,0,.28);border:1px solid rgba(255,255,255,.25);color:#ffd96a}
+.mn-fus-t{display:flex;flex-direction:column;gap:3px;min-width:0}
+.mn-fus-t b{font:900 1.35rem/1 var(--display,system-ui,sans-serif);text-transform:uppercase;letter-spacing:.02em}
+.mn-fus-t small{font-size:.8rem;opacity:.9;line-height:1.3}
+.mn-fus-ok{margin-left:auto;flex:0 0 auto;font-style:normal;font-size:.72rem;font-weight:800;padding:4px 10px;border-radius:99px;background:#ffd96a;color:#2a1450;white-space:nowrap}
+@media (max-width:520px){.mn-fus-ok{position:absolute;top:8px;right:10px}.mn-fus-t{padding-right:4px}}
+.fus-sheet p.note{margin:.2rem 0 .8rem}
+.fus-rars{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+.fus-rc{opacity:.55}.fus-rc.can{opacity:1}.fus-rc[aria-pressed="true"]{opacity:1;outline:2px solid var(--rc)}
+.fus-rc i{display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--rc);margin-right:4px}
+.fus-rc b{margin-left:4px;opacity:.8}
+.fus-flow{display:flex;align-items:center;justify-content:center;gap:14px;margin:6px 0 12px}
+.fus-in,.fus-out{min-width:110px;padding:12px 14px;border-radius:14px;text-align:center;border:2px solid var(--rc);background:color-mix(in srgb,var(--rc) 18%,transparent)}
+.fus-in b,.fus-out b{display:block;font:900 1.5rem/1 var(--display,system-ui,sans-serif)}
+.fus-in span,.fus-out span{font-size:.8rem;font-weight:700}
+.fus-arrow{font-size:1.6rem;color:#ffd96a}
+.fus-odds small,.fus-pick small{display:block;font-size:.74rem;opacity:.8;margin-bottom:6px}
+.fus-odds>div{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:12px}
+.fus-odds span{display:flex;flex-direction:column;align-items:center;min-width:44px;padding:5px 6px;border-radius:9px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12)}
+.fus-odds span b{font-size:.9rem}.fus-odds span i{font-style:normal;font-size:.68rem;opacity:.85}
+.fus-dup{display:flex;align-items:center;gap:8px;font-size:.82rem;margin:0 0 10px}
+.fus-pick>div{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:14px;max-height:140px;overflow:auto}
+.fus-pick span{font-size:.76rem;padding:4px 8px;border-radius:8px;background:rgba(255,255,255,.07)}
+.fus-pick span em{font-style:normal;opacity:.65}
+.fus-go{width:100%;min-height:48px;font-size:1rem}
+.fus-miss{text-align:center;padding:12px;border-radius:12px;background:rgba(255,255,255,.06)}
+.fus-bar{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;margin:4px 0 8px}
+.fus-bar small{font-size:.76rem;opacity:.8}.fus-bar span{display:flex;gap:6px}
+.fus-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(92px,1fr));gap:8px;padding-bottom:6px}
+.fus-grid.sm{grid-template-columns:repeat(auto-fill,minmax(70px,1fr));gap:6px}
+.fus-c{position:relative;padding:0;border:2px solid transparent;border-radius:12px;background:none;cursor:pointer;color:inherit;font:inherit;transition:transform .12s,border-color .12s}
+div.fus-c{cursor:default}
+.fus-c>.card,.fus-c>*:first-child{width:100%;max-width:100%}
+.fus-c.on{border-color:#ffd96a;transform:scale(.95);box-shadow:0 0 0 3px rgba(255,217,106,.25)}
+.fus-tick{position:absolute;top:4px;right:4px;width:22px;height:22px;border-radius:50%;display:none;place-items:center;background:#ffd96a;color:#2a1450;font-style:normal;font-weight:900;font-size:.8rem;box-shadow:0 2px 6px rgba(0,0,0,.4)}
+.fus-c.on .fus-tick{display:grid}
+.fus-rep,.fus-ex{position:absolute;left:50%;bottom:3px;transform:translateX(-50%);font-style:normal;font-size:.58rem;font-weight:800;padding:2px 6px;border-radius:99px;background:rgba(10,14,20,.85);color:#cfe;white-space:nowrap}
+.fus-ex{bottom:auto;top:3px;color:#ffb36b}
+.fus-foot{position:sticky;bottom:0;padding:10px 0 2px;background:linear-gradient(transparent,var(--bg,#0b1016) 30%)}
+.fus-foot.two{display:grid;grid-template-columns:1fr 2fr;gap:8px}
+.fus-go[disabled]{opacity:.5;pointer-events:none}
+.fus-cf{padding:12px;border-radius:14px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1)}
+.fus-cf h4{margin:0 0 10px;font-size:.95rem}
+.fus-cf.get{border:2px solid var(--rc);background:color-mix(in srgb,var(--rc) 14%,transparent)}
+.fus-arrow.big{text-align:center;font-size:1.8rem;margin:6px 0}
+.fus-warn{margin:12px 0 0;color:#ffb3a0}
 </style>
 
 <header class="top"><div class="top-in">
@@ -11336,6 +11391,9 @@ const AR_PL_RAW=[ /* arena, nombre, posición, media, rareza, rasgo */
   CLUBS["club-arena"]={id:"club-arena",name:"Leyendas de la Arena",league:"arenas",c1:"#1c0f33",c2:"#ff9a3c",acc:"#ffe08a",emb:"burst",shape:"modern",crown:true};
   LEAGUE_NAME.arenas="Leyendas de la Arena";
   const r=rng(21212121);
+  /* jugadores exclusivos mejorados: cada uno sube una rareza y su media va a lo más alto de esa rareza */
+  const HI={bronce:64,plata:74,oro:84,elite:89,leyenda:93,icono:99,mitico:114,galactico:127,celestial:139,divino:150,eterno:162,abismal:174,primordial:187,absoluto:200};
+  AR_PL_RAW.forEach((x,i)=>{const r2=arRarUp(x[4],1),o2=Math.max(x[3]+6,HI[r2]-(i%3));x[4]=r2;x[3]=Math.min(o2,HI[r2])});
   AR_PL_RAW.forEach(([a,name,pos,ovr,rar,trait])=>{
     const id="ar-"+slug(name),myth=ovr>=100,age=myth?0:22+Math.floor(r()*11),nat=NATS[Math.floor(r()*NATS.length)];
     if(BYID[id])return;
@@ -11353,10 +11411,10 @@ const arExclCount=r=>AR_PL.filter(p=>p.rar===r).length;
 /* p: probabilidad por victoria · h: horas de espera · n: cartas · up/g: garantía (rarezas por encima de la más baja de la arena)
    co: monedas base (× 1,16 por arena × tu multiplicador) · ex: probabilidad de jugador exclusivo */
 const AR_CH={
- plata:{n:"Sobre de Plata",p:62,h:3,cards:3,up:0,g:0,co:300,ex:0,th:"plata",emb:"star",col:"#c9d1d6"},
- oro:{n:"Sobre de Oro",p:28,h:8,cards:5,up:1,g:1,co:800,ex:0,th:"oro",emb:"trophy",col:"#f2c14e"},
- magico:{n:"Sobre Mágico",p:8.5,h:12,cards:8,up:2,g:2,co:2000,ex:.25,th:"cosmico",emb:"bolt",col:"#b06bff"},
- legendario:{n:"Sobre Legendario",p:1.5,h:24,cards:5,up:3,g:1,co:5000,ex:1,th:"leyendaplus",emb:"crown",col:"#ff9a3c"}};
+ plata:{n:"Sobre de Plata",p:50,h:3,cards:7,up:1,g:2,co:1800,ex:.15,th:"plata",emb:"star",col:"#c9d1d6"},
+ oro:{n:"Sobre de Oro",p:33,h:8,cards:9,up:2,g:2,co:5000,ex:.4,th:"oro",emb:"trophy",col:"#f2c14e"},
+ magico:{n:"Sobre Mágico",p:13,h:12,cards:12,up:3,g:3,co:12000,ex:.9,th:"cosmico",emb:"bolt",col:"#b06bff"},
+ legendario:{n:"Sobre Legendario",p:4,h:24,cards:10,up:4,g:3,co:30000,ex:1,th:"leyendaplus",emb:"crown",col:"#ff9a3c"}};
 const AR_CHK=["plata","oro","magico","legendario"];
 const AR_SLOTS=5,AR_QN=5,AR_QWIN=8*3600e3;
 /* valor de referencia de una carta en monedas según los precios de la tienda (solo para el coste de «abrir ya» y el análisis) */
@@ -11366,14 +11424,14 @@ const arMult=()=>earnMult(teamRating().ovr);
 /* paquete (formato de PACKS) para el flujo de apertura de sobres */
 function arChestPack(t,a){const c=AR_CH[t],lo=arLowRar(a),odds={};
   /* las cartas de un cofre mejor suben de nivel: se desplaza la tabla de la arena «up» peldaños en los cofres altos */
-  const sh=t==="legendario"?1:0;Object.keys(AR_LIST[a].odds).forEach(r=>{const k=arRarUp(r,sh);odds[k]=(odds[k]||0)+AR_LIST[a].odds[r]});
+  const sh={plata:2,oro:2,magico:3,legendario:4}[t]||2;/* recompensas mejoradas: todas las cartas de los cofres suben 1-3 rarezas sobre la tabla de la arena */Object.keys(AR_LIST[a].odds).forEach(r=>{const k=arRarUp(r,sh);odds[k]=(odds[k]||0)+AR_LIST[a].odds[r]});
   return {id:"arc-"+t+"-"+a,name:c.n,n:c.cards,th:c.th,emb:c.emb,odds,gN:c.g?arGFit(odds,c.cards,arRarUp(lo,c.up),c.g):null}}
 /* la garantía nunca puede contradecir los porcentajes mostrados: se baja de rareza hasta que encaja */
 function arGFit(o,n,r,k){let i=rIdx(r);const P=j=>RORDER.reduce((s,x)=>s+(rIdx(x)>=j?(o[x]||0):0),0);while(i>0&&n*P(i)/100<k-1e-9)i--;return {r:RORDER[i],n:k}}
 function arChestEV(t,a){const pk=arChestPack(t,a);let ev=0;Object.entries(pk.odds).forEach(([r,w])=>ev+=w/100*AR_RVAL[r]);ev*=pk.n;
   if(pk.gN)ev+=pk.gN.n*Math.max(0,AR_RVAL[pk.gN.r]-ev/pk.n);return ev}
 /* sobre de recompensa al llegar a una arena */
-function arArenaPack(a){const lo=arLowRar(a);return {id:"arp-"+a,name:"Sobre "+AR_LIST[a].n,n:6,th:["barrio","barrio","plata","plataplus","oro","oro","oroplus","elite","eliteplus","leyenda","galaxy","divino","eterno","abismal","infinito"][a]||"oro",emb:AR_LIST[a].emb in EMB?AR_LIST[a].emb:"star",odds:AR_LIST[a].odds,gN:arGFit(AR_LIST[a].odds,6,arRarUp(lo,2),1)}}
+function arArenaPack(a){const lo=arRarUp(arLowRar(a),3),odds={};Object.keys(AR_LIST[a].odds).forEach(r=>{const k=arRarUp(r,3);odds[k]=(odds[k]||0)+AR_LIST[a].odds[r]});return {id:"arp-"+a,name:"Sobre "+AR_LIST[a].n,n:12,th:["barrio","barrio","plata","plataplus","oro","oro","oroplus","elite","eliteplus","leyenda","galaxy","divino","eterno","abismal","infinito"][a]||"oro",emb:AR_LIST[a].emb in EMB?AR_LIST[a].emb:"star",odds,gN:arGFit(odds,12,arRarUp(lo,2),3)}}
 function arDrawExcl(a){const pool=AR_PL.filter(p=>p.excl<=a&&p.excl>=1);return pool.length?pool[Math.floor(R()*pool.length)]:null}
 function arChestCards(t,a){const pk=arChestPack(t,a),cards=openPackCards(pk),c=AR_CH[t];
   if(c.ex&&R()<c.ex){const x=arDrawExcl(a);if(x){let k=0;cards.forEach((p,i)=>{if(rIdx(p.rar)<rIdx(cards[k].rar))k=i});cards[k]=x}}
@@ -11427,7 +11485,7 @@ function arFmtT(ms){const s=Math.ceil(ms/1000),h=Math.floor(s/3600),m=Math.floor
 /* coste de «abrir ya»: valor de referencia del contenido (cartas a precio de tienda + monedas) × 1,25 × fracción que falta */
 function arSkipCost(c){const st=arChestState(c);if(st==="ready")return 0;const frac=st==="locked"?1:arLeft(c)/arChestDur(c);
   return Math.max(20,arNice((arChestEV(c.t,c.a)+arChestCoins(c.t,c.a)*arMult())*1.25*frac))}
-/* cofre que toca: igual que en los juegos de cofres, cuanto mejor, más raro (62 / 28 / 8,5 / 1,5 %) */
+/* cofre que toca: igual que en los juegos de cofres, cuanto mejor, más raro (50 / 33 / 13 / 4 %) */
 function arRollChest(){let t=R()*100,acc=0;for(const k of AR_CHK){acc+=AR_CH[k].p;if(t<acc)return k}return "plata"}
 
 /* ---------- recompensa pasiva: monedas por hora según tus trofeos, acumulables hasta 100 h (también sin jugar ni abrir el juego) ----------
@@ -11443,11 +11501,13 @@ const arIdleRate=tr=>Math.round((2000+8000*Math.pow(clamp(+tr||0,0,20000)/100,.7
 /* mejora ×2: pago único de 1.000.000 monedas que duplica para siempre la tasa (máximo ×2, no se repite; A.idX = 0 | 1).
    Lo acumulado ANTES de comprar se queda a la tasa antigua: la compra liquida primero (arIdleSettle) y solo las horas siguientes van ×2. */
 const AR_IDLE_UP=250000,AR_IDLE_LV=4;   /* 4 mejoras de +×0,25 a 250.000 cada una (máximo ×2) */
-const arIdleMul=()=>1+.25*(AR().idX||0);
+const arIdleMul=()=>1;/* ya no hay mejora comprable: solo cuenta el multiplicador del equipo */
 /* el multiplicador del equipo (media del once, el mismo de amistosos, torneos y premio diario) también multiplica la recompensa pasiva */
 const arTeamMul=()=>{try{return econMult(teamRating().ovr)||1}catch(e){return 1}};
 const arIdleRateNow=tr=>Math.round(arIdleRate(tr)*arIdleMul()*arTeamMul());
-function arIdleSettle(){const A=AR();if(!A.on)return A;const now=arNow();
+function arIdleSettle(){const A=AR();if(!A.on)return A;
+  if(A.idX>0){/* la mejora comprable se ha retirado: se devuelven las monedas pagadas (una sola vez) */const back=AR_IDLE_UP*A.idX;A.idX=0;S.coins=(S.coins||0)+back;try{setTimeout(()=>{toast(`Se ha retirado la mejora de monedas por hora: te devolvemos ${fmt(back)} monedas. Ahora la recompensa pasiva usa el multiplicador de tu equipo.`);setTop&&setTop();save()},300)}catch(e){}}
+const now=arNow();
   if(!A.idT||A.idT>now)A.idT=now;
   const dh=Math.min(Math.max(0,(now-A.idT)/36e5),AR_IDLE_H-A.idH);A.idT=now;
   if(dh>0){A.idC+=dh*arIdleRateNow(A.tr);A.idH+=dh}return A}
@@ -11469,10 +11529,9 @@ function arIdleClaim(){const A=AR();if(!A.on)return;const i=arIdleInfo();if(i.co
   rewardScene({kind:"gift",big:i.coins>=1e6,title:"Recompensa pasiva",sub:`${fdec(i.h,1)} h de monedas acumuladas a ${fmt(i.rate)}/h`,total:i.coins,lines:[["Tasa",fmt(i.rate)+" /h"],["Horas",fdec(i.h,1)+" de "+AR_IDLE_H]]})}
 const arIdleTime=ms=>{const h=Math.floor(ms/36e5),d=Math.floor(h/24),m=Math.floor(ms%36e5/6e4);return d?`${d} d ${h%24} h`:h?`${h} h ${String(m).padStart(2,"0")} min`:`${m} min`};
 function arIdleHTML(){const i=arIdleInfo();
-  return `<div class="ar-idle panel" id="arIdle"><div class="ar-idle-h"><div><h3>Recompensa pasiva</h3><span class="note">Se acumula aunque no juegues, hasta ${AR_IDLE_H} h${arTeamMul()>1?` · incluye el multiplicador del equipo <b class="num">${fmtX(arTeamMul())}</b>`:""}</span></div><b class="ar-idle-r num">+${fmt(i.rate)}<small>/h</small>${AR().idX?'<em class="ar-idle-x">×'+String(arIdleMul()).replace('.',',')+'</em>':""}</b></div>
+  return `<div class="ar-idle panel" id="arIdle"><div class="ar-idle-h"><div><h3>Recompensa pasiva</h3><span class="note">Se acumula aunque no juegues, hasta ${AR_IDLE_H} h</span><span class="ar-idle-tm">Multiplicador del equipo <b class="num">${fmtX(arTeamMul())}</b></span></div><b class="ar-idle-r num">+${fmt(i.rate)}<small>/h</small></b></div>
    <div class="ar-idle-m"><span class="ar-idle-c"><i class="ar-coin" aria-hidden="true"></i><b class="num" id="arIdC">${fmt(i.coins)}</b></span><button class="btn primary" id="arIdClaim"${i.coins<1?" disabled":""}>Reclamar</button></div>
    <div class="ar-bar ar-idle-bar" role="img" aria-label="${fdec(i.h,1)} de ${AR_IDLE_H} horas acumuladas"><i id="arIdBar" style="width:${Math.round(i.h/AR_IDLE_H*100)}%"></i><span class="num" id="arIdH">${fdec(i.h,1)} / ${AR_IDLE_H} h</span></div>
-   ${AR().idX>=AR_IDLE_LV?"":`<button class="btn ar-idle-up" id="arIdUp"${S.coins<AR_IDLE_UP?' aria-disabled="true"':""}>Mejorar a ×${String(arIdleMul()+.25).replace('.',',')} · <b class="num">${fmt(AR_IDLE_UP)}</b> <small>(${AR().idX||0}/${AR_IDLE_LV})</small></button>`}
    <p class="note" id="arIdT">${i.full?"Acumulación llena: reclama para volver a empezar.":`Tope (${fmt(i.max)} aprox.) en <b class="num">${arIdleTime(i.leftMs)}</b>`} · la tasa sube con tus trofeos</p></div>`}
 function arIdleTick(){const el=$("#arIdC");if(!el)return;const i=arIdleInfo();el.textContent=fmt(i.coins);const b=$("#arIdBar");if(b)b.style.width=Math.round(i.h/AR_IDLE_H*100)+"%";
   const h=$("#arIdH");if(h)h.textContent=fdec(i.h,1)+" / "+AR_IDLE_H+" h";const t=$("#arIdT");if(t)t.innerHTML=(i.full?"Acumulación llena: reclama para volver a empezar.":`Tope (${fmt(i.max)} aprox.) en <b class="num">${arIdleTime(i.leftMs)}</b>`)+" · la tasa sube con tus trofeos";
@@ -11596,7 +11655,7 @@ function bindArena(m){
   const on=(s,fn)=>{const e=m.querySelector(s);if(e)e.onclick=fn};
   on("#arUnlock",arUnlockMode);on("#arPlay",arPlayFlow);on("#arPvp",()=>typeof pvOpen==="function"&&pvOpen());on("#arRoad",()=>{AR_ROAD=!AR_ROAD;render(true);if(AR_ROAD){const r=$("#arRoadP");r&&r.scrollIntoView({behavior:"smooth",block:"start"})}});
   m.querySelectorAll("[data-arslot]").forEach(b=>b.onclick=()=>arSlotSheet(+b.dataset.arslot));
-  on("#arIdClaim",arIdleClaim);on("#arIdUp",arIdleBuy);arStartTick();
+  on("#arIdClaim",arIdleClaim);arStartTick();
   if(AR().on&&AR().live&&!AR_RUN)arAbandonPending();
 }
 /* actualiza los contadores cada segundo sin repintar la vista */
@@ -11673,7 +11732,7 @@ function arShowPack(pk,res,onDone){clearPackTimers();if(!res.length){onDone&&onD
   legacyOpen(pk,res,best,onDone)}
 
 /* ---------- información, tipos de escena y sonidos ---------- */
-INFO.arenas=["Modo Arenas","Partidos arcade de 2 minutos contra la CPU en los que controlas a tu jugador: mueve con el joystick o WASD/flechas, pasa (J / Espacio), tira manteniendo para cargar potencia (K) y regatea (L / Mayús). Con balón puedes elegir el regate: en el móvil mantén Regate y desliza (↑ Sombrero, ↗↖ Caño, → Elástica, ← Recorte, ↘↙ Bicicleta, ↓ Ruleta; si solo tocas, se elige solo) y en el ordenador pulsa 1-6. El Sombrero pasa el balón por encima del rival y tu jugador lo rodea solo. Justo después de un regate es muy difícil que te roben (recarga de 5 s). En defensa: Pase cambia de jugador, Tiro hace una entrada y Regate es un sprint de presión. Las estadísticas de tus cartas solo dan un pequeño extra de velocidad y precisión (máx. ±3 %). Ganar da +50 a +60 trofeos (+50 si se decide en la ronda de habilidad), multiplicados por la racha: cada victoria seguida sin perder suma ×0,15 (2.ª victoria ×1,15, 3.ª ×1,30... hasta ×5 como máximo; al perder vuelve a ×1). Las monedas por hora se multiplican también por el multiplicador del equipo (media del once) y un sobre de victoria que hay que esperar para abrir; perder resta 25 en la primera arena y de 33 a 50 en las demás (nunca bajas de tu arena). Las arenas van de 0 a 14.600 trofeos. Si hay empate, se decide en una ronda de habilidad de penaltis y paradas. La CPU mejora con tus trofeos siguiendo la misma curva que la Copa de Penaltis. Sobres de victoria: Plata (62 %, 3 h), Oro (28 %, 8 h), Mágico (8,5 %, 12 h) y Legendario (1,5 %, 24 h); 5 huecos, uno se desbloquea a la vez y hasta 5 sobres cada 8 h; también puedes abrirlos ya pagando monedas. Las monedas de los sobres se multiplican con tu multiplicador. Recompensa pasiva: la casilla de monedas por hora se llena sola con la hora del dispositivo (también sin jugar), hasta 100 h; la tasa sube con tus trofeos (2.000/h con 0, 10.000/h con 100, unas 78.000/h con 2.000 y unas 338.000/h con 14.600) y se cobra con Reclamar. Mejora única: por 1.000.000 de monedas la tasa va ×2 para siempre (máximo ×2); lo acumulado antes de comprarla se queda a la tasa anterior. Si la hora del dispositivo se atrasa, no se acumula nada hasta recuperarla."+"\u0020Abandonar o recargar a mitad de partido cuenta como derrota."];
+INFO.arenas=["Modo Arenas","Partidos arcade de 2 minutos contra la CPU en los que controlas a tu jugador: mueve con el joystick o WASD/flechas, pasa (J / Espacio), tira manteniendo para cargar potencia (K) y regatea (L / Mayús). Con balón puedes elegir el regate: en el móvil mantén Regate y desliza (↑ Sombrero, ↗↖ Caño, → Elástica, ← Recorte, ↘↙ Bicicleta, ↓ Ruleta; si solo tocas, se elige solo) y en el ordenador pulsa 1-6. El Sombrero pasa el balón por encima del rival y tu jugador lo rodea solo. Justo después de un regate es muy difícil que te roben (recarga de 5 s). En defensa: Pase cambia de jugador, Tiro hace una entrada y Regate es un sprint de presión. Las estadísticas de tus cartas solo dan un pequeño extra de velocidad y precisión (máx. ±3 %). Ganar da +50 a +60 trofeos (+50 si se decide en la ronda de habilidad), multiplicados por la racha: cada victoria seguida sin perder suma ×0,15 (2.ª victoria ×1,15, 3.ª ×1,30... hasta ×5 como máximo; al perder vuelve a ×1) y un sobre de victoria que hay que esperar para abrir; perder resta 25 en la primera arena y de 33 a 50 en las demás (nunca bajas de tu arena). Las arenas van de 0 a 14.600 trofeos. Si hay empate, se decide en una ronda de habilidad de penaltis y paradas. La CPU mejora con tus trofeos siguiendo la misma curva que la Copa de Penaltis. Sobres de victoria: Plata (50 %, 3 h, 7 cartas), Oro (33 %, 8 h, 9 cartas), Mágico (13 %, 12 h, 12 cartas) y Legendario (4 %, 24 h, 10 cartas y un jugador exclusivo seguro); sus cartas son de 2 a 4 rarezas por encima de la arena. Al subir de arena: sobre de 12 cartas (3 rarezas por encima) y sus jugadores exclusivos; 5 huecos, uno se desbloquea a la vez y hasta 5 sobres cada 8 h; también puedes abrirlos ya pagando monedas. Las monedas de los sobres se multiplican con tu multiplicador. Recompensa pasiva: la casilla de monedas por hora se llena sola con la hora del dispositivo (también sin jugar), hasta 100 h; la tasa sube con tus trofeos (2.000/h con 0, 10.000/h con 100, unas 78.000/h con 2.000 y unas 338.000/h con 14.600) y se cobra con Reclamar. Esa tasa se multiplica por el multiplicador de tu equipo (el de la media del once, igual que en amistosos, torneos y premio diario). Si la hora del dispositivo se atrasa, no se acumula nada hasta recuperarla."+"\u0020Abandonar o recargar a mitad de partido cuenta como derrota."];
 RS_KIND.arunl=["¡Nuevo modo!","#ffd84d"];RS_EMB.arunl=RS_TROPHY;RS_KIND.arena=["¡Sobre abierto!","#ffc94a"];RS_KIND.arenaw=["Victoria","#5fe08f"];RS_KIND.arenaup=["¡Nueva arena!","#ffd84d"];
 RS_EMB.arenaup=RS_TROPHY;RS_EMB.arenaw=RS_STAR;
 Object.assign(AU,{
@@ -14009,6 +14068,73 @@ function pwaCard(){if(!pwaAvail()||pwaLS("done")==="1")return "";
       if(g)g.insertAdjacentHTML("beforebegin",`<div class="mn-sgrp"><h4>Aplicación</h4><div class="setrow mn-set"><i class="mn-sic" aria-hidden="true">${PWA_IC.phone}</i><div class="mn-st"><b>${pwaTx().card}</b><small>${pwaLS("done")==="1"?"Ya lo hiciste en este dispositivo":pwaTx().cardS}</small></div><button class="btn small" id="sPwa">${pwaDesk()?"Crear":"Instalar"}</button></div></div>`);
       const b=$("#sPwa");if(b)b.onclick=()=>{if(PWA.ev){closeSheet();pwaInstall()}else{closeSheet();setTimeout(()=>pwaGuide(),50)}}}}catch(e){}return r}}
 })();
+
+/* ===================== FUSIÓN (apartado Club) =====================
+   10 cartas de una rareza → 1 carta de la rareza siguiente (sale de las cartas de la tienda de esa rareza).
+   La media es aleatoria dentro de esa rareza: cuanto más alta, menos probable. Las 10 cartas se pierden.
+   Para no romper el equipo, nunca se usa la última copia de un jugador del once titular.
+   Orden automático de las 10 cartas: primero repetidas, luego sueltas; siempre las de menor media; los exclusivos de Arena al final. */
+const FUS_N=10,FUS_K=.32;
+const fusNext=r=>{const i=rIdx(r);return i>=0&&i<RORDER.length-1?RORDER[i+1]:null};
+function fusCopies(r,onlyDup){
+  const xi=new Set((S.lineup||[]).filter(Boolean)),out=[];
+  Object.keys(S.owned).forEach(id=>{const p=BYID[id],n=S.owned[id]|0;if(!p||p.rar!==r||n<1)return;
+    const keep=onlyDup?1:(xi.has(id)?1:0);for(let k=keep;k<n;k++)out.push({p,dup:k>=1,key:id+"#"+k})});
+  return out.sort((a,b)=>(b.dup-a.dup)||((a.p.excl!=null)-(b.p.excl!=null))||(a.p.ovr-b.p.ovr));
+}
+/* primero se sortea la MEDIA (cada punto más es menos probable: ×0,73 por punto) y luego un jugador de esa media */
+function fusOdds(r2){const pool=BYRAR[r2]||[];if(!pool.length)return [];const ov=[...new Set(pool.map(p=>p.ovr))].sort((a,b)=>a-b),lo=ov[0];
+  const w=ov.map(o=>Math.exp(-FUS_K*(o-lo))),s=w.reduce((a,b)=>a+b,0);return ov.map((o,i)=>({ovr:o,pct:w[i]/s*100}))}
+function fusRoll(r2){const od=fusOdds(r2);if(!od.length)return null;let t=R()*100,o=od[0].ovr;for(const x of od){t-=x.pct;if(t<0){o=x.ovr;break}}
+  const c=(BYRAR[r2]||[]).filter(p=>p.ovr===o);return c[Math.floor(R()*c.length)]||null}
+const FUS={r:null,sel:[],step:"pick"};
+const fusPct=v=>(v>=1?Math.round(v):v.toFixed(1).replace(".",","))+" %";
+function fusSel(){const all=fusCopies(FUS.r,false),m=new Map(all.map(c=>[c.key,c]));FUS.sel=FUS.sel.filter(k=>m.has(k));return FUS.sel.map(k=>m.get(k))}
+function fusOddsHTML(r2){return `<div class="fus-odds"><small>Media de la carta que recibirás (más alta = menos probable)</small><div>${fusOdds(r2).map(o=>`<span><b class="num">${o.ovr}</b><i class="num">${fusPct(o.pct)}</i></span>`).join("")}</div></div>`}
+function fusPickHTML(){
+  const rs=RORDER.filter(r=>fusNext(r)&&(BYRAR[fusNext(r)]||[]).length);
+  if(!FUS.r||!rs.includes(FUS.r)){FUS.r=rs.slice().reverse().find(r=>fusCopies(r,false).length>=FUS_N)||rs[0];FUS.sel=[]}
+  const r=FUS.r,r2=fusNext(r),all=fusCopies(r,false),sel=fusSel(),ss=new Set(FUS.sel),n=sel.length;
+  return `<div class="fus-sheet"><div class="sheet-h"><h3>Fusión</h3><button class="btn small" data-close>Cerrar</button></div>
+   <p class="note">Elige <b>${FUS_N} cartas</b> de una rareza y consigue <b>1 carta de la rareza siguiente</b>. Las cartas elegidas se pierden. La última copia de los titulares de tu once no aparece.</p>
+   <div class="fus-rars">${rs.map(x=>{const k=fusCopies(x,false).length;return `<button class="chip fus-rc${k>=FUS_N?" can":""}" data-fus="${x}" aria-pressed="${x===r}" style="--rc:${RCOL[x]}"><i></i>${RAR[x].n} <b class="num">${k}</b></button>`}).join("")}</div>
+   <div class="fus-flow"><div class="fus-in" style="--rc:${RCOL[r]}"><b class="num">${n}/${FUS_N}</b><span>${RAR[r].n}</span></div><div class="fus-arrow" aria-hidden="true">➜</div><div class="fus-out" style="--rc:${RCOL[r2]}"><b>1</b><span>${RAR[r2].n}</span></div></div>
+   ${all.length?`<div class="fus-bar"><small>${all.length} cartas disponibles · toca para elegir</small><span><button class="btn small" id="fusAuto">Elegir las peores</button>${n?`<button class="btn small" id="fusClr">Quitar todas</button>`:""}</span></div>
+   <div class="fus-grid">${all.map(c=>`<button class="fus-c${ss.has(c.key)?" on":""}" data-fk="${c.key}" aria-pressed="${ss.has(c.key)}" aria-label="${esc(c.p.name)} ${c.p.ovr}">${cardHTML(c.p,{})}${c.dup?`<em class="fus-rep">Repetida</em>`:""}${c.p.excl!=null?`<em class="fus-ex">Exclusivo</em>`:""}<i class="fus-tick" aria-hidden="true">✓</i></button>`).join("")}</div>`
+   :`<p class="fus-miss">No tienes cartas ${RAR[r].n} que puedas fusionar.</p>`}
+   <div class="fus-foot"><button class="btn primary fus-go" id="fusNext"${n===FUS_N?"":" disabled"}>${n===FUS_N?"Continuar":`Elige ${FUS_N-n} más`}</button></div>
+  </div>`}
+function fusConfirmHTML(){const r=FUS.r,r2=fusNext(r),sel=fusSel();
+  return `<div class="fus-sheet"><div class="sheet-h"><h3>Confirmar fusión</h3><button class="btn small" id="fusBack">Volver</button></div>
+   <div class="fus-cf"><h4>Darás <b class="num">${FUS_N}</b> cartas ${RAR[r].n}</h4>
+    <div class="fus-grid sm">${sel.map(c=>`<div class="fus-c">${cardHTML(c.p,{})}${c.dup?`<em class="fus-rep">Repetida</em>`:""}</div>`).join("")}</div></div>
+   <div class="fus-arrow big" aria-hidden="true">⬇</div>
+   <div class="fus-cf get" style="--rc:${RCOL[r2]}"><h4>Recibirás <b>1 carta ${RAR[r2].n}</b> al azar</h4>${fusOddsHTML(r2)}</div>
+   <p class="note fus-warn">Las ${FUS_N} cartas se pierden para siempre. Esta acción no se puede deshacer.</p>
+   <div class="fus-foot two"><button class="btn" id="fusBack2">Cancelar</button><button class="btn primary fus-go" id="fusGo">Confirmar fusión</button></div></div>`}
+function openFusion(){
+  if(FUS.step==="confirm"&&fusSel().length!==FUS_N)FUS.step="pick";
+  const sc=document.querySelector(".fus-grid")?.closest(".sheet-in")?.scrollTop||0;
+  openSheet(FUS.step==="confirm"?fusConfirmHTML():fusPickHTML());
+  const si=document.querySelector(".sheet-in");if(si&&FUS.step==="pick")si.scrollTop=sc;
+  document.querySelectorAll("[data-fus]").forEach(b=>b.onclick=()=>{if(FUS.r!==b.dataset.fus){FUS.r=b.dataset.fus;FUS.sel=[]}openFusion()});
+  document.querySelectorAll("[data-fk]").forEach(b=>b.onclick=()=>{const k=b.dataset.fk,i=FUS.sel.indexOf(k);
+    if(i>=0)FUS.sel.splice(i,1);else if(FUS.sel.length<FUS_N)FUS.sel.push(k);else{toast(`Ya has elegido ${FUS_N} cartas`);return}openFusion()});
+  const au=$("#fusAuto");if(au)au.onclick=()=>{FUS.sel=fusCopies(FUS.r,false).slice(0,FUS_N).map(c=>c.key);openFusion()};
+  const cl=$("#fusClr");if(cl)cl.onclick=()=>{FUS.sel=[];openFusion()};
+  const nx=$("#fusNext");if(nx)nx.onclick=()=>{if(fusSel().length===FUS_N){FUS.step="confirm";openFusion()}};
+  ["#fusBack","#fusBack2"].forEach(q=>{const b=$(q);if(b)b.onclick=()=>{FUS.step="pick";openFusion()}});
+  const g=$("#fusGo");if(g)g.onclick=()=>{const r=FUS.r,r2=fusNext(r),pick=fusSel();
+    if(pick.length!==FUS_N||!r2)return;const got=fusRoll(r2);if(!got)return;
+    pick.forEach(c=>{S.owned[c.p.id]=Math.max(0,(S.owned[c.p.id]|0)-1);if(!S.owned[c.p.id])delete S.owned[c.p.id]});
+    S.fusions=(S.fusions|0)+1;FUS.sel=[];FUS.step="pick";closeSheet();
+    const TH={plata:"plata",oro:"oro",elite:"elite",leyenda:"leyenda",icono:"icono",mitico:"mitico",galactico:"galaxy",celestial:"celestial",divino:"divino",eterno:"eterno",abismal:"abismal",primordial:"primordial",absoluto:"absoluto"};
+    openPackFlow({id:"fusion-"+r2,name:"Fusión "+RAR[r2].n,n:1,th:TH[r2]||"oro",emb:"burst",odds:{[r2]:100}},[got],()=>render(true))};
+}
+document.addEventListener("click",e=>{if(e.target.closest&&e.target.closest("#fusOpen")){e.preventDefault();FUS.step="pick";openFusion()}});
+viewClub=(base=>function(){const h=base(),can=RORDER.some(r=>fusNext(r)&&fusCopies(r,false).length>=FUS_N);
+  const tab=`<button class="mn-fusion" id="fusOpen"><span class="mn-fus-ic" aria-hidden="true">✦</span><span class="mn-fus-t"><b>Fusión</b><small>10 cartas de una rareza → 1 de la rareza siguiente. Aprovecha las cartas que no usas.</small></span>${can?`<em class="mn-fus-ok">¡Puedes fusionar!</em>`:""}</button>`;
+  const i=h.indexOf('<div class="mn-tools">');return i<0?h+tab:h.slice(0,i)+tab+h.slice(i)})(viewClub);
 
 </script>
 </body></html>
