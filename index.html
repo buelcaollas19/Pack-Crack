@@ -5,6 +5,16 @@
 <meta name="google-site-verification" content="NkcnoR2bMkso3YnWpNnCjORRFUxD6qKO1k0qKBQMOtA" />
 <link rel="canonical" href="https://buelcaollas19.github.io/Pack-Crack/">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath d='M32 3 58 13v19c0 15-11 25-26 29C17 57 6 47 6 32V13z' fill='%23d4a32a' stroke='%23fff3c4' stroke-width='3'/%3E%3Cpath d='m32 17 4.5 9.6 10.5 1.2-7.8 7.2 2.1 10.4L32 40.2l-9.3 5.2 2.1-10.4-7.8-7.2 10.5-1.2z' fill='%23231a05'/%3E%3C/svg%3E">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="icon" href="icons/favicon.ico" sizes="any">
+<meta name="application-name" content="Crack de Sobres">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Crack de Sobres">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta property="og:image" content="https://buelcaollas19.github.io/Pack-Crack/icons/icon-512.png">
 <meta property="og:type" content="website"><meta property="og:title" content="Crack de Sobres · Juego de cartas de fútbol gratis"><meta property="og:description" content="Crack de Sobres: juego gratis de cartas de fútbol. Abre sobres, ficha cracks, monta tu once, gana torneos y la Copa de Penaltis. Sin descargas, en el móvil o el ordenador."><meta property="og:url" content="https://buelcaollas19.github.io/Pack-Crack/"><meta property="og:locale" content="es_ES">
 <meta name="twitter:card" content="summary">
 <title>Crack de Sobres · Juego de cartas de fútbol gratis</title>
@@ -3941,6 +3951,26 @@ nav.tabs::before{content:"";position:absolute;left:0;right:0;top:0;height:1px;po
 .ar-sk-k.dn,.ar-sk-go.dn{transform:scale(.94);filter:brightness(1.25)}
 @media (max-height:500px){.ar-sk-h{padding-top:calc(52px + env(safe-area-inset-top,0px))}.ar-sk-rows{grid-auto-flow:column;gap:14px}.ar-sk-msg{margin-bottom:6px}
   .ar-sk-ctl{padding-bottom:calc(10px + env(safe-area-inset-bottom,0px))}.ar-m.touch .ar-sk-k,.ar-m.touch .ar-sk-go{min-height:76px}}
+/* pase al hueco (botón táctil propio) y gesto «por arriba» (deslizar hacia arriba desde Pase / Al hueco) */
+.b-thr{width:64px;height:64px;right:112px;bottom:96px;background:radial-gradient(circle at 40% 30%,#c9a2ff,#7a3fd8 60%,#33106e)}
+.ar-m.touch .b-thr{width:70px;height:70px;right:120px;bottom:96px}
+.ar-m.touch .b-thr span{font-size:.72rem;letter-spacing:-.01em;line-height:1}
+.ar-m.def .b-thr{opacity:.45}
+.ar-b.up{box-shadow:0 -10px 18px rgba(255,255,255,.55),inset 0 0 0 3px rgba(255,255,255,.8)}
+.ar-b.up span::after{content:" ↑"}
+/* órdenes momentáneas (Atacar / Defender): discretas, arriba a la derecha bajo el marcador */
+.ar-ord{position:absolute;z-index:6;top:calc(env(safe-area-inset-top,0px) + 52px);right:max(8px,env(safe-area-inset-right,0px));display:flex;gap:6px;pointer-events:none}
+.ar-ob{pointer-events:auto;touch-action:none;display:flex;align-items:center;gap:4px;min-height:32px;padding:0 10px;border-radius:16px;background:rgba(6,10,14,.55);border:1px solid rgba(255,255,255,.22);color:#e8f2ec;font:800 .68rem/1 var(--display,sans-serif);text-transform:uppercase;letter-spacing:.02em;cursor:pointer;opacity:.85}
+.ar-ob b{font-size:.6rem;opacity:.8}.ar-ob i{font-style:normal;min-width:0;font-variant-numeric:tabular-nums}
+.ar-ob[data-o="1"].on{background:rgba(255,200,74,.28);border-color:#ffc94a;color:#ffe08a;opacity:1}
+.ar-ob[data-o="2"].on{background:rgba(106,168,255,.26);border-color:#6aa8ff;color:#cfe2ff;opacity:1}
+.ar-ob.cd{opacity:.4}
+.ar-m.skill .ar-ord,.ar-m.rotq .ar-ord{display:none}
+.ar-tac-seg{display:flex;flex-wrap:wrap;gap:6px;justify-content:flex-end}.ar-tac-seg .btn{min-height:36px}
+.ar-tac-board{display:block;width:100%;max-width:320px;margin:6px auto 10px;height:auto}
+/* guía de regates al mantener el botón Regate con balón (desliza hacia una de ellas) */
+.ar-dg{position:absolute;width:0;height:0;pointer-events:none;z-index:6;display:none}
+.ar-dg i{position:absolute;left:calc(var(--x)*var(--r));top:calc(var(--y)*var(--r));transform:translate(-50%,-50%);font:800 .68rem/1 var(--display,system-ui,sans-serif);font-style:normal;color:#fff;background:rgba(10,14,20,.78);border:1px solid rgba(255,255,255,.28);padding:.32em .5em;border-radius:999px;white-space:nowrap;text-shadow:0 1px 2px #000}
 
 /* === 97_rank.css === */
 /* ===================== RANKING POR APARTADOS ===================== */
@@ -5233,6 +5263,75 @@ input[type=checkbox]{accent-color:var(--u-acc)}
 .com-later{width:100%;margin-top:10px;min-height:48px}
 .com-x{position:absolute;top:10px;right:10px;width:44px;height:44px;border-radius:50%;border:0;background:rgba(255,255,255,.08);color:#fff;font-size:18px;cursor:pointer}
 @media (prefers-reduced-motion:reduce){.com-pop,.com-box,.com-card{transition:none}}
+
+/* === a4_admin.css === */
+.adm-card{display:flex;align-items:center;gap:10px;width:100%;margin:0 0 12px;padding:12px 16px;border-radius:16px;border:1px solid rgba(255,200,80,.45);background:linear-gradient(120deg,#2a1e05,#5a3d0a);color:#ffe7a8;font-size:15px;cursor:pointer;min-height:52px;text-align:left}
+.adm-card span{margin-left:auto;font-size:12px;opacity:.8}
+.adm-box{width:min(520px,100%)}
+.adm-n{margin:0 0 10px!important}
+.adm-list{max-height:55dvh;overflow:auto;text-align:left;margin-bottom:12px;border-radius:12px;background:rgba(0,0,0,.25)}
+.adm-row{display:flex;align-items:center;gap:10px;padding:9px 12px;border-bottom:1px solid rgba(255,255,255,.07)}
+.adm-row b{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis}
+.adm-row small{opacity:.7;font-size:12px;white-space:nowrap}
+.adm-i{width:28px;opacity:.6;font-size:12px}
+
+/* === a5_arena2.css === */
+/* Arenas: recompensa pasiva (monedas por hora acumulables) */
+.ar-idle{display:grid;gap:10px;padding:14px;border:1px solid rgba(255,201,74,.35);background:linear-gradient(160deg,rgba(255,201,74,.10),rgba(0,0,0,.18) 60%)}
+.ar-idle-h{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.ar-idle-h h3{margin:0 0 2px}
+.ar-idle-r{font-family:var(--display);font-size:1.25rem;color:#ffd24a;white-space:nowrap}
+.ar-idle-r small{font-size:.7rem;opacity:.8;margin-left:2px}
+.ar-idle-m{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.ar-idle-c{display:flex;align-items:center;gap:8px;font-family:var(--display);font-size:1.7rem;line-height:1}
+.ar-coin{display:inline-block;width:1.1em;height:1.1em;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff3b0,#ffc94a 55%,#b8700a);border:2px solid #7a4604;box-shadow:0 1px 4px rgba(0,0,0,.4)}
+.ar-idle .btn.primary{min-height:44px;padding-inline:22px}
+.ar-idle .btn:disabled{opacity:.45}
+.ar-idle-bar>i{background:linear-gradient(90deg,#ffb938,#ffd84d)}
+.ar-idle p.note{margin:0}
+@media (max-width:480px){.ar-idle-c{font-size:1.4rem}.ar-idle-m .btn{flex:1}}
+/* mejora ×2 de la recompensa pasiva */
+.ar-idle-x{font-style:normal;margin-left:6px;padding:2px 7px;border-radius:999px;background:#ffd24a;color:#2b1a00;font-size:.75rem;vertical-align:middle}
+.ar-idle-up{width:100%;min-height:44px;border-color:rgba(255,201,74,.45)}
+.ar-idle-up[aria-disabled="true"]{opacity:.6}
+
+/* === a5_pwa.css === */
+/* App instalable (28_pwa.js): reutiliza la ventana .com-pop/.com-box de la comunidad con acento dorado del escudo */
+.pwa-pop .com-box{background:radial-gradient(120% 90% at 50% 0%,rgba(255,201,74,.30),transparent 60%),linear-gradient(180deg,#151d2e,#0a0f1a);border-color:rgba(255,201,74,.45)}
+.pwa-badge{width:88px;height:88px;margin:0 auto 10px;border-radius:24px;overflow:hidden;box-shadow:0 12px 30px rgba(0,0,0,.5),0 0 0 1px rgba(255,255,255,.12)}
+.pwa-badge .pwa-logo{width:100%;height:100%;display:block}
+.pwa-pop .com-kick{color:#ffd166}
+.pwa-acts{display:grid;gap:10px}
+.pwa-go{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;min-height:52px;font-size:17px}
+.pwa-go svg{width:22px;height:22px}
+.pwa-pop .com-later{margin-top:0}
+.pwa-steps{list-style:none;margin:0 0 16px;padding:0;display:grid;gap:8px;text-align:left}
+.pwa-steps li{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:14px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);font-size:14px;line-height:1.35}
+.pwa-n{flex:0 0 26px;height:26px;border-radius:50%;display:grid;place-items:center;background:#ffd166;color:#2b1a00;font-weight:900;font-size:14px}
+.pwa-sic{flex:0 0 34px;height:34px;border-radius:10px;display:grid;place-items:center;background:rgba(255,255,255,.1);color:#9fd0ff}
+.pwa-sic svg,.pwa-sic img{width:22px;height:22px;border-radius:6px}
+.pwa-guide .note{margin:0 0 10px;text-align:left}
+.pwa-sheet .pwa-head{display:flex;align-items:center;gap:12px;margin:6px 0 14px}
+.pwa-sheet .pwa-head .pwa-logo{width:56px;height:56px;border-radius:16px}
+.pwa-sheet .pwa-head b{display:block;font-size:18px}.pwa-sheet .pwa-head small{opacity:.8}
+/* tarjeta de Inicio: fina, para no empujar el resto del menú */
+.pwa-card{display:flex;align-items:center;gap:12px;width:100%;margin:0 0 14px;padding:10px 12px;border-radius:16px;cursor:pointer;color:#fff;text-align:left;font:inherit;
+ background:linear-gradient(120deg,rgba(255,201,74,.16),rgba(255,255,255,.04) 60%);border:1px solid rgba(255,201,74,.35);box-shadow:inset 0 1px 0 rgba(255,255,255,.12);transition:transform .18s ease,border-color .18s ease}
+.pwa-card:hover{transform:translateY(-1px);border-color:rgba(255,201,74,.6)}
+.pwa-card:active{transform:scale(.98)}
+.pwa-card:focus-visible{outline:2px solid #ffd166;outline-offset:2px}
+.pwa-ci .pwa-logo{width:40px;height:40px;border-radius:11px;display:block}
+.pwa-ct{flex:1;min-width:0;display:flex;flex-direction:column;gap:1px}
+.pwa-ct b{font-size:15px;line-height:1.2}.pwa-ct em{font-style:normal;font-size:12.5px;opacity:.8}
+.pwa-cgo{flex:0 0 auto;display:flex;align-items:center;gap:6px;min-height:40px;padding:0 14px;border-radius:999px;background:#ffd166;color:#2b1a00;font-weight:900;font-size:13px;text-transform:uppercase;letter-spacing:.05em}
+.pwa-cgo svg{width:18px;height:18px}
+@media (max-width:380px){.pwa-cgo span{display:none}.pwa-cgo{padding:0 10px}}
+@media (prefers-reduced-motion:reduce){.pwa-card{transition:none}}
+/* escritorio: botón de descarga del acceso directo y ventana algo más ancha */
+.pwa-dl{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;min-height:48px}
+.pwa-dl svg{width:20px;height:20px}
+.pwa-sheet .pwa-dl{margin-top:4px}
+.pwa-desk .com-box{width:min(480px,100%)}
 </style>
 
 <header class="top"><div class="top-in">
@@ -5546,23 +5645,23 @@ const PACKS=[
  {id:"mega",cat:"legend",name:"Megasobre",price:15000,n:12,th:"mega",emb:"ball",odds:{plata:15,oro:55,elite:22,leyenda:7,icono:1},gN:{r:"elite",n:2}},
  {id:"leyendaexp",cat:"legend",name:"Leyenda Express",price:18000,n:3,th:"leyenda",emb:"crown",odds:{elite:40,leyenda:56,icono:4},gN:{r:"leyenda",n:1}},
  {id:"leyendaplus",cat:"legend",name:"Leyenda Premium",price:25000,n:6,th:"leyendaplus",emb:"crown",odds:{elite:45,leyenda:50,icono:5},gN:{r:"leyenda",n:2}},
- {id:"icono",cat:"legend",name:"Sobre Icono",price:40000,n:3,th:"icono",emb:"crown",odds:{elite:40,leyenda:35,icono:25},gN:{r:"icono",n:1}},
+ {id:"icono",cat:"legend",name:"Sobre Icono",price:40000,n:4,th:"icono",emb:"crown",odds:{elite:40,leyenda:35,icono:25},gN:{r:"icono",n:1}},
  {id:"iconoplus",cat:"legend",name:"Icono Premium",price:75000,n:5,th:"iconoplus",emb:"crown",odds:{elite:20,leyenda:45,icono:35},gN:{r:"icono",n:1}},
  {id:"iconoexp",cat:"legend",name:"Icono Express",price:110000,n:2,th:"icono",emb:"crown",odds:{leyenda:40,icono:60},gN:{r:"icono",n:1}},
  {id:"galactico",cat:"elite",name:"Sobre Galáctico",price:150000,n:8,th:"galaxy",emb:"star",odds:{elite:30,leyenda:45,icono:25},gN:{r:"icono",n:2}},
  {id:"titan",cat:"elite",name:"Sobre Titán",price:260000,n:6,th:"supreme",emb:"shield",odds:{leyenda:40,icono:55,mitico:5},gN:{r:"icono",n:2}},
  {id:"supremo",cat:"elite",name:"Sobre Supremo",price:500000,n:10,th:"supreme",emb:"trophy",odds:{elite:15,leyenda:45,icono:40},gN:{r:"icono",n:3}},
  {id:"millon",cat:"elite",name:"Sobre del Millón",price:1000000,n:12,th:"million",emb:"crown",odds:{leyenda:45,icono:55},gN:{r:"icono",n:5}},
- {id:"mitico",cat:"cosmic",name:"Sobre Mítico",price:2500000,n:5,th:"mitico",emb:"bolt",odds:{leyenda:30,icono:52,mitico:18},gN:{r:"mitico",n:1}},
+ {id:"mitico",cat:"cosmic",name:"Sobre Mítico",price:2500000,n:6,th:"mitico",emb:"bolt",odds:{leyenda:30,icono:52,mitico:18},gN:{r:"mitico",n:1}},
  {id:"miticoexp",cat:"cosmic",name:"Mítico Express",price:4000000,n:3,th:"mitico",emb:"bolt",odds:{icono:40,mitico:55,galactico:5},gN:{r:"mitico",n:1}},
  {id:"miticoplus",cat:"cosmic",name:"Mítico Premium",price:6000000,n:7,th:"miticoplus",emb:"crown",odds:{icono:45,mitico:45,galactico:10},gN:{r:"mitico",n:2}},
  {id:"cosmico",cat:"cosmic",name:"Sobre Cósmico",price:15000000,n:6,th:"cosmico",emb:"star",odds:{icono:20,mitico:50,galactico:28,celestial:2},gN:{r:"galactico",n:1}},
  {id:"galacticoplus",cat:"cosmic",name:"Galáctico Premium",price:25000000,n:5,th:"cosmico",emb:"star",odds:{mitico:35,galactico:55,celestial:10},gN:{r:"galactico",n:2}},
  {id:"celestial",cat:"cosmic",name:"Sobre Celestial",price:40000000,n:6,th:"celestial",emb:"shield",odds:{mitico:40,galactico:42,celestial:16,divino:2},gN:{r:"celestial",n:1}},
  {id:"celestialplus",cat:"cosmic",name:"Celestial Premium",price:65000000,n:5,th:"celestial",emb:"shield",odds:{galactico:45,celestial:45,divino:10},gN:{r:"celestial",n:2}},
- {id:"divino",cat:"cosmic",name:"Sobre Divino",price:100000000,n:6,th:"divino",emb:"crown",odds:{galactico:45,celestial:40,divino:15},gN:{r:"divino",n:1}},
+ {id:"divino",cat:"cosmic",name:"Sobre Divino",price:100000000,n:7,th:"divino",emb:"crown",odds:{galactico:45,celestial:40,divino:15},gN:{r:"divino",n:1}},
  {id:"divinoplus",cat:"cosmic",name:"Divino Premium",price:180000000,n:6,th:"divino",emb:"crown",odds:{celestial:50,divino:50},gN:{r:"divino",n:2}},
- {id:"olimpo",cat:"cosmic",name:"Sobre del Olimpo",price:300000000,n:10,th:"olimpo",emb:"trophy",odds:{galactico:30,celestial:45,divino:25},gN:{r:"divino",n:3}},
+ {id:"olimpo",cat:"cosmic",name:"Sobre del Olimpo",price:300000000,n:10,th:"olimpo",emb:"trophy",odds:{galactico:30,celestial:45,divino:25},gN:{r:"divino",n:2}},
  {id:"eterno",cat:"panteon",name:"Sobre Eterno",price:1500000000,n:5,th:"eterno",emb:"star",odds:{celestial:30,divino:58,eterno:12},gN:{r:"divino",n:2}},
  {id:"eternoplus",cat:"panteon",name:"Eterno Premium",price:4000000000,n:6,th:"eternoplus",emb:"crown",odds:{divino:55,eterno:42,abismal:3},gN:{r:"eterno",n:1}},
  {id:"abismal",cat:"panteon",name:"Sobre Abismal",price:10000000000,n:5,th:"abismal",emb:"bolt",odds:{divino:25,eterno:63,abismal:12},gN:{r:"eterno",n:2}},
@@ -5624,7 +5723,7 @@ const COIN=`<svg class="coin" viewBox="0 0 40 40" aria-hidden="true"><circle cx=
 
 const CACHE_KEY="cds-v3-cache:";
 const SESSION_KEY="cds-v3-session";
-function freshState(){return {v:4,casino:{played:0,net:0,big:0,won:0,wins:0},rk:{penR:0,penG:0,olW:0,olL:0,olD:0,olC:0,olT:0},coins:1500,owned:{},form:"4-3-3",lineup:Array(11).fill(null),club:"",alias:"",titles:{},stats:{pj:0,g:0,e:0,p:0,gf:0,gc:0},tour:null,packs:0,starter:false,prog:2,daily:"",gifts:[],olSeq:0,olBlock:[],eco:3,seenVer:"",set:{music:true,vol:.5,sfx:true,speed:1,cam:"tv"},updated:0}}
+function freshState(){return {v:4,czR:1,casino:{played:0,net:0,big:0,won:0,wins:0},rk:{penR:0,penG:0,olW:0,olL:0,olD:0,olC:0,olT:0},coins:1500,owned:{},form:"4-3-3",lineup:Array(11).fill(null),club:"",alias:"",titles:{},stats:{pj:0,g:0,e:0,p:0,gf:0,gc:0},tour:null,packs:0,starter:false,prog:2,daily:"",gifts:[],olSeq:0,olBlock:[],eco:3,seenVer:"",set:{music:true,vol:.5,sfx:true,speed:1,cam:"tv"},updated:0}}
 function normState(o){
   const isObj=v=>!!v&&typeof v==="object"&&!Array.isArray(v),num=(v,d)=>v!==null&&v!==""&&Number.isFinite(+v)?+v:d,has=(m,k)=>Object.prototype.hasOwnProperty.call(m,k);
   if(!isObj(o))o=null;
@@ -5653,6 +5752,11 @@ function normState(o){
   s.arena=typeof arNorm==="function"?arNorm(s.arena):s.arena;
   /* controles de teclado del modo Arenas (21d_arena_ctl.js): 2 teclas por acción, valores por defecto si faltan o no son válidas */
   s.arKeys=typeof arKeysNorm==="function"?arKeysNorm(s.arKeys):s.arKeys;
+  /* disposición de los botones táctiles del modo Arenas / online (21d_arena_ctl.js): coordenadas relativas, valores por defecto si faltan */
+  s.arLay=typeof arLayNorm==="function"?arLayNorm(s.arLay):s.arLay;
+  s.arTac=typeof arTacNorm==="function"?arTacNorm(s.arTac):s.arTac;
+  /* reinicio único de las ganancias del casino para el ranking (fase 6): las partidas sin la marca czR empiezan el casino de cero */
+  if(!(num(o&&o.czR,0)>=1))s.casino=freshState().casino;s.czR=1;
   /* contadores del ranking por apartados: solo suben con partidas reales (las partidas antiguas empiezan en 0) */
   const rk=f.rk;if(isObj(s.rk))for(const k in rk)rk[k]=Math.max(0,Math.floor(num(s.rk[k],0)));s.rk=rk;
   /* reinicio económico (22_reset.js): las partidas guardadas sin versión de economía son anteriores (eco 0) y se migran una vez al entrar */
@@ -5715,10 +5819,10 @@ function rkStats(){
   const uq=uniq().length,cp=uq?uniq().reduce((a,id)=>a+n(S.owned[id]),0):0;
   return {arT:A.on||A.tr?n(A.tr):0,arB:n(Math.max(A.best||0,A.tr||0)),arA:n(A.ar),arW:n(A.w),
     penL,penC,penR:n(K.penR),penG:n(K.penG),tourL,tourC,
-    czNet:Math.trunc(+C.net||0),czBig:n(C.big),czN:n(C.played),czW:Math.min(n(C.wins),n(C.played)),
+    czNet:Math.trunc(+C.net||0),czBig:n(C.big),czN:n(C.played),czW:Math.min(n(C.wins),n(C.played)),czR:1,
     olW:n(K.olW),olL:n(K.olL),olD:n(K.olD),olC:n(K.olC),olT:n(K.olT),
     mG:Math.min(n(St.g),n(St.pj)),mPJ:n(St.pj),mGF:n(St.gf),uq,cp:Math.max(cp,uq)}}
-const RK_KEYS=["arT","arB","arA","arW","penL","penC","penR","penG","tourL","tourC","czNet","czBig","czN","czW","olW","olL","olD","olC","olT","mG","mPJ","mGF","uq","cp"];
+const RK_KEYS=["arT","arB","arA","arW","penL","penC","penR","penG","tourL","tourC","czNet","czBig","czN","czW","czR","olW","olL","olD","olC","olT","mG","mPJ","mGF","uq","cp"];
 let RK_SB_NEW=null; /* web pública: null = sin probar, false = el servidor aún no tiene supabase_rankings.sql */
 const sbMissing=e=>e&&(e.status===404||/PGRST202|Could not find the function/i.test(String(e.message||"")));
 async function pushRank(){
@@ -6318,13 +6422,20 @@ function autoLineup(){
 /* ===================== SOBRES ===================== */
 function rollRarity(odds){let t=R()*100,acc=0;for(const r of RORDER){if(!odds[r])continue;acc+=odds[r];if(t<acc)return r}return RORDER.filter(r=>odds[r]).pop()}
 function drawFrom(rar,filter){let i=RORDER.indexOf(rar);while(i>=0){const pool=BYRAR[RORDER[i]].filter(p=>!filter||filter(p));if(pool.length)return pick(pool);i--}return pick(PLAYERS.filter(p=>!filter||filter(p)))}
+/* Probabilidades REALES: cada carta del sobre sale exactamente con los porcentajes que se muestran.
+   Las cartas garantizadas se sacan de esas mismas probabilidades (solo la parte de su rareza o mejor) y el resto
+   de cartas se compensa, de modo que la media por carta coincide con lo anunciado. */
+function packPlan(pk){if(pk._plan)return pk._plan;const o=pk.odds||{},n=pk.n,g=pk.gN||(pk.guarantee?{r:pk.guarantee,n:1}:null);
+  let plan={g:null,gn:0,rest:o};
+  if(g&&g.n>0){const gi=rIdx(g.r),hi={};let P=0;for(const r of RORDER)if(o[r]&&rIdx(r)>=gi){hi[r]=o[r];P+=o[r]}
+    if(P>0){const gn=Math.min(g.n,n,Math.floor(n*P/100+1e-9)),c={};for(const r in hi)c[r]=hi[r]/P*100;const rest={};
+      if(gn<n){for(const r of RORDER){if(!o[r])continue;const v=(n*o[r]-gn*(c[r]||0))/(n-gn);if(v>1e-9)rest[r]=v}}
+      plan={g:c,gn,rest:Object.keys(rest).length?rest:c}}}
+  Object.defineProperty(pk,"_plan",{value:plan,enumerable:false,configurable:true});return plan}
+function rollW(w){let s=0;for(const r in w)s+=w[r];let t=R()*s;for(const r of RORDER){if(!w[r])continue;t-=w[r];if(t<0)return r}return RORDER.filter(r=>w[r]).pop()}
 function openPackCards(pk){
-  const out=[];
-  for(let i=0;i<pk.n;i++)out.push(drawFrom(rollRarity(pk.odds),pk.filter));
-  const g=pk.gN||(pk.guarantee?{r:pk.guarantee,n:1}:null);
-  if(g){let have=out.filter(c=>rIdx(c.rar)>=rIdx(g.r)).length;
-    out.sort((a,b)=>rIdx(a.rar)-rIdx(b.rar)||a.ovr-b.ovr);
-    for(let i=0;i<out.length&&have<g.n;i++){if(rIdx(out[i].rar)<rIdx(g.r)){out[i]=drawFrom(g.r,pk.filter);have++}}}
+  const pl=packPlan(pk),out=[];
+  for(let i=0;i<pk.n;i++)out.push(drawFrom(i<pl.gn?rollW(pl.g):rollW(pl.rest),pk.filter));
   return out.sort(()=>R()-.5);
 }
 const grant=cards=>cards.map(p=>{const dup=(S.owned[p.id]||0)>0;S.owned[p.id]=(S.owned[p.id]||0)+1;return {p,dup}});
@@ -7408,7 +7519,7 @@ function viewTienda(){
    <div class="sec-h"><h2>Tienda</h2>${infoBtn("tienda")}<p>Cuanto mejor el sobre, más fácil que salga un crack.</p></div>
    <div class="seg" id="shopSeg">${PACK_CATS.map(([v,l])=>`<button data-v="${v}" aria-pressed="${SHOPCAT===v}">${l}</button>`).join("")}</div>
    <div class="packs">${list.map(p=>`<div class="pack">${packArt(p,best&&best.id===p.id?'<span class="best">Mejor para ti</span>':"")}
-     <div class="odds">${RORDER.filter(r=>p.odds[r]).map(r=>`<div><i class="dot-${r}"></i><span style="width:58px">${RAR[r].n}</span><span class="bar"><s class="dot-${r}" style="width:${p.odds[r]}%"></s></span><em class="num">${p.odds[r]}%</em></div>`).join("")}</div>
+     <div class="odds">${RORDER.filter(r=>p.odds[r]).map(r=>`<div><i class="dot-${r}"></i><span style="width:58px">${RAR[r].n}</span><span class="bar"><s class="dot-${r}" style="width:${p.odds[r]}%"></s></span><em class="num">${String(p.odds[r]).replace(".",",")}%</em></div>`).join("")}</div>
      <button class="btn primary" data-buy="${p.id}" ${S.coins<p.price?"disabled":""} title="${fmt(p.price)} monedas">${COIN}<span class="num">${fmtBig(p.price)}</span></button></div>`).join("")}</div>
   </div>`;
 }
@@ -7573,6 +7684,7 @@ function rkRow(x){x=x&&typeof x==="object"?x:{};const st=x.st&&typeof x.st==="ob
   value:Math.max(0,+x.value||0),titles:rkFin(x.titles,0,1e9),rating:rkFin(x.rating,0,999),cards:rkFin(x.cards,0,1e5),pos:rkFin(x.pos,0,1e9)};
   if(!Number.isFinite(r.value))r.value=0;
   RK_KEYS.forEach(k=>{const v=x[k]!==undefined?x[k]:st[k];r[k]=rkFin(v,k==="czNet"?-1e15:0,1e15)});
+  if(!(r.czR>=1))r.czNet=r.czBig=r.czN=r.czW=0; /* casino reiniciado en la fase 6: no cuentan las cifras de antes del reinicio */
   if(!r.uq)r.uq=r.cards;if(r.cp<r.uq)r.cp=r.uq;return r}
 const rkN=n=>{const a=Math.abs(n),s=n<0?"−":"";return a>=1e12?s+(a/1e12).toLocaleString("es-ES",{maximumFractionDigits:1})+" bill.":a>=1e9?s+(a/1e9).toLocaleString("es-ES",{maximumFractionDigits:1})+" mil M":a>=1e6?s+(a/1e6).toLocaleString("es-ES",{maximumFractionDigits:1})+" M":s+fmt(a)};
 const rkPct=(a,b)=>b>0?Math.round(a/b*100):0;
@@ -7606,10 +7718,10 @@ const RK_CATS=[
   tip:"Gana torneos para desbloquear los siguientes, con rivales más fuertes.",empty:"Nadie ha ganado aún un torneo.",note:"Ordena por el torneo de mayor nivel ganado y, si hay empate, por títulos de torneo."},
  {id:"casino",n:"Ganancias del casino",sh:"Casino",c:"#ff7a8a",d:"El balance neto de cada mánager en el casino.",key:r=>[r.czNet,r.czBig,r.czN],ok:r=>r.czN>0,em:r=>(r.czNet>0?"+":"")+rkN(r.czNet),
   cols:[["Balance",r=>`<span class="${r.czNet>=0?"rk-pos":"rk-neg"}">${r.czNet>0?"+":""}${rkN(r.czNet)}</span>`],["Jugadas",r=>rkN(r.czN)],["Mayor premio",r=>rkN(r.czBig)],["Ganadas",r=>rkN(r.czW)]],
-  tip:"El balance es lo ganado menos lo apostado en todas tus jugadas.",empty:"Nadie ha jugado aún en el casino.",note:"Balance neto en monedas (lo ganado menos lo apostado). «Ganadas» cuenta desde esta versión del juego."},
- {id:"online",n:"Victorias online",sh:"Online",c:"#4aa3ff",d:"Los mejores en los duelos de penaltis contra otros mánagers.",key:r=>{const t=r.olW+r.olL+r.olD;return [r.olW,t?r.olW/t:0,r.olC]},ok:r=>r.olW+r.olL+r.olD>0,em:r=>rkN(r.olW)+" V",
-  cols:[["Victorias",r=>rkSub(rkN(r.olW),rkPct(r.olW,r.olW+r.olL+r.olD)+" %")],["Duelos",r=>rkN(r.olW+r.olL+r.olD)],["Monedas ganadas",r=>rkN(r.olC)],["Cambios",r=>rkN(r.olT)]],
-  tip:"Reta a otros mánagers en la pestaña Online.",empty:"Nadie ha jugado aún un duelo online.",note:"Ordena por duelos ganados, luego por porcentaje de victorias y monedas cobradas en premios."},
+  tip:"El balance es lo ganado menos lo apostado en todas tus jugadas.",empty:"Nadie ha jugado aún en el casino.",note:"Balance neto en monedas (lo ganado menos lo apostado). Reiniciado a cero con la actualización de noviembre: cuenta desde entonces."},
+ {id:"online",n:"Victorias online",sh:"Online",c:"#4aa3ff",d:"Victorias contra otros mánagers: duelos de penaltis (diferidos y en directo) y partidos de Arena en directo.",key:r=>{const t=r.olW+r.olL+r.olD;return [r.olW,t?r.olW/t:0,r.olC]},ok:r=>r.olW+r.olL+r.olD>0,em:r=>rkN(r.olW)+" V",
+  cols:[["Victorias",r=>rkSub(rkN(r.olW),rkPct(r.olW,r.olW+r.olL+r.olD)+" %")],["Partidos",r=>rkN(r.olW+r.olL+r.olD)],["Monedas ganadas",r=>rkN(r.olC)],["Cambios",r=>rkN(r.olT)]],
+  tip:"Reta a otros mánagers en la pestaña Online.",empty:"Nadie ha jugado aún un duelo online.",note:"Cuentan los duelos de penaltis (diferidos y en directo) y los partidos de Arena 1 vs 1 en directo. Ordena por victorias, luego por porcentaje de victorias y monedas cobradas en premios."},
  {id:"partidos",n:"Partidos ganados",sh:"Partidos",c:"#9be15d",d:"Victorias en amistosos, torneos y Arenas.",key:r=>[r.mG,r.mGF,-r.mPJ],ok:r=>r.mG>0,em:r=>rkN(r.mG)+" V",
   cols:[["Victorias",r=>rkSub(rkN(r.mG),rkPct(r.mG,r.mPJ)+" %")],["Jugados",r=>rkN(r.mPJ)],["Goles",r=>rkN(r.mGF)],["Media",r=>r.rating||"–"]],
   tip:"Juega amistosos, torneos o Arenas para sumar victorias.",empty:"Nadie ha ganado aún un partido.",note:"Cuenta los partidos ganados en el tiempo reglamentario; en empate, por goles marcados."},
@@ -9881,7 +9993,7 @@ const INFO={
   penaltis:["Copa de Penaltis","Cada ronda son 5 tiros y necesitas 4. Para la barra en la zona verde para marcar. Hay 55 copas. Cada nivel estrecha la zona verde, acelera la barra y pide más PEN (50 en la primera, 120 en la 23 y 300 en la 55). Si tu lanzador no llega a ese PEN la dificultad se multiplica hasta ×4; si lo supera baja, pero nunca de ×0,55, así que las últimas copas son exigentes incluso con PEN altísimo. El premio crece con la dificultad (un 13% por nivel) y se multiplica con tu multiplicador. Si pierdes, la copa empieza de cero."],
   entreno:["Centro de entrenamiento","Cada mejora suma +2 PEN al jugador elegido (hasta 150 mejoras, +300 PEN). El precio sube con cada nivel. Las mejoras son por jugador y se mantienen para siempre."],
   casino:["Casino","Juegas con monedas o cartas del juego, nunca con dinero real. Cada resultado sale de un generador aleatorio. Los juegos tienen una pequeña ventaja de la casa, como en un casino real: a largo plazo se pierde algo más de lo que se gana. Si apuestas cartas, el premio se paga en cartas de valor proporcional."],
-  ranking:["Ranking global","Hay una clasificación por cada apartado: valor del club, trofeos de Arenas, Copa de Penaltis, torneos, casino, duelos online, partidos ganados y colección. Toca un apartado para ver su top 50 y tu puesto. Se actualiza cada vez que se guarda tu partida."],
+  ranking:["Ranking global","Hay una clasificación por cada apartado: valor del club, trofeos de Arenas, Copa de Penaltis, torneos, casino (reiniciado a cero en noviembre), victorias online (duelos de penaltis y partidos de Arena en directo), partidos ganados y colección. Toca un apartado para ver su top 50 y tu puesto. Se actualiza cada vez que se guarda tu partida."],
 };
 function infoBtn(k){return `<button class="ibtn" data-info="${k}" aria-label="Información: ${esc(INFO[k][0])}">i</button>`}
 function openInfo(k){const [t,d]=INFO[k];
@@ -10668,7 +10780,7 @@ function olApply(movs){
   movs.slice().sort((a,b)=>a.id-b.id).forEach(m=>{
     if(!(m.id>(S.olSeq||0)))return;
     if(typeof ecoOlLeg==="function"&&ecoOlLeg(m)){S.olSeq=m.id;changed=true;legN++; /* de antes del reinicio: no mueve monedas ni cartas */
-      if(S.rk){const K=S.rk;if(m.kind==="reto_win")K.olW++;else if(m.kind==="reto_loss")K.olL++;else if(m.kind==="reto_draw")K.olD++}return}
+      if(S.rk){const K=S.rk;if(m.kind==="reto_win"||m.kind==="pnl_win"||m.kind==="arena_win")K.olW++;else if(m.kind==="reto_loss"||m.kind==="pnl_loss"||m.kind==="arena_loss")K.olL++;else if(m.kind==="reto_draw"||m.kind==="arena_draw")K.olD++}return}
     const c=Math.trunc(+m.coins||0);if(c)S.coins=Math.max(0,S.coins+c);
     const got=[],lost=[];
     Object.entries(m.cards||{}).forEach(([id,d])=>{d=Math.trunc(+d||0);if(!d||!BYID[id])return;
@@ -10676,7 +10788,7 @@ function olApply(movs){
       (d>0?got:lost).push([id,Math.abs(d)]);
       if(!(S.owned[id]>0))S.lineup=S.lineup.map(x=>x===id?null:x)});
     S.olSeq=m.id;changed=true;
-    if(S.rk){const K=S.rk;if(m.kind==="reto_win"||m.kind==="pnl_win"){K.olW++;K.olC+=Math.max(0,c)}else if(m.kind==="reto_loss"||m.kind==="pnl_loss")K.olL++;else if(m.kind==="reto_draw")K.olD++;else if(m.kind==="trade")K.olT++} /* contadores del ranking */
+    if(S.rk){const K=S.rk;if(m.kind==="reto_win"||m.kind==="pnl_win"||m.kind==="arena_win"){K.olW++;K.olC+=Math.max(0,c)}else if(m.kind==="reto_loss"||m.kind==="pnl_loss"||m.kind==="arena_loss")K.olL++;else if(m.kind==="reto_draw"||m.kind==="arena_draw")K.olD++;else if(m.kind==="trade")K.olT++} /* contadores del ranking */
     if(m.kind==="reto_win")scenes.push({kind:"duelwin",big:c>=1e6,title:"Duelo de penaltis",sub:esc(m.note||""),total:c});
     else if(m.kind==="reto_loss")scenes.push({kind:"loss",title:"Duelo perdido",sub:esc(m.note||"")+"<br>Tu apuesta se la lleva el rival."});
     else if(m.kind==="reto_draw")scenes.push({kind:"draw",title:"Duelo sin ganador",sub:esc(m.note||""),total:c});
@@ -11168,7 +11280,8 @@ function bindOnline(m){
 
 /* ===================== MODO ARENAS: trofeos, arenas, cofres y jugadores exclusivos =====================
    Modo de habilidad contra la CPU (motor arcade en 21b_arena_engine.js, ronda de habilidad en 21c_arena_skill.js).
-   · 15 arenas con umbral de trofeos; ganar suma ~+25..+35, perder resta; nunca se baja del umbral de tu arena.
+   · 15 arenas con umbral de trofeos; ganar suma +50..+60, perder resta 25..50; nunca se baja del umbral de tu arena.
+     Escala ×2 (v2, nov-26): umbrales y trofeos doblados respecto a la v1 (+25..35 por victoria); las partidas antiguas se migran una vez (A.tv).
    · Al llegar por primera vez a una arena: Sobre de esa arena + 2-3 jugadores EXCLUSIVOS (no salen en la tienda).
    · Cada victoria da un cofre (Plata / Oro / Mágico / Legendario) según la arena actual: 5 huecos, uno se desbloquea
      a la vez, máximo 5 cofres cada 8 h (ventana móvil) y opción de abrir ya pagando monedas.
@@ -11179,23 +11292,23 @@ function bindOnline(m){
 /* g1/g2: césped; ln: líneas; c1/c2: tema; cr: público; emb: emblema del escudo; odds: rarezas de las cartas de sus cofres */
 const AR_LIST=[
  {n:"Potrero del Barrio",min:0,c1:"#3a2414",c2:"#e0a060",g1:"#5d7a33",g2:"#536f2d",ln:"rgba(250,240,220,.75)",cr:"#7a5a3a",emb:"ball",odds:{bronce:70,plata:27,oro:3}},
- {n:"Campo de Tierra El Pedregal",min:300,c1:"#3d2a12",c2:"#d9a441",g1:"#6b7d34",g2:"#5f7130",ln:"rgba(250,240,215,.78)",cr:"#8a6a3a",emb:"peaks",odds:{bronce:50,plata:40,oro:10}},
- {n:"Polideportivo Municipal",min:600,c1:"#0f2a4a",c2:"#4aa3ff",g1:"#2c7a4a",g2:"#277043",ln:"rgba(240,248,255,.82)",cr:"#3a5a8a",emb:"bars",odds:{bronce:30,plata:50,oro:18,elite:2}},
- {n:"Estadio de la Feria",min:1000,c1:"#3a0f2a",c2:"#ff6fb5",g1:"#2a7a3f",g2:"#256f39",ln:"rgba(255,240,250,.82)",cr:"#8a3a6a",emb:"burst",odds:{plata:50,oro:42,elite:7,leyenda:1}},
- {n:"Playa del Chiringuito",min:1400,c1:"#0c3a46",c2:"#ffd36b",g1:"#c9b27a",g2:"#bea56c",ln:"rgba(255,255,255,.85)",cr:"#2a7a8a",emb:"palm",odds:{plata:30,oro:55,elite:13,leyenda:2}},
- {n:"Coliseo de la Tortilla",min:1800,c1:"#3a2a06",c2:"#ffc94a",g1:"#2f7a36",g2:"#2a6f31",ln:"rgba(255,248,225,.85)",cr:"#8a6a1a",emb:"sun",odds:{oro:60,elite:32,leyenda:7,icono:1}},
- {n:"Templo del Tiki-Taka",min:2300,c1:"#0a3a2a",c2:"#47d6cf",g1:"#1f7a46",g2:"#1b6e3f",ln:"rgba(230,255,248,.85)",cr:"#1a6a5a",emb:"tree",odds:{oro:40,elite:45,leyenda:13,icono:2}},
- {n:"Fortaleza Glaciar",min:2800,c1:"#0c2a44",c2:"#9fe3ff",g1:"#3a8a6a",g2:"#357f62",ln:"rgba(235,250,255,.9)",cr:"#4a7aa0",emb:"snow",odds:{elite:50,leyenda:40,icono:9,mitico:1}},
- {n:"Caldera del Volcán",min:3300,c1:"#3a0a04",c2:"#ff6a2a",g1:"#3a5a22",g2:"#34511e",ln:"rgba(255,225,200,.85)",cr:"#8a2a14",emb:"fire",odds:{elite:30,leyenda:50,icono:17,mitico:3}},
- {n:"Estadio Neón",min:3900,c1:"#14062e",c2:"#c64fd8",g1:"#1c5a4a",g2:"#185043",ln:"rgba(120,255,240,.9)",cr:"#4a1a6a",emb:"bolt",odds:{leyenda:50,icono:40,mitico:9,galactico:1}},
- {n:"Arena Galáctica",min:4500,c1:"#0b0730",c2:"#8a7bff",g1:"#2a3f7a",g2:"#253870",ln:"rgba(210,205,255,.9)",cr:"#2a1a6a",emb:"planet",odds:{leyenda:30,icono:50,mitico:17,galactico:3}},
- {n:"Olimpo del Balón",min:5100,c1:"#2a1800",c2:"#ffd84d",g1:"#2f7a3a",g2:"#2a6e34",ln:"rgba(255,246,208,.92)",cr:"#8a6a20",emb:"crown",odds:{icono:50,mitico:40,galactico:9,celestial:1}},
- {n:"Bosque Eterno",min:5800,c1:"#04281a",c2:"#35f29a",g1:"#1f6a3a",g2:"#1b5f34",ln:"rgba(216,255,233,.9)",cr:"#14583a",emb:"tree",odds:{icono:30,mitico:50,galactico:17,celestial:3}},
- {n:"Abismo Profundo",min:6500,c1:"#12001a",c2:"#ff3fc8",g1:"#1a3a4a",g2:"#163342",ln:"rgba(255,194,240,.9)",cr:"#4a0a4a",emb:"swirl",odds:{mitico:50,galactico:38,celestial:10,divino:2}},
- {n:"Trono del Crack Absoluto",min:7300,c1:"#0d0b16",c2:"#f4f1ff",g1:"#2a6a40",g2:"#255f3a",ln:"rgba(255,255,255,.95)",cr:"#3a3450",emb:"infinity",odds:{mitico:30,galactico:48,celestial:18,divino:4}}
+ {n:"Campo de Tierra El Pedregal",min:600,c1:"#3d2a12",c2:"#d9a441",g1:"#6b7d34",g2:"#5f7130",ln:"rgba(250,240,215,.78)",cr:"#8a6a3a",emb:"peaks",odds:{bronce:50,plata:40,oro:10}},
+ {n:"Polideportivo Municipal",min:1200,c1:"#0f2a4a",c2:"#4aa3ff",g1:"#2c7a4a",g2:"#277043",ln:"rgba(240,248,255,.82)",cr:"#3a5a8a",emb:"bars",odds:{bronce:30,plata:50,oro:18,elite:2}},
+ {n:"Estadio de la Feria",min:2000,c1:"#3a0f2a",c2:"#ff6fb5",g1:"#2a7a3f",g2:"#256f39",ln:"rgba(255,240,250,.82)",cr:"#8a3a6a",emb:"burst",odds:{plata:50,oro:42,elite:7,leyenda:1}},
+ {n:"Playa del Chiringuito",min:2800,c1:"#0c3a46",c2:"#ffd36b",g1:"#c9b27a",g2:"#bea56c",ln:"rgba(255,255,255,.85)",cr:"#2a7a8a",emb:"palm",odds:{plata:30,oro:55,elite:13,leyenda:2}},
+ {n:"Coliseo de la Tortilla",min:3600,c1:"#3a2a06",c2:"#ffc94a",g1:"#2f7a36",g2:"#2a6f31",ln:"rgba(255,248,225,.85)",cr:"#8a6a1a",emb:"sun",odds:{oro:60,elite:32,leyenda:7,icono:1}},
+ {n:"Templo del Tiki-Taka",min:4600,c1:"#0a3a2a",c2:"#47d6cf",g1:"#1f7a46",g2:"#1b6e3f",ln:"rgba(230,255,248,.85)",cr:"#1a6a5a",emb:"tree",odds:{oro:40,elite:45,leyenda:13,icono:2}},
+ {n:"Fortaleza Glaciar",min:5600,c1:"#0c2a44",c2:"#9fe3ff",g1:"#3a8a6a",g2:"#357f62",ln:"rgba(235,250,255,.9)",cr:"#4a7aa0",emb:"snow",odds:{elite:50,leyenda:40,icono:9,mitico:1}},
+ {n:"Caldera del Volcán",min:6600,c1:"#3a0a04",c2:"#ff6a2a",g1:"#3a5a22",g2:"#34511e",ln:"rgba(255,225,200,.85)",cr:"#8a2a14",emb:"fire",odds:{elite:30,leyenda:50,icono:17,mitico:3}},
+ {n:"Estadio Neón",min:7800,c1:"#14062e",c2:"#c64fd8",g1:"#1c5a4a",g2:"#185043",ln:"rgba(120,255,240,.9)",cr:"#4a1a6a",emb:"bolt",odds:{leyenda:50,icono:40,mitico:9,galactico:1}},
+ {n:"Arena Galáctica",min:9000,c1:"#0b0730",c2:"#8a7bff",g1:"#2a3f7a",g2:"#253870",ln:"rgba(210,205,255,.9)",cr:"#2a1a6a",emb:"planet",odds:{leyenda:30,icono:50,mitico:17,galactico:3}},
+ {n:"Olimpo del Balón",min:10200,c1:"#2a1800",c2:"#ffd84d",g1:"#2f7a3a",g2:"#2a6e34",ln:"rgba(255,246,208,.92)",cr:"#8a6a20",emb:"crown",odds:{icono:50,mitico:40,galactico:9,celestial:1}},
+ {n:"Bosque Eterno",min:11600,c1:"#04281a",c2:"#35f29a",g1:"#1f6a3a",g2:"#1b5f34",ln:"rgba(216,255,233,.9)",cr:"#14583a",emb:"tree",odds:{icono:30,mitico:50,galactico:17,celestial:3}},
+ {n:"Abismo Profundo",min:13000,c1:"#12001a",c2:"#ff3fc8",g1:"#1a3a4a",g2:"#163342",ln:"rgba(255,194,240,.9)",cr:"#4a0a4a",emb:"swirl",odds:{mitico:50,galactico:38,celestial:10,divino:2}},
+ {n:"Trono del Crack Absoluto",min:14600,c1:"#0d0b16",c2:"#f4f1ff",g1:"#2a6a40",g2:"#255f3a",ln:"rgba(255,255,255,.95)",cr:"#3a3450",emb:"infinity",odds:{mitico:30,galactico:48,celestial:18,divino:4}}
 ];
 AR_LIST.forEach((a,i)=>{a.i=i;a.id="ar"+i});
-const AR_MAXTR=8000; /* a partir de aquí la CPU ya juega a su máximo nivel */
+const AR_MAXTR=16000; /* a partir de aquí la CPU ya juega a su máximo nivel */
 const arIdxOf=tr=>{let i=0;while(i+1<AR_LIST.length&&tr>=AR_LIST[i+1].min)i++;return i};
 const arLowRar=a=>RORDER.find(r=>AR_LIST[a].odds[r]);
 const arRarUp=(r,k)=>RORDER[Math.min(RORDER.length-1,rIdx(r)+k)];
@@ -11254,11 +11367,13 @@ const arMult=()=>earnMult(teamRating().ovr);
 function arChestPack(t,a){const c=AR_CH[t],lo=arLowRar(a),odds={};
   /* las cartas de un cofre mejor suben de nivel: se desplaza la tabla de la arena «up» peldaños en los cofres altos */
   const sh=t==="legendario"?1:0;Object.keys(AR_LIST[a].odds).forEach(r=>{const k=arRarUp(r,sh);odds[k]=(odds[k]||0)+AR_LIST[a].odds[r]});
-  return {id:"arc-"+t+"-"+a,name:c.n,n:c.cards,th:c.th,emb:c.emb,odds,gN:c.g?{r:arRarUp(lo,c.up),n:c.g}:null}}
+  return {id:"arc-"+t+"-"+a,name:c.n,n:c.cards,th:c.th,emb:c.emb,odds,gN:c.g?arGFit(odds,c.cards,arRarUp(lo,c.up),c.g):null}}
+/* la garantía nunca puede contradecir los porcentajes mostrados: se baja de rareza hasta que encaja */
+function arGFit(o,n,r,k){let i=rIdx(r);const P=j=>RORDER.reduce((s,x)=>s+(rIdx(x)>=j?(o[x]||0):0),0);while(i>0&&n*P(i)/100<k-1e-9)i--;return {r:RORDER[i],n:k}}
 function arChestEV(t,a){const pk=arChestPack(t,a);let ev=0;Object.entries(pk.odds).forEach(([r,w])=>ev+=w/100*AR_RVAL[r]);ev*=pk.n;
   if(pk.gN)ev+=pk.gN.n*Math.max(0,AR_RVAL[pk.gN.r]-ev/pk.n);return ev}
 /* sobre de recompensa al llegar a una arena */
-function arArenaPack(a){const lo=arLowRar(a);return {id:"arp-"+a,name:"Sobre "+AR_LIST[a].n,n:6,th:["barrio","barrio","plata","plataplus","oro","oro","oroplus","elite","eliteplus","leyenda","galaxy","divino","eterno","abismal","infinito"][a]||"oro",emb:AR_LIST[a].emb in EMB?AR_LIST[a].emb:"star",odds:AR_LIST[a].odds,gN:{r:arRarUp(lo,2),n:1}}}
+function arArenaPack(a){const lo=arLowRar(a);return {id:"arp-"+a,name:"Sobre "+AR_LIST[a].n,n:6,th:["barrio","barrio","plata","plataplus","oro","oro","oroplus","elite","eliteplus","leyenda","galaxy","divino","eterno","abismal","infinito"][a]||"oro",emb:AR_LIST[a].emb in EMB?AR_LIST[a].emb:"star",odds:AR_LIST[a].odds,gN:arGFit(AR_LIST[a].odds,6,arRarUp(lo,2),1)}}
 function arDrawExcl(a){const pool=AR_PL.filter(p=>p.excl<=a&&p.excl>=1);return pool.length?pool[Math.floor(R()*pool.length)]:null}
 function arChestCards(t,a){const pk=arChestPack(t,a),cards=openPackCards(pk),c=AR_CH[t];
   if(c.ex&&R()<c.ex){const x=arDrawExcl(a);if(x){let k=0;cards.forEach((p,i)=>{if(rIdx(p.rar)<rIdx(cards[k].rar))k=i});cards[k]=x}}
@@ -11278,11 +11393,14 @@ const arLvl=tr=>1+54*clamp(tr/AR_MAXTR,0,1);
 function arD(tr){const ms=L=>{const B=penBaseWD(L);return B.w*B.dur},m1=ms(1),mL=ms(arLvl(tr)),m55=ms(55);return clamp(Math.log(m1/mL)/Math.log(m1/m55),0,1)}
 
 /* ---------- estado ---------- */
-function arFresh(){return {on:false,tr:0,best:0,ar:0,w:0,l:0,d:0,gf:0,ga:0,streak:0,chests:Array(AR_SLOTS).fill(null),qt:[],clk:0,wall:0,debt:0,tut:false,live:null,seq:0,paid:0,log:[]}}
+function arFresh(){return {tv:2,on:false,tr:0,best:0,ar:0,w:0,l:0,d:0,gf:0,ga:0,streak:0,chests:Array(AR_SLOTS).fill(null),qt:[],clk:0,wall:0,debt:0,tut:false,live:null,seq:0,paid:0,log:[],idT:0,idH:0,idC:0,idX:0}}
 function arNorm(o){const f=arFresh(),isObj=v=>!!v&&typeof v==="object"&&!Array.isArray(v),num=(v,d)=>v!==null&&v!==""&&Number.isFinite(+v)?+v:d;
   if(!isObj(o))return f;const s=Object.assign(f,o);
+  /* migración única v1→v2: la escala de trofeos se dobló (umbrales ×2): se doblan tus trofeos y tu récord para que sigas en la misma arena */
+  if(!(num(o.tv,1)>=2)){s.tr=Math.max(0,Math.floor(num(s.tr,0)))*2;s.best=Math.max(0,Math.floor(num(s.best,0)))*2;if(isObj(s.live))s.live.tr=Math.floor(num(s.live.tr,0))*2}s.tv=2;
   s.on=!!s.on;s.tut=!!s.tut;["tr","best","ar","w","l","d","gf","ga","seq","paid","streak"].forEach(k=>s[k]=Math.max(0,Math.floor(num(s[k],0))));
   s.ar=Math.min(AR_LIST.length-1,s.ar);s.best=Math.max(s.best,s.tr);
+  s.idT=Math.max(0,num(s.idT,0));s.idH=clamp(num(s.idH,0),0,AR_IDLE_H);s.idC=Math.max(0,num(s.idC,0));if(s.idC>1e13)s.idC=1e13;s.idX=clamp(Math.floor(num(s.idX,0)),0,4);
   s.clk=Math.max(0,num(s.clk,0));s.wall=Math.max(0,num(s.wall,0));s.debt=Math.max(0,num(s.debt,0));
   const ch=Array.isArray(s.chests)?s.chests:[];s.chests=Array.from({length:AR_SLOTS},(_,i)=>{const c=ch[i];if(!isObj(c)||!AR_CH[c.t])return null;
     return {t:c.t,a:clamp(Math.floor(num(c.a,0)),0,AR_LIST.length-1),s:Math.max(0,num(c.s,0)),id:String(c.id||"c"+i).slice(0,24),ready:!!c.ready}});
@@ -11312,13 +11430,61 @@ function arSkipCost(c){const st=arChestState(c);if(st==="ready")return 0;const f
 /* cofre que toca: igual que en los juegos de cofres, cuanto mejor, más raro (62 / 28 / 8,5 / 1,5 %) */
 function arRollChest(){let t=R()*100,acc=0;for(const k of AR_CHK){acc+=AR_CH[k].p;if(t<acc)return k}return "plata"}
 
+/* ---------- recompensa pasiva: monedas por hora según tus trofeos, acumulables hasta 100 h (también sin jugar ni abrir el juego) ----------
+   tasa(t) = 2.000 + 8.000·(min(t, 20.000)/100)^0,75 monedas/h (redondeo a 10). Tabla (por hora · tope de 100 h):
+     0 → 2.000 · 200k | 100 → 10.000 · 1 M | 600 (arena 2) → 32.670 · 3,3 M | 2.000 (arena 4) → 77.660 · 7,8 M
+     4.600 (arena 7) → 143.310 · 14,3 M | 9.000 (arena 11) → 235.760 · 23,6 M | 14.600 (arena 15) → 338.010 · 33,8 M | ≥20.000 → 427.460 (techo)
+   NO se multiplica por el multiplicador de la economía (earnMult): es una cifra fija y visible. Para un jugador recién llegado a las Arenas
+   (media 85-95, ingresos activos de miles a ~1 M/h con EARN_X 2,5) vale como 1-2 h de juego al día; para uno de arenas altas (media 130+, decenas de M/h)
+   es un complemento pequeño: no rompe la economía exponencial. Los sobres de victoria se mantienen igual (dan cartas y exclusivos).
+   Se acumula con el reloj propio del modo (arNow): nunca retrocede; si la hora del dispositivo se atrasa, esa deuda se descuenta del siguiente avance. */
+const AR_IDLE_H=100;
+const arIdleRate=tr=>Math.round((2000+8000*Math.pow(clamp(+tr||0,0,20000)/100,.75))/10)*10;
+/* mejora ×2: pago único de 1.000.000 monedas que duplica para siempre la tasa (máximo ×2, no se repite; A.idX = 0 | 1).
+   Lo acumulado ANTES de comprar se queda a la tasa antigua: la compra liquida primero (arIdleSettle) y solo las horas siguientes van ×2. */
+const AR_IDLE_UP=250000,AR_IDLE_LV=4;   /* 4 mejoras de +×0,25 a 250.000 cada una (máximo ×2) */
+const arIdleMul=()=>1+.25*(AR().idX||0);
+const arIdleRateNow=tr=>arIdleRate(tr)*arIdleMul();
+function arIdleSettle(){const A=AR();if(!A.on)return A;const now=arNow();
+  if(!A.idT||A.idT>now)A.idT=now;
+  const dh=Math.min(Math.max(0,(now-A.idT)/36e5),AR_IDLE_H-A.idH);A.idT=now;
+  if(dh>0){A.idC+=dh*arIdleRateNow(A.tr);A.idH+=dh}return A}
+/* estado para la vista: monedas, tasa, horas acumuladas y tiempo hasta el tope */
+function arIdleInfo(){const A=arIdleSettle(),rate=arIdleRateNow(A.tr),left=Math.max(0,AR_IDLE_H-A.idH);
+  return {rate,coins:Math.floor(A.idC+1e-6),h:A.idH,left,leftMs:left*36e5,full:left<=1e-6,max:Math.round(AR_IDLE_H*rate)}}
+function arIdleBuy(){const A=AR();if(!A.on||A.idX>=AR_IDLE_LV)return;
+  if(S.coins<AR_IDLE_UP){toast(`Te faltan ${fmt(AR_IDLE_UP-S.coins)} monedas para la mejora.`);return}
+  const m0=arIdleMul(),m1=m0+.25,r=arIdleRate(A.tr),fx=m=>'×'+String(m).replace('.',',');
+  openSheet(`<div class="ar-up-sheet"><div class="sheet-h"><h3>Mejorar monedas por hora</h3><button class="btn small" data-close>Cancelar</button></div>
+   <p>Mejora ${A.idX+1} de ${AR_IDLE_LV}: pagas <b class="num">${fmt(AR_IDLE_UP)}</b> monedas y tu recompensa pasiva pasa de <b>${fx(m0)}</b> a <b>${fx(m1)}</b> para siempre (máximo ×2).</p>
+   <p class="note">Ahora: <b class="num">${fmt(r*m0)}/h</b> → con la mejora: <b class="num">${fmt(r*m1)}/h</b> (y seguirá subiendo con tus trofeos). Lo ya acumulado se queda a la tasa actual.</p>
+   <button class="btn primary" id="arUpOk" style="width:100%;min-height:48px">Pagar ${fmt(AR_IDLE_UP)} y mejorar a ${fx(m1)}</button></div>`);
+  $("#arUpOk").onclick=()=>{const A=arIdleSettle();if(A.idX>=AR_IDLE_LV||S.coins<AR_IDLE_UP){closeSheet();return}
+    S.coins-=AR_IDLE_UP;A.idX=(A.idX||0)+1;save();setTop();closeSheet();render(true);
+    rewardScene({kind:"upgrade",title:"Monedas por hora "+fx(m1),sub:"Tu recompensa pasiva de Arenas mejora para siempre.",total:0,lines:[["Antes",fmt(r*m0)+" /h"],["Ahora",fmt(r*m1)+" /h"],["Coste",fmt(AR_IDLE_UP)]]})}}
+function arIdleClaim(){const A=AR();if(!A.on)return;const i=arIdleInfo();if(i.coins<1){toast("Aún no hay monedas que reclamar.");return}
+  A.idC=0;A.idH=0;A.idT=arNow();addCoins(i.coins);save();setTop();render(true);
+  rewardScene({kind:"gift",big:i.coins>=1e6,title:"Recompensa pasiva",sub:`${fdec(i.h,1)} h de monedas acumuladas a ${fmt(i.rate)}/h`,total:i.coins,lines:[["Tasa",fmt(i.rate)+" /h"],["Horas",fdec(i.h,1)+" de "+AR_IDLE_H]]})}
+const arIdleTime=ms=>{const h=Math.floor(ms/36e5),d=Math.floor(h/24),m=Math.floor(ms%36e5/6e4);return d?`${d} d ${h%24} h`:h?`${h} h ${String(m).padStart(2,"0")} min`:`${m} min`};
+function arIdleHTML(){const i=arIdleInfo();
+  return `<div class="ar-idle panel" id="arIdle"><div class="ar-idle-h"><div><h3>Recompensa pasiva</h3><span class="note">Se acumula aunque no juegues, hasta ${AR_IDLE_H} h</span></div><b class="ar-idle-r num">+${fmt(i.rate)}<small>/h</small>${AR().idX?'<em class="ar-idle-x">×'+String(arIdleMul()).replace('.',',')+'</em>':""}</b></div>
+   <div class="ar-idle-m"><span class="ar-idle-c"><i class="ar-coin" aria-hidden="true"></i><b class="num" id="arIdC">${fmt(i.coins)}</b></span><button class="btn primary" id="arIdClaim"${i.coins<1?" disabled":""}>Reclamar</button></div>
+   <div class="ar-bar ar-idle-bar" role="img" aria-label="${fdec(i.h,1)} de ${AR_IDLE_H} horas acumuladas"><i id="arIdBar" style="width:${Math.round(i.h/AR_IDLE_H*100)}%"></i><span class="num" id="arIdH">${fdec(i.h,1)} / ${AR_IDLE_H} h</span></div>
+   ${AR().idX>=AR_IDLE_LV?"":`<button class="btn ar-idle-up" id="arIdUp"${S.coins<AR_IDLE_UP?' aria-disabled="true"':""}>Mejorar a ×${String(arIdleMul()+.25).replace('.',',')} · <b class="num">${fmt(AR_IDLE_UP)}</b> <small>(${AR().idX||0}/${AR_IDLE_LV})</small></button>`}
+   <p class="note" id="arIdT">${i.full?"Acumulación llena: reclama para volver a empezar.":`Tope (${fmt(i.max)} aprox.) en <b class="num">${arIdleTime(i.leftMs)}</b>`} · la tasa sube con tus trofeos</p></div>`}
+function arIdleTick(){const el=$("#arIdC");if(!el)return;const i=arIdleInfo();el.textContent=fmt(i.coins);const b=$("#arIdBar");if(b)b.style.width=Math.round(i.h/AR_IDLE_H*100)+"%";
+  const h=$("#arIdH");if(h)h.textContent=fdec(i.h,1)+" / "+AR_IDLE_H+" h";const t=$("#arIdT");if(t)t.innerHTML=(i.full?"Acumulación llena: reclama para volver a empezar.":`Tope (${fmt(i.max)} aprox.) en <b class="num">${arIdleTime(i.leftMs)}</b>`)+" · la tasa sube con tus trofeos";
+  const c=$("#arIdClaim");if(c)c.disabled=i.coins<1}
+
 /* ---------- trofeos ---------- */
 function arTrophyDelta(win,gd,skill,a){
-  if(win)return skill?25:clamp(29+Math.min(6,Math.max(1,gd)),30,35);
-  const base=a===0?16:clamp(20+a*.6,20,29);return -Math.round(skill?base*.6:base+Math.min(3,Math.max(0,-gd-1)))}
+  if(win)return skill?50:clamp(52+2*Math.min(4,Math.max(1,gd)),54,60);/* victoria: al menos 50 trofeos (ganar por la ronda de habilidad: 50) */
+  /* derrota: 25 en la 1.ª arena y de 33 a 46 después (+1 por cada gol de diferencia por encima de 1, máx. +4); la ronda de habilidad resta el 60 %.
+     Proporción derrota/victoria 0,45-0,85 (v1: 0,5-0,9): con la CPU subiendo de nivel con los trofeos, cada arena cuesta un número de partidas parecido al de antes. */
+  const base=a===0?25:clamp(32+a,33,46);return -Math.round(skill?base*.6:base+Math.min(4,Math.max(0,-gd-1)))}
 /* aplica el resultado de una partida (una sola vez por id de partida) y devuelve el resumen */
 function arApplyResult(id,res){
-  const A=AR();if(A.lastId===id)return null;A.lastId=id;
+  const A=arIdleSettle();if(A.lastId===id)return null;A.lastId=id;
   const a0=arIdxOf(A.tr),win=res.win,d=arTrophyDelta(win,res.gf-res.ga,res.skill,a0),floor=AR_LIST[a0].min;
   const tr0=A.tr;A.tr=Math.max(floor,A.tr+d);A.best=Math.max(A.best,A.tr);
   if(win){A.w++;A.streak++}else{A.l++;A.streak=0}if(res.skill)A.d++;A.gf+=res.gf;A.ga+=res.ga;
@@ -11386,6 +11552,7 @@ function viewArenas(){
      <button class="btn ar-road-btn" id="arRoad" aria-expanded="${AR_ROAD}">${UI.rank}<span>Camino de trofeos</span></button></div>
     <div class="ar-rec num"><span><b>${A.w}</b> victorias</span><span><b>${A.l}</b> derrotas</span><span><b>${A.d}</b> rondas de habilidad</span><span>${UI.bolt} CPU ${Math.round(D*100)}%</span></div>
    </div>
+   ${arIdleHTML()}
    <div class="ar-chests panel">
     <div class="ar-ch-h"><h3>Sobres de victoria</h3><div class="ar-quota${q.left?"":" full"}" id="arQuota"><b class="num">${q.left}/${AR_QN}</b><span>${q.left===AR_QN?"sobres disponibles (cada 8 h)":`se recarga 1 en <b class="num" data-arq>${arFmtT(q.next)}</b>`}</span></div></div>
     <div class="ar-slots">${A.chests.map(slot).join("")}</div>
@@ -11425,12 +11592,12 @@ function bindArena(m){
   const on=(s,fn)=>{const e=m.querySelector(s);if(e)e.onclick=fn};
   on("#arUnlock",arUnlockMode);on("#arPlay",arPlayFlow);on("#arPvp",()=>typeof pvOpen==="function"&&pvOpen());on("#arRoad",()=>{AR_ROAD=!AR_ROAD;render(true);if(AR_ROAD){const r=$("#arRoadP");r&&r.scrollIntoView({behavior:"smooth",block:"start"})}});
   m.querySelectorAll("[data-arslot]").forEach(b=>b.onclick=()=>arSlotSheet(+b.dataset.arslot));
-  arStartTick();
+  on("#arIdClaim",arIdleClaim);on("#arIdUp",arIdleBuy);arStartTick();
   if(AR().on&&AR().live&&!AR_RUN)arAbandonPending();
 }
 /* actualiza los contadores cada segundo sin repintar la vista */
 function arStartTick(){arStopTick();let lastSt="";AR_TICK=setInterval(()=>{if(AR_RUN)return;if(TAB!=="torneos"||JUG!=="arenas"||!document.querySelector(".ar-home")){arStopTick();return}
-  const A=AR(),st=A.chests.map(arChestState).join();if(lastSt&&st!==lastSt){render(true);return}lastSt=st;
+  arIdleTick();const A=AR(),st=A.chests.map(arChestState).join();if(lastSt&&st!==lastSt){render(true);return}lastSt=st;
   A.chests.forEach((c,i)=>{const el=document.querySelector(`[data-artime="${i}"]`);if(el&&arChestState(c)==="unlocking")el.textContent=arFmtS(arLeft(c))});
   const q=arQuota(),qe=document.querySelector("[data-arq]");if(qe)qe.textContent=arFmtT(q.next);else if(q.left<AR_QN){const b=$("#arQuota");if(b&&!b.querySelector("[data-arq]"))render(true)}
   const sl=$("#arSlotLeft");if(sl){const c=A.chests[+sl.dataset.i];if(c&&arChestState(c)==="unlocking"){sl.textContent=arFmtT(arLeft(c));const sc=$("#arSkip");if(sc)sc.querySelector("b").textContent=fmt(arSkipCost(c))}}
@@ -11502,7 +11669,7 @@ function arShowPack(pk,res,onDone){clearPackTimers();if(!res.length){onDone&&onD
   legacyOpen(pk,res,best,onDone)}
 
 /* ---------- información, tipos de escena y sonidos ---------- */
-INFO.arenas=["Modo Arenas","Partidos arcade de 2 minutos contra la CPU en los que controlas a tu jugador: mueve con el joystick o WASD/flechas, pasa (J / Espacio), tira manteniendo para cargar potencia (K) y regatea (L / Mayús). En defensa: Pase cambia de jugador, Tiro hace una entrada y Regate es un sprint de presión. Las estadísticas de tus cartas solo dan un pequeño extra de velocidad y precisión (máx. ±3 %). Ganar da +25 a +35 trofeos y un sobre de victoria que hay que esperar para abrir; perder resta 16-32 (nunca bajas de tu arena). Si hay empate, se decide en una ronda de habilidad de penaltis y paradas. La CPU mejora con tus trofeos siguiendo la misma curva que la Copa de Penaltis. Sobres de victoria: Plata (62 %, 3 h), Oro (28 %, 8 h), Mágico (8,5 %, 12 h) y Legendario (1,5 %, 24 h); 5 huecos, uno se desbloquea a la vez y hasta 5 sobres cada 8 h; también puedes abrirlos ya pagando monedas. Las monedas de los sobres se multiplican con tu multiplicador. Abandonar o recargar a mitad de partido cuenta como derrota."];
+INFO.arenas=["Modo Arenas","Partidos arcade de 2 minutos contra la CPU en los que controlas a tu jugador: mueve con el joystick o WASD/flechas, pasa (J / Espacio), tira manteniendo para cargar potencia (K) y regatea (L / Mayús). Con balón puedes elegir el regate: en el móvil mantén Regate y desliza (↑ Sombrero, ↗↖ Caño, → Elástica, ← Recorte, ↘↙ Bicicleta, ↓ Ruleta; si solo tocas, se elige solo) y en el ordenador pulsa 1-6. El Sombrero pasa el balón por encima del rival y tu jugador lo rodea solo. Justo después de un regate es muy difícil que te roben (recarga de 5 s). En defensa: Pase cambia de jugador, Tiro hace una entrada y Regate es un sprint de presión. Las estadísticas de tus cartas solo dan un pequeño extra de velocidad y precisión (máx. ±3 %). Ganar da +50 a +60 trofeos (+50 si se decide en la ronda de habilidad) y un sobre de victoria que hay que esperar para abrir; perder resta 25 en la primera arena y de 33 a 50 en las demás (nunca bajas de tu arena). Las arenas van de 0 a 14.600 trofeos. Si hay empate, se decide en una ronda de habilidad de penaltis y paradas. La CPU mejora con tus trofeos siguiendo la misma curva que la Copa de Penaltis. Sobres de victoria: Plata (62 %, 3 h), Oro (28 %, 8 h), Mágico (8,5 %, 12 h) y Legendario (1,5 %, 24 h); 5 huecos, uno se desbloquea a la vez y hasta 5 sobres cada 8 h; también puedes abrirlos ya pagando monedas. Las monedas de los sobres se multiplican con tu multiplicador. Recompensa pasiva: la casilla de monedas por hora se llena sola con la hora del dispositivo (también sin jugar), hasta 100 h; la tasa sube con tus trofeos (2.000/h con 0, 10.000/h con 100, unas 78.000/h con 2.000 y unas 338.000/h con 14.600) y se cobra con Reclamar. Mejora única: por 1.000.000 de monedas la tasa va ×2 para siempre (máximo ×2); lo acumulado antes de comprarla se queda a la tasa anterior. Si la hora del dispositivo se atrasa, no se acumula nada hasta recuperarla."+"\u0020Abandonar o recargar a mitad de partido cuenta como derrota."];
 RS_KIND.arunl=["¡Nuevo modo!","#ffd84d"];RS_EMB.arunl=RS_TROPHY;RS_KIND.arena=["¡Sobre abierto!","#ffc94a"];RS_KIND.arenaw=["Victoria","#5fe08f"];RS_KIND.arenaup=["¡Nueva arena!","#ffd84d"];
 RS_EMB.arenaup=RS_TROPHY;RS_EMB.arenaw=RS_STAR;
 Object.assign(AU,{
@@ -11533,20 +11700,27 @@ function arCpuParams(D){return {
   spd:arLerp(.84,1.06,D)+Math.max(0,D-.7)*.1,react:arLerp(.5,.1,D),passErr:arLerp(.2,.03,D),shotErr:arLerp(.17,.03,D),range:arLerp(12,12.5,D),pow:arLerp(.45,.9,D),
   tackleP:arLerp(.18,.7,D)+Math.max(0,D-.7)*.6,pressN:D<.3?1:2,press:arLerp(.45,1,D),steal:arLerp(.25,1.5,D),gkReact:arLerp(.56,.25,D)-Math.max(0,D-.7)*.075,gkDive:arLerp(3.6,6.5,D)+Math.max(0,D-.7)*2.6,gkErr:arLerp(2,.85,D),gkSave:arLerp(.72,.87,D)+Math.max(0,D-.7)*.15,
   gkReach:arLerp(.55,.96,D)+Math.max(0,D-.7)*.12,gkCatch:arLerp(14,21.5,D),mistake:arLerp(.1,.006,D),skill:arLerp(.05,.55,D),through:arLerp(.05,.5,D),mark:arLerp(.5,1,D),
-  shield:arLerp(0,.4,D),passP:arLerp(1.9,3.4,D),read:arLerp(0,.9,D)}}
+  shield:arLerp(0,.4,D),passP:arLerp(1.9,3.4,D),read:arLerp(0,.9,D),
+  /* inteligencia táctica (desmarques, coberturas, marcajes, repliegue) y del portero (ángulo, salidas): crece con la arena */
+  iq:Math.min(1,.1+1.25*D),gkIQ:arLerp(.2,1,D)}}
 /* compañeros de tu equipo controlados por la IA: nivel fijo intermedio (no dependen de tus trofeos) */
 /* (porterías grandes: tu portero algo más ágil para que la CPU no marque mucho más) */
-const AR_MATE=Object.assign(arCpuParams(.45),{gkReact:.34,gkDive:5.6,gkReach:.9,gkErr:1,gkSave:.62,gkCatch:19});
+const AR_MATE=Object.assign(arCpuParams(.45),{gkReact:.34,gkDive:5.6,gkReach:.9,gkErr:1,gkSave:.62,gkCatch:19,iq:.3,gkIQ:.45});
+/* protección del balón tras un blocaje del portero (s) */
+const AR_PROT=3;
 /* PRNG determinista con estado serializable (mulberry32) */
 function arRng(seed){let a=(seed>>>0)||1;const f=()=>{a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296};f.get=()=>a;f.set=v=>{a=v|0};return f}
-const AR_B={pass:1,shot:2,drib:4,sw:8,tk:16,tac:24};/* tac = cambiar y entrada a la vez (cabe en la señal de red existente) */
+const AR_B={pass:1,shot:2,drib:4,sw:8,tk:16,tac:24,thr:32,lob:64,ord:128};/* ord (+tk = Defender, solo = Atacar): órdenes momentáneas a la CPU de tu equipo */
+const AR_ORD_T=9,AR_ORD_CD=4;/* thr = pase al hueco (mantenido) · lob = gesto «por arriba» (deslizar hacia arriba): bits libres del byte de botones que ya viaja por la red *//* tac = cambiar y entrada a la vez (cabe en la señal de red existente) */
 /* radio para coger/recibir/robar el balón de los jugadores de campo (×1,5; el portero y los choques entre jugadores no cambian) */
 const AR_HB=1.5;
 
 function arMatch(cfg,onEnd){
-  const L=$("#layer"),A=AR_LIST[cfg.arena||0],D=cfg.D||0,PVP=cfg.pvp||null,ME=PVP?PVP.me|0:0,CP=PVP?Object.assign({},AR_MATE,{shield:0}):arCpuParams(D),TUT=!!cfg.tut,H=1/120;
+  const L=$("#layer"),A=AR_LIST[cfg.arena||0],D=cfg.D||0,PVP=cfg.pvp||null,ME=PVP?PVP.me|0:0,CP=PVP?Object.assign({},AR_MATE,{shield:0}):arCpuParams(Math.min(1,1-Math.pow(1-D,1.45)+(D<=.34?.2-.185*D/.34:.015*Math.max(0,1-(D-.34)/.12))))/* un poco más difícil hasta ~4000 trofeos; sin efecto desde D≈0,46 *//* rival offline: curva cóncava (sube antes en arenas medias) */,TUT=!!cfg.tut,H=1/120;
   /* JcJ en directo (24_pvp.js): cfg.pvp={me:0|1,five:[[5 ids],[5 ids]]}, cfg.net gobierna los ticks. Los dos equipos son humanos con la misma IA de compañeros; ME es tu equipo (el 1 ve el campo girado 180°) */
   const rnd=arRng(cfg.seed!=null?cfg.seed:hash(String(cfg.id||"x")));
+  /* rival CPU de la Arena offline: refuerzo progresivo con la dificultad (portero, presión y definición). No afecta al online ni a tus compañeros */
+  if(!PVP){const k=Math.max(Math.max(0,1-Math.abs(D-.34)/.3)*.78,D<.34?.9*(1-D/.34)+.6*D/.34:0);/* refuerzo del portero rival centrado en las arenas medias (D≈0,34) */CP.gkReact=Math.max(.12,CP.gkReact-.22*k);CP.gkDive+=2*k;CP.gkReach+=.15*k;CP.gkErr*=1-.35*Math.min(1,k)}
   const lu=lineupPlayers().filter(Boolean),gkP=lu.find(p=>p.pos==="POR")||lu[0],outs=lu.filter(p=>p!==gkP).sort((a,b)=>b.ovr-a.ovr).slice(0,4);
   /* tus 5: portero + los 4 mejores de campo colocados por posición */
   const pvF=t=>PVP.five[t].map(id=>BYID[id]||null),opFive=PVP?pvF(1):null;
@@ -11569,7 +11743,7 @@ function arMatch(cfg,onEnd){
    <div class="ar-tut" id="arTut" hidden></div>
    <div class="ar-ctl" id="arCtl">
     <div class="ar-joy" id="arJoy"><div class="ar-joy-b"></div><div class="ar-joy-k" id="arJoyK"></div></div>
-    <div class="ar-btns"><button class="ar-b b-drib" data-b="drib"><span>Regate</span><small>${kn("drib")}</small></button><button class="ar-b b-pass" data-b="pass"><span>Pase</span><small>${kn("pass")}</small></button><button class="ar-b b-shot" data-b="shot"><span>Tiro</span><small>${kn("shot")}</small></button></div>
+    <div class="ar-btns"><button class="ar-b b-drib" data-b="drib"><span>Regate</span><small>${kn("drib")}</small></button><button class="ar-b b-pass" data-b="pass"><span>Pase</span><small>${kn("pass")}</small></button><button class="ar-b b-shot" data-b="shot"><span>Tiro</span><small>${kn("shot")}</small></button><button class="ar-b b-thr" data-b="thr"><span>Al hueco</span><small>${kn("thr")}</small></button></div>
     <div class="ar-keys" id="arKeys" aria-hidden="true">${arKeysBar(false)}</div>
    </div>
    <div class="ar-rot" id="arRot" hidden role="alert"><div class="ar-rot-in"><svg viewBox="0 0 64 64" aria-hidden="true"><rect class="ph" x="22" y="8" width="20" height="36" rx="4"/><path d="M14 46a20 20 0 0 0 30 8" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><path d="M44 48l1 7-7 0" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -11586,25 +11760,32 @@ function arMatch(cfg,onEnd){
   const mk=(team,i)=>{const me=team===0||!!PVP,src=team===0?myFive[i]:PVP?opFive[i]:null,d0=team===0?1:-1;return {team,i,role:ROLES[i],x:0,y:0,vx:0,vy:0,fx:d0,fy:0,px:0,py:0,pfx:d0,pfy:0,
     name:(me?(src?src.short||src.name:"Jugador"):oppNames[i]).split(" ").slice(-1)[0].slice(0,14),num:[1,4,7,11,9][i],src,
     spd:6.9*(me?statF(src,"rit"):CP.spd),acc:me?statF(src,"tir"):1,pas:me?statF(src,"pas"):1,cool:0,dive:0,
-    stun:0,tackleT:0,tackleCd:0,skillT:0,skillCd:0,skillK:0,skillS:0,kickT:0,kickK:0,dcd:0,tac:1,boostT:0,boostCd:0,ai:{t:rnd()*.2,hold:0,recv:0,sw:0,react:0,err:0},off:false,anim:rnd()*6}};
+    stun:0,tackleT:0,tackleCd:0,skillT:0,skillCd:0,skillK:0,skillS:0,kickT:0,kickK:0,dcd:0,tac:1,boostT:0,boostCd:0,prot:0,safe:0,sax:0,say:0,sbx:0,sby:0,sox:0,soy:0,stc:40,ord:0,ordT:0,ordCd:0,ai:{t:rnd()*.2,hold:0,recv:0,sw:0,react:0,err:0,gg:0,tx:0,ty:0,st:0},off:false,anim:rnd()*6}};
   const P=[0,1,2,3,4].map(i=>mk(0,i)).concat([0,1,2,3,4].map(i=>mk(1,i)));
   const TM=[[],[]];/* jugadores activos por equipo: se rellenan cada tick sin crear arrays */
   const fillTeams=()=>{TM[0].length=0;TM[1].length=0;for(let i=0;i<10;i++){const p=P[i];if(!p.off)TM[p.team].push(p)}};fillTeams();
   const team=t=>TM[t];
   const gk=t=>P[t*5];
   G.human=P[4];G.human1=PVP?P[9]:null;G.golden=0;
+  /* esquema táctico de tu equipo (S.arTac, elegido antes de jugar). En el online cada lado envía el suyo como entrada durante la cuenta atrás */
+  if(!PVP&&typeof arTacCode==="function")P[0].stc=arTacCode(S.arTac);
   /* estado de botones dentro de la simulación */
   const SB={b:0,t0:[0,0,0],last:0,mx:0,my:0,mm:0},SB1={b:0,t0:[0,0,0],last:0,mx:0,my:0,mm:0};
   const isH=t=>t===0||!!PVP,hum=t=>t===0?G.human:PVP?G.human1:null,sbt=t=>t===0?SB:SB1,teamBall=t=>!!ball.owner&&ball.owner.team===t;
   /* ---------- entrada (fuera de la simulación) ---------- */
-  const IN={kx:0,ky:0,jx:0,jy:0,gx:0,gy:0,tac:false,down:{pass:false,shot:false,drib:false},latch:{pass:false,shot:false,drib:false},ev:0,keys:new Set(),bk:new Set()};
-  const BTN={pass:0,shot:1,drib:2};
+  const IN={kx:0,ky:0,jx:0,jy:0,gx:0,gy:0,tac:false,down:{pass:false,shot:false,drib:false,thr:false},latch:{pass:false,shot:false,drib:false,thr:false},lob:false,ev:0,keys:new Set(),bk:new Set()};
+  const BTN={pass:0,shot:1,drib:2,thr:3};
+  /* elegir regate deslizando el botón: ↑ Sombrero · ↗↖ Caño · → Elástica · ← Recorte · ↘↙ Bicicleta · ↓ Ruleta (tocar = automático) */
+  function dribOfSwipe(dx,dy){const a=Math.atan2(-dy,dx)*180/Math.PI;if(a>=67.5&&a<112.5)return 6;if(a>=22.5&&a<67.5||a>=112.5&&a<157.5)return 4;if(a>=-22.5&&a<22.5)return 5;if(a>=157.5||a<-157.5)return 1;if(a>=-112.5&&a<-67.5)return 3;return 2}
+  let dgEl=null;function dribGuide(b,on){if(!dgEl){dgEl=document.createElement("div");dgEl.className="ar-dg";dgEl.innerHTML=[["Sombrero",0,-1],["Caño",.75,-.75],["Elástica",1,0],["Bicicleta",.75,.75],["Ruleta",0,1],["Bicicleta",-.75,.75],["Recorte",-1,0],["Caño",-.75,-.75]].map(([n,x,y])=>`<i style="--x:${x};--y:${y}">${n}</i>`).join("");ov.appendChild(dgEl)}
+    if(!on){dgEl.style.display="none";return}const r=b.getBoundingClientRect(),o=ov.getBoundingClientRect(),R0=Math.max(62,r.width*.95),cx=clamp(r.left-o.left+r.width/2,R0+40,o.width-R0-40),cy=clamp(r.top-o.top+r.height/2,R0+14,o.height-R0-14);dgEl.style.cssText=`display:block;left:${cx}px;top:${cy}px;--r:${R0}px`}
   const press=b=>{if(IN.down[b])return;IN.down[b]=true;IN.latch[b]=true;if(navigator.vibrate&&touch)try{navigator.vibrate(8)}catch(e){}};
   const release=b=>{IN.down[b]=false};
   const MV={up:[0,-1],down:[0,1],left:[-1,0],right:[1,0]};
   const recalcK=()=>{let x=0,y=0;IN.keys.forEach(k=>{const v=MV[arKeyAct(k)];if(v){x+=v[0];y+=v[1]}});const m=Math.hypot(x,y)||1;IN.kx=x/m;IN.ky=y/m};
   const kd=e=>{if(AR_CAP||!e.code&&e.key!=="Escape")return;const act=arKeyAct(e.code);
     if(e.repeat&&act&&act!=="pause"){e.preventDefault();return}
+    if(!act&&/^(Digit|Numpad)[1-6]$/.test(e.code)&&!G.skill&&!G.paused){IN.dk=+e.code.slice(-1);e.preventDefault();return}/* PC: 1-6 eligen el regate */
     if(G.skill&&G.skill.key&&!G.paused&&!G.rot){if(G.skill.key(e.code,act)){e.preventDefault();return}}
     if(act==="pause"||e.code==="Escape"){e.preventDefault();e.stopImmediatePropagation();if(G.rot&&!G.paused){pause();return}G.paused?resume():pause();return}
     if(!act)return;
@@ -11612,11 +11793,13 @@ function arMatch(cfg,onEnd){
     else if(BTN[act]!==undefined){IN.bk.add(e.code);press(act);e.preventDefault()}
     else if(act==="switch"){IN.ev|=AR_B.sw;e.preventDefault()}
     else if(act==="tackle"){IN.ev|=AR_B.tk;e.preventDefault()}
+    else if(act==="atk"){IN.ev|=AR_B.ord;e.preventDefault()}else if(act==="dfd"){IN.ev|=AR_B.ord|AR_B.tk;e.preventDefault()}
+    else if(act==="lob"){IN.lobK=true;e.preventDefault()}
     else if(act==="tactic"){e.preventDefault()}/* tácticas retiradas */};
-  const ku=e=>{if(AR_CAP)return;const act=arKeyAct(e.code);if(!act)return;
+  const ku=e=>{if(AR_CAP)return;const act=arKeyAct(e.code);if(!act)return;if(act==="lob"){IN.lobK=false;e.preventDefault();return}
     if(MV[act]){IN.keys.delete(e.code);recalcK();e.preventDefault()}
     else if(BTN[act]!==undefined){IN.bk.delete(e.code);let still=false;IN.bk.forEach(k=>{if(arKeyAct(k)===act)still=true});if(!still)release(act);e.preventDefault()}};
-  const blur=()=>{IN.keys.clear();IN.bk.clear();recalcK();IN.jx=IN.jy=0;release("pass");release("shot");release("drib")};
+  const blur=()=>{IN.keys.clear();IN.bk.clear();recalcK();IN.jx=IN.jy=0;release("pass");release("shot");release("drib");release("thr");IN.lob=false;IN.lobK=false};
   document.addEventListener("keydown",kd,true);document.addEventListener("keyup",ku,true);window.addEventListener("blur",blur);
   /* joystick táctil flotante: aparece donde apoyas el pulgar dentro de su zona */
   const joy=$("#arJoy"),jk=$("#arJoyK");let jid=null,jc0=0,jc1=0;
@@ -11624,12 +11807,17 @@ function arMatch(cfg,onEnd){
   joy.addEventListener("pointerdown",e=>{if(jid!==null)return;jid=e.pointerId;joy.setPointerCapture&&joy.setPointerCapture(e.pointerId);const r=joy.getBoundingClientRect();jc0=e.clientX-r.left;jc1=e.clientY-r.top;joy.style.setProperty("--jx",jc0+"px");joy.style.setProperty("--jy",jc1+"px");joy.classList.add("on");jmove(e);e.preventDefault()});
   const jmove=e=>{if(e.pointerId!==jid)return;const r=joy.getBoundingClientRect(),dx=e.clientX-r.left-jc0,dy=e.clientY-r.top-jc1,R0=jr(),m=Math.hypot(dx,dy),k=m>R0?R0/m:1;
     jk.style.transform=`translate(${dx*k}px,${dy*k}px)`;const dz=.18,mm=Math.min(1,m/R0);if(mm<dz){IN.jx=IN.jy=0}else{IN.jx=dx/m*Math.min(1,(mm-dz)/(1-dz)*1.15);IN.jy=dy/m*Math.min(1,(mm-dz)/(1-dz)*1.15)}e.preventDefault()};
-  const jend=e=>{if(e.pointerId!==jid)return;jid=null;IN.jx=IN.jy=0;jk.style.transform="";joy.classList.remove("on")};
+  const jend=e=>{if(e.pointerId!==jid)return;jid=null;IN.jx=IN.jy=0;jk.style.transform="";joy.classList.remove("on");if(JC){joy.style.setProperty("--jx",JC.x+"px");joy.style.setProperty("--jy",JC.y+"px")}};
   joy.addEventListener("pointermove",jmove);joy.addEventListener("pointerup",jend);joy.addEventListener("pointercancel",jend);
   const btnEl={};
   ov.querySelectorAll(".ar-b").forEach(b=>{const k=b.dataset.b;btnEl[k]=b;
-    b.addEventListener("pointerdown",e=>{e.preventDefault();b.setPointerCapture&&b.setPointerCapture(e.pointerId);if(G.skill&&G.skill.tap){G.skill.tap(k);b.classList.add("dn");setTimeout(()=>b.classList.remove("dn"),120);return}press(k);b.classList.add("dn")});
-    const up=e=>{e.preventDefault();release(k);b.classList.remove("dn")};b.addEventListener("pointerup",up);b.addEventListener("pointercancel",up);b.addEventListener("lostpointercapture",up);b.addEventListener("contextmenu",e=>e.preventDefault())});
+    b.addEventListener("pointerdown",e=>{e.preventDefault();b.setPointerCapture&&b.setPointerCapture(e.pointerId);if(G.skill&&G.skill.tap){G.skill.tap(k);b.classList.add("dn");setTimeout(()=>b.classList.remove("dn"),120);return}
+      if(k==="drib"&&myBall()){/* con balón: toca = regate automático · desliza = eliges el regate */b._g={x:e.clientX,y:e.clientY,u:0};b.classList.add("dn");dribGuide(b,true);return}
+      press(k);b.classList.add("dn");b._y0=e.clientY;b.classList.remove("up")});
+    /* gesto: pulsar Pase o Al hueco y deslizar el dedo hacia arriba → pase por arriba (bombeado) */
+    if(k==="drib")b.addEventListener("pointermove",e=>{const g=b._g;if(!g||g.u)return;const dx=e.clientX-g.x,dy=e.clientY-g.y;if(Math.hypot(dx,dy)<Math.max(24,b.offsetHeight*.3))return;g.u=1;IN.dk=dribOfSwipe(dx,dy);dribGuide(b,false)});
+    if(k==="pass"||k==="thr")b.addEventListener("pointermove",e=>{if(!IN.down[k]||b._y0==null)return;if(b._y0-e.clientY>Math.max(26,b.offsetHeight*.35)){if(!IN.lob)IN.lob=true;b.classList.add("up")}});
+    const up=e=>{e.preventDefault();if(b._g){if(!b._g.u)IN.latch.drib=true;b._g=null;dribGuide(b,false)}else release(k);b.classList.remove("dn");b._y0=null;setTimeout(()=>b.classList.remove("up"),150)};b.addEventListener("pointerup",up);b.addEventListener("pointercancel",up);b.addEventListener("lostpointercapture",up);b.addEventListener("contextmenu",e=>e.preventDefault())});
   ov.addEventListener("touchmove",e=>e.preventDefault(),{passive:false});
   /* botón de táctica de la CPU de tu equipo (esquina superior derecha, bajo la pausa): toca para ciclar DEF → EQU → OFE → ULT */
   const TACN=[["DEF","Defensiva","#6aa8ff"],["EQU","Equilibrada","#9fffb4"],["OFE","Ofensiva","#ffd84d"],["ULT","Ultraofensiva","#ff6a5a"]];
@@ -11637,6 +11825,12 @@ function arMatch(cfg,onEnd){
   tacB.style.cssText="position:absolute;z-index:6;top:calc(env(safe-area-inset-top,0px) + 64px);right:max(8px,env(safe-area-inset-right,0px));width:46px;height:46px;min-width:44px;min-height:44px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0;background:rgba(6,10,14,.62);border:2px solid #9fffb4;color:#fff;font:800 .72rem/1 var(--display,sans-serif);letter-spacing:.02em;pointer-events:auto;touch-action:none;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.4)";
   tacB.innerHTML="<b style=\"display:block\">EQU</b><small style=\"display:block;font-size:.46rem;opacity:.7;margin-top:2px;letter-spacing:0\">TÁCT.</small>";ov.appendChild(tacB);
   tacB.addEventListener("pointerdown",e=>{e.preventDefault();e.stopPropagation();IN.tac=true});tacB.addEventListener("contextmenu",e=>e.preventDefault());
+  /* órdenes momentáneas a la CPU de tu equipo: dos botones discretos arriba (Atacar / Defender), con la orden activa y el enfriamiento */
+  const ordW=document.createElement("div");ordW.className="ar-ord";ordW.innerHTML=`<button class="ar-ob" data-o="1" aria-label="Orden: atacar"><b>▲</b><span>Atacar</span><i></i></button><button class="ar-ob" data-o="2" aria-label="Orden: defender"><b>▼</b><span>Defender</span><i></i></button>`;ov.appendChild(ordW);
+  ordW.querySelectorAll(".ar-ob").forEach(b=>{b.addEventListener("pointerdown",e=>{e.preventDefault();e.stopPropagation();if(G.state!=="play"||G.skill)return;IN.ev|=AR_B.ord|(b.dataset.o==="2"?AR_B.tk:0)});b.addEventListener("contextmenu",e=>e.preventDefault())});
+  let ordK="";function syncOrd(){const g0=gk(ME),k=g0.ord+"|"+Math.ceil(g0.ordT)+"|"+(g0.ordCd>0?1:0);if(k===ordK)return;ordK=k;
+    ordW.querySelectorAll(".ar-ob").forEach(b=>{const o=+b.dataset.o,on=g0.ord===o;b.classList.toggle("on",on);b.classList.toggle("cd",g0.ordCd>0&&!on);b.lastElementChild.textContent=on?Math.ceil(g0.ordT):""});
+    if(g0.ord&&g0.ordT>AR_ORD_T-.2)evt(g0.ord===1?"Orden: ¡al ataque!":"Orden: ¡atrás, a defender!")}
   let tacLast=-1;function syncTac(){const t=gk(ME).tac;if(t===tacLast)return;const first=tacLast<0;tacLast=t;const d=TACN[t];tacB.firstChild.textContent=d[0];tacB.style.borderColor=d[2];tacB.style.color=d[2];if(!first)evt("Táctica: "+d[1])}
   /* mando: se lee una vez por fotograma */
   const PAD={on:false,p:0};
@@ -11652,13 +11846,16 @@ function arMatch(cfg,onEnd){
     if(st&1)press("pass");else if(IN.down.pass&&!IN.bk.size)release("pass");
     if(st&2)press("shot");else if(IN.down.shot&&!IN.bk.size)release("shot");
     if(st&4)press("drib");else if(IN.down.drib&&!IN.bk.size)release("drib");
+    if(bt(6))press("thr");else if(IN.down.thr&&!IN.bk.size)release("thr");/* LT = pase al hueco */
     if(rise&8)IN.ev|=AR_B.sw;if(rise&16)IN.ev|=AR_B.tk}
   /* muestreo de la entrada de este tick → {mx,my,b,e} enteros (lo que viajaría por la red) */
   const INP={mx:0,my:0,b:0,e:0};
-  function sampleInput(){let x=IN.jx||IN.gx||IN.kx,y=IN.jy||IN.gy||IN.ky,world=false;
+  function sampleInput(){if(G.state==="count"&&PVP){INP.mx=typeof arTacCode==="function"?arTacCode(S.arTac):40;INP.my=-128;INP.b=0;INP.e=0;return INP}/* cuenta atrás online: viaja tu esquema táctico */
+    let x=IN.jx||IN.gx||IN.kx,y=IN.jy||IN.gy||IN.ky,world=false;
     if(window.__AR_BOT){const b=window.__AR_BOT;x=b.mx||0;y=b.my||0;world=!!b.world}
     let m=Math.hypot(x,y);if(m<.05){INP.mx=INP.my=0}else{const k=Math.min(1,m)/m;let wx=x*k,wy=y*k;if(!world&&V.port){const t=wx;wx=-wy;wy=t}if(!world&&V.flip){wx=-wx;wy=-wy}INP.mx=Math.round(wx*127);INP.my=Math.round(wy*127)}
-    let b=0;for(const k in BTN){if(IN.down[k]||IN.latch[k])b|=AR_B[k];IN.latch[k]=false}INP.b=b;INP.e=IN.ev;IN.ev=0;if(IN.tac&&G.state==="play"){INP.e|=AR_B.tac;IN.tac=false}return INP}
+    let b=0;for(const k in BTN){if(IN.down[k]||IN.latch[k])b|=AR_B[k];IN.latch[k]=false}if(IN.lob||IN.lobK){b|=AR_B.lob;if(!IN.down.pass&&!IN.down.thr)IN.lob=false}INP.b=b;INP.e=IN.ev;IN.ev=0;if(IN.tac&&G.state==="play"){INP.e|=AR_B.tac;IN.tac=false}
+    if(IN.dk){/* regate elegido: viaja como Regate+«por arriba» con el tipo codificado en la dirección de ese único tick */if(G.state==="play"&&!(b&(AR_B.pass|AR_B.thr|AR_B.drib))){const a=(IN.dk-1)*Math.PI/3;INP.mx=Math.round(Math.cos(a)*127);INP.my=Math.round(Math.sin(a)*127);INP.b=b|AR_B.drib|AR_B.lob}IN.dk=0}return INP}
   const myBall=()=>ball.owner&&ball.owner.team===ME;
   /* vector de movimiento del humano dentro de la simulación (de la entrada del tick) */
   const MVO={x:0,y:0,m:0};
@@ -11666,16 +11863,20 @@ function arMatch(cfg,onEnd){
   /* aplica la entrada de un tick: flancos de botones → acciones (determinista) */
   function applyInput(inp,tm){tm=tm|0;const SB=sbt(tm),prev=SB.b,b=inp.b|0,rise=b&~prev,fall=prev&~b;
     const mx=(inp.mx|0)/127,my=(inp.my|0)/127,m=Math.hypot(mx,my);
+    const xk=(rise&4)&&(b&64)&&!(b&33)&&m>.5?((Math.round(Math.atan2(my,mx)/(Math.PI/3))+6)%6)+1:0;/* regate elegido (su tick no mueve al jugador) */
     if(Math.abs(mx-SB.mx)+Math.abs(my-SB.my)>.05||rise||fall||inp.e)SB.last=G.t;
-    if(m<.05){SB.mx=SB.my=SB.mm=0}else{SB.mx=mx/m;SB.my=my/m;SB.mm=Math.min(1,m)}
+    if(xk){}else if(m<.05){SB.mx=SB.my=SB.mm=0}else{SB.mx=mx/m;SB.my=my/m;SB.mm=Math.min(1,m)}
     SB.b=b;const h=hum(tm);if(!h)return;const tb=teamBall(tm);
     if((inp.e&24)===24){/* tácticas retiradas: siempre equilibrada */inp={mx:inp.mx,my:inp.my,b:inp.b,e:0}}/* táctica de la CPU de tu equipo: defensiva → equilibrada → ofensiva → ultraofensiva */
-    if(rise&1){SB.t0[0]=G.t;if(!tb)doSwitch(tm)}
+    if(rise&1||rise&32){SB.t0[0]=G.t;if(rise&1&&!tb)doSwitch(tm)}
+    const lobG=!!((b|prev)&64);/* gesto «por arriba» */
     if(rise&2){SB.t0[1]=G.t;if(!tb)doTackle(h)}
-    if(rise&4){SB.t0[2]=G.t;if(ball.owner===h)doSkill(h);else doSprint(h)}
+    if(rise&4){SB.t0[2]=G.t;if(ball.owner===h)doSkill(h,xk);else doSprint(h)}
+    if(inp.e&AR_B.ord){const g0=gk(tm);if(g0.ordCd<=0){g0.ord=inp.e&AR_B.tk?2:1;g0.ordT=AR_ORD_T;g0.ordCd=AR_ORD_T+AR_ORD_CD}inp={mx:inp.mx,my:inp.my,b:inp.b,e:0}}/* orden momentánea: Atacar / Defender */
     if(inp.e&AR_B.sw&&!teamBall(tm))doSwitch(tm);
     if(inp.e&AR_B.tk&&!teamBall(tm))doTackle(hum(tm));
-    if(fall&1&&ball.owner===hum(tm)){const hh=hum(tm),q=doPass(hh,G.t-SB.t0[0],.02/hh.pas);if(q&&q.role!=="GK")setHuman(q);if(G.tut)G.tut.ev("pass")}
+    if(fall&32&&ball.owner===hum(tm)){const hh=hum(tm),q=doThrough(hh,G.t-SB.t0[0],.02/hh.pas,lobG);if(q&&q.role!=="GK")setHuman(q);if(G.tut)G.tut.ev("pass")}
+    if(fall&1&&ball.owner===hum(tm)){const hh=hum(tm),q=doPass(hh,lobG?Math.max(.6,G.t-SB.t0[0]):G.t-SB.t0[0],.02/hh.pas);if(q&&q.role!=="GK")setHuman(q);if(G.tut)G.tut.ev("pass")}
     if(fall&2&&ball.owner===hum(tm)){const hh=hum(tm),mv=moveVec(tm);let dirA=null;
       /* tiro manual: va exactamente hacia donde apuntas con el joystick/teclas (si apuntas hacia atrás, hacia la portería) */
       if(mv.m>.3){const gdir=tm===0?1:-1;dirA=mv.x*gdir>-.15?Math.atan2(mv.y,mv.x):null}
@@ -11689,15 +11890,28 @@ function arMatch(cfg,onEnd){
       if(!touch){cdHud=document.createElement("div");cdHud.style.cssText="position:absolute;left:50%;bottom:44px;transform:translateX(-50%);padding:3px 10px;border-radius:99px;background:rgba(0,0,0,.55);color:#fff;font:700 .8rem var(--display,sans-serif);letter-spacing:.04em;pointer-events:none;white-space:nowrap";ov.appendChild(cdHud)}}
     const show=own&&t>0;cdEl.style.display=show?"grid":"none";btnEl.drib.firstElementChild.style.visibility=show?"hidden":"";if(show){cdEl.style.background=`conic-gradient(rgba(0,0,0,.66) ${Math.round(f*360)}deg,rgba(0,0,0,0) 0)`;cdEl.textContent=t.toFixed(1)}
     if(cdHud){cdHud.style.display=own||t>0?"block":"none";cdHud.textContent=t>0?`REGATE ${t.toFixed(1)} s`:"REGATE LISTO";cdHud.style.opacity=t>0?".95":".55";cdHud.style.color=t>0?"#ffd84d":"#9fffb4"}}
-  function syncBtns(){syncCd();syncTac();tacB.style.display="none";const has=!!myBall(),dn=(IN.down.pass?1:0)|(IN.down.shot?2:0)|(IN.down.drib?4:0);if(has===lastHas&&dn===lastDn)return;
+  function syncBtns(){syncCd();syncTac();syncOrd();tacB.style.display="none";const has=!!myBall(),dn=(IN.down.pass?1:0)|(IN.down.shot?2:0)|(IN.down.drib?4:0)|(IN.down.thr?8:0);if(has===lastHas&&dn===lastDn)return;
     if(has!==lastHas){lastHas=has;const lab=has?["Pase","Tiro","Regate"]:["Cambiar","Entrada","Sprint"];btnEl.pass.firstElementChild.textContent=lab[0];btnEl.shot.firstElementChild.textContent=lab[1];btnEl.drib.firstElementChild.textContent=lab[2];ov.classList.toggle("def",!has)}
-    if(dn!==lastDn){lastDn=dn;btnEl.pass.classList.toggle("dn",!!(dn&1));btnEl.shot.classList.toggle("dn",!!(dn&2));btnEl.drib.classList.toggle("dn",!!(dn&4))}}
+    if(dn!==lastDn){lastDn=dn;btnEl.pass.classList.toggle("dn",!!(dn&1));btnEl.shot.classList.toggle("dn",!!(dn&2));btnEl.drib.classList.toggle("dn",!!(dn&4));btnEl.thr.classList.toggle("dn",!!(dn&8))}}
   /* ---------- vista y orientación ---------- */
   const V={W:0,H:0,dpr:1,s:10,ox:0,oy:0,port:false,flip:ME===1,bg:null,gr:{},bs:null,zm:false,vx:0,vy:0,vw:0,vh:0,WW:0,WH:0,WOX:0,WOY:0};
   /* cámara con zoom (solo dibujo): en pantallas pequeñas / táctil sigue el balón; CAM está en coordenadas de pantalla-campo (ya giradas para el invitado) */
   const CAM={x:32,y:20,init:false,t:0},MW=6;
+  /* disposición personalizada de los controles táctiles (S.arLay, ver 21d): LAY=null → CSS por defecto; layG = geometría en px */
+  let LAY=null,JC=null;const layG={};
+  const layReserve=(sl,sr)=>{if(!touch)return [0,0];if(!LAY){const be=ov.querySelector(".ar-btns");return [Math.max(6,sl),be?be.offsetWidth+Math.max(12,sr)+10:0]}
+    let l=Math.max(6,sl),r=0;const w=V.W;for(const k of ["shot","pass","drib","thr"]){const g=layG[k];if(!g)continue;if(g.x>w/2)r=Math.max(r,w-(g.x-g.d/2)+8);else l=Math.max(l,g.x+g.d/2+8)}return [l,Math.min(r,w*.45)]};
+  function applyLay(){const bt=ov.querySelector(".ar-btns"),pb=$("#arPauseB"),hd=ov.querySelector(".ar-sb"),port=V.H>V.W*1.05,L=touch&&!port&&typeof arLayNorm==="function"&&S.arLay&&S.arLay.on?arLayNorm(S.arLay):null;
+    if(!bt||!pb||!hd||!ov.isConnected)return;/* el partido ya se cerró (último aviso del ResizeObserver) */
+    ov.classList.toggle("lay",!!L);LAY=L;JC=null;const sp=[btnEl.drib,btnEl.pass,btnEl.shot,btnEl.thr];
+    if(!L){bt.removeAttribute("style");sp.forEach(b=>{b.removeAttribute("style");b.firstElementChild.removeAttribute("style")});joy.removeAttribute("style");joy.firstElementChild.removeAttribute("style");jk.style.cssText="";pb.removeAttribute("style");if(pb.parentNode!==hd)hd.appendChild(pb);for(const k in layG)delete layG[k];return}
+    const pad=arSafePad(),R=ov.getBoundingClientRect(),w=R.width,h=R.height;bt.style.cssText="left:0;top:0;right:0;bottom:0;width:auto;height:auto";
+    for(const k of ["shot","pass","drib","thr"]){const g=arLayPx(L,k,w,h,pad),b=btnEl[k];layG[k]=g;b.style.cssText=`right:auto;bottom:auto;left:${g.x}px;top:${g.y}px;width:${g.d}px;height:${g.d}px;margin:${-g.d/2}px 0 0 ${-g.d/2}px`;b.firstElementChild.style.fontSize=((k==="shot"?1:.84)*L.c[k].s)+"rem"}
+    const g=arLayPx(L,"j",w,h,pad);joy.style.left=g.x<w/2?"0":"50%";joy.style.width="50%";const jr0=joy.getBoundingClientRect();JC={x:g.x-jr0.left+R.left,y:g.y-jr0.top+R.top};joy.style.setProperty("--jx",JC.x+"px");joy.style.setProperty("--jy",JC.y+"px");
+    joy.firstElementChild.style.cssText=`width:${g.d}px;height:${g.d}px;margin:${-g.d/2}px 0 0 ${-g.d/2}px`;const kk=g.d*.453;jk.style.width=jk.style.height=kk+"px";jk.style.marginLeft=jk.style.marginTop=-kk/2+"px";
+    const q=arLayPx(L,"pause",w,h,pad);if(pb.parentNode!==ov)ov.appendChild(pb);pb.style.cssText=`position:absolute;z-index:5;left:${q.x-q.d/2}px;top:${q.y-q.d/2}px;width:${q.d}px;height:${q.d}px`}
   const safe=ov.querySelector(".ar-safe");
-  function resize(){const r=ov.getBoundingClientRect();V.dpr=Math.min(PERF.cfg().pr2d,window.devicePixelRatio||1);V.W=Math.max(200,r.width);V.H=Math.max(200,r.height);
+  function resize(){const r=ov.getBoundingClientRect();V.dpr=Math.min(PERF.cfg().pr2d,window.devicePixelRatio||1);V.W=Math.max(200,r.width);V.H=Math.max(200,r.height);applyLay();
     cv.width=Math.round(V.W*V.dpr);cv.height=Math.round(V.H*V.dpr);cv.style.width=V.W+"px";cv.style.height=V.H+"px";
     V.port=V.H>V.W*1.05;ov.classList.toggle("port",V.port);
     /* en móvil se juega en horizontal: en vertical se pide girar y se pausa */
@@ -11707,11 +11921,11 @@ function arMatch(cfg,onEnd){
     if(V.port){const ctlH=Math.min(210,V.H*.27),top=60+st,aw=V.W-8,ah=V.H-top-ctlH-4;V.s=Math.min(aw/fw,ah/fl);V.ox=(V.W-ARF.W*V.s)/2;V.oy=top+(ah-ARF.L*V.s)/2}
     else{const top=(touch?50:48)+st,ah=V.H-top-6;
       /* táctil en horizontal: el campo ocupa el alto y deja a la derecha la columna de botones (sin tapar la portería rival) */
-      const be=touch?ov.querySelector(".ar-btns"):null,rw=be?be.offsetWidth+Math.max(12,sr)+10:0,x0=touch?Math.max(6,sl):0,aw=V.W-x0-rw;
+      const rs=layReserve(sl,sr),rw=rs[1],x0=rs[0],aw=V.W-x0-rw;
       V.s=Math.min(aw/fl,ah/fw);V.ox=x0+(aw-ARF.L*V.s)/2;V.oy=top+(ah-ARF.W*V.s)/2+2}
     /* zoom de cámara: móvil / ventana pequeña (siempre en táctil), nunca en vertical */
     V.zm=!V.port&&(!!touch||V.H<500||V.W<500);CAM.init=false;
-    if(V.zm){const top=(touch?50:48)+st,ah=V.H-top-6,be=touch?ov.querySelector(".ar-btns"):null,rw=be?be.offsetWidth+Math.max(12,sr)+10:0,x0=touch?Math.max(6,sl):0,aw=V.W-x0-rw;
+    if(V.zm){const top=(touch?50:48)+st,ah=V.H-top-6,rs=layReserve(sl,sr),rw=rs[1],x0=rs[0],aw=V.W-x0-rw;
       V.vx=x0;V.vy=top;V.vw=aw;V.vh=ah;
       V.s=Math.max(V.s*1.25,Math.min(aw/(ARF.L*.58),ah/(ARF.W*.5)));
       V.WW=(ARF.L+2*MW)*V.s;V.WH=(ARF.W+2*MW)*V.s;V.WOX=MW*V.s;V.WOY=MW*V.s}
@@ -11782,14 +11996,24 @@ function arMatch(cfg,onEnd){
     for(let i=0;i<T.length;i++){const q=T[i];if(q===p)continue;const vx=q.x-p.x,vy=q.y-p.y,d=Math.hypot(vx,vy)||1;const cos=(vx*dx+vy*dy)/d;if(q.role==="GK"&&cos<.7)continue;
       let block=0;for(let j=0;j<O.length;j++){const o=O[j],t=clamp(((o.x-p.x)*vx+(o.y-p.y)*vy)/(d*d),0,1),cx=p.x+vx*t,cy=p.y+vy*t,dd=Math.hypot(o.x-cx,o.y-cy);if(dd<1.6&&t>.1)block+=1.6-dd}
       const sc=cos*2.2-d/28-block*.9+(q.role==="GK"?-1.5:0)+(through?uOf(p.team,q.x)/ARF.L*.6:0);if(sc>bs){bs=sc;best=q}}return best}
-  function doPass(p,held,err){let mx=p.fx,my=p.fy,mm=1;if(p===hum(p.team)){const v=moveVec(p.team);mx=v.x;my=v.y;mm=v.m}const dx=mm>.3?mx:p.fx,dy=mm>.3?my:p.fy;
-    const lob=held>.28,q=bestMate(p,dx,dy,lob);if(!q){/* sin compañero: despeje en esa dirección */kick(p,dx*16,dy*16,lob?5:.5,0,"pass");return null}
+  function doPass(p,held,err,qF){let mx=p.fx,my=p.fy,mm=1;if(p===hum(p.team)){const v=moveVec(p.team);mx=v.x;my=v.y;mm=v.m}const dx=mm>.3?mx:p.fx,dy=mm>.3?my:p.fy;
+    const lob=held>.28,q=qF||bestMate(p,dx,dy,lob);if(!q){/* sin compañero: despeje en esa dirección */kick(p,dx*16,dy*16,lob?5:.5,0,"pass");return null}
     const d=dist(p,q),lead=lob?1.25:.75;let tx=q.x+q.vx*d/16*lead,ty=q.y+q.vy*d/16*lead;
     if(lob){const gx=goalX(p.team),ad=Math.sign(gx-q.x);tx+=ad*3.5}
     tx=clamp(tx,1,ARF.L-1);ty=clamp(ty,1,ARF.W-1);const ang=Math.atan2(ty-p.y,tx-p.x)+gauss()*err,dd=Math.hypot(tx-p.x,ty-p.y);
     if(lob){const pw=clamp(held,.28,1),vz=3.5+pw*4.5,tf=2*vz/9.8,v=clamp(dd/(tf*1.05),6,22);kick(p,Math.cos(ang)*v,Math.sin(ang)*v,vz,0,"pass")}
     else{const v=clamp(6.5+dd*.75,8.5,19);kick(p,Math.cos(ang)*v,Math.sin(ang)*v,.15,0,"pass")}
-    q.ai.recv=1.4;return q}
+    q.ai.recv=1.4;p.ai.gg=1.2;p.ai.st=0;return q}
+  /* pase al hueco: al espacio por delante del compañero que corre hacia donde apuntas (raso o, con el gesto / manteniendo, por arriba) */
+  function doThrough(p,held,err,lobF){let mx=p.fx,my=p.fy,mm=1;if(p===hum(p.team)){const v=moveVec(p.team);mx=v.x;my=v.y;mm=v.m}const dx=mm>.3?mx:p.fx,dy=mm>.3?my:p.fy;
+    const lob=!!lobF||held>.28,q=bestMate(p,dx,dy,true),gd=p.team===0?1:-1;if(!q){kick(p,dx*15,dy*15,lob?5:.4,0,"pass");return null}
+    const qs=Math.hypot(q.vx,q.vy);let rx,ry;if(qs>2){rx=q.vx/qs;ry=q.vy/qs}else{rx=dx;ry=dy}
+    rx+=gd*.8;ry+=(ARF.GC-q.y)*.02;const rm=Math.hypot(rx,ry)||1;rx/=rm;ry/=rm;if(rx*gd<.15){rx=gd*.6;ry=Math.sign(ry||1)*.8}
+    const d=dist(p,q),ld=5+d*.15;let tx=clamp(q.x+rx*ld,1.5,ARF.L-1.5),ty=clamp(q.y+ry*ld,2,ARF.W-2);
+    const ang=Math.atan2(ty-p.y,tx-p.x)+gauss()*err,dd=Math.hypot(tx-p.x,ty-p.y);
+    if(lob){const pw=clamp(Math.max(held,.6),.28,1),vz=3.8+pw*4.5,tf=2*vz/9.8,v=clamp(dd/(tf*1.05),6,22);kick(p,Math.cos(ang)*v,Math.sin(ang)*v,vz,0,"pass")}
+    else{const v=clamp(7+dd*.72,9,20);kick(p,Math.cos(ang)*v,Math.sin(ang)*v,.12,0,"pass")}
+    q.ai.recv=1.8;p.ai.gg=1.2;p.ai.st=0;return q}
   function doShot(p,held,aimY,err,lat,dirA){const pw=clamp(held/.85,.15,1),gx=goalX(p.team);
     let ty=aimY!=null?aimY:ARF.GC+(p.y>ARF.GC?-1.4:1.4);const dx=gx-p.x,dy=ty-p.y,d=Math.hypot(dx,dy);
     let press=0;const O=team(1-p.team);for(let i=0;i<O.length;i++){const o=O[i];if(o.role!=="GK"&&dist(o,p)<1.6){press=isH(p.team)?.025:.035;break}}
@@ -11804,22 +12028,27 @@ function arMatch(cfg,onEnd){
     kick(p,Math.cos(ang)*v,Math.sin(ang)*v,vz,sp*5.5,"shot")}
   function doTackle(p){if(p.tackleCd>0||p.stun>0)return;p.tackleT=.32;p.tackleCd=.95;const o=ball.owner&&ball.owner.team!==p.team?ball.owner:null;
     const tx=o?o.x:ball.x,ty=o?o.y:ball.y,d=Math.hypot(tx-p.x,ty-p.y)||1;p.fx=(tx-p.x)/d;p.fy=(ty-p.y)/d;p.vx=p.fx*10.5;p.vy=p.fy*10.5;SND.arTackle()}
-  /* regates (determinista): el tipo depende de la dirección pulsada, el movimiento y el defensor más cercano. 1 recorte · 2 bicicleta · 3 ruleta · 4 caño · 5 elástica.
+  /* regates (determinista): el tipo depende de la dirección pulsada, el movimiento y el defensor más cercano. 1 recorte · 2 bicicleta · 3 ruleta · 4 caño · 5 elástica · 6 sombrero (el balón también se anima al dibujar).
      El jugador humano solo puede regatear cada 5 s (el contador vive en el portero de su equipo: P[t*5].dcd, que ya se serializa con PK) */
-  const DRIB_N=["","¡Recorte!","¡Bicicleta!","¡Ruleta!","¡Caño!","¡Elástica!"],DRIB_CD=5;
-  function doSkill(p){if(p.skillCd>0||p.stun>0)return;const hh=isH(p.team)&&p===hum(p.team),gt=gk(p.team);if(hh&&gt.dcd>0)return;
+  const DRIB_N=["","¡Recorte!","¡Bicicleta!","¡Ruleta!","¡Caño!","¡Elástica!","¡Sombrero!"],DRIB_CD=5;
+  function doSkill(p,fk){if(p.skillCd>0||p.stun>0)return;const hh=isH(p.team)&&p===hum(p.team),gt=gk(p.team);if(hh&&gt.dcd>0)return;
     p.skillT=.42;p.skillCd=1.05;if(hh)gt.dcd=DRIB_CD;let mx=0,my=0;if(hh){const v=moveVec(p.team);mx=v.x;my=v.y}
     const fx=p.fx,fy=p.fy,lat=mx*-fy+my*fx,fwd=mx*fx+my*fy,mm=Math.hypot(mx,my),spd=Math.hypot(p.vx,p.vy),o=nearestTo(team(1-p.team),p.x,p.y,null);
     let od=99,rel=0,ol=0;if(o){const ox=o.x-p.x,oy=o.y-p.y;od=Math.hypot(ox,oy);rel=ox*fx+oy*fy;ol=ox*-fy+oy*fx}
     let K,side=Math.abs(lat)<.2?(p.anim%2>1?1:-1):Math.sign(lat);
-    if(od<2.3&&rel>0&&Math.abs(ol)<1){K=(mm>.4&&fwd>.5&&od<1.7)||(mm<=.4&&(p.anim|0)%2)?4:3;if(K===3)side=ol>0?-1:1}
+    if(od<2.3&&rel>0&&Math.abs(ol)<1){K=(mm>.4&&fwd>.5&&od<1.7)||(mm<=.4&&(p.anim|0)%2)?4:mm>.4&&fwd>.5?6:3;if(K===3)side=ol>0?-1:1}
+    else if(od<3.4&&rel>0&&mm>.4&&fwd>.7&&Math.abs(ol)<1.4)K=6;
     else if(mm>.4&&spd>3&&(mx*p.vx+my*p.vy)/(mm*spd)<-.2)K=5;
     else if(Math.abs(lat)>.5)K=1;else K=2;
-    p.skillK=K;p.skillS=side;let ix=0,iy=0;
+    if(fk>=1&&fk<=6){K=fk;if(K===3&&o&&od<2.6)side=ol>0?-1:1}
+    p.skillK=K;p.skillS=side;p.safe=.85;let ix=0,iy=0;/* safe: tras el regate cuesta mucho robarle */
     if(K===1){ix=-fy*side*5.5;iy=fx*side*5.5}
     else if(K===2){ix=-fy*side*3+fx*2.4;iy=fx*side*3+fy*2.4}
     else if(K===3){ix=-fy*side*4.6+fx*3.6;iy=fx*side*4.6+fy*3.6}
     else if(K===4){ix=fx*6.2;iy=fy*6.2;if(o)o.stun=Math.max(o.stun,.22)}
+    else if(K===6){/* sombrero: el balón pasa por encima del rival y el jugador lo rodea solo y se queda la pelota */
+      const r=.45,L=ARF.L-r,W=ARF.W-r;let cx,cy;if(o&&od<4){cx=o.x;cy=o.y;o.stun=Math.max(o.stun,.6)}else{cx=p.x+fx*1.6;cy=p.y+fy*1.6}
+      p.sox=p.x;p.soy=p.y;p.sax=clamp(cx-fy*side*1.35,r,L);p.say=clamp(cy+fx*side*1.35,r,W);p.sbx=clamp(cx+fx*1.75,r,L);p.sby=clamp(cy+fy*1.75,r,W);p.boostT=0;flash(p,DRIB_N[K]);return}
     else{const m=mm||1;ix=mx/m*6.5;iy=my/m*6.5}
     p.vx+=ix;p.vy+=iy;p.boostT=.45;flash(p,DRIB_N[K])}
   function doSprint(p){if(p.boostCd>0)return;p.boostT=.65;p.boostCd=1.4}
@@ -11833,12 +12062,21 @@ function arMatch(cfg,onEnd){
   /* tácticas de la CPU de tu equipo (compañeros controlados por la IA): 0 defensiva · 1 equilibrada · 2 ofensiva · 3 ultraofensiva */
   const tacOf=p=>isH(p.team)&&p.role!=="GK"?gk(p.team).tac:1;
   const TAC_ATT=[[-10,-8,-5],[0,0,0],[6,7,4],[24,18,8]],TAC_DEF=[[-2,-8,-12],[0,0,0],[4,6,8],[22,20,16]],PRN=[[0,1],[0,1],[1,2],[2,3]],PSP=[.85,1,1.05,1.12],MKF=[1.15,1,.7,.2],RUN_T=[.5,.42,.36,.2],RUN_L=[5,7,9,11],RNG=[-1,0,2,3.5];
+  /* esquema por puesto: D 0 abajo·1 normal·2 en mitad del campo · medios 0 contención·1 normal·2 llegada · DC 0 libre·1 normal·2 siempre arriba */
+  const stcOf=p=>{const c=gk(p.team).stc|0,k=p.role==="D"?0:p.role==="LW"?1:p.role==="RW"?2:3;return Math.floor(c/[1,3,9,27][k])%3};
+  const STC_ATT=[[-6,0,9],[-6,0,6],[0,0,4]],STC_DEF=[[-3,0,7],[-3,0,2],[2,0,8]];
+  /* órdenes: la CPU de tu equipo juega más lista (desmarques / marcajes) mientras dura */
+  const ORDC=[[null,null,null],[null,null,null]];
+  function ordC(t,C){const o=isH(t)?gk(t).ord:0;if(!o)return C;let v=ORDC[t][o];if(!v||v.base!==C){v=Object.assign({},C,o===1?{iq:Math.max(C.iq,.9),through:.6}:{iq:Math.max(C.iq,.9),mark:1,press:1});v.base=C;ORDC[t][o]=v}return v}
   function basePos(p,att){const b=BASE[att?"att":"def"][p.role],bu=uOf(p.team,ball.x);let u=b[0]*ARF.L+(bu-ARF.L/2)*.32,y=b[1]*ARF.W+(ball.y-ARF.GC)*.3;
     {const tt=tacOf(p);if(tt!==1){u+=(att?TAC_ATT:TAC_DEF)[tt][p.role==="D"?0:p.role==="ST"?2:1]}}
-    if(!att&&p.role==="D"&&isH(1-p.team))u+=5;/* más espacio delante de la portería para el humano */
+    if(!att&&p.role==="D"&&isH(1-p.team))u+=5;
+    if(isH(p.team)&&p.role!=="GK"){const g0=gk(p.team),sd=stcOf(p);u+=(att?STC_ATT:STC_DEF)[p.role==="D"?0:p.role==="ST"?2:1][sd];
+      if(p.role==="ST"&&sd===2&&!att)u=Math.max(u,ARF.L*.6);/* «siempre arriba» */
+      if(g0.ord===1)u+=p.role==="D"?4:7;else if(g0.ord===2)u-=p.role==="ST"?5:7}/* más espacio delante de la portería para el humano */
     if(p.role==="GK"){BP[0]=xOfU(p.team,1.2);BP[1]=ARF.GC;return BP}BP[0]=xOfU(p.team,clamp(u,3,ARF.L-4));BP[1]=clamp(y,2.5,ARF.W-2.5);return BP}
   function kickoff(t){const kt=t;for(let i=0;i<10;i++){const p=P[i],b=BASE.def[p.role];let u=b[0]*ARF.L*.9,y=b[1]*ARF.W;if(p.role==="ST"){u=p.team===kt?ARF.L/2-.9:ARF.L/2-7}
-      p.x=xOfU(p.team,Math.min(u,ARF.L/2-.8));p.y=p.role==="ST"&&p.team===kt?ARF.GC:y;p.vx=p.vy=0;p.fx=p.team===0?1:-1;p.fy=0;p.stun=p.tackleT=p.skillT=p.boostT=0;p.ai.t=.4+rnd()*.3;p.px=p.x;p.py=p.y}
+      p.x=xOfU(p.team,Math.min(u,ARF.L/2-.8));p.y=p.role==="ST"&&p.team===kt?ARF.GC:y;p.vx=p.vy=0;p.fx=p.team===0?1:-1;p.fy=0;p.stun=p.tackleT=p.skillT=p.boostT=p.prot=0;p.ai.t=.4+rnd()*.3;p.px=p.x;p.py=p.y}
     ball.x=ARF.L/2;ball.y=ARF.GC;ball.z=0;ball.vx=ball.vy=ball.vz=0;ball.spin=0;trL=0;coolAll(0);setOwner(P[kt*5+4]);if(kt===0)G.human=P[4];else if(PVP)G.human1=P[9];G.kickT=0}
   /* ---------- IA ---------- */
   const PATH=new Float64Array(130);let pathOk=false,pathT=-1;const PB=[0,0];
@@ -11851,34 +12089,87 @@ function arMatch(cfg,onEnd){
   function nearestN(out,t,c,n,skip){out.length=0;if(n<=0)return out;const T=team(t);for(let i=0;i<T.length;i++){const p=T[i];if(p.role==="GK"||p===skip)continue;const d=dist(p,c);
       if(out.length<n){out.push(p);for(let k=out.length-1;k>0&&dist(out[k],c)<dist(out[k-1],c);k--){const x=out[k];out[k]=out[k-1];out[k-1]=x}}
       else if(d<dist(out[n-1],c)){out[n-1]=p;for(let k=n-1;k>0&&dist(out[k],c)<dist(out[k-1],c);k--){const x=out[k];out[k]=out[k-1];out[k-1]=x}}}return out}
+  /* ---- utilidades tácticas (puras: solo leen el estado; deterministas) ---- */
+  /* holgura de la línea de pase a→(x,y): distancia mínima de un rival al segmento (tope 3) */
+  function laneClr(t,ax,ay,x,y){const O=team(1-t),vx=x-ax,vy=y-ay,L2=vx*vx+vy*vy||1;let m=3;for(let j=0;j<O.length;j++){const o=O[j],k=((o.x-ax)*vx+(o.y-ay)*vy)/L2;if(k<.08||k>1.05)continue;const dd=Math.hypot(o.x-(ax+vx*k),o.y-(ay+vy*k));if(dd<m)m=dd}return m}
+  /* espacio libre en (x,y): distancia al rival más cercano (tope 6) */
+  function openAt(t,x,y){const O=team(1-t);let m=6;for(let j=0;j<O.length;j++){const o=O[j],dd=Math.hypot(o.x-x,o.y-y);if(dd<m)m=dd}return m}
+  /* mejor receptor para la IA: línea limpia, receptor libre y avance hacia la portería */
+  const APR={q:null,sc:-9,ln:0};
+  function aiPass(p,C){APR.q=null;APR.sc=-9;APR.ln=0;const T=team(p.team),up=uOf(p.team,p.x);
+    for(let i=0;i<T.length;i++){const q=T[i];if(q===p||q.off)continue;const gkq=q.role==="GK";if(gkq&&up>ARF.L*.45)continue;
+      const d=dist(p,q),lx=q.x+q.vx*d/16*.75,ly=q.y+q.vy*d/16*.75,ln=laneClr(p.team,p.x,p.y,lx,ly),op=openAt(p.team,lx,ly),adv=uOf(p.team,lx)-up;
+      let sc=ln*1.1+Math.min(op,4)*.55+adv*.12-Math.abs(d-11)*.05-(gkq?2.2:0);if(ln<1)sc-=3;if(d<3.5)sc-=1.5;
+      if(sc>APR.sc){APR.sc=sc;APR.q=q;APR.ln=ln}}return APR}
+  /* desmarque: busca el hueco (apoyo, ruptura a la espalda de la defensa o pared tras pasar) alrededor de la posición base */
+  const SUPA=[[0,0],[4.5,0],[3.2,3.2],[0,4.5],[-3.2,3.2],[-4.5,0],[-3.2,-3.2],[0,-4.5],[3.2,-3.2]];
+  function supportPt(p,c,bx,by,C){const t=p.team,T=team(t),O=team(1-t),cu=uOf(t,c.x),bu0=uOf(t,bx),gg=p.ai.gg>0,fwd=(t===0?c.fx:-c.fx)>.2;
+    let ldu=0;for(let j=0;j<O.length;j++){const o=O[j];if(o.role!=="GK"){const u=uOf(t,o.x);if(u>ldu)ldu=u}}
+    let best=-1e9,bx2=bx,by2=by;
+    for(let k=0;k<11;k++){let u,y;
+      if(k<9){u=bu0+SUPA[k][0]*(gg?1.4:1);y=by+SUPA[k][1]}
+      else if(k===9){if(p.role==="D")continue;u=Math.min(ARF.L-6.5,Math.max(ldu+2.2,cu+5));y=arLerp(p.y,ARF.GC,.35)}/* ruptura */
+      else{u=cu+(gg?7:4);y=c.y+(p.y>c.y?5:-5)}/* triangulación: apoyo en diagonal por delante del poseedor */
+      if(p.role==="D"&&u>bu0+3)continue;
+      u=clamp(u,2.5,ARF.L-3);y=clamp(y,2,ARF.W-2);if(u>ARF.L-6.5&&Math.abs(y-ARF.GC)<7)u=ARF.L-6.5;/* sin meterse encima del portero */const x=xOfU(t,u);
+      const op=openAt(t,x,y),ln=laneClr(t,c.x,c.y,x,y),dc=Math.hypot(x-c.x,y-c.y);
+      let sc=Math.min(op,5)*.55+ln*.9+(u-cu)*(gg?.2:.07)-Math.hypot(x-p.x,y-p.y)*.07;
+      if(dc<5)sc-=(5-dc)*.5;if(dc>19)sc-=(dc-19)*.2;
+      for(let i=0;i<T.length;i++){const q=T[i];if(q===p||q===c||q.role==="GK")continue;const dm=Math.hypot(q.x-x,q.y-y);if(dm<6)sc-=(6-dm)*.35}
+      if(k===9&&fwd)sc+=.9*C.iq;if(k===10&&gg)sc+=.8;
+      if(sc>best){best=sc;bx2=x;by2=y}}
+    p.ai.tx=bx2;p.ai.ty=by2}
+  /* marcajes: cada tick, los atacantes más peligrosos se reparten entre los defensores libres (más cercano primero) */
+  const MKA=new Int8Array(10),MKD=[0,0,0,0,0];
+  function assignMarks(t,c){for(let i=0;i<5;i++)MKA[t*5+i]=-1;const A=team(1-t),D=team(t),ps=PRS[t],h=hum(t);let n=0;
+    for(let i=0;i<A.length;i++){const a=A[i];if(a===c||a.role==="GK")continue;let k=n++;MKD[k]=a.team*5+a.i;const ua=uOf(t,a.x);while(k>0&&uOf(t,P[MKD[k-1]].x)>ua){const x=MKD[k];MKD[k]=MKD[k-1];MKD[k-1]=x;k--}}
+    for(let k=0;k<n;k++){const a=P[MKD[k]];let bd=1e9,bi=-1;for(let i=0;i<D.length;i++){const d=D[i];if(d.role==="GK"||d===h||ps.indexOf(d)>=0||MKA[t*5+d.i]>=0)continue;const dd=dist(d,a);if(dd<bd){bd=dd;bi=d.i}}if(bi>=0)MKA[t*5+bi]=MKD[k]}}
   function aiField(p,dt,C){const att=ball.owner&&ball.owner.team===p.team,carrier=ball.owner===p;const bp=basePos(p,att);let tx=bp[0],ty=bp[1],speed=.78;
     if(carrier)return aiCarrier(p,dt,C);
-    if(!ball.owner){const ch=CH[p.team];if(ch===p||p.ai.recv>0){const q=predictBall(Math.min(1.2,dist(p,ball)/p.spd));tx=q[0];ty=q[1];speed=1}}
+    if(!ball.owner){const ch=CH[p.team];if(ch===p||p.ai.recv>0){const q=predictBall(Math.min(1.2,dist(p,ball)/p.spd));tx=q[0];ty=q[1];speed=1}
+      else if(C.iq>.3&&uOf(p.team,p.x)>uOf(p.team,ball.x)+2&&ball.lastTeam!==p.team){/* balón suelto del rival a tu espalda: repliegue */speed=.8+.2*C.iq}}
     else if(att){const c=ball.owner,d=dist(p,c);if(d<6){const ax=p.x-c.x,ay=p.y-c.y,m=Math.hypot(ax,ay)||1;tx+=ax/m*3;ty+=ay/m*3}
-      const tt=tacOf(p);if(p.role==="ST"||(tt===1?C.through>.3&&p.role!=="D":tt>=2&&(tt===3||p.role!=="D"))){const cu=uOf(p.team,c.x);if(cu>ARF.L*RUN_T[tt]){tx=xOfU(p.team,Math.min(ARF.L-(tt===3?3:5),Math.max(uOf(p.team,tx),cu+RUN_L[tt])));ty=ARF.GC+(p.y-ARF.GC)*.6;speed=.95}}}
-    else{const c=ball.owner,ps=PRS[p.team];
-      if(ps.indexOf(p)>=0){const gx=ownX(p.team),d=Math.hypot(gx-c.x,ARF.GC-c.y)||1;tx=c.x+(gx-c.x)/d*1.0+c.vx*.18;ty=c.y+(ARF.GC-c.y)/d*1.0+c.vy*.18;speed=C.press*PSP[tacOf(p)];
-        if(dist(p,c)<1.45&&p.tackleCd<=0&&p.ai.t<=0){p.ai.t=C.react;if(!(c.skillT>0&&rnd()<C.read)&&!(c.skillCd<=0&&isH(c.team)&&rnd()<C.read*.35)&&rnd()<C.tackleP)doTackle(p)}}
-      else{/* marca al rival más cercano por su lado de portería, mezclado con la zona */const opp=nearestTo(team(c.team),p.x,p.y,c);
-        if(opp){const gx=ownX(p.team),d=Math.hypot(gx-opp.x,ARF.GC-opp.y)||1,mx=opp.x+(gx-opp.x)/d*2.2,my=opp.y+(ARF.GC-opp.y)/d*2.2;tx=arLerp(tx,mx,C.mark*.75*MKF[tacOf(p)]);ty=arLerp(ty,my,C.mark*.75*MKF[tacOf(p)])}speed=.85}}
+      const tt=tacOf(p),sd=isH(p.team)?stcOf(p):1,mid=p.role==="LW"||p.role==="RW",o1=isH(p.team)&&gk(p.team).ord===1;
+      if(!(mid&&sd===0&&!o1)&&(p.role==="ST"||(mid&&sd===2)||(o1&&p.role!=="D")||(tt===1?C.through>.3&&p.role!=="D":tt>=2&&(tt===3||p.role!=="D")))){const cu=uOf(p.team,c.x);if(cu>ARF.L*RUN_T[tt]){tx=xOfU(p.team,Math.min(ARF.L-(tt===3?3:5),Math.max(uOf(p.team,tx),cu+RUN_L[tt])));ty=ARF.GC+(p.y-ARF.GC)*.6;speed=.95}}
+      /* desmarques inteligentes: apoyo, ruptura y paredes (peso según la inteligencia) */
+      if(C.iq>0){if(p.ai.st<=0){p.ai.st=.3;supportPt(p,c,tx,ty,C)}const w=(isH(p.team)&&p.role==="ST"&&stcOf(p)===0?1:C.iq)*(p.ai.gg>0?1:.8);tx=arLerp(tx,p.ai.tx,w);ty=arLerp(ty,p.ai.ty,w);speed=Math.min(1,Math.max(speed,.8+.15*C.iq+(p.ai.gg>0?.1:0)))}}
+    else{const c=ball.owner,ps=PRS[p.team],pi=ps.indexOf(p),gx=ownX(p.team),pr=gk(c.team).prot>0;
+      if(pi===0||(pi>0&&(C.iq<.35||uOf(p.team,c.x)>=24))){const d=Math.hypot(gx-c.x,ARF.GC-c.y)||1,o=pr?3:1;tx=c.x+(gx-c.x)/d*o+c.vx*.18;ty=c.y+(ARF.GC-c.y)/d*o+c.vy*.18;speed=C.press*PSP[tacOf(p)];
+        /* poseedor pegado a la línea de fondo: el lado de la portería no existe, se le entra por el lado del campo, al balón */
+        if(uOf(p.team,c.x)<2.2&&!pr){tx=ball.x+(p.team===0?1:-1)*.95;ty=ball.y+(p.y>ball.y?.5:-.5)}
+        if(!pr&&dist(p,c)<1.45&&p.tackleCd<=0&&p.ai.t<=0){p.ai.t=C.react;if(!((c.skillT>0||c.safe>0)&&rnd()<Math.max(.8,C.read))&&!(c.skillCd<=0&&isH(c.team)&&rnd()<C.read*.35)&&rnd()<C.tackleP)doTackle(p)}}
+      else if(pi>0){/* cobertura (cerca de la propia área): el segundo hombre se queda detrás del que presiona, tapando el camino a la portería */const d=Math.hypot(gx-c.x,ARF.GC-c.y)||1,f=ps[0],sd=f&&Math.abs(f.y-c.y)>.5?(f.y>c.y?-1:1):(c.y>ARF.GC?-1:1);
+        const cd=d<17?1.3:2.6,cx=c.x+(gx-c.x)/d*cd,cy=c.y+(ARF.GC-c.y)/d*cd+sd*(d<17?.5:1.1)/* en zona de tiro tapa el disparo */,px=c.x+(gx-c.x)/d+c.vx*.18,py=c.y+(ARF.GC-c.y)/d+c.vy*.18;tx=arLerp(px,cx,C.iq);ty=arLerp(py,cy,C.iq);speed=C.press*PSP[tacOf(p)];
+        if(!pr&&dist(p,c)<1.45&&p.tackleCd<=0&&p.ai.t<=0){p.ai.t=C.react;if(rnd()<C.tackleP*.8)doTackle(p)}}
+      else{/* marcaje: al atacante asignado (o al más cercano), por su lado de portería y cerrando la línea de pase */const mi=MKA[p.team*5+p.i],opp=C.iq>.2&&mi>=0?P[mi]:nearestTo(team(c.team),p.x,p.y,c);
+        if(opp){const d=Math.hypot(gx-opp.x,ARF.GC-opp.y)||1,bd=dist(opp,c)||1,gs=arLerp(2.2,1.5,C.iq),ls=C.iq*Math.min(1.2,bd*.12);
+          const mx=opp.x+(gx-opp.x)/d*gs+(c.x-opp.x)/bd*ls,my=opp.y+(ARF.GC-opp.y)/d*gs+(c.y-opp.y)/bd*ls,w=Math.min(1,C.mark*.75*MKF[tacOf(p)]*(1+.35*C.iq))*(bd>13?1-.6*C.iq:1);/* lejos del balón no persigue señuelos: mantiene el bloque */tx=arLerp(tx,mx,w);ty=arLerp(ty,my,w)}
+        speed=.85;/* repliegue: si está por delante del balón vuelve rápido */if(uOf(p.team,p.x)>uOf(p.team,c.x)+1)speed=Math.min(1,.85+.17*C.iq)}}
+    if(!att&&Math.abs(ty-ARF.GC)<6.5&&uOf(p.team,tx)<3.4)tx=xOfU(p.team,3.4);/* sin invadir la zona del portero */
     steer(p,tx,ty,speed,dt)}
   function steer(p,tx,ty,k,dt){const dx=tx-p.x,dy=ty-p.y,d=Math.hypot(dx,dy);if(d<.3){move(p,0,0,dt);return}const sl=Math.min(1,d/2.2);move(p,dx/d*sl*k,dy/d*sl*k,dt)}
   function aiCarrier(p,dt,C){const gx=goalX(p.team),dg=Math.hypot(gx-p.x,ARF.GC-p.y),opps=team(1-p.team),near=nearestTo(opps,p.x,p.y,null),pr=near?dist(near,p):99;
     p.ai.hold+=dt;
-    if(p.role==="GK"){move(p,0,0,dt);if(p.ai.hold>.8){const q=bestMate(p,gx-p.x,(rnd()-.5)*20,false);if(q){const d=dist(p,q),v=clamp(8+d*.8,10,20),a=Math.atan2(q.y-p.y,q.x-p.x)+gauss()*C.passErr*.5;kick(p,Math.cos(a)*v,Math.sin(a)*v,d>18?4:.3,0,"pass");q.ai.recv=1.4}}return}
+    if(p.role==="GK"){/* con el balón en las manos se separa de la línea (nunca se queda pegado a la red) y saca al compañero mejor situado */
+      const ou=uOf(p.team,p.x);if(ou<2.4)steer(p,xOfU(p.team,2.6),arLerp(p.y,ARF.GC,.5),.6,dt);else move(p,0,0,dt);
+      if(p.ai.hold>.8&&C.iq>.3){const a=aiPass(p,C);if(a.q&&(a.ln>1.4||p.ai.hold>2.2)){const q=a.q,d=dist(p,q),v=clamp(8+d*.8,10,20),an=Math.atan2(q.y-p.y,q.x-p.x)+gauss()*C.passErr*.5;kick(p,Math.cos(an)*v,Math.sin(an)*v,d>18?4:.3,0,"pass");q.ai.recv=1.4}return}
+      if(p.ai.hold>.8){const q=bestMate(p,gx-p.x,(rnd()-.5)*20,false);if(q){const d=dist(p,q),v=clamp(8+d*.8,10,20),a=Math.atan2(q.y-p.y,q.x-p.x)+gauss()*C.passErr*.5;kick(p,Math.cos(a)*v,Math.sin(a)*v,d>18?4:.3,0,"pass");q.ai.recv=1.4}}return}
     let dx=gx-p.x,dy=ARF.GC-p.y;const m=Math.hypot(dx,dy)||1;dx/=m;dy/=m;
     /* esquiva al defensor más cercano */
-    for(let i=0;i<opps.length;i++){const o=opps[i],d=dist(o,p);if(d<4.5&&o.role!=="GK"){const ax=p.x-o.x,ay=p.y-o.y,w=(4.5-d)/4.5*1.4;dx+=ax/d*w;dy+=ay/d*w}}
+    {const rr=4.5+1.5*C.iq,ww=1.4+.6*C.iq;for(let i=0;i<opps.length;i++){const o=opps[i],d=dist(o,p);if(d<rr&&o.role!=="GK"&&d>0){const ax=p.x-o.x,ay=p.y-o.y,w=(rr-d)/rr*ww;dx+=ax/d*w;dy+=ay/d*w}}}
     if(p.y<3)dy+=.6;if(p.y>ARF.W-3)dy-=.6;
     const mm=Math.hypot(dx,dy)||1;move(p,dx/mm,dy/mm,dt);
     if(p.ai.t>0)return;p.ai.t=C.react*(.7+rnd()*.6);
     if(rnd()<C.mistake){const a=Math.atan2(p.fy,p.fx)+gauss()*.8;kick(p,Math.cos(a)*7,Math.sin(a)*7,.2,0,"touch");return}
     const gkY=gk(1-p.team).y;
     let block=false;for(let i=0;i<opps.length;i++){const o=opps[i];if(o.role==="GK")continue;const t=clamp(((o.x-p.x)*(gx-p.x)+(o.y-p.y)*(ARF.GC-p.y))/(dg*dg),0,1);if(t>.05&&Math.hypot(o.x-(p.x+(gx-p.x)*t),o.y-(p.y+(ARF.GC-p.y)*t))<1.3){block=true;break}}
-    if(dg<C.range+RNG[tacOf(p)]&&(!block||dg<8||rnd()<.25)){const side=Math.abs(gkY-ARF.GC)>.3?(gkY>ARF.GC?-1:1):(p.y>ARF.GC?-1:1),ty=ARF.GC+side*(ARF.GY1-ARF.GY0)/2*arLerp(.55,.85,rnd());
+    /* lectura de juego: si un compañero está claramente mejor situado (más cerca de la portería y con la línea limpia) se la da */
+    if(C.iq>.25&&(block||pr<C.passP*1.2||dg>C.range+RNG[tacOf(p)]+2.5*C.iq)&&rnd()<C.iq*.55){const a=aiPass(p,C);
+      if(a.q&&a.q.role!=="GK"&&a.ln>1.2&&a.sc>1.6+(block?-.6:0)&&uOf(p.team,a.q.x)>uOf(p.team,p.x)-(pr<C.passP?6:-2)){doPass(p,0,C.passErr,a.q);p.ai.hold=0;return}}
+    if((dg<C.range+RNG[tacOf(p)]||(!block&&dg<C.range+RNG[tacOf(p)]+2.5*C.iq))&&(!block||dg<8||rnd()<.25)){const side=Math.abs(gkY-ARF.GC)>.3?(gkY>ARF.GC?-1:1):(p.y>ARF.GC?-1:1),ty=ARF.GC+side*(ARF.GY1-ARF.GY0)/2*arLerp(.55,.85,rnd());
       doShot(p,clamp(C.pow+(rnd()-.5)*.2,.3,.98)*.85,ty,C.shotErr,0);return}
     if(pr<1.7&&rnd()<C.skill){doSkill(p);return}
-    if(pr<C.passP||(p.ai.hold>2.6&&rnd()<.5)){const q=bestMate(p,dx,dy,rnd()<C.through);if(q&&uOf(p.team,q.x)>uOf(p.team,p.x)-8){doPass(p,rnd()<C.through?.5:0,C.passErr);p.ai.hold=0;return}}
+    if(pr<C.passP||(p.ai.hold>2.6&&rnd()<.5)){const thr=rnd()<C.through,q=C.iq>.3&&!thr?aiPass(p,C).q||bestMate(p,dx,dy,false):bestMate(p,dx,dy,thr);if(q&&uOf(p.team,q.x)>uOf(p.team,p.x)-8){doPass(p,thr?.5:0,C.passErr,q);p.ai.hold=0;return}}
   }
   function move(p,dx,dy,dt){const sp=p.spd*(p.boostT>0?1.28:1)*(p.stun>0?.25:1)*(p.tackleT>0?0:1)*(ball.owner===p?.94:1);if(p.tackleT>0)return;
     const tvx=dx*sp,tvy=dy*sp,ac=(p.stun>0?6:26)*dt,ex=tvx-p.vx,ey=tvy-p.vy,em=Math.hypot(ex,ey);if(em>ac){p.vx+=ex/em*ac;p.vy+=ey/em*ac}else{p.vx=tvx;p.vy=tvy}}
@@ -11887,12 +12178,19 @@ function arMatch(cfg,onEnd){
     if(ball.owner===p)return aiCarrier(p,dt,C);
     const bvx=ball.vx*dirIn;let threat=false,cy=0,tl=9;
     if(!ball.owner&&bvx<-5){tl=(ball.x-gx)/-ball.vx;cy=ball.y+ball.vy*tl;if(tl>0&&tl<1.6&&cy>ARF.GY0-1.2&&cy<ARF.GY1+1.2)threat=true}
-    if(threat){if(!p.ai.react)p.ai.err=gauss()*C.gkErr;p.ai.react=(p.ai.react||0)+dt;if(p.ai.react>=C.gkReact){cy+=p.ai.err;const ty=clamp(cy,ARF.GY0-.6,ARF.GY1+.6),tx=gx+dirIn*.6,dx=tx-p.x,dy=ty-p.y,d=Math.hypot(dx,dy);
+    if(threat){if(!p.ai.react){p.ai.err=gauss()*C.gkErr;p.ai.react=.04*(C.gkIQ||0)}/* lectura del tiro: el portero listo arranca antes */p.ai.react=(p.ai.react||0)+dt;if(p.ai.react>=C.gkReact){cy+=p.ai.err;const ty=clamp(cy,ARF.GY0-.6,ARF.GY1+.6),tx=gx+dirIn*.6,dx=tx-p.x,dy=ty-p.y,d=Math.hypot(dx,dy);
         if(d>.05){const v=Math.min(C.gkDive,d/dt);p.vx=dx/d*v;p.vy=dy/d*v;p.dive=.4}}else{p.vx*=.8;p.vy*=.8}}
-    else{p.ai.react=0;const bx=ball.x,by=ball.y,d=Math.hypot(bx-gx,by-ARF.GC)||1,out=clamp(d*.1,.6,3.4);let tx=gx+(bx-gx)/d*out,ty=ARF.GC+(by-ARF.GC)/d*out;ty=clamp(ty,ARF.GY0-.4,ARF.GY1+.4);
+    else{p.ai.react=0;const bx=ball.x,by=ball.y,d=Math.hypot(bx-gx,by-ARF.GC)||1,out=clamp(d*.1,.6,3.4),IQ=C.gkIQ||0;let tx=gx+(bx-gx)/d*out,ty=ARF.GC+(by-ARF.GC)/d*out,sp=.9;ty=clamp(ty,ARF.GY0-.4,ARF.GY1+.4);
       if(!ball.owner&&Math.abs(ball.x-gx)<7&&Math.abs(ball.y-ARF.GC)<7&&Math.hypot(ball.vx,ball.vy)<9){tx=ball.x;ty=ball.y}
-      else if(ball.owner&&ball.owner.team!==p.team&&Math.abs(ball.x-gx)<6&&Math.abs(ball.y-ARF.GC)<5){tx=arLerp(tx,ball.x,.55);ty=arLerp(ty,ball.y,.55)}
-      steer(p,tx,ty,.9,dt)}
+      else if(!ball.owner&&IQ>.3&&ball.lastTeam!==p.team&&ball.kind==='pass'&&ball.vx*dirIn<-2){/* anticipación: sale a por el pase al hueco si llega antes que el delantero */const q=predictBall(.45),qx=q[0],qy=q[1];
+        if(Math.abs(qx-gx)<arLerp(5,9.5,IQ)&&Math.abs(qy-ARF.GC)<9){const tg=Math.hypot(qx-p.x,qy-p.y)/p.spd;let ta=9;const O=team(1-p.team);for(let j=0;j<O.length;j++){const o=O[j],tt=Math.hypot(qx-o.x,qy-o.y)/o.spd;if(tt<ta)ta=tt}
+          if(tg<ta*.85){tx=qx;ty=qy;sp=1}}}
+      else if(ball.owner&&ball.owner.team!==p.team){const c=ball.owner,cu=Math.abs(c.x-gx);
+        if(Math.abs(ball.x-gx)<6&&Math.abs(ball.y-ARF.GC)<5){tx=arLerp(tx,ball.x,.55);ty=arLerp(ty,ball.y,.55)}
+        /* salida al mano a mano: delantero solo, centrado y cerca, sin defensa entre él y la portería */
+        if(IQ>.5&&cu<arLerp(3,4.5,IQ)&&Math.abs(c.y-ARF.GC)<6&&dist(p,c)<3.6&&gk(c.team).prot<=0){const T=team(p.team);let cov=false;for(let j=0;j<T.length;j++){const q=T[j];if(q.role!=="GK"&&Math.abs(q.x-gx)<cu-.3&&Math.abs(q.y-c.y)<2.5){cov=true;break}}
+          if(!cov){tx=c.x+c.vx*.2;ty=c.y+c.vy*.2;sp=1}}}
+      steer(p,tx,ty,sp,dt)}
     p.x=clamp(p.x,p.team===0?.2:ARF.L-9,p.team===0?9:ARF.L-.2)}
   /* ---------- humano ---------- */
   function humanStep(p,dt){const tm=p.team,mv=moveVec(tm);
@@ -11905,39 +12203,48 @@ function arMatch(cfg,onEnd){
   }
   /* ---------- paso de simulación ---------- */
   function step(dt){G.t+=dt;fillTeams();
-    for(let i=0;i<10;i++){const p=P[i];if(p.off)continue;p.stun=Math.max(0,p.stun-dt);p.tackleCd=Math.max(0,p.tackleCd-dt);p.skillCd=Math.max(0,p.skillCd-dt);p.dcd=Math.max(0,p.dcd-dt);p.kickT=Math.max(0,p.kickT-dt);p.boostCd=Math.max(0,p.boostCd-dt);p.boostT=Math.max(0,p.boostT-dt);p.skillT=Math.max(0,p.skillT-dt);
+    for(let i=0;i<10;i++){const p=P[i];if(p.off)continue;p.stun=Math.max(0,p.stun-dt);p.tackleCd=Math.max(0,p.tackleCd-dt);p.skillCd=Math.max(0,p.skillCd-dt);p.dcd=Math.max(0,p.dcd-dt);p.kickT=Math.max(0,p.kickT-dt);p.boostCd=Math.max(0,p.boostCd-dt);p.boostT=Math.max(0,p.boostT-dt);p.skillT=Math.max(0,p.skillT-dt);p.safe=Math.max(0,p.safe-dt);
       p.ai.t-=dt;p.ai.recv=Math.max(0,(p.ai.recv||0)-dt);p.ai.sw=Math.max(0,(p.ai.sw||0)-dt);p.dive=Math.max(0,(p.dive||0)-dt);if(p.cool>0)p.cool=Math.max(0,p.cool-dt);if(p.tackleT>0){p.tackleT-=dt;if(p.tackleT<=0){p.vx*=.3;p.vy*=.3;p.stun=Math.max(p.stun,.22)}}}
+    /* protección tras blocaje: cuenta atrás; se pierde si el rival se hace con el balón */
+    for(let t=0;t<2;t++){const g0=gk(t);if(g0.ordCd>0)g0.ordCd=Math.max(0,g0.ordCd-dt);if(g0.ordT>0){g0.ordT=Math.max(0,g0.ordT-dt);if(g0.ordT<=0)g0.ord=0}if(g0.prot>0){g0.prot=Math.max(0,g0.prot-dt);if(ball.owner&&ball.owner.team!==t)g0.prot=0}}
     if(!ball.owner){if(!pathOk||G.t-pathT>.033){calcPath();pathT=G.t}}else pathOk=false;
     if(ball.owner){CH[0]=CH[1]=null}else{CH[0]=chaser(0);CH[1]=chaser(1)}
     for(let t=0;t<2;t++){const c=ball.owner&&ball.owner.team!==t?ball.owner:null;if(!c){PRS[t].length=0;continue}const C=t===1?CP:AR_MATE;
-      nearestN(PRS[t],t,c,isH(t)?PRN[gk(t).tac][hum(t)&&dist(hum(t),c)<6?0:1]:C.pressN,isH(t)?hum(t):null)}
-    for(let i=0;i<10;i++){const p=P[i];if(p.off)continue;const C=p.team===1?CP:AR_MATE;
+      nearestN(PRS[t],t,c,isH(t)?(gk(t).ord===2?2:PRN[gk(t).tac][hum(t)&&dist(hum(t),c)<6?0:1]):C.pressN,isH(t)?hum(t):null);assignMarks(t,c)}
+    for(let i=0;i<10;i++){const p=P[i];if(p.off)continue;const C=ordC(p.team,p.team===1?CP:AR_MATE);
       if(G.freeze&&G.freeze(p)){p.vx*=.8;p.vy*=.8}
       else if(p.role==="GK")aiGK(p,dt,C);else if(p===hum(p.team))humanStep(p,dt);else aiField(p,dt,C);
+      if(p.skillK===6&&p.skillT>0){/* sombrero: recorrido automático por el lado del rival hasta su espalda */const h1=p.skillT>.21,tx=h1?p.sax:p.sbx,ty=h1?p.say:p.sby,rem=Math.max(.04,h1?p.skillT-.21:p.skillT),vx=(tx-p.x)/rem,vy=(ty-p.y)/rem,vm=Math.hypot(vx,vy),cap=15;p.vx=vm>cap?vx/vm*cap:vx;p.vy=vm>cap?vy/vm*cap:vy;if(p.skillT-dt<=0){p.vx*=.45;p.vy*=.45}}
       p.x+=p.vx*dt;p.y+=p.vy*dt;const r=.45;p.x=clamp(p.x,r,ARF.L-r);p.y=clamp(p.y,r,ARF.W-r);
+      /* postes: los jugadores los rodean (no se enganchan en la portería) */
+      if(p.x<1||p.x>ARF.L-1)for(let k=0;k<4;k++){const qx=k<2?0:ARF.L,qy=k%2?ARF.GY1:ARF.GY0,ex=p.x-qx,ey=p.y-qy,ed=Math.hypot(ex,ey),R0=r+.14;if(ed<R0){const nx=ed>1e-6?ex/ed:(k<2?1:-1),ny=ed>1e-6?ey/ed:0;p.x=qx+nx*R0;p.y=qy+ny*R0;const vn=p.vx*nx+p.vy*ny;if(vn<0){p.vx-=vn*nx;p.vy-=vn*ny}}}
       const v=Math.hypot(p.vx,p.vy);if(v>.6&&p.tackleT<=0&&!(p.role==="GK"&&p.dive>0)){p.fx=arLerp(p.fx,p.vx/v,Math.min(1,dt*14));p.fy=arLerp(p.fy,p.vy/v,Math.min(1,dt*14));const fm=Math.hypot(p.fx,p.fy)||1;p.fx/=fm;p.fy/=fm}
       p.anim+=v*dt*1.6}
     /* separación entre jugadores */
-    for(let i=0;i<10;i++){const a=P[i];if(a.off)continue;for(let j=i+1;j<10;j++){const b=P[j];if(b.off)continue;const dx=b.x-a.x,dy=b.y-a.y,d=Math.hypot(dx,dy);if(d<1.05&&d>0){const o=(1.05-d)/2,nx=dx/d,ny=dy/d;a.x-=nx*o;a.y-=ny*o;b.x+=nx*o;b.y+=ny*o}}}
+    for(let i=0;i<10;i++){const a=P[i];if(a.off)continue;for(let j=i+1;j<10;j++){const b=P[j];if(b.off)continue;if((a.skillK===6&&a.skillT>0)||(b.skillK===6&&b.skillT>0))continue;const dx=b.x-a.x,dy=b.y-a.y,d=Math.hypot(dx,dy);if(d<1.05&&d>0){const o=(1.05-d)/2,nx=dx/d,ny=dy/d;/* el portero no se deja desplazar (nadie lo saca de su sitio empujándolo) */const ga=a.role==="GK"?0:b.role==="GK"?2:1;
+        if(ga===1){a.x-=nx*o;a.y-=ny*o;b.x+=nx*o;b.y+=ny*o}else if(ga===0){b.x+=nx*o*2;b.y+=ny*o*2}else{a.x-=nx*o*2;a.y-=ny*o*2}}}}
     /* entradas y robos */
     const o=ball.owner;
-    if(o){for(let i=0;i<10;i++){const p=P[i];if(p.off||p.team===o.team||p.stun>0)continue;const d=Math.hypot(ball.x-p.x,ball.y-p.y);
+    if(o&&gk(o.team).prot<=0){for(let i=0;i<10;i++){const p=P[i];if(p.off||p.team===o.team||p.stun>0)continue;const d=Math.hypot(ball.x-p.x,ball.y-p.y);
       if(ball.owner!==o)break;
       const hb=p.role==="GK"?1:AR_HB;   /* hitbox de balón ampliada solo para jugadores de campo */
       if(p.tackleT>0&&d<1.3*hb&&o.role!=="GK"){const fr=((p.x-o.x)*o.fx+(p.y-o.y)*o.fy)/(d||1),pS=(fr>.3?.82:fr<-.3?.4:.62)*(o.team===1?1-CP.shield:1);
-        if(o.skillT>0||rnd()>pS){p.tackleT=0;p.stun=.75;p.vx*=.2;p.vy*=.2;if(o.team===ME){evt("¡Regate!");if(G.tut)G.tut.ev("dodge")}}
+        if(o.skillT>0||(o.safe>0&&rnd()<.85)||rnd()>pS){p.tackleT=0;p.stun=.75;p.vx*=.2;p.vy*=.2;if(o.team===ME){evt("¡Regate!");if(G.tut)G.tut.ev("dodge")}}
         else{const a=Math.atan2(p.fy,p.fx)+gauss()*.4;o.stun=.45;ball.owner=null;ball.vx=Math.cos(a)*5.5+p.vx*.2;ball.vy=Math.sin(a)*5.5+p.vy*.2;ball.vz=.4;o.cool=.5;G.stats.tk[p.team]++;if(p.team===ME)evt("¡Robo!");p.tackleT=0;SND.arTackle()}}
-      else if(d<.95*hb&&o.skillT<=0&&o.role!=="GK"){/* presión pegada al poseedor: robo progresivo */const C=p.team===1?CP:AR_MATE,rate=p===hum(p.team)?1.1:C.steal;if(rnd()<rate*dt){setOwner(p);o.cool=.5;o.stun=.25;G.stats.tk[p.team]++;if(p.team===ME)evt("¡Robo!")}}}}
+      else if((d<.95*hb||(dist(p,o)<1.25&&(o.x<1.3||o.x>ARF.L-1.3||o.y<1.3||o.y>ARF.W-1.3)))&&o.skillT<=0&&o.safe<=0&&o.role!=="GK"){/* presión pegada al poseedor: robo progresivo */const C=p.team===1?CP:AR_MATE,rate=p===hum(p.team)?1.1:C.steal;if(rnd()<rate*dt){setOwner(p);o.cool=.5;o.stun=.25;G.stats.tk[p.team]++;if(p.team===ME)evt("¡Robo!")}}}}
     /* balón */
     if(ball.owner){const p=ball.owner,v=Math.hypot(p.vx,p.vy),lead=.58+.28*v/7.5,tx=p.x+p.fx*lead,ty=p.y+p.fy*lead,k=Math.min(1,dt*22);ball.x+=(tx-ball.x)*k;ball.y+=(ty-ball.y)*k;ball.vx=p.vx;ball.vy=p.vy;ball.z=0;
-      if(p.role==="GK"){ball.x=clamp(ball.x,.3,ARF.L-.3)}}
+      /* el balón controlado nunca se mete en la red ni atraviesa las vallas: siempre se le puede robar */
+      ball.x=clamp(ball.x,ARF.BR+.06,ARF.L-ARF.BR-.06);ball.y=clamp(ball.y,ARF.BR+.06,ARF.W-ARF.BR-.06)}
     else ballPhys(dt);
     /* toma de posesión */
     if(!ball.owner&&G.state==="play"){let best=null,bd=9;for(let i=0;i<10;i++){const p=P[i];if(p.off||p.stun>0||p.cool>0)continue;const gkR=p.role==="GK";const d=Math.hypot(ball.x-p.x,ball.y-p.y),reach=gkR?(p.team===1?CP:AR_MATE).gkReach*(p.dive>0?1.08:1)*(p.team===0?statF(myFive[0],"def"):PVP?statF(opFive[0],"def"):1):.9*AR_HB;
         if(d<reach&&ball.z<(gkR?2.5:1.25)&&d<bd){bd=d;best=p}}
-      if(best&&best.role!=="GK"&&ball.kind==="shot"&&ball.lastTeam!==best.team&&isH(ball.lastTeam)&&rnd()<.2){best.cool=.15;best=null}/* los defensas bloquean menos los tiros */
+      if(best&&best.role!=="GK"&&ball.kind==="shot"&&ball.lastTeam!==best.team&&isH(ball.lastTeam)&&rnd()<.2){best.cool=.15;best=null}
+      /* durante la protección, el rival pegado al pasador no puede cortar el pase a bocajarro */
+      if(best&&best.team!==ball.lastTeam&&ball.last&&gk(ball.lastTeam).prot>0&&dist(ball,ball.last)<3.5){best.cool=.1;best=null}/* los defensas bloquean menos los tiros */
       if(best){const rel=Math.hypot(ball.vx-best.vx,ball.vy-best.vy),gkR=best.role==="GK",C=best.team===1?CP:AR_MATE;
-        if(gkR){/* blocaje: si el portero toca el balón se lo queda (sin rechaces ni goles tras tocarle) */const sv=ball.kind==="shot"&&ball.lastTeam!==best.team;setOwner(best);best.ai.hold=0;if(sv){evt("¡Paradón!");G.stats.sv[best.team]++}}
+        if(gkR){/* blocaje: si el portero toca el balón se lo queda (sin rechaces ni goles tras tocarle) */const sv=ball.kind==="shot"&&ball.lastTeam!==best.team;setOwner(best);best.ai.hold=0;best.prot=AR_PROT;if(sv){evt("¡Paradón!");G.stats.sv[best.team]++}}
         else if(rel<19||(rel<25&&rnd()<.5)){setOwner(best);best.ai.hold=0;best.ai.t=Math.max(best.ai.t,(best.team===1&&!PVP?CP.react:.2)*.6);if(best.team===0&&G.tut)G.tut.ev("recv",best)}
         else{/* rebote en el jugador */const ang=Math.atan2(ball.vy,ball.vx)+Math.PI+gauss()*.7;const v=Math.hypot(ball.vx,ball.vy)*.35;ball.vx=Math.cos(ang)*v;ball.vy=Math.sin(ang)*v;best.cool=.25;ball.lastTeam=best.team;SND.arBounce(.3)}}}
   }
@@ -11972,7 +12279,7 @@ function arMatch(cfg,onEnd){
   function ballSprite(){if(V.bs)return V.bs;const R=24,c=document.createElement("canvas");c.width=c.height=R*2+2;const g=c.getContext("2d"),gr=g.createRadialGradient(R+1-R*.35,R+1-R*.35,R*.1,R+1,R+1,R);gr.addColorStop(0,"#fff");gr.addColorStop(1,"#b9c2bd");
     g.fillStyle=gr;g.beginPath();g.arc(R+1,R+1,R,0,7);g.fill();g.strokeStyle="rgba(0,0,0,.4)";g.lineWidth=1.6;g.stroke();V.bs=c;return c}
   /* efectos de los regates (solo dibujo) */
-  const DCOL=["#fff","#7fe3ff","#ffd84d","#ff8bd6","#8bff9c","#ff9a5a"];
+  const DCOL=["#fff","#7fe3ff","#ffd84d","#ff8bd6","#8bff9c","#ff9a5a","#c89bff"];
   function skillFx(g,p,x,y,s,now,wx,wy){const k=p.skillK||1,ph=1-p.skillT/.42,c=DCOL[k],a=Math.sin(Math.min(1,ph)*Math.PI);
     const q=S2(wx+p.fx,wy+p.fy),dx=q[0]-x,dy=q[1]-y,ang=Math.atan2(dy,dx),m=Math.hypot(dx,dy)||1,ux=dx/m,uy=dy/m;
     g.save();g.strokeStyle=c;g.fillStyle=c;g.lineCap="round";g.lineWidth=Math.max(2.2,s*.22);
@@ -11980,6 +12287,7 @@ function arMatch(cfg,onEnd){
     else if(k===2){/* bicicleta: dos arcos que se alternan alrededor del balón */g.globalAlpha=.85*a;for(let i=0;i<3;i++){const sg=(i+Math.floor(ph*6))%2?1:-1;g.beginPath();g.arc(x+ux*s*.9,y+uy*s*.9,s*(.7+.18*i),ang+sg*.6-.5,ang+sg*.6+.5);g.stroke()}}
     else if(k===3){/* ruleta: remolino */g.globalAlpha=.9*a;for(let i=0;i<2;i++){g.beginPath();g.arc(x,y,s*(1.1+.35*i),ph*12+i*3.1,ph*12+i*3.1+2.2);g.stroke()}}
     else if(k===4){/* caño: el balón pasa entre las piernas, chevrones hacia delante */g.globalAlpha=.9*a;for(let i=0;i<3;i++){const d=s*(1.2+i*.8+ph*1.4),px=x+ux*d,py=y+uy*d;g.beginPath();g.moveTo(px-ux*s*.3-uy*s*.4,py-uy*s*.3+ux*s*.4);g.lineTo(px,py);g.lineTo(px-ux*s*.3+uy*s*.4,py-uy*s*.3-ux*s*.4);g.stroke()}}
+    else if(k===6){/* sombrero: arco punteado por encima del rival */g.globalAlpha=.85*a;g.setLineDash([s*.25,s*.3]);g.beginPath();g.moveTo(x,y);g.quadraticCurveTo(x+ux*s*2.4,y+uy*s*2.4-s*3.2,x+ux*s*4.8,y+uy*s*4.8);g.stroke();g.setLineDash([])}
     else{/* elástica: dos latigazos cruzados */g.globalAlpha=.9*a;for(let i=-1;i<=1;i+=2){g.beginPath();g.arc(x,y,s*1.3,ang+i*(.4+ph*1.4)-.6,ang+i*(.4+ph*1.4)+.6);g.stroke()}}
     g.restore()}
   function draw(al){const g=ctx;g.setTransform(V.dpr,0,0,V.dpr,0,0);const IX=p=>p.px+(p.x-p.px)*al,IY=p=>p.py+(p.y-p.py)*al;
@@ -11989,7 +12297,16 @@ function arMatch(cfg,onEnd){
     const s=V.s,now=G.t;
     /* sombras */
     g.fillStyle="rgba(0,0,0,.28)";g.beginPath();for(let i=0;i<10;i++){const p=P[i];if(p.off)continue;const q=S2(IX(p),IY(p)),x=q[0],y=q[1];g.moveTo(x+s*.3+s*.85,y+s*.35);g.ellipse(x+s*.3,y+s*.35,s*.85,s*.6,0,0,7)}g.fill();
-    const bx=ball.px+(ball.x-ball.px)*al,by=ball.py+(ball.y-ball.py)*al,bz=ball.pz+(ball.z-ball.pz)*al;
+    let bx=ball.px+(ball.x-ball.px)*al,by=ball.py+(ball.y-ball.py)*al,bz=ball.pz+(ball.z-ball.pz)*al,bsp=0;
+    /* animación del BALÓN en cada regate (solo dibujo: no toca la simulación ni el online) */
+    {const ow=ball.owner;if(ow&&ow.skillT>0&&!ow.off){const ph=Math.min(1,1-ow.skillT/.42),k=ow.skillK,sd=ow.skillS||1,fx=ow.fx,fy=ow.fy,lx=-fy,ly=fx,S1=Math.sin(ph*Math.PI);let f=0,l=0;
+      if(k===1){l=sd*.75*S1;f=-.25*S1}                                    /* recorte: arrastre con la suela hacia un lado */
+      else if(k===2){l=.22*Math.sin(ph*Math.PI*4);f=-.15*S1}               /* bicicleta: el balón baila entre los pies */
+      else if(k===3){const px=IX(ow),py=IY(ow),rx=bx-px,ry=by-py,an=sd*ph*Math.PI*2,c=Math.cos(an),sn=Math.sin(an);bx=px+rx*c-ry*sn;by=py+rx*sn+ry*c;bsp=an} /* ruleta: gira alrededor del jugador */
+      else if(k===4){f=1.5*S1;l=.12*Math.sin(ph*Math.PI*3)}                 /* caño: sale disparado entre las piernas */
+      else if(k===5){l=sd*.9*Math.sin(ph*Math.PI*2);f=.15*S1}              /* elástica: sale a un lado y vuelve de latigazo al otro */
+      else if(k===6){bx=ow.sox+(ow.sbx-ow.sox)*ph;by=ow.soy+(ow.sby-ow.soy)*ph;bz+=2.6*S1}/* sombrero: el balón va en línea recta por encima del rival mientras el jugador lo rodea */
+      bx+=fx*f+lx*l;by+=fy*f+ly*l;if(!bsp)bsp=(f+l)*4}}
     {const q=S2(bx,by),x=q[0],y=q[1];g.globalAlpha=Math.max(.15,.45-bz*.08);g.beginPath();g.ellipse(x+bz*s*.25,y+bz*s*.2,s*.32,s*.24,0,0,7);g.fill();g.globalAlpha=1}
     /* indicador del jugador controlado y objetivo de pase */
     const h=hum(ME);if(h&&!h.off){const q=S2(IX(h),IY(h)),x=q[0],y=q[1],pu=.5+.5*Math.sin(now*7);g.strokeStyle=myCol;g.lineWidth=Math.max(1.5,s*.16);g.globalAlpha=.6+.4*pu;g.beginPath();g.arc(x,y,s*(1.05+.12*pu),0,7);g.stroke();g.globalAlpha=1;
@@ -12002,7 +12319,7 @@ function arMatch(cfg,onEnd){
       g.save();g.translate(x,y);const ang=(V.port?Math.atan2(-p.fx,p.fy):Math.atan2(p.fy,p.fx))+(V.flip?Math.PI:0);g.rotate(ang);
       if(p.tackleT>0){g.scale(1.25,.8)}
       const dph=p.skillT>0?1-p.skillT/.42:0,dk=p.skillT>0?p.skillK:0;
-      if(dk===1){g.scale(1,1-.16*Math.sin(dph*Math.PI))}else if(dk===3){g.rotate(dph*Math.PI*2*(p.anim%2>1?1:-1))}else if(dk===4){g.scale(1+.18*Math.sin(dph*Math.PI),1-.1*Math.sin(dph*Math.PI))}else if(dk===5){g.transform(1,0,.38*Math.sin(dph*Math.PI*2),1,0,0)}
+      if(dk===1){g.scale(1,1-.16*Math.sin(dph*Math.PI))}else if(dk===3){g.rotate(dph*Math.PI*2*(p.anim%2>1?1:-1))}else if(dk===4){g.scale(1+.18*Math.sin(dph*Math.PI),1-.1*Math.sin(dph*Math.PI))}else if(dk===5){g.transform(1,0,.38*Math.sin(dph*Math.PI*2),1,0,0)}else if(dk===6){g.scale(1-.12*Math.sin(dph*Math.PI),1+.12*Math.sin(dph*Math.PI))}
       if(p.kickT>0&&p.kickK){const kp=1-p.kickT/.3,ks=Math.sin(kp*Math.PI);if(p.kickK>=3)g.scale(1+.1*ks,1-.06*ks)}
       const sw=dk===2?Math.sin(dph*Math.PI*7):Math.sin(p.anim*3)*Math.min(1,Math.hypot(p.vx,p.vy)/4);
       g.fillStyle="#1a1a1a";g.beginPath();g.ellipse(r*.25+sw*r*.35,-r*.38,r*.28,r*.17,0,0,7);g.ellipse(r*.25-sw*r*.35,r*.38,r*.28,r*.17,0,0,7);g.fill();
@@ -12027,6 +12344,8 @@ function arMatch(cfg,onEnd){
     /* estela y balón */
     if(trL>2&&PERF.cfg().tier!=="baja"){const sh=ball.kind==="shot",rs=Math.abs(ball.spin)>2.2,hi=!sh&&bz>.6,pw=Math.hypot(ball.vx,ball.vy)>24;
       g.strokeStyle=sh?(rs?"rgba(255,200,90,.75)":pw?"rgba(255,110,70,.7)":"rgba(255,255,255,.5)"):hi?"rgba(150,210,255,.6)":"rgba(255,255,255,.28)";g.lineWidth=Math.max(1,s*(sh?(pw||rs?.34:.24):hi?.2:.12));g.lineCap="round";g.beginPath();for(let i=0;i<trL;i++){const e=trail[(trH-trL+i+TRN)%TRN],q=S2(e[0],e[1]),yy=q[1]-e[2]*s*.55;i?g.lineTo(q[0],yy):g.moveTo(q[0],yy)}g.stroke()}
+    /* protección tras blocaje: arco fino alrededor del poseedor que se vacía en 3 s */
+    {const ow=ball.owner,pr=ow?gk(ow.team).prot:0;if(pr>0){const q=S2(IX(ow),IY(ow));g.save();g.globalAlpha=.5*Math.min(1,pr*1.5);g.strokeStyle="#cfeeff";g.lineWidth=Math.max(1.2,s*.09);g.beginPath();g.arc(q[0],q[1],s*1.32,-1.5708,-1.5708+6.2832*pr/AR_PROT);g.stroke();g.restore()}}
     {const ow=ball.owner;if(ow&&ow.skillT>0){const q=S2(bx,by),ph=1-ow.skillT/.42;g.save();g.globalAlpha=(1-ph)*.8;g.strokeStyle=DCOL[ow.skillK||1];g.lineWidth=Math.max(1.5,s*.12);g.beginPath();g.arc(q[0],q[1]-bz*s*.55,s*(.5+ph*1.1),0,7);g.stroke();g.restore()}}
     {const q=S2(bx,by),x=q[0],rr=Math.max(3,s*(.42+bz*.035)),yy=q[1]-bz*s*.55;g.drawImage(ballSprite(),x-rr-rr/24,yy-rr-rr/24,rr*2+rr/12,rr*2+rr/12);
       g.fillStyle="#1d2420";const ro2=(bx+by)*1.4;g.beginPath();for(let i=0;i<3;i++){const a=ro2+i*2.1,cx=x+Math.cos(a)*rr*.45,cy=yy+Math.sin(a)*rr*.45;g.moveTo(cx+rr*.22,cy);g.arc(cx,cy,rr*.22,0,7)}g.fill()}
@@ -12058,7 +12377,7 @@ function arMatch(cfg,onEnd){
     if(!inp){if(window.__AR_BOTT&&G.state==="play")try{window.__AR_BOTT(G,H)}catch(e){}inp=sampleInput()}
     if(REC)REC.push(inp.mx,inp.my,inp.b|inp.e);
     G.tick++;
-    if(G.state==="count"){G.stT+=H;const n=3-Math.floor(G.stT/.75);if(n>=1){if(n!==G.cn){G.cn=n;if(!G.silent){const big=$("#arBig");big.innerHTML=`<b>${n}</b>`;big.className="ar-big on cnt";SND.arTick(false)}}}
+    if(G.state==="count"){if(inp&&inp.my===-128)gk(0).stc=clamp(inp.mx|0,0,80);if(PVP&&inp1&&inp1.my===-128)gk(1).stc=clamp(inp1.mx|0,0,80);G.stT+=H;const n=3-Math.floor(G.stT/.75);if(n>=1){if(n!==G.cn){G.cn=n;if(!G.silent){const big=$("#arBig");big.innerHTML=`<b>${n}</b>`;big.className="ar-big on cnt";SND.arTick(false)}}}
       else{G.state="play";if(!G.silent){const big=$("#arBig");big.innerHTML="<b>¡Ya!</b>";big.className="ar-big on go";SND.whistle&&SND.whistle(1);setTimeout(()=>{if(G.state==="play")big.className="ar-big"},600)}}
       return}
     if(G.state==="goal"){G.stT+=H/G.slow;if(G.stT>.7)G.slow=1;step(H);if(G.stT>2.4){if(!G.silent)$("#arBig").className="ar-big";if(PVP&&G.golden){finish();return}if(G.tut){G.state="play";G.tut.after&&G.tut.after();return}kickoff(G.kick);G.state="ready";G.stT=0}return}
@@ -12079,15 +12398,19 @@ function arMatch(cfg,onEnd){
   function resume(){if(ctlP)return;G.paused=false;$("#arPz").hidden=true;last=performance.now();if(!G.rot)G.skill&&G.skill.pause&&G.skill.pause(false)}
   let ctlP=null;
   function openCtl(){const c=$("#arPzC"),inn=$("#arPzIn");inn.hidden=true;c.hidden=false;ctlP=arCtlPanel(c,{inMatch:true,onClose:()=>{ctlP=null;c.hidden=true;c.innerHTML="";inn.hidden=false;blur();refreshKeys();const r=$("#arRes");r&&r.focus()}})}
-  function refreshKeys(){$("#arKeys").innerHTML=arKeysBar(PAD.on);["pass","shot","drib"].forEach(b=>{const s=btnEl[b].lastElementChild;s.textContent=arKeyName((S.arKeys[b]||[])[0])});if(G.tut&&G.tut.refresh)G.tut.refresh();if(G.skill&&G.skill.refresh)G.skill.refresh()}
+  function refreshKeys(){$("#arKeys").innerHTML=arKeysBar(PAD.on);["pass","shot","drib","thr"].forEach(b=>{const s=btnEl[b].lastElementChild;s.textContent=arKeyName((S.arKeys[b]||[])[0])});if(G.tut&&G.tut.refresh)G.tut.refresh();if(G.skill&&G.skill.refresh)G.skill.refresh()}
   const vis=()=>{if(document.hidden&&!G.paused)pause()};document.addEventListener("visibilitychange",vis);
-  $("#arPauseB").onclick=()=>G.paused?resume():pause();$("#arRes").onclick=resume;$("#arCtlB").onclick=openCtl;$("#arRotP").onclick=pause;
+  $("#arPauseB").onclick=()=>G.paused?resume():pause();$("#arRes").onclick=resume;$("#arCtlB").onclick=openCtl;
+  {const tb=document.createElement("button");tb.className="btn";tb.id="arTacB";tb.textContent="Táctica";$("#arCtlB").after(tb);
+    tb.onclick=()=>{if(typeof arTacPanel!=="function")return;const c=$("#arPzC"),inn=$("#arPzIn");inn.hidden=true;c.hidden=false;arTacPanel({inMatch:true,host:c,onClose:()=>{c.hidden=true;c.innerHTML="";inn.hidden=false}})}}
+  if(touch){const lb=document.createElement("button");lb.className="btn";lb.id="arLayB";lb.textContent="Personalizar botones";$("#arCtlB").after(lb);lb.onclick=()=>{if(typeof arLayEditor==="function")arLayEditor({})}}
+  const onLay=()=>{applyLay();resize()};window.addEventListener("arlay",onLay);$("#arRotP").onclick=pause;
   const qb=$("#arQuit");if(qb)qb.onclick=()=>{if(!qb.dataset.c){qb.dataset.c=1;qb.textContent="Toca otra vez para abandonar";return}if(cfg.net){cfg.net.quit();return}close({abandon:true,gf:G.score[0],ga:G.score[1]})};
   const sk=$("#arSkipTut");if(sk)sk.onclick=()=>close({tutSkip:true});
-  function close(res){if(destroyed)return;destroyed=true;cancelAnimationFrame(raf);ro.disconnect();document.removeEventListener("keydown",kd,true);document.removeEventListener("keyup",ku,true);window.removeEventListener("blur",blur);document.removeEventListener("visibilitychange",vis);
+  function close(res){if(destroyed)return;destroyed=true;cancelAnimationFrame(raf);ro.disconnect();window.removeEventListener("arlay",onLay);document.removeEventListener("keydown",kd,true);document.removeEventListener("keyup",ku,true);window.removeEventListener("blur",blur);document.removeEventListener("visibilitychange",vis);
     if(ctlP)ctlP.close();if(G.skill&&G.skill.destroy)G.skill.destroy();window.__AR_G=null;L.innerHTML="";arExitLandscape();res.stats=G.stats;onEnd&&onEnd(res)}
   /* ---------- estado serializable, simulación sin dibujo y resumen (para red, repeticiones y pruebas) ---------- */
-  const PK=["x","y","vx","vy","fx","fy","stun","tackleT","tackleCd","skillT","skillCd","skillK","skillS","kickT","kickK","dcd","tac","boostT","boostCd","cool","dive","anim","off"],AK=["t","hold","recv","sw","react","err"];
+  const PK=["x","y","vx","vy","fx","fy","stun","tackleT","tackleCd","skillT","skillCd","skillK","skillS","kickT","kickK","dcd","tac","boostT","boostCd","cool","dive","anim","off","prot","safe","sax","say","sbx","sby","sox","soy","stc","ord","ordT","ordCd"],AK=["t","hold","recv","sw","react","err","gg","tx","ty","st"];
   const idx=p=>p?P.indexOf(p):-1;
   G.serialize=()=>({v:1,rng:rnd.get(),t:G.t,tick:G.tick,clock:G.clock,score:G.score.slice(),state:G.state,stT:G.stT,cn:G.cn,kick:G.kick,slow:G.slow,shotFlight:G.shotFlight,ended:G.ended,stats:JSON.parse(JSON.stringify(G.stats)),
     human:idx(G.human),human1:idx(G.human1),golden:G.golden,sb1:{b:SB1.b,t0:SB1.t0.slice(),last:SB1.last,mx:SB1.mx,my:SB1.my,mm:SB1.mm},sb:{b:SB.b,t0:SB.t0.slice(),last:SB.last,mx:SB.mx,my:SB.my,mm:SB.mm},path:pathOk?{t:pathT,a:Array.from(PATH)}:null,
@@ -12102,7 +12425,7 @@ function arMatch(cfg,onEnd){
     f(G.tick);f(G.score[0]);f(G.score[1]);f(ball.x);f(ball.y);f(ball.z);f(idx(ball.owner));for(let i=0;i<10;i++){f(P[i].x);f(P[i].y);f(P[i].vx)}f(rnd.get());return (h>>>0).toString(16)};
   /* avanza n ticks con entradas dadas (array plano mx,my,bits) sin dibujar ni sonar */
   G.sim=(n,ins)=>{const was=G.silent;G.silent=true;SND=MUTE;
-    try{const I={mx:0,my:0,b:0,e:0};for(let i=0;i<n;i++){if(ins){I.mx=ins[i*3]|0;I.my=ins[i*3+1]|0;const bb=ins[i*3+2]|0;I.b=bb&7;I.e=bb&24}else{I.mx=I.my=I.b=I.e=0}tick(I)}}finally{SND=AU;G.silent=was}return G.hash()};
+    try{const I={mx:0,my:0,b:0,e:0};for(let i=0;i<n;i++){if(ins){I.mx=ins[i*3]|0;I.my=ins[i*3+1]|0;const bb=ins[i*3+2]|0;I.b=bb&103;I.e=bb&152}else{I.mx=I.my=I.b=I.e=0}tick(I)}}finally{SND=AU;G.silent=was}return G.hash()};
   /* instantánea binaria (Float64Array preasignado, sin crear objetos): rollback de la red cada tick */
   const STC=["count","play","goal","ready","end"],KDC=["","pass","shot","touch","parry"];
   G.SNAP=22+16+132+11+10*(PK.length+AK.length);
@@ -12126,6 +12449,7 @@ function arMatch(cfg,onEnd){
     const sec=Math.max(0,Math.ceil(G.clock)),c=$("#arClk");c.textContent=(G.golden?"+":"")+Math.floor(sec/60)+":"+String(sec%60).padStart(2,"0");c.classList.toggle("hot",sec<=10&&G.state!=="count");c.classList.toggle("gold",!!G.golden)};
   G.rec=REC;G.fps=()=>FPS.v;G.ov=ov;G.evt=evt;G.big=(html,cls)=>{const b=$("#arBig");if(!b)return;b.innerHTML=html;b.className="ar-big"+(cls?" on "+cls:"")};
   /* ---------- ganchos para pruebas automáticas (solo lectura del estado + entrada simulada) ---------- */
+  if(window.__AR_DBG)G.dbg={P,ball,setOwner,hum:t=>hum(t)};/* solo pruebas */
   G.snap=()=>({t:G.t,state:G.state,clock:G.clock,score:G.score.slice(),port:V.port,rot:G.rot,human:G.human?{x:G.human.x,y:G.human.y,i:G.human.i}:null,own:ball.owner?[ball.owner.team,ball.owner.i]:null,
     ball:{x:ball.x,y:ball.y,z:ball.z,vx:ball.vx,vy:ball.vy},p:P.map(p=>[p.team,p.x,p.y,p.off?1:0]),skill:G.skill&&G.skill.snap?G.skill.snap():null,tut:G.tut&&G.tut.step?G.tut.step():null,mark:G.tut&&G.tut.mark?G.tut.mark():null,paused:G.paused,stats:G.stats,fps:FPS.v});
   G.press=press;G.release=release;G.close=close;G.pause=pause;G.resume=resume;G.ARF=ARF;G.raw={P,ball,V};
@@ -12362,11 +12686,15 @@ const AR_ACTS=[
   {k:"down",n:"Moverse abajo",d:["KeyS","ArrowDown"]},
   {k:"left",n:"Moverse a la izquierda",d:["KeyA","ArrowLeft"]},
   {k:"right",n:"Moverse a la derecha",d:["KeyD","ArrowRight"]},
-  {k:"pass",n:"Pase",h:"Toque: raso · mantener: bombeado. Sin balón cambia de jugador",d:["KeyJ","Space"]},
+  {k:"pass",n:"Pase",h:"Toque: raso · mantener: por arriba. Sin balón cambia de jugador",d:["KeyJ","Space"]},
   {k:"shot",n:"Tiro",h:"Mantén para cargar. Sin balón hace una entrada",d:["KeyK",""]},
+  {k:"thr",n:"Pase al hueco",h:"Al espacio por delante del compañero que corre. Mantén para que vaya por arriba",d:["KeyH",""]},
   {k:"drib",n:"Regate / sprint",h:"Con balón: finta · sin balón: sprint",d:["KeyL","ShiftLeft"]},
   {k:"switch",n:"Cambiar jugador",d:["KeyQ","KeyE"]},
   {k:"tackle",n:"Entrada",d:["KeyU",""]},
+  {k:"lob",n:"Globo",h:"Mantenla al soltar Pase o Al hueco: el pase sale por arriba",d:["KeyG",""]},
+  {k:"atk",n:"Orden: Atacar",h:"Tu equipo sube líneas y busca la ruptura unos segundos",d:["KeyZ",""]},
+  {k:"dfd",n:"Orden: Defender",h:"Tu equipo repliega, cierra pases y presiona en doble unos segundos",d:["KeyX",""]},
   {k:"pause",n:"Pausa",h:"Esc también pausa siempre",d:["KeyP",""]}];
 const AR_ACT=Object.fromEntries(AR_ACTS.map(a=>[a.k,a]));
 const AR_KEY_OK=c=>typeof c==="string"&&/^[A-Za-z0-9]{1,24}$/.test(c)&&c!=="Escape";
@@ -12401,8 +12729,8 @@ function arMoveKbd(txt){arKeyMap();const K=S.arKeys,gr=[0,1].map(i=>["up","left"
   return gr.filter(g=>g.some(Boolean)).map(g=>{const s=g.join(",");if(s==="KeyW,KeyA,KeyS,KeyD")return txt?"WASD":"<kbd>WASD</kbd>";if(s==="ArrowUp,ArrowLeft,ArrowDown,ArrowRight")return txt?"flechas":"<kbd>flechas</kbd>";
     return txt?g.map(arKeyName).join(""):g.map(arKbdOne).join("")}).join(txt?" o ":" o ")}
 /* barra de ayuda del partido */
-function arKeysBar(pad){return pad?`Mando: mover <kbd>stick</kbd> · Pase <kbd>A</kbd> · Tiro <kbd>B</kbd> (mantén) · Regate <kbd>X</kbd>/<kbd>RB</kbd> · Cambiar <kbd>LB</kbd> · Entrada <kbd>Y</kbd> · Pausa <kbd>Start</kbd>`
-  :`Mover ${arMoveKbd()} · Pase ${arKbd("pass")} · Tiro ${arKbd("shot")} (mantén) · Regate ${arKbd("drib")} · Cambiar ${arKbd("switch")} · Entrada ${arKbd("tackle")} · Pausa ${arKbd("pause")}`}
+function arKeysBar(pad){return pad?`Mando: mover <kbd>stick</kbd> · Pase <kbd>A</kbd> · Al hueco <kbd>LT</kbd> · Tiro <kbd>B</kbd> (mantén) · Regate <kbd>X</kbd>/<kbd>RB</kbd> · Cambiar <kbd>LB</kbd> · Entrada <kbd>Y</kbd> · Pausa <kbd>Start</kbd>`
+  :`Mover ${arMoveKbd()} · Pase ${arKbd("pass")} · Al hueco ${arKbd("thr")} · Globo ${arKbd("lob")} · Tiro ${arKbd("shot")} (mantén) · Regate ${arKbd("drib")} (o elige: <kbd>1</kbd> Recorte <kbd>2</kbd> Bicicleta <kbd>3</kbd> Ruleta <kbd>4</kbd> Caño <kbd>5</kbd> Elástica <kbd>6</kbd> Sombrero) · Cambiar ${arKbd("switch")} · Entrada ${arKbd("tackle")} · Atacar ${arKbd("atk")} · Defender ${arKbd("dfd")} · Pausa ${arKbd("pause")}`}
 /* texto de ayuda del modo (16_info.js) con las teclas elegidas */
 (function(){try{if(typeof INFO==="undefined"||!INFO.arenas)return;const base=INFO.arenas[1];
   Object.defineProperty(INFO.arenas,1,{configurable:true,enumerable:true,get(){try{return base.replace(/mueve con el joystick[^.]*?\(L \/ Mayús\)/,
@@ -12416,14 +12744,15 @@ function arCtlPanel(host,{onClose,inMatch=false}={}){
   const paint=()=>{arKeyMap();const K=S.arKeys;
     host.innerHTML=`<div class="arc" role="group" aria-label="Controles del modo Arenas">
      <div class="arc-h"><h3>Controles</h3><button class="btn small" data-arcx>Cerrar</button></div>
-     <p class="note">${touch?"En el móvil se juega con el joystick y los botones en pantalla. Aquí puedes configurar un teclado o ver los botones del mando.":"Toca una tecla de la lista y pulsa la nueva. <kbd>Esc</kbd> cancela · <kbd>Retroceso</kbd> deja vacía la tecla secundaria."}</p>
+     <p class="note">${touch?"En el móvil se juega con el joystick y los botones en pantalla. Pulsa Pase o Al hueco y desliza el dedo hacia arriba para pasar por arriba. Aquí puedes configurar un teclado o ver los botones del mando.":"Toca una tecla de la lista y pulsa la nueva. <kbd>Esc</kbd> cancela · <kbd>Retroceso</kbd> deja vacía la tecla secundaria."}</p>
      <div class="arc-l">${AR_ACTS.map(a=>{const k=K[a.k],empty=!k[0]&&!k[1];return `<div class="arc-r${empty?" warn":""}" data-a="${a.k}"><span class="arc-n"><b>${a.n}</b>${a.h?`<small>${a.h}</small>`:""}${empty?`<small class="arc-w">Sin tecla asignada</small>`:""}</span>
        ${[0,1].map(i=>`<button class="arc-k${cap&&cap.a===a.k&&cap.i===i?" cap":""}${k[i]?"":" none"}" data-a="${a.k}" data-i="${i}" aria-label="${a.n}, tecla ${i?"secundaria":"principal"}: ${k[i]?esc(arKeyName(k[i])):"ninguna"}">${cap&&cap.a===a.k&&cap.i===i?"Pulsa una tecla…":k[i]?esc(arKeyName(k[i])):"—"}</button>`).join("")}</div>`}).join("")}</div>
      <div class="arc-msg" aria-live="polite">${pend?`<span>La tecla <kbd>${esc(arKeyName(pend.code))}</kbd> ya es «${AR_ACT[pend.oa].n}».</span><button class="btn small primary" data-arcsw>Intercambiar</button><button class="btn small" data-arccn>Cancelar</button>`:msg}</div>
-     <p class="arc-pad note">Mando (Xbox/PlayStation): stick o cruceta mover · A/✕ pase · B/○ tiro · X/□ o RB regate · LB cambiar · Y/△ entrada · Start pausa.</p>
-     <div class="arc-f"><button class="btn" data-arcdef>Restaurar valores por defecto</button><button class="btn primary" data-arcx>Listo</button></div></div>`;
+     <p class="arc-pad note">Mando (Xbox/PlayStation): stick o cruceta mover · A/✕ pase (mantén: por arriba) · LT pase al hueco · B/○ tiro · X/□ o RB regate · LB cambiar · Y/△ entrada · Start pausa.</p>
+     <div class="arc-f">${touch?`<button class="btn" data-arclay>Personalizar botones</button>`:""}<button class="btn" data-arcdef>Restaurar valores por defecto</button><button class="btn primary" data-arcx>Listo</button></div></div>`;
     host.querySelectorAll(".arc-k").forEach(b=>b.onclick=()=>{pend=null;cap={a:b.dataset.a,i:+b.dataset.i};msg="";paint();const nb=host.querySelector(".arc-k.cap");nb&&nb.focus()});
     host.querySelectorAll("[data-arcx]").forEach(b=>b.onclick=close);
+    const lb=host.querySelector("[data-arclay]");if(lb)lb.onclick=()=>arLayEditor({});
     const d=host.querySelector("[data-arcdef]");d.onclick=()=>{cap=pend=null;arKeysSet(arKeysDef());msg="Controles restaurados a los valores por defecto.";paint()};
     const sw=host.querySelector("[data-arcsw]");if(sw)sw.onclick=()=>{assign(pend.a,pend.i,pend.code,true);pend=null;paint()};
     const cn=host.querySelector("[data-arccn]");if(cn)cn.onclick=()=>{pend=null;msg="";paint()}};
@@ -12452,6 +12781,7 @@ document.addEventListener("click",e=>{const b=e.target&&e.target.closest&&e.targ
 /* añade el botón «Controles» a la pantalla de Arenas sin tocar su plantilla (si el menú ya trae uno con data-arctl, no hace nada) */
 function arCtlInject(m){try{if(typeof TAB==="undefined"||TAB!=="torneos"||JUG!=="arenas"||!AR().on||!m||m.querySelector("[data-arctl]"))return;
   const at=m.querySelector(".ar-rec")||m.querySelector(".ar-play-row");if(!at)return;
+  at.insertAdjacentHTML("afterend",`<button class="btn small ar-ctl-btn" data-artac aria-label="Táctica del equipo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M12 3v18M7 8h.01M7 16h.01M17 12h.01"/></svg><span>Táctica</span></button>`);
   at.insertAdjacentHTML("afterend",`<button class="btn small ar-ctl-btn" data-arctl aria-label="Controles del modo Arenas"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="2" y="6" width="20" height="12" rx="3"/><path d="M6 10h.01M10 10h.01M14 10h.01M18 10h.01M7 14h10"/></svg><span>Controles</span></button>`)}catch(e){}}
 if(typeof bindArena==="function"){const _bindArena=bindArena;bindArena=function(m){_bindArena(m);arCtlInject(m)}}
 
@@ -12470,6 +12800,97 @@ function arEnterLandscape(){clearTimeout(AR_FSX);AR_FSX=0;if(!arIsPhone())return
     const p=rq.call(el,{navigationUI:"hide"});AR_FSMINE=true;if(p&&p.then)p.then(arLockLandscape,()=>{AR_FSMINE=false});else arLockLandscape()}catch(e){AR_FSMINE=false}}
 function arExitLandscape(){clearTimeout(AR_FSX);AR_FSX=setTimeout(()=>{AR_FSX=0;try{screen.orientation&&screen.orientation.unlock&&screen.orientation.unlock()}catch(e){}
   if(AR_FSMINE&&arFsEl()){AR_FSMINE=false;try{const ex=document.exitFullscreen||document.webkitExitFullscreen;const p=ex&&ex.call(document);p&&p.catch&&p.catch(()=>{})}catch(e){}}},150)}
+
+/* ===================== DISPOSICIÓN DE LOS CONTROLES TÁCTILES (editor) =====================
+   S.arLay={on,c:{j,shot,pass,drib,pause:{x,y,s}}}: x,y = centro del control como fracción del ancho/alto de la pantalla en horizontal; s = tamaño (0,6–1,6).
+   Si on=false se usa la disposición por defecto (CSS). La usan el modo Arena contra la CPU y el partido online en directo (mismo motor). */
+const AR_LAY_BASE={j:150,shot:96,pass:84,drib:80,thr:70,pause:48};
+function arLayDef(){return {on:false,c:{j:{x:.133,y:.723,s:1},shot:{x:.929,y:.846,s:1},pass:{x:.803,y:.862,s:1},drib:{x:.929,y:.59,s:1},thr:{x:.79,y:.6,s:1},pause:{x:.962,y:.072,s:1}}}}
+function arLayNorm(o){const d=arLayDef();if(!o||typeof o!=="object")return d;d.on=!!o.on;
+  for(const k in d.c){const v=o.c&&o.c[k];if(v&&typeof v==="object"){const x=+v.x,y=+v.y,s=+v.s;if(isFinite(x))d.c[k].x=Math.min(1,Math.max(0,x));if(isFinite(y))d.c[k].y=Math.min(1,Math.max(0,y));if(isFinite(s))d.c[k].s=Math.min(1.6,Math.max(.6,s))}}return d}
+/* márgenes seguros (notch, barras) en px */
+function arSafePad(){const p=document.createElement("div");p.style.cssText="position:fixed;left:0;top:0;visibility:hidden;pointer-events:none;padding:env(safe-area-inset-top,0px) env(safe-area-inset-right,0px) env(safe-area-inset-bottom,0px) env(safe-area-inset-left,0px)";document.body.appendChild(p);
+  const c=getComputedStyle(p),r={t:parseFloat(c.paddingTop)||0,r:parseFloat(c.paddingRight)||0,b:parseFloat(c.paddingBottom)||0,l:parseFloat(c.paddingLeft)||0};p.remove();return r}
+/* geometría en px de un control, con límites para que no salga de la pantalla ni de la zona segura */
+/* franja del marcador (arriba): ningún control puede quedar encima; la pausa solo puede ir en sus esquinas */
+const AR_SB_H=50;
+function arLayPx(L,k,W,H,pad){const v=L.c[k],d=AR_LAY_BASE[k]*v.s,r=d/2,m=4,top=pad.t+(k==="pause"?0:AR_SB_H);
+  const x=Math.min(W-pad.r-r-m,Math.max(pad.l+r+m,v.x*W));let y=Math.min(H-pad.b-r-m,Math.max(top+r+m,v.y*H));
+  if(k==="pause"&&y-r<pad.t+AR_SB_H&&Math.abs(x-W/2)<W*.25+r)y=Math.min(H-pad.b-r-m,pad.t+AR_SB_H+r+m);
+  return {d,x,y}}
+function arLayEditor(opt){opt=opt||{};const old=document.getElementById("arLayEd");if(old)old.remove();
+  const pad=arSafePad(),L=arLayNorm(S.arLay),root=document.createElement("div");root.id="arLayEd";
+  root.style.cssText="position:fixed;inset:0;z-index:99999;background:#0a1a10;color:#fff;font-family:var(--display,Arial,sans-serif);touch-action:none;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;overflow:hidden";
+  const GR={shot:"radial-gradient(circle at 40% 30%,#ff8a6a,#d8382a 60%,#8a160c)",pass:"radial-gradient(circle at 40% 30%,#7ff0a8,#1346bb 60%,#051b64)",drib:"radial-gradient(circle at 40% 30%,#8fd0ff,#2a78d8 60%,#0d3a7a)",thr:"radial-gradient(circle at 40% 30%,#c9a2ff,#7a3fd8 60%,#33106e)"},NM={j:"Joystick",shot:"Tiro",pass:"Pase",drib:"Regate",thr:"Al hueco",pause:"Pausa"},SUB={shot:"y entrada",pass:"y cambiar",drib:"y sprint",thr:"pase al espacio"};
+  root.innerHTML=`<svg style="position:absolute;inset:0;width:100%;height:100%" viewBox="0 0 100 60" preserveAspectRatio="none" aria-hidden="true"><rect width="100" height="60" fill="#1f6b33"/><g fill="none" stroke="rgba(255,255,255,.5)" stroke-width=".35"><rect x="3" y="4" width="94" height="52"/><path d="M50 4v52"/><ellipse cx="50" cy="30" rx="8" ry="12"/><rect x="3" y="18" width="12" height="24"/><rect x="85" y="18" width="12" height="24"/></g></svg>
+   <div id="aleGrid" style="position:absolute;inset:0;pointer-events:none;display:none;background-image:linear-gradient(rgba(255,255,255,.12) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.12) 1px,transparent 1px);background-size:5% 5%"></div>
+   <div id="aleStage" style="position:absolute;inset:0"></div>
+   <div id="aleBar" style="position:absolute;left:50%;top:calc(6px + env(safe-area-inset-top,0px));transform:translateX(-50%);z-index:3;display:flex;flex-wrap:wrap;gap:6px 8px;align-items:center;justify-content:center;width:max-content;max-width:min(96vw,640px);box-sizing:border-box;padding:6px 10px;border-radius:14px;background:rgba(5,9,12,.82);border:1px solid rgba(255,255,255,.18);font-size:.8rem">
+    <label style="display:flex;gap:5px;align-items:center;min-height:36px"><input type="checkbox" id="aleSnap" checked> Imán</label>
+    <label style="display:flex;gap:6px;align-items:center;min-height:36px"><span id="aleNm" style="min-width:64px">Elige un control</span><input type="range" id="aleSz" min="60" max="160" step="5" value="100" disabled style="width:120px"><b id="aleVal" style="min-width:38px">100%</b></label>
+    <button class="btn small" id="aleRst" style="min-height:36px">Restablecer</button><button class="btn small" id="aleCan" style="min-height:36px">Cancelar</button><button class="btn small primary" id="aleOk" style="min-height:36px">Guardar</button></div>
+   <div id="aleRot" hidden style="position:absolute;inset:0;z-index:2;display:grid;place-items:center;text-align:center;background:rgba(5,9,12,.9);padding:20px"><div><b style="font-size:1.2rem">Gira el móvil en horizontal</b><p style="opacity:.75">Los botones se colocan con el móvil en horizontal.</p></div></div>`;
+  document.body.appendChild(root);
+  const $e=id=>root.querySelector("#"+id),stage=$e("aleStage"),els={};let sel=null;
+  const mk=k=>{const e=document.createElement("div");e.dataset.k=k;e.setAttribute("aria-label",NM[k]);
+    let css="position:absolute;border-radius:50%;display:grid;place-items:center;font-weight:800;text-transform:uppercase;font-size:.8rem;box-shadow:0 4px 12px rgba(0,0,0,.5);touch-action:none;cursor:grab;";
+    if(k==="j"){css+="background:radial-gradient(circle,rgba(255,255,255,.06),rgba(255,255,255,.18) 70%,rgba(255,255,255,.05) 72%);border:3px solid rgba(60,242,180,.55);";e.innerHTML='<i style="width:45%;height:45%;border-radius:50%;background:radial-gradient(circle at 40% 35%,#fff,#bfffe6 55%,#22b98c);display:block"></i>'}
+    else if(k==="pause"){css+="border-radius:14px;background:rgba(20,28,50,.85);border:1px solid rgba(255,255,255,.3);";e.textContent="II"}
+    else{css+="background:"+GR[k]+";color:#fff;text-shadow:0 1px 2px #000;border:2px solid rgba(255,255,255,.35);text-align:center;line-height:1.05;";e.innerHTML=`<span>${NM[k]}<small style="display:block;font-size:.62em;opacity:.85;text-transform:none">${SUB[k]}</small></span>`;e.setAttribute("aria-label",NM[k]+" "+SUB[k])}
+    e.style.cssText=css;stage.appendChild(e);els[k]=e;return e};
+  ["j","shot","pass","drib","thr","pause"].forEach(mk);
+  const W=()=>root.clientWidth,H=()=>root.clientHeight;
+  function place(){const w=W(),h=H();for(const k in els){const g=arLayPx(L,k,w,h,pad),e=els[k];e.style.left=g.x-g.d/2+"px";e.style.top=g.y-g.d/2+"px";e.style.width=e.style.height=g.d+"px";e.style.fontSize=(k==="pause"?1:.8*g.d/84)+"rem";
+      e.style.outline=k===sel?"3px solid #ffd84d":"none";e.style.outlineOffset="3px"}
+    /* la barra de herramientas se aparta: si el control elegido está arriba, baja al borde inferior */
+    const bar=$e("aleBar"),bh=bar.offsetHeight+14,bw=bar.offsetWidth/2+8;let ct=0,cb=0;
+    for(const k in els){const g=arLayPx(L,k,w,h,pad),wt=k===sel?10:1;if(Math.abs(g.x-w/2)<bw+g.d/2){if(g.y-g.d/2<bh)ct+=wt;if(g.y+g.d/2>h-bh)cb+=wt}}
+    const up=ct>cb;bar.style.top=up?"auto":"calc(6px + env(safe-area-inset-top,0px))";bar.style.bottom=up?"calc(6px + env(safe-area-inset-bottom,0px))":"auto";
+    const rot=w<h*1.05;$e("aleRot").hidden=!rot;stage.style.visibility=rot?"hidden":"visible"}
+  function select(k){sel=k;const sz=$e("aleSz");sz.disabled=!k;if(k){sz.value=Math.round(L.c[k].s*100);$e("aleNm").textContent=NM[k]+(SUB[k]?" "+SUB[k]:"");$e("aleVal").textContent=sz.value+"%"}else{$e("aleNm").textContent="Elige un control"}place()}
+  const snapOn=()=>$e("aleSnap").checked;$e("aleSnap").onchange=()=>{$e("aleGrid").style.display=snapOn()?"block":"none"};$e("aleGrid").style.display="block";
+  const P=new Map();let pinch=null,drag=null;
+  stage.addEventListener("pointerdown",ev=>{const el=ev.target.closest("[data-k]");if(!el)return;const k=el.dataset.k;ev.preventDefault();el.setPointerCapture&&el.setPointerCapture(ev.pointerId);
+    P.set(ev.pointerId,{x:ev.clientX,y:ev.clientY,k});if(sel!==k)select(k);
+    const same=[...P.values()].filter(p=>p.k===k);
+    if(same.length>=2){const a=same[0],b=same[1];pinch={k,d0:Math.hypot(a.x-b.x,a.y-b.y)||1,s0:L.c[k].s};drag=null}
+    else{const g=arLayPx(L,k,W(),H(),pad);drag={id:ev.pointerId,k,ox:ev.clientX-g.x,oy:ev.clientY-g.y}}});
+  stage.addEventListener("pointermove",ev=>{const p=P.get(ev.pointerId);if(!p)return;p.x=ev.clientX;p.y=ev.clientY;ev.preventDefault();
+    if(pinch){const same=[...P.values()].filter(q=>q.k===pinch.k);if(same.length>=2){const d=Math.hypot(same[0].x-same[1].x,same[0].y-same[1].y);L.c[pinch.k].s=Math.min(1.6,Math.max(.6,Math.round(pinch.s0*d/pinch.d0*20)/20));L.on=true;if(sel===pinch.k){$e("aleSz").value=Math.round(L.c[pinch.k].s*100);$e("aleVal").textContent=$e("aleSz").value+"%"}place()}return}
+    if(drag&&drag.id===ev.pointerId){const w=W(),h=H(),g=arLayPx(L,drag.k,w,h,pad);let x=ev.clientX-drag.ox,y=ev.clientY-drag.oy;
+      const r=g.d/2+4,xc=Math.min(w-pad.r-r,Math.max(pad.l+r,x)),yc=Math.min(h-pad.b-r,Math.max(pad.t+r,y));let fx=xc/w,fy=yc/h;
+      if(snapOn()){fx=Math.round(fx/.025)*.025;fy=Math.round(fy/.025)*.025}
+      L.c[drag.k].x=fx;L.c[drag.k].y=fy;L.on=true;place()}});
+  const up=ev=>{P.delete(ev.pointerId);if(drag&&drag.id===ev.pointerId)drag=null;if(P.size<2)pinch=null};stage.addEventListener("pointerup",up);stage.addEventListener("pointercancel",up);
+  stage.addEventListener("pointerdown",ev=>{if(!ev.target.closest("[data-k]")){select(null)}});
+  $e("aleSz").oninput=()=>{if(!sel)return;L.c[sel].s=Math.min(1.6,Math.max(.6,$e("aleSz").value/100));L.on=true;$e("aleVal").textContent=$e("aleSz").value+"%";place()};
+  $e("aleRst").onclick=()=>{const d=arLayDef();L.on=false;L.c=d.c;select(null)};
+  const done=(save_)=>{window.removeEventListener("resize",place);window.removeEventListener("keydown",kd,true);root.remove();
+    if(save_){S.arLay=arLayNorm(L);if(typeof save==="function")save();try{window.dispatchEvent(new Event("arlay"))}catch(e){}}opt.onDone&&opt.onDone(save_)};
+  const kd=e=>{if(e.code==="Escape"){e.preventDefault();e.stopImmediatePropagation();done(false)}};
+  $e("aleCan").onclick=()=>done(false);$e("aleOk").onclick=()=>done(true);window.addEventListener("resize",place);window.addEventListener("keydown",kd,true);
+  place();try{arEnterLandscape()}catch(e){}return {close:done}}
+
+/* ===================== ESQUEMA TÁCTICO (antes de jugar) =====================
+   S.arTac={D,LW,RW,ST} ∈ {0,1,2}: D 0 siempre abajo · 1 normal · 2 en mitad del campo; medios 0 contención · 1 normal · 2 llegada; DC 0 libre · 1 normal · 2 siempre arriba.
+   Lo respetan los compañeros de la IA en la Arena y en el online (allí viaja como entrada durante la cuenta atrás: código 0–80). */
+const AR_TAC=[{k:"D",n:"Defensa",o:["Siempre abajo","Normal","En mitad del campo"]},{k:"LW",n:"Medio izquierdo",o:["Contención","Normal","Llegada"]},{k:"RW",n:"Medio derecho",o:["Contención","Normal","Llegada"]},{k:"ST",n:"Delantero",o:["Libre","Normal","Siempre arriba"]}];
+function arTacNorm(o){const r={};AR_TAC.forEach(a=>{const v=o&&typeof o==="object"?+o[a.k]:1;r[a.k]=v===0||v===2?v:1});return r}
+function arTacCode(o){const t=arTacNorm(o);return t.D+3*t.LW+9*t.RW+27*t.ST}
+/* mini pizarra: dónde se coloca cada uno según su papel (atacas hacia la derecha) */
+function arTacBoard(t){const U={D:[9,17,28],LW:[20,27,36],RW:[20,27,36],ST:[33,42,52]},Y={D:20,LW:9,RW:31,ST:20},X=u=>u*2.5,dot=(x,y,c,l)=>`<circle cx="${X(x)}" cy="${y*2.5}" r="6" fill="${c}" stroke="#000" stroke-opacity=".4"/><text x="${X(x)}" y="${y*2.5+3}" font-size="7" font-weight="800" text-anchor="middle" fill="#111">${l}</text>`;
+  return `<svg class="ar-tac-board" viewBox="0 0 160 100" role="img" aria-label="Pizarra táctica"><rect width="160" height="100" rx="6" fill="#1f6b33"/><g fill="none" stroke="rgba(255,255,255,.55)" stroke-width="1"><rect x="2" y="2" width="156" height="96" rx="3"/><path d="M80 2v96"/><circle cx="80" cy="50" r="12"/><rect x="2" y="30" width="14" height="40"/><rect x="144" y="30" width="14" height="40"/></g>
+   ${dot(3,20,"#5fe08f","PO")}${["D","LW","RW","ST"].map(k=>dot(U[k][t[k]],Y[k],"#ffc94a",{D:"DF",LW:"MI",RW:"MD",ST:"DC"}[k])).join("")}</svg>`}
+function arTacPanel(opt){opt=opt||{};S.arTac=arTacNorm(S.arTac);const paint=()=>{const h=$("#arTacHost");if(!h)return;
+  h.innerHTML=`<div class="arc"><div class="arc-h"><h3>Táctica del equipo</h3><button class="btn small" data-tx>Cerrar</button></div>
+   <p class="note">Cómo se colocan tus compañeros de la IA en la Arena y en la Arena online. Durante el partido puedes darles órdenes momentáneas con los botones Atacar y Defender.${opt.inMatch?" <b>Los cambios se aplican desde el próximo partido.</b>":""}</p>${arTacBoard(S.arTac)}
+   ${AR_TAC.map(a=>`<div class="arc-r"><span class="arc-n"><b>${a.n}</b></span><div class="ar-tac-seg" role="radiogroup" aria-label="${a.n}">${a.o.map((n,i)=>`<button class="btn small${S.arTac[a.k]===i?" primary":""}" role="radio" aria-checked="${S.arTac[a.k]===i}" data-tk="${a.k}" data-tv="${i}">${n}</button>`).join("")}</div></div>`).join("")}
+   <div class="arc-f"><button class="btn" data-tdef>Restaurar</button><button class="btn primary" data-tx>Listo</button></div></div>`;
+  h.querySelectorAll("[data-tk]").forEach(b=>b.onclick=()=>{S.arTac[b.dataset.tk]=+b.dataset.tv;if(typeof save==="function")save();paint()});
+  h.querySelector("[data-tdef]").onclick=()=>{S.arTac=arTacNorm(null);if(typeof save==="function")save();paint()};
+  h.querySelectorAll("[data-tx]").forEach(b=>b.onclick=()=>{if(opt.host){opt.onClose&&opt.onClose()}else closeSheet()})};
+  if(opt.host)opt.host.innerHTML=`<div id="arTacHost"></div>`;else openSheet(`<div id="arTacHost"></div>`);paint()}
+document.addEventListener("click",e=>{const b=e.target&&e.target.closest&&e.target.closest("[data-artac]");if(b){e.preventDefault();arTacPanel()}});
 
 /* ===================== REINICIO ECONÓMICO (economía v3) =====================
    Con la gran actualización (14 rarezas, media hasta 200, 43 sobres, 30 torneos, 55 copas, Arenas, online) la economía
@@ -12990,9 +13411,9 @@ function pvCore(X,io){
   function peerRejoin(){for(let t=conf+1;t<conf+RN;t++)if(rT[t%RN]===t)rT[t%RN]=-1;rHave=conf;rAck=-1;rb=Math.min(rb,conf+1);setTimeout(()=>sendState(true),150)}
   function sendResync(){sendState(true)}
   /* --- simulación --- */
-  function inputsFor(t){const k=t%RN;I0.mx=MX[0][k];I0.my=MY[0][k];I0.b=BB[0][k]&7;I0.e=BB[0][k]&24;I1.mx=MX[1][k];I1.my=MY[1][k];I1.b=BB[1][k]&7;I1.e=BB[1][k]&24;
+  function inputsFor(t){const k=t%RN;I0.mx=MX[0][k];I0.my=MY[0][k];I0.b=BB[0][k]&103;I0.e=BB[0][k]&152;I1.mx=MX[1][k];I1.my=MY[1][k];I1.b=BB[1][k]&103;I1.e=BB[1][k]&152;
     if(rT[k]!==t){/* predicción: la última entrada conocida del rival, sin pulsaciones sueltas */const q=rHave>=0?rHave%RN:-1,R=IS[rem];
-      if(q>=0){R.mx=MX[rem][q];R.my=MY[rem][q];R.b=BB[rem][q]&7}else{R.mx=R.my=R.b=0}R.e=0}
+      if(q>=0){R.mx=MX[rem][q];R.my=MY[rem][q];R.b=BB[rem][q]&39}else{R.mx=R.my=R.b=0}R.e=0}
     const R=IS[rem];uT[k]=t;uMx[k]=R.mx;uMy[k]=R.my;uB[k]=R.b|R.e}
   function simTick(t,silent){const k=t%SN;G.save(snaps[k]);snapT[k]=t;
     if(window.__PVP_DESYNC===t&&!host&&!silent){window.__PVP_DESYNC=-1;G.raw.ball.x+=.01}
@@ -13076,6 +13497,15 @@ function pvHashSnap(s){const u=new Uint32Array(s.buffer,s.byteOffset,s.length*2)
    · Liquidación: acuse firmado sha256(ficha|id|ga|gb|ih) con ih = «tirosA-tirosB» (o «ab:a»/«ab:b» por abandono), mismas
      reglas que la Arena en directo. Sin noticias del rival 25 s → victoria por abandono. */
 const PL={list:[],at:0,busy:false,ses:null,known:null,ok:null,ver:"pl1"};
+/* Dificultad creciente del duelo en directo, IGUAL para los dos (depende solo del número de tiro n = 0,1,2…, el mismo para A y B):
+   la ventana de acierto (ms que el indicador pasa por la zona verde) se multiplica por f(n) = 1 · 0,55 · 0,32 · 0,20 · 0,13 en los
+   tiros 1-5 y, en la muerte súbita, ×0,72 más en cada pareja (0,094 · 0,067 · 0,048…). La zona verde se estrecha (f^0,55) y la barra
+   acelera (f^0,45). Suelo: 18 ms de ventana (zona ≥ 2,5 %, barra ≥ 0,22 s): con tan poca ventana se acierta ~1 de cada 4, así la muerte súbita
+   acaba en 2-3 parejas (si los dos fallaran casi siempre, duraría más). Con nivel 14 y PEN medio: tiro 1 ≈ 190 ms, tiro 3 ≈ 60 ms, tiro 5 ≈ 25 ms. */
+const PL_HARD=[1,.55,.32,.2,.13];
+const plHardF=n=>(n=Math.max(0,n|0))<5?PL_HARD[n]:.13*Math.pow(.72,n-4);
+function plHard(b,n){const f=plHardF(n);let w=Math.max(.025,b.w*Math.pow(f,.55)),dur=Math.max(.22,b.dur*Math.pow(f,.45));
+  const ms=w*dur*1000;if(ms<18){const k=Math.sqrt(18/ms);w*=k;dur*=k}return {w,dur,ms:Math.round(w*dur*1000),m:b.m,hard:b.w*b.dur/(w*dur)}}
 const PL_SHOT=15000,PL_GRACE=25000,PL_RR=["goal","save","post","wide","over"];
 const PL_ERR={plive:"Ya tienes un duelo de penaltis en directo en juego: termínalo primero.",card:"Ese lanzador ya no está en tu club.",many:"Tienes demasiados desafíos de penaltis abiertos."};
 const plErr=r=>PL_ERR[r&&r.e]||olErr(r);
@@ -13120,7 +13550,7 @@ function plCreateSheet(o){
   PLF=Object.assign({rival:"",open:!(o&&o.rival),bet:Math.min(500,Math.max(50,Math.floor(S.coins/10/50)*50||50)),lvl:14,card:(olBestShooter()||{}).id},PLF&&PLF.keep?PLF:{},o||{});PLF.keep=false;
   const p=BYID[PLF.card]&&S.owned[PLF.card]?BYID[PLF.card]:olBestShooter(),pen=p?penStat(p):0,can=S.coins>=PLF.bet&&PLF.bet>=50;
   openSheet(`<div class="ol-form pv-form pl-form"><div class="sheet-h"><h3>${OL_IC.duel} Duelo de penaltis en directo</h3><button class="btn small" data-close>Cerrar</button></div>
-   <p class="note">Los dos a la vez y por turnos: tiráis A, B, A, B… con la barra de la zona verde, 15 s por tiro. Como en el fútbol: acaba antes si uno ya no puede alcanzar al otro y, si empatáis tras 5, muerte súbita. El ganador se lleva las dos apuestas.</p>
+   <p class="note">Los dos a la vez y por turnos: tiráis A, B, A, B… con la barra de la zona verde, 15 s por tiro. Como en el fútbol: acaba antes si uno ya no puede alcanzar al otro y, si empatáis tras 5, muerte súbita. Cada penalti es mucho más difícil que el anterior para los dos (zona verde más estrecha y barra más rápida), y la muerte súbita aún más. El ganador se lleva las dos apuestas.</p>
    <div class="ol-f-row"><span class="ol-f-l">Rival</span><div class="seg" id="plOpen"><button data-v="1" aria-pressed="${PLF.open}">Abierto a cualquiera</button><button data-v="0" aria-pressed="${!PLF.open}">Un mánager</button></div></div>
    ${PLF.open?"":`<div class="field"><label for="plRiv">Usuario del rival</label><input id="plRiv" maxlength="16" autocomplete="off" placeholder="Ej.: mister_crack" value="${esc(PLF.rival)}"></div>`}
    <div class="field"><label for="plBet">Apuesta (monedas del juego)</label><div class="ol-bet">${COIN}<input id="plBet" type="number" inputmode="numeric" min="50" step="50" value="${PLF.bet}"></div>
@@ -13321,8 +13751,8 @@ function plLobby(entry){
           /* ---- tu tiro: la misma barra que la Copa de Penaltis ---- */
           eng.setMode("shoot",{keeperKit:gk(O),kickerKit:kit(M)});who(M,sd?"Muerte súbita":`Penalti ${n+1} de 5`);
           msg(sd?`Muerte súbita: ${M===0?"si fallas y @"+esc(U[O])+" marca, pierdes":"si marcas tras el fallo de @"+esc(U[O])+", ganas"}.`:`Tu penalti ${n+1}: para el indicador en la zona verde.`);AU.whistle(1);
-          const prm=penParams(lvl,Math.min(n,4),PEN[M]),ap=aimBar($("#plCtl"),{...prm,shot:n+1});
-          if(sd){const s=document.querySelector("#plCtl .pw-info span");if(s)s.innerHTML="<b>Muerte súbita</b>"}
+          const prm=plHard(penParams(lvl,0,PEN[M]),n),ap=aimBar($("#plCtl"),{...prm,shot:n+1});
+          {const s=document.querySelector("#plCtl .pw-info span");if(s)s.innerHTML=(sd?"<b>Muerte súbita</b> · ":"")+`Tiro <b class="num">${n+1}</b> · Dificultad <b class="num">x${fdec(prm.hard,1)}</b>`}
           const ok=$("#plCtl .pw-ok"),t0=performance.now();
           send({t:"aim",n,k:M,g0:ok?parseFloat(ok.style.left)/100:.4,w:prm.w,dur:prm.dur});
           let out=null,to=false;ap.then(v=>{if(!out)out=v});
@@ -13338,7 +13768,7 @@ function plLobby(entry){
         who(O,sd?"Muerte súbita":`Penalti ${n+1} de 5`);msg(`Tira @${esc(U[O])}…`);
         if(!X.waitT||X.waitN!==O*100+n){X.waitT=performance.now();X.waitN=O*100+n;$("#plCtl").innerHTML="";X.ghost=null}
         const a=X.aim&&X.aim.k===O&&X.aim.n===n?X.aim:null,el=performance.now()-(a?a.rx-X.rtt/2:X.waitT);
-        if(a&&!X.ghost){X.ghost=1;$("#plCtl").innerHTML=`<div class="pw pw2 pl-ghost" aria-label="Barra de @${esc(U[O])}"><div class="pw-info"><span>Barra de <b>@${esc(U[O])}</b></span><span>Zona verde <b class="num">${Math.round(a.w*100)}%</b></span></div>
+        if(a&&!X.ghost){X.ghost=1;$("#plCtl").innerHTML=`<div class="pw pw2 pl-ghost" aria-label="Barra de @${esc(U[O])}"><div class="pw-info"><span>Barra de <b>@${esc(U[O])}</b> · Tiro <b class="num">${n+1}</b> · Ventana <b class="num">${Math.round(a.w*a.dur*1000)} ms</b></span><span>Zona verde <b class="num">${Math.round(a.w*100)}%</b></span></div>
           <div class="pw-track big"><i class="pw-ok" style="left:${a.g0*100}%;width:${a.w*100}%"></i><b class="pw-m" id="plGm"></b></div></div>`}
         if(a){const ph=(el/1000/a.dur)%2,v=ph<1?ph:2-ph,m=$("#plGm");if(m)m.style.left=(v*100)+"%"}
         const waited=performance.now()-X.waitT;clock(PL_SHOT-(a?el:waited));
@@ -13434,39 +13864,146 @@ if(typeof SBM!=="undefined"&&SBM){setTimeout(iceRefresh,3000);document.addEventL
   }catch(e){}
 })();
 
-/* ===================== COMUNIDAD DE WHATSAPP: aviso al entrar + acceso en Inicio ===================== */
+/* ===================== COMUNIDAD DE WHATSAPP: tarjeta de acceso en Inicio (el aviso emergente se retiró a petición del usuario) ===================== */
 const COM_URL="https://chat.whatsapp.com/KyLtKg8nc6JLNPhAGn7Den?s=hd&p=i&mlu=0";
 const COM_IC='<svg viewBox="0 0 32 32" aria-hidden="true"><path fill="currentColor" d="M16 3C8.8 3 3 8.7 3 15.8c0 2.5.7 4.9 2 7L3 29l6.4-2c2 1.1 4.3 1.7 6.6 1.7 7.2 0 13-5.7 13-12.8S23.2 3 16 3zm0 23.4c-2.1 0-4.1-.6-5.9-1.7l-.4-.3-3.8 1.2 1.2-3.7-.3-.4c-1.2-1.8-1.9-3.9-1.9-6.1C4.9 10 9.9 5.1 16 5.1S27.1 10 27.1 15.9 22.1 26.4 16 26.4zm6.1-7.8c-.3-.2-2-1-2.3-1.1s-.5-.2-.8.2-.9 1.1-1.1 1.3-.4.2-.7.1a9 9 0 0 1-4.5-3.9c-.3-.6.3-.5 1-1.8.1-.2 0-.4 0-.6l-1-2.5c-.3-.7-.5-.6-.8-.6h-.6c-.2 0-.6.1-.9.4s-1.2 1.1-1.2 2.7 1.2 3.1 1.4 3.4 2.4 3.6 5.7 5c2.1.9 2.9 1 4 .8.6-.1 2-.8 2.2-1.6s.3-1.4.2-1.6-.3-.2-.6-.3z"/></svg>';
 function comJoined(){try{return localStorage.getItem("cds-com-joined")==="1"}catch(e){return false}}
 function comMark(){try{localStorage.setItem("cds-com-joined","1")}catch(e){}}
 function comCard(){return `<a class="com-card" href="${COM_URL}" target="_blank" rel="noopener noreferrer" data-comlink>
   <span class="com-ic">${COM_IC}</span><span class="com-tx"><small>Comunidad oficial</small><b>Únete al grupo de WhatsApp</b><em>Novedades, torneos, regalos y rivales para retar</em></span><span class="com-go">Entrar</span></a>`}
-function comPopup(){
-  if(document.querySelector(".com-pop"))return;
-  const el=document.createElement("div");el.className="com-pop";el.setAttribute("role","dialog");el.setAttribute("aria-modal","true");el.setAttribute("aria-label","Comunidad de WhatsApp");
-  el.innerHTML=`<div class="com-box"><button class="com-x" aria-label="Cerrar">✕</button>
-    <div class="com-badge">${COM_IC}</div><small class="com-kick">Comunidad oficial</small><h2>¡Únete a la comunidad de Crack de Sobres!</h2>
-    <p>Entra en nuestro grupo de WhatsApp para enterarte antes que nadie de las novedades, regalos y torneos, y encontrar rivales para tus desafíos.</p>
-    <a class="btn primary com-join" href="${COM_URL}" target="_blank" rel="noopener noreferrer" data-comlink>${COM_IC}<span>Unirme al grupo</span></a>
-    <button class="btn com-later">Ahora no</button></div>`;
-  document.body.appendChild(el);requestAnimationFrame(()=>el.classList.add("on"));
-  const close=()=>{el.classList.remove("on");setTimeout(()=>el.remove(),250);document.removeEventListener("keydown",kd)};
-  const kd=e=>{if(e.key==="Escape")close()};document.addEventListener("keydown",kd);
-  el.querySelector(".com-x").onclick=close;el.querySelector(".com-later").onclick=close;
-  el.onclick=e=>{if(e.target===el)close()};
-  el.querySelector(".com-join").addEventListener("click",()=>{comMark();setTimeout(close,150)});
-}
-/* espera a que no haya otra ventana (novedades, sobre de bienvenida, premios) y muestra el aviso una vez por entrada */
-function comWhenFree(){
-  if(comJoined()||navigator.webdriver)return;   /* no molesta en las pruebas automáticas */let n=0;
-  const t=setInterval(()=>{n++;if(n>240){clearInterval(t);return}
-    const busy=($("#layer")&&$("#layer").innerHTML.trim())||document.querySelector(".rs,.nw-box,.ipop,.com-pop,.overlay");
-    if(!busy&&typeof ACC!=="undefined"&&ACC){clearInterval(t);setTimeout(comPopup,600)}},800);
-}
 document.addEventListener("click",e=>{const a=e.target.closest&&e.target.closest("[data-comlink]");if(a)comMark()});
 (function(){
-  if(typeof enterGame==="function"){const eg=enterGame;enterGame=function(){const r=eg.apply(this,arguments);try{comWhenFree()}catch(e){}return r}}
+  /* aviso emergente retirado a petición del usuario: solo queda la tarjeta de Inicio */
   if(typeof viewInicio==="function"){const vi=viewInicio;viewInicio=function(){return comCard()+vi.apply(this,arguments)}}
+})();
+
+/* ===================== PANEL DE ADMINISTRADOR (solo Buelcaollas36): lista de usuarios registrados ===================== */
+const ADMIN_KEY="buelcaollas36";
+const isAdmin=()=>typeof ACC!=="undefined"&&ACC&&!ACC.offline&&ACC.key===ADMIN_KEY;
+async function admFetchUsers(){
+  if(DB&&DB.supabase){const r=await sbRPC("cds_admin_users",{p_key:ACC.key,p_hash:ACC.hash});return (r||[]).map(x=>({u:x.u,c:x.c}))}
+  if(DB&&DB.collection){const snap=await DB.collection("cuentas").limit(1000).get();return snap.docs.map(d=>{const v=d.data()||{};return {u:v.user||d.id,c:v.created||0}}).sort((a,b)=>a.c-b.c)}
+  throw new Error("sin conexión");
+}
+function admPanel(){
+  if(!isAdmin()||document.querySelector(".adm-pop"))return;
+  const el=document.createElement("div");el.className="com-pop adm-pop";el.setAttribute("role","dialog");el.setAttribute("aria-modal","true");
+  el.innerHTML=`<div class="com-box adm-box"><button class="com-x" aria-label="Cerrar">✕</button><small class="com-kick">Panel de administrador</small>
+    <h2>Usuarios registrados</h2><p class="adm-n">Cargando…</p><div class="adm-list"></div><button class="btn com-later">Cerrar</button></div>`;
+  document.body.appendChild(el);requestAnimationFrame(()=>el.classList.add("on"));
+  const close=()=>{el.classList.remove("on");setTimeout(()=>el.remove(),250)};
+  el.querySelector(".com-x").onclick=close;el.querySelector(".com-later").onclick=close;el.onclick=e=>{if(e.target===el)close()};
+  admFetchUsers().then(list=>{
+    const f=c=>c?new Date(typeof c==="number"?c:Date.parse(c)).toLocaleString("es-ES",{day:"2-digit",month:"2-digit",year:"numeric",hour:"2-digit",minute:"2-digit"}):"";
+    el.querySelector(".adm-n").textContent=list.length+" usuarios registrados";
+    el.querySelector(".adm-list").innerHTML=list.map((x,i)=>`<div class="adm-row"><span class="adm-i">${i+1}</span><b>@${esc(x.u)}</b><small>${f(x.c)}</small></div>`).join("");
+  }).catch(()=>{el.querySelector(".adm-n").textContent="No se pudo cargar la lista (¿falta pegar el último SQL en Supabase?)."});
+}
+document.addEventListener("click",e=>{if(e.target.closest&&e.target.closest("#admOpen"))admPanel()});
+(function(){if(typeof viewInicio==="function"){const vi=viewInicio;viewInicio=function(){const h=vi.apply(this,arguments);return isAdmin()?`<button class="adm-card" id="admOpen">🛡️ <b>Panel de administrador</b><span>Ver todos los usuarios registrados</span></button>`+h:h}}})();
+
+/* ===================== APP INSTALABLE (PWA): añadir la web a la pantalla de inicio =====================
+   Solo en la web pública (build_web.py enlaza manifest.webmanifest, iconos y sw.js): sin <link rel="manifest"> (artifact de Claude)
+   no se muestra nada. Si ya se juega como app instalada (display-mode standalone / navigator.standalone) tampoco.
+   · Android / Chrome / Edge (también escritorio): botón Instalar con el aviso nativo (beforeinstallprompt).
+   · iPhone / iPad (Safari): instrucciones visuales «Compartir → Añadir a pantalla de inicio».
+   · Ordenador: «Crea un acceso directo en tu escritorio»: Chrome/Edge instalan con beforeinstallprompt (acceso en escritorio/menú Inicio) o
+     se explica su menú; Safari en Mac «Archivo → Añadir al Dock»; y en cualquier navegador (también Firefox) «Descargar acceso directo»:
+     Windows «Crack de Sobres.url», Mac «Crack de Sobres.webloc», Linux «crack-de-sobres.desktop», para arrastrar al escritorio.
+   · Aviso emergente al entrar (una vez por visita) hasta que se instale o se descarte 3 veces; acceso permanente en Inicio y Ajustes. */
+const PWA={ev:null,web:(()=>{try{return !!document.querySelector('link[rel="manifest"]')}catch(e){return false}})(),shown:false};
+const pwaStandalone=()=>{try{return ["standalone","fullscreen","minimal-ui"].some(m=>matchMedia(`(display-mode: ${m})`).matches)||navigator.standalone===true}catch(e){return false}};
+const pwaIOS=()=>/iphone|ipad|ipod/i.test(navigator.userAgent)||(navigator.platform==="MacIntel"&&navigator.maxTouchPoints>1);
+const pwaLS=(k,v)=>{try{if(v===undefined)return localStorage.getItem("cds-pwa-"+k);localStorage.setItem("cds-pwa-"+k,String(v))}catch(e){return null}};
+const pwaUA=()=>navigator.userAgent||"";
+const pwaDesk=()=>!pwaIOS()&&!/android|mobi|iphone|ipad|ipod|silk|kindle/i.test(pwaUA());
+const pwaOS=()=>/windows/i.test(pwaUA())?"win":/mac os x|macintosh/i.test(pwaUA())?"mac":"linux";
+const pwaBrowser=()=>{const u=pwaUA();return /edg\//i.test(u)?"edge":/firefox|fxios/i.test(u)?"firefox":/opr\//i.test(u)?"opera":/chrome|chromium|crios/i.test(u)?"chrome":/safari/i.test(u)?"safari":"other"};
+const pwaURL=()=>location.origin+location.pathname.replace(/index\.html$/,"");
+/* genera y descarga el archivo de acceso directo del sistema */
+function pwaShortcut(){
+  const u=pwaURL(),os=pwaOS(),ic=u+"icons/";let name,body,type;
+  if(os==="win"){name="Crack de Sobres.url";type="application/internet-shortcut";body=`[InternetShortcut]\r\nURL=${u}\r\nIconFile=${ic}favicon.ico\r\nIconIndex=0\r\n`}
+  else if(os==="mac"){name="Crack de Sobres.webloc";type="application/x-apple-plist";body=`<?xml version="1.0" encoding="UTF-8"?>\n<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">\n<plist version="1.0">\n<dict>\n\t<key>URL</key>\n\t<string>${u}</string>\n</dict>\n</plist>\n`}
+  else{name="crack-de-sobres.desktop";type="application/x-desktop";body=`[Desktop Entry]\nVersion=1.0\nType=Link\nName=Crack de Sobres\nComment=Juego de cartas de fútbol\nURL=${u}\nIcon=${ic}icon-192.png\n`}
+  try{const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([body],{type}));a.download=name;document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},1500)}catch(e){}
+  PWA.lastDl={name,body};pwaLS("done",1);
+  toast(`Descargado «${name}»: arrástralo de Descargas a tu escritorio${os==="linux"?" (si hace falta, clic derecho → Permitir lanzar)":""}.`);return {name,body}}
+const pwaAvail=()=>PWA.web&&!pwaStandalone();
+const pwaNag=()=>pwaAvail()&&pwaLS("done")!=="1"&&(+pwaLS("no")||0)<3;
+const PWA_IC={
+ phone:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="2.5" width="12" height="19" rx="2.5"/><path d="M10.5 18.5h3"/><path d="M12 7v6M9.3 10.4 12 13l2.7-2.6"/></svg>',
+ share:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 9H6.5A1.5 1.5 0 0 0 5 10.5v9A1.5 1.5 0 0 0 6.5 21h11a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 17.5 9H16"/><path d="M12 14V3M8.5 6.5 12 3l3.5 3.5"/></svg>',
+ add:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="4"/><path d="M12 8v8M8 12h8"/></svg>',
+ dots:'<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="5" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="12" cy="19" r="1.8"/></svg>',
+ inst:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8M12 7v6M9.3 10.4 12 13l2.7-2.6"/></svg>'};
+const pwaLogo=()=>`<img class="pwa-logo" src="icons/icon-192.png" alt="" width="56" height="56" decoding="async">`;
+/* pasos según el dispositivo cuando no hay aviso nativo de instalación */
+function pwaSteps(){
+  const st=(n,ic,t)=>`<li><span class="pwa-n num">${n}</span><span class="pwa-sic">${ic}</span><span>${t}</span></li>`;
+  if(pwaIOS())return `<ol class="pwa-steps">${st(1,PWA_IC.share,"Abre esta web en <b>Safari</b> y toca <b>Compartir</b> (abajo, o arriba en el iPad).")}${st(2,PWA_IC.add,"Desliza y elige <b>Añadir a pantalla de inicio</b>.")}${st(3,'<img src="icons/icon-192.png" alt="" width="22" height="22">',"Toca <b>Añadir</b>: tendrás el icono de <b>Crack de Sobres</b> como una app.")}</ol>`;
+  if(/android/i.test(navigator.userAgent))return `<ol class="pwa-steps">${st(1,PWA_IC.dots,"Abre el menú del navegador <b>⋮</b> (arriba a la derecha).")}${st(2,PWA_IC.add,"Toca <b>Instalar aplicación</b> o <b>Añadir a pantalla de inicio</b>.")}${st(3,'<img src="icons/icon-192.png" alt="" width="22" height="22">',"Confirma: el icono de <b>Crack de Sobres</b> aparecerá con tus apps.")}</ol>`;
+  const br=pwaBrowser(),os=pwaOS(),fileN=os==="win"?"Crack de Sobres.url":os==="mac"?"Crack de Sobres.webloc":"crack-de-sobres.desktop",
+    dl=st("·",PWA_IC.inst,`En cualquier navegador: pulsa <b>Descargar acceso directo</b> y arrastra «${fileN}» de <b>Descargas</b> al <b>escritorio</b>.`);
+  if(br==="safari"&&os==="mac")return `<ol class="pwa-steps">${st(1,PWA_IC.dots,"En la barra de menús de Safari abre <b>Archivo</b>.")}${st(2,PWA_IC.add,"Elige <b>Añadir al Dock</b> y pulsa <b>Añadir</b>: tendrás Crack de Sobres en el Dock y en Aplicaciones.")}${dl}</ol>`;
+  if(br==="firefox")return `<ol class="pwa-steps">${st(1,PWA_IC.inst,`Pulsa <b>Descargar acceso directo</b> y arrastra «${fileN}» de <b>Descargas</b> al <b>escritorio</b>.`)}${st(2,PWA_IC.add,"O arrastra el <b>candado</b> de la barra de direcciones hasta el escritorio.")}</ol>`;
+  if(br==="edge")return `<ol class="pwa-steps">${st(1,PWA_IC.dots,"Abre el menú <b>⋯</b> (arriba a la derecha) → <b>Aplicaciones</b>.")}${st(2,PWA_IC.add,"Elige <b>Instalar este sitio como aplicación</b> y marca <b>Crear acceso directo en el escritorio</b>.")}${dl}</ol>`;
+  return `<ol class="pwa-steps">${st(1,PWA_IC.dots,"Abre el menú <b>⋮</b> (arriba a la derecha) → <b>Enviar, guardar y compartir</b>.")}${st(2,PWA_IC.add,"Elige <b>Instalar página como aplicación…</b> (o <b>Crear acceso directo…</b> y marca <b>Abrir como ventana</b>): aparecerá en el escritorio y en el menú Inicio.")}${dl}</ol>`}
+/* textos según el dispositivo */
+const pwaTx=()=>pwaDesk()?{t:"Crea un acceso directo en tu escritorio",p:"Abre Crack de Sobres con un doble clic desde el escritorio, en su propia ventana y con su icono.",card:"Acceso directo en el escritorio",cardS:"Ábrelo con un doble clic, como un programa",go:"Crear acceso directo",how:"Cómo crearlo",sheet:"Acceso directo en el escritorio",ok:"¡Listo! Ya tienes Crack de Sobres en tu escritorio."}
+  :{t:"Instala Crack de Sobres",p:"Añádelo a la pantalla de inicio: se abre al momento, a pantalla completa y con su icono, como una app.",card:"Añadir a la pantalla de inicio",cardS:"Juega como una app, con su icono",go:"Instalar",how:"Cómo añadirlo",sheet:"Añadir a la pantalla de inicio",ok:"¡Listo! Crack de Sobres ya está en tu pantalla de inicio."};
+const pwaDlBtn=()=>pwaDesk()?`<button class="btn pwa-dl" data-pwadl>${PWA_IC.inst}<span>Descargar acceso directo</span></button>`:"";
+function pwaDone(){pwaLS("done",1);document.querySelectorAll(".pwa-card").forEach(e=>e.remove());const p=document.querySelector(".pwa-pop");if(p)p.remove()}
+/* instalar: aviso nativo si el navegador lo ofrece; si no, instrucciones */
+async function pwaInstall(fromPop){
+  if(PWA.ev){const e=PWA.ev;PWA.ev=null;try{await e.prompt();const c=await e.userChoice;if(c&&c.outcome==="accepted"){pwaDone();toast(pwaTx().ok)}}catch(err){}return}
+  pwaGuide(fromPop)}
+function pwaGuide(pop){
+  const html=`<div class="pwa-guide"><p class="note">${pwaIOS()?"En iPhone y iPad se añade desde Safari:":pwaDesk()?"Elige cómo crear el acceso directo:":"Tu navegador no muestra el instalador automático. Hazlo así:"}</p>${pwaSteps()}${pop?"":pwaDlBtn()}</div>`;
+  const box=pop&&pop.querySelector(".com-box");
+  if(box){const g=box.querySelector(".pwa-guide");if(g)g.remove();box.querySelector(".pwa-acts").insertAdjacentHTML("beforebegin",html);const b=box.querySelector(".pwa-go");if(b){b.querySelector("span").textContent="Entendido";b.onclick=()=>pop.__close(true)}return}
+  openSheet(`<div class="pwa-sheet"><div class="sheet-h"><h3>${pwaTx().sheet}</h3><button class="btn small" data-close>Cerrar</button></div><div class="pwa-head">${pwaLogo()}<div><b>Crack de Sobres</b><small>${pwaTx().cardS}</small></div></div>${html}</div>`)}
+/* aviso emergente al entrar */
+function pwaPopup(){
+  if(document.querySelector(".pwa-pop")||!pwaNag())return;PWA.shown=true;try{sessionStorage.setItem("cds-pwa-s","1")}catch(e){}
+  const X=pwaTx(),el=document.createElement("div");el.className="com-pop pwa-pop"+(pwaDesk()?" pwa-desk":"");el.setAttribute("role","dialog");el.setAttribute("aria-modal","true");el.setAttribute("aria-labelledby","pwaT");
+  el.innerHTML=`<div class="com-box"><button class="com-x" aria-label="Cerrar">✕</button>
+    <div class="pwa-badge">${pwaLogo()}</div><small class="com-kick">Gratis · sin tienda de apps</small><h2 id="pwaT">${X.t}</h2>
+    <p>${X.p}</p>
+    <div class="pwa-acts"><button class="btn primary pwa-go">${pwaDesk()?PWA_IC.inst:PWA_IC.phone}<span>${PWA.ev?X.go:X.how}</span></button>
+    ${pwaDlBtn()}<button class="btn com-later">Ahora no</button></div></div>`;
+  document.body.appendChild(el);requestAnimationFrame(()=>el.classList.add("on"));
+  const close=no=>{if(no)pwaLS("no",(+pwaLS("no")||0)+1);el.classList.remove("on");setTimeout(()=>el.remove(),250);document.removeEventListener("keydown",kd)};el.__close=close;
+  const kd=e=>{if(e.key==="Escape")close(true)};document.addEventListener("keydown",kd);
+  el.querySelector(".com-x").onclick=()=>close(true);el.querySelector(".com-later").onclick=()=>close(true);
+  el.onclick=e=>{if(e.target===el)close(true)};
+  const d=el.querySelector("[data-pwadl]");if(d)d.onclick=e=>{e.stopPropagation();pwaShortcut();close(false)};
+  el.querySelector(".pwa-go").onclick=()=>{if(PWA.ev){close(false);pwaInstall()}else pwaGuide(el)};
+  setTimeout(()=>{const b=el.querySelector(".pwa-go");if(b)b.focus()},300)}
+/* espera a que no haya otra ventana abierta (novedades, sobre de bienvenida, premios…) */
+function pwaWhenFree(){
+  if(!pwaNag()||(navigator.webdriver&&!window.__PWA_FORCE))return; /* no molesta en las pruebas automáticas */
+  try{if(sessionStorage.getItem("cds-pwa-s"))return}catch(e){}
+  let n=0;const t=setInterval(()=>{n++;if(n>240||!pwaNag()){clearInterval(t);return}
+    const busy=($("#layer")&&$("#layer").innerHTML.trim())||document.querySelector(".rs,.nw-box,.ipop,.com-pop,.overlay");
+    if(!busy&&typeof ACC!=="undefined"&&ACC){clearInterval(t);setTimeout(()=>{if(!document.querySelector(".rs,.nw-box,.ipop,.com-pop,.overlay"))pwaPopup()},1200)}},800)}
+/* acceso permanente en Inicio */
+function pwaCard(){if(!pwaAvail()||pwaLS("done")==="1")return "";
+  return `<button class="pwa-card" data-pwa><span class="pwa-ci">${pwaLogo()}</span><span class="pwa-ct"><b>${pwaTx().card}</b><em>${pwaTx().cardS}</em></span><span class="pwa-cgo">${pwaDesk()?PWA_IC.inst:PWA_IC.phone}<span>${pwaDesk()?"Crear":"Instalar"}</span></span></button>`}
+(function(){
+  if(!PWA.web)return;
+  document.addEventListener("click",e=>{const t=e.target.closest&&e.target,b=t&&t.closest("[data-pwa]"),d=t&&t.closest(".pwa-sheet [data-pwadl]");if(b){e.preventDefault();pwaInstall()}else if(d){e.preventDefault();pwaShortcut();closeSheet()}});
+  window.addEventListener("beforeinstallprompt",e=>{e.preventDefault();PWA.ev=e;const s=document.querySelector(".pwa-pop .pwa-go span");if(s&&!document.querySelector(".pwa-pop .pwa-guide"))s.textContent=pwaTx().go});
+  window.addEventListener("appinstalled",()=>{PWA.ev=null;pwaDone()});
+  if("serviceWorker" in navigator&&(location.protocol==="https:"||/^(localhost|127\.0\.0\.1)$/.test(location.hostname)))
+    window.addEventListener("load",()=>navigator.serviceWorker.register("sw.js").catch(()=>{}));
+  if(typeof viewInicio==="function"){const vi=viewInicio;viewInicio=function(){const r=vi.apply(this,arguments),c=pwaCard();if(!c)return r;
+    const i=r.startsWith('<a class="com-card"')?r.indexOf("</a>")+4:0;return r.slice(0,i)+c+r.slice(i)}}
+  if(typeof enterGame==="function"){const eg=enterGame;enterGame=function(){const r=eg.apply(this,arguments);try{pwaWhenFree()}catch(e){}return r}}
+  if(typeof settingsSheet==="function"){const ss=settingsSheet;settingsSheet=function(){const r=ss.apply(this,arguments);try{
+    if(pwaAvail()){const g=[...document.querySelectorAll(".mn-setx .mn-sgrp")].pop();
+      if(g)g.insertAdjacentHTML("beforebegin",`<div class="mn-sgrp"><h4>Aplicación</h4><div class="setrow mn-set"><i class="mn-sic" aria-hidden="true">${PWA_IC.phone}</i><div class="mn-st"><b>${pwaTx().card}</b><small>${pwaLS("done")==="1"?"Ya lo hiciste en este dispositivo":pwaTx().cardS}</small></div><button class="btn small" id="sPwa">${pwaDesk()?"Crear":"Instalar"}</button></div></div>`);
+      const b=$("#sPwa");if(b)b.onclick=()=>{if(PWA.ev){closeSheet();pwaInstall()}else{closeSheet();setTimeout(()=>pwaGuide(),50)}}}}catch(e){}return r}}
 })();
 
 </script>
