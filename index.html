@@ -5557,6 +5557,11 @@ div.fus-c{cursor:default}
 .du-wait{text-align:center}
 @media (max-width:430px){.du-seat{grid-template-columns:minmax(0,1fr);justify-items:center;text-align:center}.du-seat-c{grid-column:1;grid-row:auto}.du-seat small,.du-seat b,.du-seat .pv-rd{grid-column:1;justify-self:center}.du-vs{font-size:1rem}}
 
+.du-betb{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 10px;align-items:center;padding:10px 14px;border-radius:14px;background:linear-gradient(120deg,rgba(255,209,102,.18),rgba(10,15,32,.6));border:1px solid rgba(255,209,102,.5)}
+.du-betb span{display:flex;align-items:center;gap:6px;font-weight:800;color:#ffe08a}.du-betb span svg{width:18px;height:18px}.du-betb small{grid-column:1;color:#b9c4e8;font-size:.82rem}
+.du-betb .btn,.du-betb em{grid-column:2;grid-row:1/3}.du-betb em{font-style:normal;font-weight:800;color:#6df0a2}
+.du-betb.free{border-color:rgba(255,255,255,.14);background:rgba(255,255,255,.04)}.du-betb.free span{color:#fff}
+
 /* === a9_aaa.css === */
 /* =====================================================================
    A9 · ACABADO «AAA» de menús e interfaz. SOLO estilos estáticos: degradados y texturas que se pintan una vez.
@@ -15027,28 +15032,35 @@ function duoOpen(){
   if(DU.ses){DU.ses.show();return}
   const mine=duMine();if(!mine){toast(PV_ERR.five);return}
   const list=()=>{const now=Date.now(),a=[...DU.rooms.values()].filter(r=>now-r.at<7000&&r.n<4);
-    return a.length?a.map(r=>`<button class="du-room" data-duj="${esc(r.c)}"><b>Sala de @${esc(r.h)}</b><small>${r.n}/4 jugadores</small><i>Entrar</i></button>`).join(""):'<p class="note ol-none">No hay salas públicas ahora mismo. ¡Crea la tuya y comparte el código!</p>'};
+    return a.length?a.map(r=>`<button class="du-room" data-duj="${esc(r.c)}"><b>Sala de @${esc(r.h)}</b><small>${r.n}/4 jugadores · ${r.b>0?"apuesta "+fmt(r.b):"amistoso"}</small><i>Entrar</i></button>`).join(""):'<p class="note ol-none">No hay salas públicas ahora mismo. ¡Crea la tuya y comparte el código!</p>'};
   openSheet(`<div class="ol-form du-form" id="duSheet"><div class="sheet-h"><h3>Arena 2 contra 2</h3><button class="btn small" data-close>Cerrar</button></div>
    <div class="pv-gate-art du-art" aria-hidden="true"><b>2</b><i>VS</i><b>2</b></div>
    <p class="note">Dos contra dos en directo, 2 minutos. Cada persona maneja <b>a un solo jugador</b> (delantero o cierre) y el portero lo lleva la CPU: tres por equipo. Es amistoso, sin apuesta: ganar da ${fmt(DU_PRIZE.win)} monedas.</p>
+   <div class="field"><label for="duBet">Apuesta por jugador (0 = amistoso)</label><div class="ol-bet">${COIN}<input id="duBet" type="number" inputmode="numeric" min="0" step="50" value="0"></div><small>Con apuesta, cada jugador paga al entrar y el bote se reparte entre los ganadores. En amistoso, ganar da ${fmt(DU_PRIZE.win)} monedas.</small></div>
    <button class="btn primary pv-big" id="duNew">Crear sala</button>
    <div class="field"><label for="duCodeI">Unirse con código</label><div class="du-join"><input id="duCodeI" maxlength="5" autocomplete="off" autocapitalize="characters" placeholder="Ej.: K7M2P"><button class="btn" id="duJoin">Entrar</button></div></div>
    <h4 class="ol-h4">Salas públicas</h4><div class="du-rooms" id="duRooms">${list()}</div></div>`);
   const bind=()=>document.querySelectorAll("[data-duj]").forEach(b=>b.onclick=()=>{duLobStop();closeSheet();duRoom(b.dataset.duj,false)});bind();
-  $("#duNew").onclick=()=>{duLobStop();closeSheet();duRoom(duCode(),true)};
+  $("#duNew").onclick=async()=>{const g=$("#duNew"),bet=Math.max(0,Math.floor(+$("#duBet").value||0)),code=duCode();if(g.dataset.busy)return;
+    if(bet>0){if(bet<50){toast("La apuesta mínima es de 50 monedas.");return}if(bet>S.coins){toast("No tienes monedas suficientes para esa apuesta.");return}
+      g.dataset.busy=1;g.disabled=true;g.textContent="Creando sala…";try{await flushSave()}catch(e){}const r=await olCall("cds_duo_crear",{p_code:code,p_bet:bet});
+      if(!r.ok){delete g.dataset.busy;g.disabled=false;g.textContent="Crear sala";toast(duErr(r));return}try{olSync()}catch(e){}}
+    duLobStop();closeSheet();duRoom(code,true,bet)};
   $("#duJoin").onclick=()=>{const c=$("#duCodeI").value.toUpperCase().replace(/[^A-Z0-9]/g,"");if(c.length<4){toast("Escribe el código de la sala.");return}duLobStop();closeSheet();duRoom(c,false)};
   duLobStop();DU.rooms.clear();
-  DU.lob=pvRT("duo-lobby",(ev,name,p)=>{if(ev==="msg"&&name==="room"&&p&&typeof p.c==="string")DU.rooms.set(p.c,{c:p.c.slice(0,6),h:String(p.h||"").replace(/[^\w.\-]/g,"").slice(0,16),n:p.n|0,at:Date.now()})});
+  DU.lob=pvRT("duo-lobby",(ev,name,p)=>{if(ev==="msg"&&name==="room"&&p&&typeof p.c==="string")DU.rooms.set(p.c,{c:p.c.slice(0,6),h:String(p.h||"").replace(/[^\w.\-]/g,"").slice(0,16),n:p.n|0,b:Math.max(0,Math.floor(+p.b||0)),at:Date.now()})});
   DU.lobT=setInterval(()=>{const el=$("#duRooms");if(!el){duLobStop();return}el.innerHTML=list();bind()},1500);
 }
+const DU_ERR={coins:"No tienes monedas suficientes para la apuesta.",busy:"Ya estás en otra sala 2 contra 2 con apuesta.",full:"La sala está llena.",estado:"La sala ya no admite jugadores.",code:"Ese código ya está en uso: vuelve a intentarlo.",datos:"La apuesta no es válida.",teams:"Con apuesta tiene que haber al menos una persona en cada equipo.",net:"El servidor no tiene activadas las apuestas del 2 contra 2 o no hay conexión."};
+const duErr=r=>r&&r.e==="unpaid"?`@${r.who||"un jugador"} no ha pagado la apuesta.`:DU_ERR[r&&r.e]||"No se ha podido completar. Inténtalo de nuevo.";
 function duLobStop(){clearInterval(DU.lobT);DU.lobT=0;if(DU.lob){try{DU.lob.close()}catch(e){}DU.lob=null}}
 
 /* ---------- sala de espera + red ---------- */
-function duRoom(code,host){
+function duRoom(code,host,bet){
   const mine=duMine();if(!mine){toast(PV_ERR.five);return}
   const L=$("#layer");
   const X={code,host,sid:Math.floor(Math.random()*2e9)+1,slot:host?0:-1,slots:[null,null,null,null],seen:[0,0,0,0],ready:false,card:mine.outs[3]||mine.outs[0],gk:mine.gk,pub:true,
-    started:false,dead:false,lastHost:performance.now(),t0:performance.now(),stats:{rb:0,rbT:0,rbMax:0,stall:0,desync:0,hashOk:0,fixes:0,sent:0,rx:0}};
+    bet:host?Math.max(0,Math.floor(+bet||0)):0,paid:!!host,betKnown:!!host,started:false,dead:false,lastHost:performance.now(),t0:performance.now(),stats:{rb:0,rbT:0,rbMax:0,stall:0,desync:0,hashOk:0,fixes:0,sent:0,rx:0}};
   DU.ses=X;if(typeof OL!=="undefined")OL.playing=true;
   let rt=null,ann=null,NET=null,tick=0;const rtcs=[null,null,null,null],sigQ=[];
   if(host)X.slots[0]=duInfo(X);
@@ -15078,18 +15090,19 @@ function duRoom(code,host){
         X.slots[i]=q;X.seen[i]=performance.now();pushRoom();paint()}
       else if(name==="leave"){const i=X.slots.findIndex(s=>s&&s.sid===p.sid);if(i>=0&&i!==X.slot){X.slots[i]=null;pushRoom();paint()}}}
     else{
-      if(name==="room"&&Array.isArray(p.slots)){X.lastHost=performance.now();X.slots=p.slots.slice(0,4).map(duSanInfo);while(X.slots.length<4)X.slots.push(null);X.slot=X.slots.findIndex(s=>s&&s.sid===X.sid);paint()}
-      else if(name==="full"&&p.sid===X.sid){destroy();L.innerHTML="";toast("La sala está llena.");render(true)}
-      else if(name==="start"&&Array.isArray(p.slots)){X.slots=p.slots.slice(0,4).map(duSanInfo);while(X.slots.length<4)X.slots.push(null);X.slot=X.slots.findIndex(s=>s&&s.sid===X.sid);if(X.slot>=0)begin(p)}
-      else if(name==="closed"){destroy();L.innerHTML="";toast("El anfitrión ha cerrado la sala.");render(true)}}}
-  const join=sw=>{if(rt&&!X.started){const o=duInfo(X);if(sw)o.sw=1;rt.send("join",o)}};
-  const pushRoom=()=>{if(host&&rt&&!X.started)rt.send("room",{slots:X.slots})};
+      if(name==="room"&&Array.isArray(p.slots)){X.lastHost=performance.now();{const b=Math.max(0,Math.floor(+p.bet||0));if(!X.betKnown||b!==X.bet){X.bet=b;X.betKnown=true;if(!X.paid||b===0)show()}}X.slots=p.slots.slice(0,4).map(duSanInfo);while(X.slots.length<4)X.slots.push(null);X.slot=X.slots.findIndex(s=>s&&s.sid===X.sid);paint()}
+      else if(name==="full"&&p.sid===X.sid){refund();destroy();L.innerHTML="";toast("La sala está llena.");render(true)}
+      else if(name==="start"&&Array.isArray(p.slots)){X.bet=Math.max(0,Math.floor(+p.bet||0));X.slots=p.slots.slice(0,4).map(duSanInfo);while(X.slots.length<4)X.slots.push(null);X.slot=X.slots.findIndex(s=>s&&s.sid===X.sid);if(X.slot>=0)begin(p)}
+      else if(name==="closed"){if(X.bet>0&&X.paid)setTimeout(()=>{try{olSync()}catch(e){}},1500);destroy();L.innerHTML="";toast("El anfitrión ha cerrado la sala.");render(true)}}}
+  const refund=()=>{if(X.bet>0&&X.paid&&!X.started){X.paid=false;olCall("cds_duo_salir",{p_code:code}).then(()=>{try{olSync()}catch(e){}})}};
+  const join=sw=>{if(rt&&!X.started&&X.betKnown&&(X.bet===0||X.paid)){const o=duInfo(X);if(sw)o.sw=1;rt.send("join",o)}};
+  const pushRoom=()=>{if(host&&rt&&!X.started)rt.send("room",{slots:X.slots,bet:X.bet})};
   rt=pvRT("duo-"+code,onRT);
   if(host)ann=pvRT("duo-lobby",()=>{});
   const beat=setInterval(()=>{if(X.dead||X.started)return;tick++;const now=performance.now();
     if(host){X.slots[X.slot]=duInfo(X);for(let i=0;i<4;i++)if(i!==X.slot&&X.slots[i]&&now-X.seen[i]>6500)X.slots[i]=null;pushRoom();
-      if(X.pub&&ann&&ann.up&&tick%2===0)ann.send("room",{c:code,h:ACC.user,n:X.slots.filter(Boolean).length})}
-    else{join();if(now-X.lastHost>9000&&now-X.t0>9000){destroy();L.innerHTML="";toast("No se ha encontrado la sala o el anfitrión se ha ido.");render(true);return}}
+      if(X.pub&&ann&&ann.up&&tick%2===0)ann.send("room",{c:code,h:ACC.user,n:X.slots.filter(Boolean).length,b:X.bet})}
+    else{join();if(now-X.lastHost>9000&&now-X.t0>9000){refund();destroy();L.innerHTML="";toast("No se ha encontrado la sala o el anfitrión se ha ido.");render(true);return}}
     paint()},1000);
   /* --- sala de espera --- */
   const seatHTML=i=>{const s=X.slots[i],me=i===X.slot;return `<div class="du-seat${s?"":" free"}${me?" me":""}"><small>${duSeatName(i)}</small>${s?`<div class="du-seat-c">${s.card&&BYID[s.card]?cardHTML(BYID[s.card],{mini:true,cw:52}):""}</div><b>@${esc(s.n)}</b><em class="pv-rd${s.rd?" on":""}">${s.rd?"LISTO":"…"}</em>`:`<div class="du-seat-c"><i class="pv-q">+</i></div><b>Libre</b><em class="pv-rd">CPU</em>`}</div>`};
@@ -15097,6 +15110,7 @@ function duRoom(code,host){
     <div class="pv-lb-bg" aria-hidden="true"><i></i><i></i></div>
     <div class="pv-lb-in"><header class="pv-lb-h"><div><small>Arena en directo · 2 contra 2</small><h2>Sala <span class="du-code" id="duCode">${esc(code)}</span></h2></div><button class="pv-x" id="duX" aria-label="Salir de la sala">×</button></header>
      <div class="du-share"><span>Comparte el código <b>${esc(code)}</b> con tus amigos</span><button class="btn small" id="duCopy">Copiar</button>${host?`<label class="du-pub"><input type="checkbox" id="duPub"${X.pub?" checked":""}> Sala pública</label>`:""}</div>
+     ${X.bet>0?`<div class="du-betb"><span>${COIN}<b class="num">${fmt(X.bet)}</b> de apuesta por jugador</span><small>El bote se reparte entre los ganadores. Si empatáis, se devuelve.</small>${!host&&!X.paid?`<button class="btn primary" id="duPay">Pagar ${fmt(X.bet)} y entrar</button>`:`<em>✓ Pagada</em>`}</div>`:`<div class="du-betb free"><span>Partido amistoso</span><small>Sin apuesta: ganar da ${fmt(DU_PRIZE.win)} monedas.</small></div>`}
      <div class="du-teams" id="duTeams"></div>
      <div class="du-pick"><small>Tu jugador</small><div id="duCards">${mine.outs.map(id=>`<button class="du-pc" data-dc="${id}" aria-pressed="${id===X.card}">${cardHTML(BYID[id],{mini:true,cw:54})}</button>`).join("")}</div></div>
      <div class="pv-conn" id="duConn"><i class="pv-dot"></i><span id="duConnT">Conectando…</span></div>
@@ -15104,6 +15118,8 @@ function duRoom(code,host){
      ${host?`<button class="btn primary pv-big" id="duStart" disabled>Empezar partido</button>`:`<p class="note du-wait">El anfitrión empieza el partido cuando estéis todos listos.</p>`}
      <p class="note">Los puestos libres los juega la CPU. Hacen falta al menos 2 personas.</p></div></div>`;
     $("#duX").onclick=leave;
+    const pay=$("#duPay");if(pay)pay.onclick=async()=>{if(pay.dataset.busy)return;if(S.coins<X.bet){toast(DU_ERR.coins);return}pay.dataset.busy=1;pay.disabled=true;pay.textContent="Pagando…";try{await flushSave()}catch(e){}
+      const r=await olCall("cds_duo_entrar",{p_code:code});if(X.dead)return;if(!r.ok){delete pay.dataset.busy;pay.disabled=false;pay.textContent=`Pagar ${fmt(X.bet)} y entrar`;toast(duErr(r));return}X.paid=true;try{olSync()}catch(e){}join();show()};
     $("#duCopy").onclick=()=>{try{navigator.clipboard.writeText(code);toast("Código copiado: "+code)}catch(e){toast("Código: "+code)}};
     const pb=$("#duPub");if(pb)pb.onchange=()=>{X.pub=pb.checked};
     document.querySelectorAll("[data-dc]").forEach(b=>b.onclick=()=>{X.card=b.dataset.dc;document.querySelectorAll("[data-dc]").forEach(x=>x.setAttribute("aria-pressed",x===b));if(host){X.slots[X.slot]=duInfo(X);pushRoom()}else join();paint()});
@@ -15115,13 +15131,15 @@ function duRoom(code,host){
     const html=`<div class="du-team t0"><h4>Equipo A</h4>${seatHTML(0)}${seatHTML(2)}</div><div class="du-vs">VS</div><div class="du-team t1"><h4>Equipo B</h4>${seatHTML(1)}${seatHTML(3)}</div>`;
     if(tm._h!==html){tm._h=html;tm.innerHTML=html}
     const n=X.slots.filter(Boolean).length,up=rt&&rt.up,inRoom=X.slot>=0;
-    $("#duConn").dataset.q=!up||!inRoom?"wait":"good";$("#duConnT").textContent=!up?"Conectando con el servidor en directo…":!inRoom?"Entrando en la sala…":`${n} de 4 en la sala`;
+    $("#duConn").dataset.q=!up||!inRoom?"wait":"good";$("#duConnT").textContent=!up?"Conectando con el servidor en directo…":!inRoom?(X.bet>0&&!X.paid?"Paga la apuesta para ocupar tu puesto":"Entrando en la sala…"):`${n} de 4 en la sala`;
     const rb=$("#duReady");rb.disabled=!inRoom;rb.classList.toggle("on",X.ready);rb.textContent=X.ready?"¡Listo! (toca para quitar)":"¡Listo!";$("#duSw").disabled=!inRoom;
-    const st=$("#duStart");if(st){const ok=n>=2&&X.slots.every(s=>!s||s.rd);st.disabled=!ok;st.textContent=n<2?"Esperando a más jugadores…":ok?"Empezar partido":"Esperando a que todos estén listos…"}}
-  function leave(){if(X.started)return;if(rt){if(host)rt.send("closed",{});else rt.send("leave",{sid:X.sid})}setTimeout(destroy,150);L.innerHTML="";render(true)}
+    const st=$("#duStart");if(st){const both=X.bet===0||([0,2].some(i=>X.slots[i])&&[1,3].some(i=>X.slots[i])),ok=n>=2&&both&&X.slots.every(s=>!s||s.rd);st.disabled=!ok;st.textContent=n<2?"Esperando a más jugadores…":!both?"Hace falta alguien en cada equipo":ok?"Empezar partido":"Esperando a que todos estén listos…"}}
+  function leave(){if(X.started)return;refund();if(rt){if(host)rt.send("closed",{});else rt.send("leave",{sid:X.sid})}setTimeout(destroy,150);L.innerHTML="";render(true)}
   /* --- partido --- */
-  function start(){if(!host||X.started)return;X.slots[X.slot]=duInfo(X);const n=X.slots.filter(Boolean).length;if(n<2||!X.slots.every(s=>!s||s.rd))return;
-    const o={slots:X.slots,seed:Math.floor(Math.random()*2e9),fill:mine.five,d:900};rt.send("start",o);setTimeout(()=>!X.dead&&rt.send("start",o),250);setTimeout(()=>!X.dead&&rt.send("start",o),600);begin(o)}
+  async function start(){if(!host||X.started||X.starting)return;X.slots[X.slot]=duInfo(X);const n=X.slots.filter(Boolean).length;if(n<2||!X.slots.every(s=>!s||s.rd))return;
+    if(X.bet>0){const teams={};X.slots.forEach((q,i)=>{if(q)teams[q.n.toLowerCase()]=duTeam(i)});X.starting=true;const st=$("#duStart");if(st){st.disabled=true;st.textContent="Comprobando apuestas…"}
+      const r=await olCall("cds_duo_empezar",{p_code:code,p_teams:teams});X.starting=false;if(X.dead||X.started)return;if(!r.ok){toast(duErr(r));paint();return}}
+    const o={slots:X.slots,seed:Math.floor(Math.random()*2e9),fill:mine.five,d:900,bet:X.bet};rt.send("start",o);setTimeout(()=>!X.dead&&rt.send("start",o),250);setTimeout(()=>!X.dead&&rt.send("start",o),600);begin(o)}
   function begin(o){if(X.started||X.slot<0)return;X.started=true;X.slots=X.slots.map(duSanInfo);clearInterval(beat);if(ann){try{ann.close()}catch(e){}ann=null}
     X.mask=0;X.slots.forEach((s,i)=>{if(s)X.mask|=1<<i});X.mask0=X.mask;X.seed=o.seed|0;
     const fill=(Array.isArray(o.fill)?o.fill:[]).map(duCard),mf=mine.five,F=i=>fill[i]||mf[i],five=[[],[]],cos=[null,null],names=[[],[]];
@@ -15135,7 +15153,15 @@ function duRoom(code,host){
   async function finish(res){
     /* res: {ga,gb,ab?,lost?,golden?} */
     setTimeout(destroy,2500);if(typeof OL!=="undefined")OL.playing=false;window.__DU_LAST={res,stats:X.stats,mask:X.mask};
-    if(res.ab){toast(res.lost?res.lost:"Has salido del partido 2 contra 2.");render(true);return}
+    if(res.ab){toast(res.lost?res.lost:X.bet>0?"Has salido: tu apuesta se decide con el resultado del partido.":"Has salido del partido 2 contra 2.");render(true);return}
+    if(X.bet>0){const t=duTeam(X.slot),gf=t?res.gb:res.ga,gc=t?res.ga:res.gb,win=gf>gc,draw=gf===gc;let np=0,nw=0;for(let i=0;i<4;i++)if(X.mask0>>i&1){np++;if(duTeam(i)===t)nw++}
+      const share=Math.floor(X.bet*np/Math.max(1,nw));S.duo=S.duo||{w:0,d:0,l:0};S.duo[win?"w":draw?"d":"l"]++;save();
+      let r=null;for(let k=0;k<4;k++){r=await olCall("cds_duo_reportar",{p_code:X.code,p_ga:res.ga|0,p_gb:res.gb|0});if(r.ok||r.e!=="pronto")break;await new Promise(z=>setTimeout(z,4000))}
+      window.__DU_BET=r;try{await olSync()}catch(e){}const st=r&&r.ok?r.st:"";
+      await rewardScene({kind:draw?"draw":win?"arenaw":"loss",title:draw?"Empate en el 2 contra 2":win?"¡Victoria en el 2 contra 2!":"Derrota en el 2 contra 2",sub:res.golden?"Decidido en el gol de oro.":"",total:win?share:draw?X.bet:0,
+        lines:[["Resultado",`${gf} - ${gc}`],["Apuesta",fmt(X.bet)],[win?"Bote ganado":draw?"Apuesta devuelta":"Apuesta perdida",win?`+${fmt(share)}`:draw?`+${fmt(X.bet)}`:`−${fmt(X.bet)}`],
+          ["Estado",!r||!r.ok?"Sin confirmar: se resolverá sola":st==="done"?"Pagado":st==="void"?"Anulado: apuesta devuelta":"Esperando a que el rival confirme el marcador"]]});
+      setTimeout(()=>{try{olSync()}catch(e){}},6000);render(true);return}
     const t=duTeam(X.slot),gf=t?res.gb:res.ga,gc=t?res.ga:res.gb,win=gf>gc,draw=gf===gc,prize=DU_PRIZE[win?"win":draw?"draw":"loss"];
     addCoins(prize);S.duo=S.duo||{w:0,d:0,l:0};S.duo[win?"w":draw?"d":"l"]++;save();
     await rewardScene({kind:draw?"draw":win?"arenaw":"loss",title:draw?"Empate en el 2 contra 2":win?"¡Victoria en el 2 contra 2!":"Derrota en el 2 contra 2",sub:res.golden?"Decidido en el gol de oro.":"",total:prize,
