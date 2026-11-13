@@ -2025,6 +2025,20 @@ nav.tabs::before{content:"";position:absolute;left:0;right:0;top:0;height:1px;po
 .pen-more,.tour-more{text-align:center;padding:10px 12px;border:1px dashed var(--edge,rgba(255,255,255,.18));border-radius:12px;margin:6px 0 0}
 .tour-more,.pen-more{grid-column:1/-1}
 
+/* ===== Más allá del Absoluto: Titánico, Cuántico, Etéreo, Supremo y Omega ===== */
+.dot-titanico{background:linear-gradient(90deg,#d6e9ff,#6fb1ff,#17407a)}.dot-cuantico{background:linear-gradient(90deg,#f1ffd0,#b6ff3d,#3a7a00)}
+.dot-etereo{background:linear-gradient(90deg,#ffffff,#e0a8ff,#7a4fb0)}.dot-supremo{background:linear-gradient(90deg,#ffd2bf,#ff5a2d,#8a1a00)}.dot-omega{background:linear-gradient(90deg,#000,#ffcf40,#fff6cf,#ffcf40,#000)}
+.card.r-titanico .rib,.card.r-cuantico .rib,.card.r-etereo .rib,.card.r-supremo .rib,.card.r-omega .rib{font-size:4.4cqw}
+.card.r-titanico .c-holo,.card.r-cuantico .c-holo,.card.r-supremo .c-holo,.card.r-omega .c-holo{opacity:.14}.card.r-etereo .c-holo{opacity:.4}
+.card.r-titanico .c-hd .ovr{text-shadow:0 0 3cqw rgba(111,177,255,.95)}.card.r-cuantico .c-hd .ovr{text-shadow:0 0 3cqw rgba(182,255,61,.95)}
+.card.r-etereo .c-hd .ovr{text-shadow:0 .5cqw 0 rgba(255,255,255,.85),0 0 3cqw rgba(255,255,255,.7)}.card.r-supremo .c-hd .ovr{text-shadow:0 0 3cqw rgba(255,90,45,.95)}.card.r-omega .c-hd .ovr{text-shadow:0 0 3cqw rgba(255,207,64,1)}
+.card.r-titanico .c-hd .ovr,.card.r-cuantico .c-hd .ovr,.card.r-etereo .c-hd .ovr,.card.r-supremo .c-hd .ovr,.card.r-omega .c-hd .ovr{letter-spacing:-.04em}
+.flip .back.g-titanico{box-shadow:0 0 54px 18px rgba(111,177,255,1);animation:bestpulse .7s ease-in-out infinite}.flip .back.g-cuantico{box-shadow:0 0 54px 18px rgba(182,255,61,1);animation:bestpulse .7s ease-in-out infinite}
+.flip .back.g-etereo{box-shadow:0 0 56px 19px rgba(224,168,255,1);animation:bestpulse .65s ease-in-out infinite}.flip .back.g-supremo{box-shadow:0 0 58px 20px rgba(255,90,45,1);animation:bestpulse .6s ease-in-out infinite}
+.flip .back.g-omega{box-shadow:0 0 62px 22px rgba(255,207,64,1),0 0 100px 34px rgba(255,255,255,.5);animation:bestpulse .55s ease-in-out infinite}
+.pack:has(.th-titanico),.pack:has(.th-titanicoplus){--halo:rgba(111,177,255,.36)}.pack:has(.th-cuantico),.pack:has(.th-cuanticoplus){--halo:rgba(182,255,61,.34)}
+.pack:has(.th-etereo),.pack:has(.th-etereoplus){--halo:rgba(224,168,255,.38)}.pack:has(.th-supremo),.pack:has(.th-supremoplus){--halo:rgba(255,90,45,.38)}.pack:has(.th-omega),.pack:has(.th-crackfinal){--halo:rgba(255,207,64,.42)}
+
 /* === 40_packs.css === */
 /* ===================== TIENDA Y APERTURA DE SOBRES (v2) ===================== */
 /* ---- HUD de la apertura 3D ---- */
@@ -5892,11 +5906,11 @@ const STAT_KEYS=["rit","tir","pas","reg","def","fis"];
 const STAT_LBL={rit:"RIT",tir:"TIR",pas:"PAS",reg:"REG",def:"DEF",fis:"FÍS"};
 const POR_LBL={rit:"SAL",tir:"PAT",pas:"SAQ",reg:"REF",def:"PAR",fis:"POS"};
 const OFFS={DEL:{rit:3,tir:6,pas:-6,reg:3,def:-30,fis:-2},MED:{rit:-2,tir:-3,pas:6,reg:4,def:-10,fis:-1},DEF:{rit:-4,tir:-22,pas:-6,reg:-12,def:7,fis:5},POR:{rit:0,tir:-30,pas:-12,reg:2,def:6,fis:-1}};
-const RORDER=["bronce","plata","oro","elite","leyenda","icono","mitico","galactico","celestial","divino","eterno","abismal","primordial","absoluto"];
+const RORDER=["bronce","plata","oro","elite","leyenda","icono","mitico","galactico","celestial","divino","eterno","abismal","primordial","absoluto","titanico","cuantico","etereo","supremo","omega"];
 /* techo de estadísticas: 150 hasta Divino; las rarezas del Panteón (Eterno → Absoluto) llegan a 200 */
-const STAT_CAP=200,OLD_CAP=150;
-const RAR={bronce:{n:"Bronce"},plata:{n:"Plata"},oro:{n:"Oro"},elite:{n:"Élite"},leyenda:{n:"Leyenda"},icono:{n:"Icono"},mitico:{n:"Mítico"},galactico:{n:"Galáctico"},celestial:{n:"Celestial"},divino:{n:"Divino"},eterno:{n:"Eterno"},abismal:{n:"Abismal"},primordial:{n:"Primordial"},absoluto:{n:"Absoluto"}};
-const RCOL={bronce:"#c27a43",plata:"#c9d1d6",oro:"#f2c14e",elite:"#47d6cf",leyenda:"#c64fd8",icono:"#f3e3b0",mitico:"#ff3b4e",galactico:"#8a7bff",celestial:"#6ff3ff",divino:"#ffd84d",eterno:"#35f29a",abismal:"#ff3fc8",primordial:"#ff8a1f",absoluto:"#f4f1ff"};
+const STAT_CAP=300,OLD_CAP=150;
+const RAR={bronce:{n:"Bronce"},plata:{n:"Plata"},oro:{n:"Oro"},elite:{n:"Élite"},leyenda:{n:"Leyenda"},icono:{n:"Icono"},mitico:{n:"Mítico"},galactico:{n:"Galáctico"},celestial:{n:"Celestial"},divino:{n:"Divino"},eterno:{n:"Eterno"},abismal:{n:"Abismal"},primordial:{n:"Primordial"},absoluto:{n:"Absoluto"},titanico:{n:"Titánico"},cuantico:{n:"Cuántico"},etereo:{n:"Etéreo"},supremo:{n:"Supremo"},omega:{n:"Omega"}};
+const RCOL={bronce:"#c27a43",plata:"#c9d1d6",oro:"#f2c14e",elite:"#47d6cf",leyenda:"#c64fd8",icono:"#f3e3b0",mitico:"#ff3b4e",galactico:"#8a7bff",celestial:"#6ff3ff",divino:"#ffd84d",eterno:"#35f29a",abismal:"#ff3fc8",primordial:"#ff8a1f",absoluto:"#f4f1ff",titanico:"#6fb1ff",cuantico:"#b6ff3d",etereo:"#e0a8ff",supremo:"#ff5a2d",omega:"#ffcf40"};
 function rarityOf(o){return o>=90?"leyenda":o>=85?"elite":o>=75?"oro":o>=65?"plata":"bronce"}
 function valueM(o){return o<=150?0.1*Math.pow(1.13,o-40):0.1*Math.pow(1.13,110)*Math.pow(1.07,o-150)}
 function fmtM(v){return v>=1e6?(v/1e6).toLocaleString("es-ES",{maximumFractionDigits:2})+" bill. €":v>=1000?(v/1000).toLocaleString("es-ES",{maximumFractionDigits:2})+" mil M€":v.toLocaleString("es-ES",{maximumFractionDigits:v<10?2:1})+" M€"}
@@ -5970,7 +5984,18 @@ const PANTEON=[
  ["primordial","Forja Primordial","#1a0800","#ff8a1f","#ffd2a0","dragon",175,187,35,["Magma","Big Bang","Tiranosaurio","Mamut","Diplodoco","Glaciar","Volcánico","Protón","Fósil Andante","Meteorito"],
    ["Marcó el primer gol de la historia.","Chuta con la fuerza de un volcán.","Llegó antes que los dinosaurios… y les ganó.","Su pisada provoca terremotos."]],
  ["absoluto","Absoluto Supremo","#0d0b16","#f4f1ff","#ffe9a8","infinity",188,200,30,["Omnipotente","Todopoderoso","Plenipotenciario","Supremísimo","Megacrack","Ultracrack","Emperador","Archiduque","Infinito","Absolutísimo"],
-   ["El fútbol entero cabe en su bota.","No hay techo: el techo es él.","Gana el partido antes de empezarlo.","Lo tiene todo. Absolutamente todo."]]];
+   ["El fútbol entero cabe en su bota.","No hay techo: el techo es él.","Gana el partido antes de empezarlo.","Lo tiene todo. Absolutamente todo."]],
+ /* más allá del Absoluto: cinco rarezas hasta media 300 */
+ ["titanico","Titanes de Acero","#06101f","#6fb1ff","#d6e9ff","helmet",201,220,28,["Coloso","Titán","Gigantón","Acorazado","Mastodonte","Rompemuros","Yunque","Martillo","Bastión","Tanque"],
+   ["Mueve la portería con el hombro.","Pesa lo que un estadio y corre igual.","Los postes le piden perdón.","Despeja hasta las nubes."]],
+ ["cuantico","Cuánticos FC","#071200","#b6ff3d","#eaffb8","dna",221,240,26,["Fotón","Neutrino","Quark","Láser","Electrón","Partícula","Átomo","Positrón","Plasma","Bosón"],
+   ["Está en dos áreas a la vez.","Marca antes de chutar.","Nadie sabe dónde está hasta que celebra.","Regatea por un túnel cuántico."]],
+ ["etereo","Club Etéreo","#150a24","#e0a8ff","#f6e4ff","wings",241,260,24,["Espectro","Susurro","Niebla","Suspiro","Eco","Fantasma","Aurora","Reflejo","Sombra Clara","Bruma"],
+   ["Flota medio metro sobre el césped.","Atraviesa las barreras sin tocarlas.","Solo se le ve cuando marca.","Su pase llega sin hacer ruido."]],
+ ["supremo","Corte Suprema","#1a0500","#ff5a2d","#ffd2bf","trident",261,280,22,["Soberano","Monarca","Tirano","Césped Imperial","Regente","Conquistador","Dominador","Caudillo","Zar","Faraón"],
+   ["El árbitro le pide permiso para pitar.","Manda en su área y en la contraria.","Firma los goles antes del partido.","La grada se pone en pie cuando se ata las botas."]],
+ ["omega","Omega Final","#0a0700","#ffcf40","#fff3c4","omega",281,300,20,["Último","Definitivo","Final","Culmen","Cénit","Apoteósico","Terminal","Zenit","Colofón","Remate"],
+   ["Después de él ya no hay nadie.","Es el último nivel del fútbol.","Cuando marca se acaba la discusión.","El juego termina cuando él quiere."]]];
 /* posiciones del Panteón ordenadas de menor a mayor media: cada posición ocupa puestos equiespaciados entre el primero y el último,
    y los empates se rompen rotando el orden por rareza (la carta tope es de una posición distinta en cada rareza) */
 function panteonPositions(n,ri){
@@ -6001,7 +6026,7 @@ function panteonPositions(n,ri){
 })();
 const BYRAR={};RORDER.forEach(r=>BYRAR[r]=PLAYERS.filter(p=>p.rar===r));
 const avgStat=p=>STAT_KEYS.reduce((a,k)=>a+p.st[k],0)/6;
-const QS_RAR={icono:2,mitico:6,galactico:14,celestial:30,divino:70,eterno:170,abismal:420,primordial:1000,absoluto:2400};
+const QS_RAR={icono:2,mitico:6,galactico:14,celestial:30,divino:70,eterno:170,abismal:420,primordial:1000,absoluto:2400,titanico:5800,cuantico:14000,etereo:33000,supremo:80000,omega:190000};
 /* venta de repetidas: ×3 en rarezas altas; en las bajas se limita para que ningún sobre devuelva más del 60% de su precio vendiendo repetidas */
 const QS_MULT={bronce:.3,plata:.25,oro:.25,elite:2.2,leyenda:2.2};
 function qsCoins(p){return Math.max(5,Math.round((10+Math.pow(p.ovr-45,2)*.18+(avgStat(p)-p.ovr)*1.5)*(QS_RAR[p.rar]||1)*(QS_MULT[p.rar]??3)))}
@@ -6063,10 +6088,21 @@ const PACKS=[
  {id:"primordial",cat:"absoluto",name:"Sobre Primordial",price:60000000000,n:5,th:"primordial",emb:"fire",odds:{eterno:25,abismal:63,primordial:12},gN:{r:"abismal",n:2}},
  {id:"primordialplus",cat:"absoluto",name:"Primordial Premium",price:150000000000,n:6,th:"primordialplus",emb:"fire",odds:{abismal:55,primordial:44,absoluto:1},gN:{r:"primordial",n:1}},
  {id:"absoluto",cat:"absoluto",name:"Sobre Absoluto",price:400000000000,n:5,th:"absoluto",emb:"trophy",odds:{abismal:25,primordial:71,absoluto:4},gN:{r:"primordial",n:2}},
- {id:"infinito",cat:"absoluto",name:"Sobre del Infinito",price:1000000000000,n:6,th:"infinito",emb:"crown",odds:{primordial:90,absoluto:10},gN:{r:"primordial",n:3}}
+ {id:"infinito",cat:"absoluto",name:"Sobre del Infinito",price:1000000000000,n:6,th:"infinito",emb:"crown",odds:{primordial:90,absoluto:10},gN:{r:"primordial",n:3}},
+ /* MÁS ALLÁ: cinco rarezas nuevas hasta media 300. Cada escalón cuesta ×5 (antes ×6) porque el progreso es más rápido */
+ {id:"titanico",cat:"omega",name:"Sobre Titánico",price:2500000000000,n:5,th:"titanico",emb:"shield",odds:{primordial:25,absoluto:63,titanico:12},gN:{r:"absoluto",n:2}},
+ {id:"titanicoplus",cat:"omega",name:"Titánico Premium",price:6000000000000,n:6,th:"titanicoplus",emb:"shield",odds:{absoluto:55,titanico:42,cuantico:3},gN:{r:"titanico",n:1}},
+ {id:"cuantico",cat:"omega",name:"Sobre Cuántico",price:12000000000000,n:5,th:"cuantico",emb:"bolt",odds:{absoluto:25,titanico:63,cuantico:12},gN:{r:"titanico",n:2}},
+ {id:"cuanticoplus",cat:"omega",name:"Cuántico Premium",price:30000000000000,n:6,th:"cuanticoplus",emb:"bolt",odds:{titanico:55,cuantico:42,etereo:3},gN:{r:"cuantico",n:1}},
+ {id:"etereo",cat:"omega",name:"Sobre Etéreo",price:60000000000000,n:5,th:"etereo",emb:"star",odds:{titanico:25,cuantico:63,etereo:12},gN:{r:"cuantico",n:2}},
+ {id:"etereoplus",cat:"omega",name:"Etéreo Premium",price:150000000000000,n:6,th:"etereoplus",emb:"star",odds:{cuantico:55,etereo:42,supremo:3},gN:{r:"etereo",n:1}},
+ {id:"supremo",cat:"omega",name:"Sobre Supremo",price:300000000000000,n:5,th:"supremo",emb:"crown",odds:{cuantico:25,etereo:63,supremo:12},gN:{r:"etereo",n:2}},
+ {id:"supremoplus",cat:"omega",name:"Supremo Premium",price:700000000000000,n:6,th:"supremoplus",emb:"crown",odds:{etereo:55,supremo:42,omega:3},gN:{r:"supremo",n:1}},
+ {id:"omega",cat:"omega",name:"Sobre Omega",price:1500000000000000,n:5,th:"omega",emb:"trophy",odds:{etereo:25,supremo:63,omega:12},gN:{r:"supremo",n:2}},
+ {id:"crackfinal",cat:"omega",name:"Sobre Crack Final",price:4000000000000000,n:6,th:"crackfinal",emb:"trophy",odds:{supremo:85,omega:15},gN:{r:"supremo",n:3}}
 ];
 /* v12: Absoluto es un hito muy raro: ≈0,4-0,6 Absolutos por billón gastado (antes 1,2-2,4) y el Sobre del Infinito ya no garantiza ninguno */
-const PACK_CATS=[["basic","Básicos"],["premium","Premium"],["legend","Leyenda"],["elite","Élite mundial"],["cosmic","Cósmicos"],["panteon","Panteón"],["absoluto","Absolutos"]];
+const PACK_CATS=[["basic","Básicos"],["premium","Premium"],["legend","Leyenda"],["elite","Élite mundial"],["cosmic","Cósmicos"],["panteon","Panteón"],["absoluto","Absolutos"],["omega","Más allá"]];
 const FORMS={
  "4-3-3":[["POR",50,89],["DEF",13,69],["DEF",37,74],["DEF",63,74],["DEF",87,69],["MED",22,47],["MED",50,51],["MED",78,47],["DEL",17,22],["DEL",50,16],["DEL",83,22]],
  "4-4-2":[["POR",50,89],["DEF",13,69],["DEF",37,74],["DEF",63,74],["DEF",87,69],["MED",13,45],["MED",37,50],["MED",63,50],["MED",87,45],["DEL",35,20],["DEL",65,20]],
@@ -6641,7 +6677,12 @@ const CARD_PAL={
  eterno:{bg:["#e9fff2","#7ff7bd","#1fbf78","#065c3a"],m:["#f2fff7","#4ff0a6","#064a2c"],ink:"#02251a",lab:"#0b5236",glow:"#35f29a",o:["#02251a","#0c6a43"]},
  abismal:{bg:["#5a0a52","#2a0430","#0e0118","#020006"],m:["#ffe0f6","#ff3fc8","#3a0430"],ink:"#ffffff",lab:"#ffc2ee",glow:"#ff3fc8",o:["#ffffff","#ff9be0"]},
  primordial:{bg:["#4a1a06","#260a02","#120400","#050100"],m:["#ffe6c4","#ff8a1f","#4a1600"],ink:"#ffffff",lab:"#ffd2a0",glow:"#ff8a1f",o:["#ffffff","#ffb46a"]},
- absoluto:{bg:["#ffffff","#f1edff","#d9d2f4","#a99fd0"],m:["#ffffff","#e4dcff","#4a3f7a"],ink:"#140f2a",lab:"#463a7a",glow:"#f4f1ff",o:["#140f2a","#5b4a9a"]}
+ absoluto:{bg:["#ffffff","#f1edff","#d9d2f4","#a99fd0"],m:["#ffffff","#e4dcff","#4a3f7a"],ink:"#140f2a",lab:"#463a7a",glow:"#f4f1ff",o:["#140f2a","#5b4a9a"]},
+ titanico:{bg:["#3b6aa8","#1a3564","#0a1a38","#030814"],m:["#e6f1ff","#6fb1ff","#0e2a52"],ink:"#ffffff",lab:"#cfe4ff",glow:"#6fb1ff",o:["#ffffff","#9fcaff"]},
+ cuantico:{bg:["#1f3a00","#0f2200","#061200","#010500"],m:["#f1ffd0","#b6ff3d","#234400"],ink:"#ffffff",lab:"#dcff9a",glow:"#b6ff3d",o:["#ffffff","#d2ff7a"]},
+ etereo:{bg:["#fbf2ff","#ecd0ff","#c99af0","#7a4fb0"],m:["#ffffff","#e0a8ff","#4a2478"],ink:"#200a3a",lab:"#4c2a7a",glow:"#e0a8ff",o:["#200a3a","#6a3fa8"]},
+ supremo:{bg:["#6a1400","#3a0800","#1a0300","#070100"],m:["#ffe4d6","#ff5a2d","#4a1000"],ink:"#ffffff",lab:"#ffc9b3",glow:"#ff5a2d",o:["#ffffff","#ff9a7a"]},
+ omega:{bg:["#2a2000","#141000","#080600","#000000"],m:["#fff6cf","#ffcf40","#5a4300"],ink:"#ffffff",lab:"#ffe9a0",glow:"#ffcf40",o:["#ffffff","#ffe07a"]}
 };
 const svgURI=s=>`url("data:image/svg+xml;charset=utf-8,${encodeURIComponent(s.replace(/\s{2,}/g," "))}")`;
 function cardArtBG(rar){
@@ -6715,6 +6756,12 @@ function cardArtBG(rar){
     art+=`<g opacity=".75">${pr}</g><path d="M58 4L61 41L98 44L61 47L58 84L55 47L18 44L55 41Z" fill="#fff" opacity=".7"/>`;
     let hx="";for(let i=0;i<30;i++){const x=r()*100,y=70+r()*70,s=1.5+r()*4;hx+=`<path d="M${f(x)} ${f(y-s)}L${f(x+s*.87)} ${f(y-s/2)}V${f(y+s/2)}L${f(x)} ${f(y+s)}L${f(x-s*.87)} ${f(y+s/2)}V${f(y-s/2)}Z" fill="hsl(${Math.round(r()*360)},90%,80%)" opacity="${(.25+r()*.35).toFixed(2)}"/>`}
     art+=hx+glitter(200,.42,1,"#fff")+[0,1,2,3,4,5,6,7,8,9,10].map(()=>spark(f(r()*100),f(r()*140),1.4+r()*2.8,1,"#fff")).join("");
+  }else if(RI>RORDER.indexOf("absoluto")){/* rarezas más allá del Absoluto: núcleo de luz del color de la rareza, anillos, haces y polvo brillante */
+    const G=P.glow,k=RI-RORDER.indexOf("absoluto"),cx=58,cy=44;
+    art+=`<circle cx="${cx}" cy="${cy}" r="${46+k*3}" fill="${G}" opacity=".5" filter="url(#bl)"/>`+rays(cx,cy,10+k*4,.22,G,.5);
+    let rg="";for(let i=0;i<k+2;i++){const R0=14+i*7.5;rg+=`<circle cx="${cx}" cy="${cy}" r="${R0}" fill="none" stroke="${i%2?"#fff":G}" stroke-width="${i%2?.35:.7}" opacity="${f(.8-i*.08)}" ${i%2?'stroke-dasharray="1.2 2.4"':""}/>`}
+    let sh="";for(let i=0;i<10+k*3;i++){const a=r()*Math.PI*2,d=22+r()*70,x=cx+Math.cos(a)*d,y=cy+Math.sin(a)*d*1.1,s2=1.5+r()*4;sh+=`<path d="M${f(x)} ${f(y-s2)}L${f(x+s2*.6)} ${f(y)}L${f(x)} ${f(y+s2)}L${f(x-s2*.6)} ${f(y)}Z" fill="${r()<.5?G:"#fff"}" opacity="${f(.25+r()*.5)}"/>`}
+    art+=rg+sh+`<circle cx="${cx}" cy="${cy}" r="7" fill="#fff" opacity=".9" filter="url(#bs)"/>`+glitter(140+k*25,.42,.95,"#fff")+[0,1,2,3,4,5,6,7].map(()=>spark(f(r()*100),f(r()*140),1.3+r()*2.6,1,r()<.5?G:"#fff")).join("");
   }
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 140" preserveAspectRatio="none"><defs>${defs}</defs><rect width="100" height="140" fill="url(#b)"/>${art}<rect width="100" height="140" fill="url(#l)"/><rect width="100" height="140" fill="url(#v)"/>${RI>=6?`<rect width="100" height="140" fill="none"/>`:""}</svg>`;
 }
@@ -8021,7 +8068,7 @@ function viewPlantilla(){
 }
 let JUG="torneos";
 /* color de cada torneo según la rareza de su rango de rivales; se muestran los desbloqueados y los 2 siguientes */
-const TOUR_COL=TOURS.map(t=>{const m=(t.range[0]+t.range[1])/2;return RCOL[m>=188?"absoluto":m>=175?"primordial":m>=163?"abismal":m>=151?"eterno":m>=140?"divino":m>=128?"celestial":m>=115?"galactico":m>=100?"mitico":m>=90?"icono":m>=84?"leyenda":m>=74?"elite":m>=66?"oro":m>=60?"plata":"bronce"]});
+const TOUR_COL=TOURS.map(t=>{const m=(t.range[0]+t.range[1])/2;return RCOL[m>=281?"omega":m>=261?"supremo":m>=241?"etereo":m>=221?"cuantico":m>=201?"titanico":m>=188?"absoluto":m>=175?"primordial":m>=163?"abismal":m>=151?"eterno":m>=140?"divino":m>=128?"celestial":m>=115?"galactico":m>=100?"mitico":m>=90?"icono":m>=84?"leyenda":m>=74?"elite":m>=66?"oro":m>=60?"plata":"bronce"]});
 const tourShowTo=()=>{let i=0;while(i<TOURS.length&&tourUnlocked(TOURS[i]))i++;return Math.min(TOURS.length-1,i+1)};
 /* ---- menú Jugar estilo «juego»: losetas grandes de modo con arte (solo presentación) ---- */
 const EP_ART={
@@ -8495,7 +8542,7 @@ boot();
 /* ===================== CASINO (fichas y cartas del juego, nunca dinero real) ===================== */
 const crand=()=>{try{const a=new Uint32Array(1);crypto.getRandomValues(a);return a[0]/4294967296}catch(e){return Math.random()}};
 const cpick=a=>a[Math.floor(crand()*a.length)];
-const BETBASE={bronce:[40,50],plata:[110,65],oro:[320,75],elite:[1800,85],leyenda:[7000,90],icono:[28000,91],mitico:[150000,100],galactico:[700000,115],celestial:[3000000,128],divino:[12000000,140],eterno:[48000000,151],abismal:[190000000,163],primordial:[760000000,175],absoluto:[3000000000,188]};
+const BETBASE={bronce:[40,50],plata:[110,65],oro:[320,75],elite:[1800,85],leyenda:[7000,90],icono:[28000,91],mitico:[150000,100],galactico:[700000,115],celestial:[3000000,128],divino:[12000000,140],eterno:[48000000,151],abismal:[190000000,163],primordial:[760000000,175],absoluto:[3000000000,188],titanico:[12000000000,201],cuantico:[48000000000,221],etereo:[190000000000,241],supremo:[760000000000,261],omega:[3000000000000,281]};
 const cardBetValue=p=>{const [b,m]=BETBASE[p.rar];return Math.round(b*(1+(p.ovr-m)*.07))};
 const olResC=id=>typeof olRes==="function"?olRes(id):0;/* copias reservadas en ofertas de intercambio: no se apuestan */
 function stakeableCards(){const inL=new Set(S.lineup.filter(Boolean));return uniq().map(id=>BYID[id]).filter(p=>S.owned[p.id]>(inL.has(p.id)?1:0)+olResC(p.id)).sort((a,b)=>cardBetValue(b)-cardBetValue(a))}
@@ -9215,13 +9262,14 @@ function powerBar(host){
   });
 }
 
-/* ===================== COPA DE PENALTIS (55 niveles, una sola carta, barra con zona verde) ===================== */
+/* ===================== COPA DE PENALTIS (65 niveles, una sola carta, barra con zona verde) ===================== */
 const PEN_NAMES=["Copa del Barrio","Copa Comarcal","Copa Provincial","Copa Regional","Copa Costa del Sol","Copa Andaluza","Copa de Plata","Copa Ibérica","Copa del Mediterráneo","Copa de Oro","Copa Atlántica","Copa Continental","Copa de Campeones","Copa Élite","Copa Diamante","Copa de los Titanes","Copa Galáctica","Copa Imperial","Copa Platino","Copa Obsidiana","Copa de las Leyendas","Copa Inmortal","Copa Crack Supremo",
  "Copa del Portero Gigante","Copa Mano de Hierro","Copa del Larguero","Copa Escuadra","Copa Panenka","Copa del Murciélago","Copa Paradón","Copa Mítica",
  "Copa Meteorito","Copa Nebulosa","Copa Órbita","Copa Supernova","Copa Vía Láctea","Copa Agujero Negro","Copa Celestial",
  "Copa del Rayo Divino","Copa del Olimpo","Copa Bosque Eterno","Copa Milenaria","Copa del Kraken","Copa del Abismo","Copa Tinieblas",
- "Copa del Volcán","Copa Jurásica","Copa Big Bang","Copa Primordial","Copa Omnipotente","Copa del Infinito","Copa del Multiverso","Copa Absoluta","Copa Imposible","Copa Crack Eterno"];
-const PEN_TIERS=[[1,"Bronce","#c27a43"],[6,"Plata","#c9d1d6"],[11,"Oro","#f2c14e"],[16,"Diamante","#47d6cf"],[20,"Leyenda","#c64fd8"],[23,"Suprema","#ff5b6e"],[24,"Mítica","#ff3b4e"],[32,"Galáctica","#8a7bff"],[39,"Divina","#ffd84d"],[41,"Eterna","#35f29a"],[43,"Abismal","#ff3fc8"],[46,"Primordial","#ff8a1f"],[50,"Absoluta","#f4f1ff"]];
+ "Copa del Volcán","Copa Jurásica","Copa Big Bang","Copa Primordial","Copa Omnipotente","Copa del Infinito","Copa del Multiverso","Copa Absoluta","Copa Imposible","Copa Crack Eterno",
+ "Copa del Trueno","Copa Aurora Boreal","Copa del Dragón","Copa Fénix","Copa del Titán Dormido","Copa Horizonte","Copa del Destino","Copa Suprema del Crack","Copa del Fin del Mundo","Copa Leyenda Infinita"];
+const PEN_TIERS=[[1,"Bronce","#c27a43"],[6,"Plata","#c9d1d6"],[11,"Oro","#f2c14e"],[16,"Diamante","#47d6cf"],[20,"Leyenda","#c64fd8"],[23,"Suprema","#ff5b6e"],[24,"Mítica","#ff3b4e"],[32,"Galáctica","#8a7bff"],[39,"Divina","#ffd84d"],[41,"Eterna","#35f29a"],[43,"Abismal","#ff3fc8"],[46,"Primordial","#ff8a1f"],[50,"Absoluta","#f4f1ff"],[56,"Legendaria","#7df9ff"],[61,"Infinita","#ffffff"]];
 const nice=v=>{const m=Math.pow(10,Math.max(0,Math.floor(Math.log10(v))-1));return Math.round(v/m)*m};
 /* premio de campeón (base, se multiplica por tu multiplicador): crece un 20 % por nivel, al ritmo de la dificultad */
 const penChamp=L=>nice(1000*Math.pow(1.2,L-1));
@@ -9247,7 +9295,8 @@ const penMult=(pen,L=10)=>penMultD(pen-penReq(L));
 /* dificultad base: hasta la copa 23 igual que antes; después la zona verde se estrecha un 3,2 % y la barra se acelera un 1,5 % por nivel */
 function penBaseWD(L){const a=Math.min(L,23)-1,b=Math.max(0,L-23);return {w:.38*Math.pow(.949,a)*Math.pow(.968,b),dur:1.5*Math.pow(.969,a)*Math.pow(.985,b)}}
 function penParams(L,k,pen){const m=penMult(pen,L),B=penBaseWD(L);
-  const w=Math.min(.6,Math.max(.01,B.w*(1-.05*k)/m)),dur=Math.max(.25,B.dur*(1-.04*k)/Math.sqrt(m));
+  /* PEN_EASY: tandas un poco más fáciles (zona verde un 15 % más ancha y barra un 8 % más lenta) */
+  const w=Math.min(.6,Math.max(.01,B.w*1.15*(1-.05*k)/m)),dur=Math.max(.25,B.dur*1.08*(1-.04*k)/Math.sqrt(m));
   return {w,dur,ms:Math.round(w*dur*1000),m}}
 const PEN_DIFF=[[250,"Fácil","#5fe08f"],[140,"Media","#c6e05f"],[80,"Difícil","#f2c14e"],[45,"Muy difícil","#ff9a4a"],[0,"Extrema","#ff5b5b"]];
 const penDiff=(L,pen)=>{const ms=penParams(L,2,pen).ms;return PEN_DIFF.find(d=>ms>=d[0])};
@@ -9397,13 +9446,13 @@ function playPenRound(){
       const {hit,v}=await aimBar($("#pCtl"),{...prm,shot:k+1});
       const zones=[];[-1,0,1].forEach(c=>[0,1].forEach(r=>zones.push({c,r})));const z=cpick(zones);
       const r=hit?"goal":failKind(z,v>.94?.95:.7),kz=r==="save"?z:otherZone(z);
-      await new Promise(x=>setTimeout(x,250));$("#pCtl").innerHTML="";
+      await new Promise(x=>setTimeout(x,110));$("#pCtl").innerHTML="";
       await eng.shoot(z,kz,r,{power:.6+crand()*.3});
       res.push(hit);dots();
       eng.say(hit?"¡GOL!":r==="save"?"¡PARADA!":r==="post"?"¡AL POSTE!":"¡FUERA!",hit?"g":"x");
       if(hit){AU.crowd(.8,2);AU.sparkle(5)}else AU.loseTone();
       msg(hit?`¡${esc(p.short)} marca!`:`${esc(p.short)} falla.`);
-      await new Promise(x=>setTimeout(x,1200));
+      await new Promise(x=>setTimeout(x,600));
       if(goals()>=4||res.length-goals()>=2)break;
     }
     const passed=goals()>=4,ovrT=teamRating().ovr,em=earnMult(ovrT);let prize=0,base=0,champ=false;
@@ -9412,7 +9461,7 @@ function playPenRound(){
     else S.pen=null;
     if(prize)addCoins(prize);save();
     $("#pCtl").innerHTML="";
-    await new Promise(x=>setTimeout(x,300));
+    await new Promise(x=>setTimeout(x,120));
     await rewardScene({kind:champ?"champ":passed?"round":"out",big:champ,title:cup.name,sub:`${PEN_ROUNDS[round]} · ${goals()} de ${res.length} penaltis con ${esc(p.short)}`,base,mult:em,total:prize,ovr:ovrT,
       lines:[["Ronda",PEN_ROUNDS[round]],["Penaltis marcados",`${goals()} / ${res.length}`],["Dificultad con este lanzador",penDiff(cup.L,pen)[1]]],
       extra:champ&&PEN_CUPS[cup.L]?`<p class="rs-sub">Desbloqueada: <b>${esc(PEN_CUPS[cup.L].name)}</b></p>`:passed?"":`<p class="rs-sub">La copa vuelve a empezar desde cuartos. Mejora su PEN en el centro de entrenamiento.</p>`});
@@ -10537,7 +10586,7 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
 
 /* ===================== CARTAS 3D v2: mismo arte que la carta 2D, canto metálico, laca y lámina holográfica ===================== */
 /* estilos 3D (estudio de 15_studio3d.js) para las rarezas del Panteón */
-try{Object.assign(CARD_STYLE,{eterno:["#e9fff2","#35f29a","#065c3a","#02251a"],abismal:["#ffc2ee","#ff3fc8","#12001a","#ffffff"],primordial:["#ffd2a0","#ff8a1f","#1a0800","#ffffff"],absoluto:["#ffffff","#f1edff","#6a5fa8","#140f2a"]})}catch(e){}
+try{Object.assign(CARD_STYLE,{eterno:["#e9fff2","#35f29a","#065c3a","#02251a"],abismal:["#ffc2ee","#ff3fc8","#12001a","#ffffff"],primordial:["#ffd2a0","#ff8a1f","#1a0800","#ffffff"],absoluto:["#ffffff","#f1edff","#6a5fa8","#140f2a"],titanico:["#d6e9ff","#6fb1ff","#0a1a38","#ffffff"],cuantico:["#eaffb8","#b6ff3d","#061200","#ffffff"],etereo:["#ffffff","#e0a8ff","#7a4fb0","#200a3a"],supremo:["#ffd2bf","#ff5a2d","#1a0300","#ffffff"],omega:["#fff3c4","#ffcf40","#080600","#ffffff"]})}catch(e){}
 /* precarga del arte SVG de cada rareza como imagen (para dibujar en canvas sin esperas) */
 const CARD_IMG={};
 function cardArtImg(rar,kind){const k=rar+"|"+kind;if(!CARD_IMG[k]){const A=cardArt(rar);const src=kind==="bg"?A.bg:kind==="fr"?A.fr:cardArtFrame(rar,true);
@@ -10553,7 +10602,7 @@ const CARD_FONT='"Saira Condensed","Barlow Condensed","Roboto Condensed","Arial 
 function fitText(g,txt,weight,size,maxW){let fs=size;g.font=`${weight} ${fs}px ${CARD_FONT}`;while(g.measureText(txt).width>maxW&&fs>size*.4){fs*=.95;g.font=`${weight} ${fs}px ${CARD_FONT}`}return fs}
 async function cardCanvas(p,W=640){
   const H=Math.round(W*1.4),u=W/100,c=document.createElement("canvas");c.width=W;c.height=H;const g=c.getContext("2d");
-  const P=CARD_PAL[p.rar]||CARD_PAL.oro,lbl=p.pos==="POR"?POR_LBL:STAT_LBL,dark=["leyenda","mitico","galactico","abismal","primordial"].includes(p.rar);
+  const P=CARD_PAL[p.rar]||CARD_PAL.oro,lbl=p.pos==="POR"?POR_LBL:STAT_LBL,dark=["leyenda","mitico","galactico","abismal","primordial","titanico","cuantico","supremo","omega"].includes(p.rar);
   try{await document.fonts.ready}catch(e){}
   const avS=av(p).replace(/var\(--rim,#fff\)/g,P.glow);
   const [bgI,frI,avI,flI,crI]=await Promise.all([imgReady(cardArtImg(p.rar,"bg")),imgReady(cardArtImg(p.rar,"fr")),svgImg(avS),svgImg(flagSVG(p.nat,"fl")),svgImg(clubCrest(p.club,"cr"))]);
@@ -10691,7 +10740,11 @@ const PK3_TH={
  leyendaplus:["#ffd27a","#7d1fa6","#12021f","#ffe9a8"],iconoplus:["#fff4cf","#6b5320","#0b0803","#ffe9a8"],miticoplus:["#ffd27a","#a3001c","#120004","#ffe08a"],
  /* Panteón y Absolutos */
  eterno:["#e9fff2","#2fd98a","#04311f","#f2fff7"],eternoplus:["#ffe9a8","#0f8a55","#021a10","#d8ffe9"],abismal:["#ffb3ec","#a1128a","#0e0014","#ffe0f6"],abismalplus:["#ff8fe0","#3a0a52","#030006","#ffc2ee"],
- primordial:["#ffd2a0","#d9560a","#1a0600","#ffe6c4"],primordialplus:["#ffe08a","#7a2000","#0a0200","#ffb46a"],absoluto:["#ffffff","#cfc6ff","#4a3f7a","#ffffff"],infinito:["#ffffff","#ffe9a8","#140f2a","#f4f1ff"]};
+ primordial:["#ffd2a0","#d9560a","#1a0600","#ffe6c4"],primordialplus:["#ffe08a","#7a2000","#0a0200","#ffb46a"],absoluto:["#ffffff","#cfc6ff","#4a3f7a","#ffffff"],infinito:["#ffffff","#ffe9a8","#140f2a","#f4f1ff"],
+ /* más allá del Absoluto */
+ titanico:["#d6e9ff","#2f6fc4","#06101f","#e6f1ff"],titanicoplus:["#ffffff","#17407a","#020812","#9fcaff"],cuantico:["#eaffb8","#5fae00","#071200","#f1ffd0"],cuanticoplus:["#ffffff","#2a5a00","#020700","#d2ff7a"],
+ etereo:["#ffffff","#b77fe8","#2a1248","#f6e4ff"],etereoplus:["#fff0ff","#7a3fb8","#12051f","#e0a8ff"],supremo:["#ffd2bf","#d43a12","#1a0500","#ffe4d6"],supremoplus:["#ffe08a","#8a1a00","#0a0100","#ff9a7a"],
+ omega:["#fff3c4","#c99a12","#0a0700","#fff6cf"],crackfinal:["#ffffff","#ffcf40","#000000","#fff3c4"]};
 const PK3_DIM={W:1.5,H:2.2,TV:.17};/* TV: altura relativa (desde arriba) de la línea de rasgado */
 const pk3Pal=pk=>PK3_TH[pk.th]||PK3_TH.oro;
 /* textura del sobre: mode "c" = color, "h" = mapa de relieve (gris) */
@@ -11869,7 +11922,7 @@ const AR_PL_RAW=[ /* arena, nombre, posición, media, rareza, rasgo */
   LEAGUE_NAME.arenas="Leyendas de la Arena";
   const r=rng(21212121);
   /* jugadores exclusivos mejorados: cada uno sube una rareza y su media va a lo más alto de esa rareza */
-  const HI={bronce:64,plata:74,oro:84,elite:89,leyenda:93,icono:99,mitico:114,galactico:127,celestial:139,divino:150,eterno:162,abismal:174,primordial:187,absoluto:200};
+  const HI={bronce:64,plata:74,oro:84,elite:89,leyenda:93,icono:99,mitico:114,galactico:127,celestial:139,divino:150,eterno:162,abismal:174,primordial:187,absoluto:200,titanico:220,cuantico:240,etereo:260,supremo:280,omega:300};
   AR_PL_RAW.forEach((x,i)=>{const r2=arRarUp(x[4],1),o2=Math.max(x[3]+6,HI[r2]-(i%3));x[4]=r2;x[3]=Math.min(o2,HI[r2])});
   AR_PL_RAW.forEach(([a,name,pos,ovr,rar,trait])=>{
     const id="ar-"+slug(name),myth=ovr>=100,age=myth?0:22+Math.floor(r()*11),nat=NATS[Math.floor(r()*NATS.length)];
@@ -11895,7 +11948,7 @@ const AR_CH={
 const AR_CHK=["plata","oro","magico","legendario"];
 const AR_SLOTS=5,AR_QN=5,AR_QWIN=8*3600e3;
 /* valor de referencia de una carta en monedas según los precios de la tienda (solo para el coste de «abrir ya» y el análisis) */
-const AR_RVAL={bronce:20,plata:60,oro:300,elite:1500,leyenda:5000,icono:20000,mitico:6e5,galactico:3e6,celestial:1.2e7,divino:3.5e7,eterno:3e8,abismal:2e9,primordial:1.2e10,absoluto:8e10};
+const AR_RVAL={bronce:20,plata:60,oro:300,elite:1500,leyenda:5000,icono:20000,mitico:6e5,galactico:3e6,celestial:1.2e7,divino:3.5e7,eterno:3e8,abismal:2e9,primordial:1.2e10,absoluto:8e10,titanico:5e11,cuantico:3e12,etereo:2e13,supremo:1.2e14,omega:8e14};
 const arChestCoins=(t,a)=>Math.round(AR_CH[t].co*Math.pow(1.16,a)/10)*10;
 const arMult=()=>earnMult(teamRating().ovr);
 /* paquete (formato de PACKS) para el flujo de apertura de sobres */
@@ -13600,7 +13653,7 @@ function newsFeats(){
   const n=(v,d)=>typeof v!=="undefined"&&v?v:d;
   const nAr=typeof AR_LIST!=="undefined"?AR_LIST.length:15,nEx=typeof AR_PL!=="undefined"?AR_PL.length:33;
   return [
-   ["rar","#c89bff","Progresión larga",`${RORDER.length} rarezas y media hasta ${STAT_CAP}. El Panteón del Balón (Eterno, Abismal, Primordial y Absoluto) y un multiplicador de monedas que crece con tu once.`],
+   ["rar","#c89bff","Progresión larga",`${RORDER.length} rarezas y media hasta ${STAT_CAP}. El Panteón del Balón (Eterno, Abismal, Primordial y Absoluto), cinco rarezas más allá (Titánico, Cuántico, Etéreo, Supremo y Omega) y un multiplicador de monedas que crece con tu once.`],
    ["pl","#6ff3ff","150 jugadores nuevos","Cracks de las rarezas más altas, repartidos por todas las posiciones para que cualquier once pueda subir de nivel."],
    ["abs","#ffd84d","Rareza Absoluto","La carta más difícil del juego, con una apertura de sobre épica en 2D y 3D. Si te sale una, lo vas a notar."],
    ["pack","#ff9a3c","Sobres, torneos y copas",`${n(typeof PACKS!=="undefined"&&PACKS.length,43)} sobres, ${n(typeof TOURS!=="undefined"&&TOURS.length,30)} torneos y ${n(typeof PEN_CUPS!=="undefined"&&PEN_CUPS.length,55)} Copas de Penaltis con mejoras de PEN por jugador.`],
@@ -14663,7 +14716,7 @@ function openFusion(){
     if(pick.length!==FUS_N||!r2)return;const got=fusRoll(r2);if(!got)return;
     pick.forEach(c=>{S.owned[c.p.id]=Math.max(0,(S.owned[c.p.id]|0)-1);if(!S.owned[c.p.id])delete S.owned[c.p.id]});
     S.fusions=(S.fusions|0)+1;FUS.sel=[];FUS.step="pick";closeSheet();
-    const TH={plata:"plata",oro:"oro",elite:"elite",leyenda:"leyenda",icono:"icono",mitico:"mitico",galactico:"galaxy",celestial:"celestial",divino:"divino",eterno:"eterno",abismal:"abismal",primordial:"primordial",absoluto:"absoluto"};
+    const TH={plata:"plata",oro:"oro",elite:"elite",leyenda:"leyenda",icono:"icono",mitico:"mitico",galactico:"galaxy",celestial:"celestial",divino:"divino",eterno:"eterno",abismal:"abismal",primordial:"primordial",absoluto:"absoluto",titanico:"titanico",cuantico:"cuantico",etereo:"etereo",supremo:"supremo",omega:"omega"};
     openPackFlow({id:"fusion-"+r2,name:"Fusión "+RAR[r2].n,n:1,th:TH[r2]||"oro",emb:"burst",odds:{[r2]:100}},[got],()=>render(true))};
 }
 document.addEventListener("click",e=>{if(e.target.closest&&e.target.closest("#fusOpen")){e.preventDefault();FUS.step="pick";openFusion()}});
