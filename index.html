@@ -3909,7 +3909,7 @@ nav.tabs::before{content:"";position:absolute;left:0;right:0;top:0;height:1px;po
 .ar-m.port .ar-joy{width:50%;height:min(27%,210px)}
 .ar-m.port .ar-btns{bottom:calc(10px + env(safe-area-inset-bottom,0px))}
 /* pausa */
-.ar-pz{position:absolute;inset:0;z-index:8;display:grid;place-items:center;background:rgba(2,3,6,.72);backdrop-filter:blur(4px)}
+.ar-pz{position:absolute;inset:0;z-index:8;display:grid;place-items:center;background:rgba(2,3,6,.86)}
 .ar-pz[hidden]{display:none}
 .ar-pz-in{display:grid;gap:12px;justify-items:stretch;width:min(86vw,340px);padding:22px;border-radius:18px;background:linear-gradient(180deg,#14192b,#090b14);border:1px solid rgba(255,255,255,.12);text-align:center}
 .ar-pz-in h3{font-size:2rem;text-transform:uppercase}
@@ -5689,15 +5689,13 @@ input.search,#main input[type=text],#layer input[type=text],#layer input[type=nu
 /* 23 · textos secundarios más legibles */
 .sec-h p{font-size:1.02rem;color:#bcc9e8}.note{color:#aebbdb}
 .tile span,.ep-m-s,.mn-tmeta,.mn-pill small{color:#b7c4e4}
-/* partido: órdenes cerca del pulgar en pantallas táctiles, celebración del público y avisos del dúo */
+/* partido: órdenes cerca del pulgar en pantallas táctiles, avisos del dúo */
 .ar-m.touch .ar-ord{top:auto;bottom:calc(env(safe-area-inset-bottom,0px) + 46%);flex-direction:column;align-items:flex-end;gap:8px}
 .ar-m.touch .ar-ob{min-height:38px;padding:0 12px}
-.ar-m.gfx::after{content:"";position:absolute;inset:0;z-index:3;pointer-events:none;background:radial-gradient(ellipse at 50% 50%,rgba(255,255,255,0) 45%,rgba(255,255,255,.5) 100%);opacity:0;animation:pxGfx 1.4s ease-out}
-@keyframes pxGfx{0%{opacity:0}12%{opacity:1}30%{opacity:.35}45%{opacity:.8}100%{opacity:0}}
 .du-pings{position:absolute;z-index:6;left:max(8px,env(safe-area-inset-left,0px));top:calc(env(safe-area-inset-top,0px) + 118px);display:grid;gap:6px}
 .du-pings button{min-height:34px;padding:0 12px;border-radius:16px;background:rgba(6,10,14,.6);border:1px solid rgba(255,255,255,.25);color:#e8f2ec;font:800 .72rem/1 var(--u-disp,sans-serif);cursor:pointer}
 .du-pings button:active{background:rgba(60,242,180,.3)}
-@media(prefers-reduced-motion:reduce){.ar-m.gfx::after,.px-zoom{animation:none}}
+@media(prefers-reduced-motion:reduce){.px-zoom{animation:none}}
 
 .tabs-in{display:grid!important;grid-template-columns:repeat(5,minmax(0,1fr))!important}
 .px-pass-h>div{display:grid;gap:2px}
@@ -5718,6 +5716,11 @@ input.search,#main input[type=text],#layer input[type=text],#layer input[type=nu
 .px-of-tag,.px-dot,.px-card em{background-image:none}
 .ar-duo-btn{background:linear-gradient(180deg,#ff5a6e,#c0162f 60%,#86081c)!important;border-color:rgba(255,200,200,.35)!important}
 .du-room{border-color:rgba(255,90,110,.4);background:linear-gradient(180deg,rgba(255,90,110,.14),rgba(255,90,110,.03))}.du-room i{background:#ff3d6e}
+
+/* rendimiento en partido de Arena: el menú de debajo y sus animaciones dejan de pintarse */
+body.ar-on>.top,body.ar-on>#main,body.ar-on>.tabs,body.ar-on>.bg3d{visibility:hidden!important}
+body.ar-on>#main *,body.ar-on>.top *{animation:none!important}
+body.ar-on{background-image:none!important}
 </style>
 
 <header class="top"><div class="top-in">
@@ -12284,6 +12287,7 @@ function arMatch(cfg,onEnd){
     <b>Gira el móvil</b><p>El partido se juega en horizontal. Se reanuda al girarlo.</p><button class="btn" id="arRotP">Menú de pausa</button></div></div>
    <div class="ar-pz" id="arPz" hidden><div class="ar-pz-in" id="arPzIn"><h3>Pausa</h3><p class="note">${TUT?"Tutorial":"Partido de "+esc(A.n)}</p><button class="btn primary" id="arRes">Reanudar</button><button class="btn" id="arCtlB">Controles</button>${TUT?`<button class="btn" id="arSkipTut">Saltar tutorial</button>`:`<button class="btn danger" id="arQuit">Abandonar (cuenta como derrota)</button>`}</div><div class="ar-pz-c" id="arPzC" hidden></div></div>
   </div>`;
+  document.body.classList.add("ar-on");/* durante el partido no se pinta el menú que queda debajo */
   const ov=L.querySelector(".ar-m"),cv=$("#arCv"),ctx=cv.getContext("2d",{alpha:false}),touch=matchMedia("(pointer:coarse)").matches||"ontouchstart" in window;
   ov.classList.toggle("touch",!!touch);arEnterLandscape();arLoadLayout();
   /* ---------- estado de la simulación (serializable) ---------- */
@@ -12450,7 +12454,7 @@ function arMatch(cfg,onEnd){
     joy.firstElementChild.style.cssText=`width:${g.d}px;height:${g.d}px;margin:${-g.d/2}px 0 0 ${-g.d/2}px`;const kk=g.d*.453;jk.style.width=jk.style.height=kk+"px";jk.style.marginLeft=jk.style.marginTop=-kk/2+"px";
     const q=arLayPx(L,"pause",w,h,pad);if(pb.parentNode!==ov)ov.appendChild(pb);pb.style.cssText=`position:absolute;z-index:5;left:${q.x-q.d/2}px;top:${q.y-q.d/2}px;width:${q.d}px;height:${q.d}px`}
   const safe=ov.querySelector(".ar-safe");
-  function resize(){const r=ov.getBoundingClientRect();V.dpr=Math.min(PERF.cfg().pr2d,window.devicePixelRatio||1);V.W=Math.max(200,r.width);V.H=Math.max(200,r.height);applyLay();
+  function resize(){const r=ov.getBoundingClientRect();V.dpr=Math.min(PERF.cfg().pr2d,V.cap||1.5,window.devicePixelRatio||1);V.W=Math.max(200,r.width);V.H=Math.max(200,r.height);applyLay();
     cv.width=Math.round(V.W*V.dpr);cv.height=Math.round(V.H*V.dpr);cv.style.width=V.W+"px";cv.style.height=V.H+"px";
     V.port=V.H>V.W*1.05;ov.classList.toggle("port",V.port);
     /* en móvil se juega en horizontal: en vertical se pide girar y se pausa */
@@ -12484,7 +12488,7 @@ function arMatch(cfg,onEnd){
     for(let i=0;i<10;i++){const p=P[i];if(p.off)continue;g.fillStyle=p.team===ME?myCol:opCol;g.fillRect(mx(p.px+(p.x-p.px)*al)-1.5,my(p.py+(p.y-p.py)*al)-1.5,3,3)}
     g.fillStyle="#fff";g.fillRect(mx(ball.px+(ball.x-ball.px)*al)-1.5,my(ball.py+(ball.y-ball.py)*al)-1.5,3,3);
     g.strokeStyle="#fff";g.globalAlpha=.8;const a=(V.vx-V.ox)/V.s,b=(V.vy-V.oy)/V.s,cw=V.vw/V.s,ch=V.vh/V.s;g.strokeRect(x0+a/ARF.L*w,y0+b/ARF.W*h,cw/ARF.L*w,ch/ARF.W*h);g.restore()}
-  const RPN=420,RPB=new Float32Array(RPN*43),RPS=new Float32Array(66);let RPG=-1;
+  const HQ=PERF.cfg().tier==="alta";
   const SP=[0,0];/* conversión a pantalla en un vector reutilizado */
   const S2=(x,y)=>{if(V.flip){x=ARF.L-x;y=ARF.W-y}if(V.port){SP[0]=V.ox+y*V.s;SP[1]=V.oy+(ARF.L-x)*V.s}else{SP[0]=V.ox+x*V.s;SP[1]=V.oy+y*V.s}return SP};
   const S2n=(x,y)=>V.flip?S2n0(ARF.L-x,ARF.W-y):S2n0(x,y),S2n0=(x,y)=>V.port?[V.ox+y*V.s,V.oy+(ARF.L-x)*V.s]:[V.ox+x*V.s,V.oy+y*V.s];
@@ -12496,17 +12500,7 @@ function arMatch(cfg,onEnd){
     const bg=g.createRadialGradient(V.W/2,V.H*.45,0,V.W/2,V.H*.45,Math.max(V.W,V.H)*.75);bg.addColorStop(0,shade(A.c1,.12));bg.addColorStop(1,shade(A.c1,-.55));g.fillStyle=bg;g.fillRect(0,0,V.W,V.H);
     const rr=rng(hash(A.n)),n=Math.round(1400*Q.crowd*(V.W*V.H)/(900*600)),[fx0,fy0]=S2(0,0),[fx1,fy1]=S2(ARF.L,ARF.W),X0=Math.min(fx0,fx1),X1=Math.max(fx0,fx1),Y0=Math.min(fy0,fy1),Y1=Math.max(fy0,fy1),pad=1.6*s;
     const cols=[A.c2,"#ffffff",A.cr,shade(A.c2,-.3),"#ffd23c",myCol];
-    /* gradas (se dibujan una sola vez, en el fondo pre-renderizado): filas de asientos por anillos, pasillos, vomitorios y bloques de color */
-    {const rowH=Math.max(3.2,s*.5)*(Q.tier==="baja"?1.7:Q.tier==="media"?1.25:1),sp=rowH*.98,d=rowH*.6,BK=cols.map(()=>[[],[],[]]),round=true;
-      for(let k=0;k<110;k++){const off=pad+rowH*(k+1.3),x0=X0-off,x1=X1+off,y0=Y0-off,y1=Y1+off;if(x0<-rowH&&y0<-rowH&&x1>V.W+rowH&&y1>V.H+rowH)break;
-        const walk=k%7===6;g.strokeStyle=walk?"rgba(0,0,0,.42)":k%2?"rgba(255,255,255,.035)":"rgba(0,0,0,.10)";g.lineWidth=rowH*(walk?1:.92);g.strokeRect(x0,y0,x1-x0,y1-y0);if(walk)continue;
-        const ab=k<10?0:k<24?1:2,tier=Math.floor(k/7);
-        const put=(x,y,idx,side)=>{if(x<-d||y<-d||x>V.W+d||y>V.H+d)return;const sec=Math.floor(idx/20);if(idx%20===0)return;const hv=hash("s"+side+"_"+sec+"_"+tier);
-          if(rr()<.07)return;const ci=hv%4===0?(hv>>>3)%cols.length:Math.floor(rr()*cols.length);BK[ci][ab].push(x+(rr()-.5)*d*.3,y+(rr()-.5)*d*.3)};
-        let i=0;for(let x=x0;x<=x1;x+=sp,i++){put(x,y0,i,0);put(x,y1,i,1)}i=0;for(let y=y0+sp;y<y1;y+=sp,i++){put(x0,y,i,2);put(x1,y,i,3)}}
-      const AL=[.78,.56,.36];for(let ci=0;ci<cols.length;ci++)for(let a=0;a<3;a++){const q=BK[ci][a];if(!q.length)continue;g.fillStyle=cols[ci];g.globalAlpha=AL[a];g.beginPath();
-        for(let i=0;i<q.length;i+=2){if(round){g.moveTo(q[i]+d/2,q[i+1]);g.arc(q[i],q[i+1],d/2,0,7)}else g.rect(q[i]-d/2,q[i+1]-d/2,d,d)}g.fill()}
-      g.globalAlpha=1}
+
     const bw=Math.max(4,s*.9);g.fillStyle="#0b0f14";g.fillRect(X0-pad,Y0-pad,X1-X0+2*pad,Y1-Y0+2*pad);
     const ad=g.createLinearGradient(X0,0,X1,0);ad.addColorStop(0,shade(A.c2,-.25));ad.addColorStop(.5,A.c2);ad.addColorStop(1,shade(A.c2,-.25));
     g.fillStyle=ad;g.globalAlpha=.85;g.fillRect(X0-pad+2,Y0-pad+2,X1-X0+2*pad-4,bw);g.fillRect(X0-pad+2,Y1+pad-2-bw,X1-X0+2*pad-4,bw);
@@ -12848,7 +12842,7 @@ function arMatch(cfg,onEnd){
     if(b.y<0){b.y=-b.y;b.vy=-b.vy*.62;b.vx*=.9;bounceSnd(v)}if(b.y>ARF.W){b.y=2*ARF.W-b.y;b.vy=-b.vy*.62;b.vx*=.9;bounceSnd(v)}
     if(G.shotFlight>0&&(v<6||ball.kind!=="shot"))G.shotFlight=0}
   const bounceSnd=v=>{if(v>6)SND.arBounce(Math.min(.4,v*.02))};
-  function goal(t){RPG=G.tick;if(!G.silent){ov.classList.remove("gfx");void ov.offsetWidth;ov.classList.add("gfx")}G.score[t]++;G.state="goal";G.stT=0;G.slow=.25;G.shotFlight=0;const sc=ball.last&&ball.last.team===t?ball.last.name:"";G.lastScorer=sc;G.kick=1-t;
+  function goal(t){G.score[t]++;G.state="goal";G.stT=0;G.slow=.25;G.shotFlight=0;const sc=ball.last&&ball.last.team===t?ball.last.name:"";G.lastScorer=sc;G.kick=1-t;
     if(!G.silent){$("#arS0").textContent=G.score[ME];$("#arS1").textContent=G.score[1-ME];const big=$("#arBig");
       big.innerHTML=`<b>${t===ME?"¡GOOOL!":"Gol rival"}</b>${sc?`<small>${esc(sc)}</small>`:""}`;big.className="ar-big on "+(t===ME?"me":"op");
       SND.whistle&&SND.whistle(1);if(t===ME){SND.crowd&&SND.crowd(1,2.6);SND.boom();confetti(t)}else SND.loseTone&&SND.loseTone()}
@@ -12884,17 +12878,6 @@ function arMatch(cfg,onEnd){
     else if(k===6){/* sombrero: arco punteado por encima del rival */g.globalAlpha=.85*a;g.setLineDash([s*.25,s*.3]);g.beginPath();g.moveTo(x,y);g.quadraticCurveTo(x+ux*s*2.4,y+uy*s*2.4-s*3.2,x+ux*s*4.8,y+uy*s*4.8);g.stroke();g.setLineDash([])}
     else{/* elástica: dos latigazos cruzados */g.globalAlpha=.9*a;for(let i=-1;i<=1;i+=2){g.beginPath();g.arc(x,y,s*1.3,ang+i*(.4+ph*1.4)-.6,ang+i*(.4+ph*1.4)+.6);g.stroke()}}
     g.restore()}
-  /* REPETICIÓN del gol (solo dibujo): cada tick se guarda la posición de jugadores y balón en un anillo; durante la pausa del gol
-     se pinta ese tramo de nuevo cambiando las posiciones un instante y devolviéndolas al acabar. La simulación no se entera. */
-  function drawR(al){
-    if(G.state!=="goal"||RPG<0||G.tut||G.stT<1||G.tick-RPG>330){draw(al);return}
-    const t=Math.round(RPG-250+Math.min(1,(G.stT-1)/1.3)*262);if(t<1||G.tick-t>=RPN-2){draw(al);return}
-    const o=(t%RPN)*43,ow=ball.owner;for(let i=0;i<10;i++){const p=P[i],k=i*6;RPS[k]=p.x;RPS[k+1]=p.y;RPS[k+2]=p.fx;RPS[k+3]=p.fy;RPS[k+4]=p.px;RPS[k+5]=p.py;p.x=p.px=RPB[o+i*4];p.y=p.py=RPB[o+i*4+1];p.fx=RPB[o+i*4+2];p.fy=RPB[o+i*4+3]}
-    RPS[60]=ball.x;RPS[61]=ball.y;RPS[62]=ball.z;RPS[63]=ball.px;RPS[64]=ball.py;RPS[65]=ball.pz;ball.x=ball.px=RPB[o+40];ball.y=ball.py=RPB[o+41];ball.z=ball.pz=RPB[o+42];ball.owner=null;const st0=G.state;G.state="play";
-    try{draw(1)}finally{G.state=st0;for(let i=0;i<10;i++){const p=P[i],k=i*6;p.x=RPS[k];p.y=RPS[k+1];p.fx=RPS[k+2];p.fy=RPS[k+3];p.px=RPS[k+4];p.py=RPS[k+5]}
-      ball.x=RPS[60];ball.y=RPS[61];ball.z=RPS[62];ball.px=RPS[63];ball.py=RPS[64];ball.pz=RPS[65];ball.owner=ow}
-    const g=ctx;g.setTransform(V.dpr,0,0,V.dpr,0,0);g.font="800 "+Math.max(12,Math.min(18,V.W*.022)|0)+"px Saira Condensed,Arial Narrow,sans-serif";g.textAlign="left";g.textBaseline="top";
-    const tx=V.W*.04,ty=V.H*.34;g.fillStyle="rgba(0,0,0,.6)";g.fillRect(tx-8,ty-5,g.measureText("● REPETICIÓN").width+16,parseInt(g.font.slice(4))+10);g.fillStyle="#ff4d5e";g.fillText("●",tx,ty);g.fillStyle="#fff";g.fillText("  REPETICIÓN",tx,ty)}
   function draw(al){const g=ctx;g.setTransform(V.dpr,0,0,V.dpr,0,0);const IX=p=>p.px+(p.x-p.px)*al,IY=p=>p.py+(p.y-p.py)*al;
     if(V.zm){const hh0=myP();camUpdate(ball.px+(ball.x-ball.px)*al,ball.py+(ball.y-ball.py)*al,hh0&&!hh0.off?IX(hh0):null,hh0&&!hh0.off?IY(hh0):null)}
     if(!V.bg)drawBG();
@@ -12922,14 +12905,12 @@ function arMatch(cfg,onEnd){
     const r=s*1.05;
     for(let i=0;i<10;i++){const p=P[i];if(p.off)continue;const q=S2(IX(p),IY(p)),x=q[0],y=q[1],isGK=p.role==="GK",LK=typeof cosLook==="function"?((V.lk||(V.lk={}))[i]!==undefined?V.lk[i]:(V.lk[i]=(CPK?(CPK[p.team]?cosLookFrom(p.src,CPK[p.team]):0):(p.team===ME?cosLook(p.src):0))||0)):0,c=isGK?(p.team===ME?"#5fe08f":"#47d6cf"):(p.team===ME?(KITV==="rainbow"?cosRainbow(now+i*.15):myCol):OPK?(OPK==="rainbow"?cosRainbow(now+i*.15):OPK):opCol);
       g.save();g.translate(x,y);const ang=(V.port?Math.atan2(-p.fx,p.fy):Math.atan2(p.fy,p.fx))+(V.flip?Math.PI:0);g.rotate(ang);
-      if(G.state==="goal"&&p===ball.last&&p.team!==G.kick){/* celebración del goleador (solo dibujo); la tuya se elige en Perfil */const ck=p.team===ME?(S.set.celeb|0):0,cs=Math.sin(G.stT*9),cz=1+.2*Math.abs(cs);
-        if(ck===1){g.scale(1+.35*Math.abs(cs),1+.35*Math.abs(cs))}else if(ck===2){g.translate(r*1.6*Math.min(1,G.stT),0);g.scale(1.3,.75)}else if(ck===3){g.rotate(.55*cs);g.scale(cz,cz)}else{g.rotate(G.stT*6);g.scale(cz,cz)}}
       if(p.tackleT>0){g.scale(1.25,.8)}
       const dph=p.skillT>0?1-p.skillT/.42:0,dk=p.skillT>0?p.skillK:0;
       if(dk===1){g.scale(1,1-.16*Math.sin(dph*Math.PI))}else if(dk===3){g.rotate(dph*Math.PI*2*(p.anim%2>1?1:-1))}else if(dk===4){g.scale(1+.18*Math.sin(dph*Math.PI),1-.1*Math.sin(dph*Math.PI))}else if(dk===5){g.transform(1,0,.38*Math.sin(dph*Math.PI*2),1,0,0)}else if(dk===6){g.scale(1-.12*Math.sin(dph*Math.PI),1+.12*Math.sin(dph*Math.PI))}
       if(p.kickT>0&&p.kickK){const kp=1-p.kickT/.3,ks=Math.sin(kp*Math.PI);if(p.kickK>=3)g.scale(1+.1*ks,1-.06*ks)}
       const sw=dk===2?Math.sin(dph*Math.PI*7):Math.sin(p.anim*3)*Math.min(1,Math.hypot(p.vx,p.vy)/4);
-      {const bb=LK&&LK.bb||1;g.fillStyle=LK?LK.bt:"#1a1a1a";if(LK&&LK.bglow){g.shadowColor=LK.bt;g.shadowBlur=r*.5}g.beginPath();g.ellipse(r*.25*bb+sw*r*.35,-r*.38,r*.28*bb,r*.17*bb,0,0,7);g.ellipse(r*.25*bb-sw*r*.35,r*.38,r*.28*bb,r*.17*bb,0,0,7);g.fill();g.shadowBlur=0}
+      {const bb=LK&&LK.bb||1;g.fillStyle=LK?LK.bt:"#1a1a1a";if(LK&&LK.bglow&&HQ){g.shadowColor=LK.bt;g.shadowBlur=r*.5}g.beginPath();g.ellipse(r*.25*bb+sw*r*.35,-r*.38,r*.28*bb,r*.17*bb,0,0,7);g.ellipse(r*.25*bb-sw*r*.35,r*.38,r*.28*bb,r*.17*bb,0,0,7);g.fill();g.shadowBlur=0}
       if(p.kickT>0&&p.kickK){/* pierna que golpea: barrido hacia delante (la rosca barre en diagonal) */const kp=1-p.kickT/.3,ks=Math.sin(kp*Math.PI),kk=p.kickK,fy=kk===4?(-.5+kp)*r*.9:r*.38,fxx=r*(.3+(kk>=3?.95:.6)*ks);g.fillStyle=kk===3?"#ff7a45":kk===4?"#ffb84d":kk===2?"#9fd6ff":"#f2f2f2";g.beginPath();g.ellipse(fxx,fy,r*(.34+.1*ks),r*.2,kk===4?.5*(1-2*kp):0,0,7);g.fill()}
       if(c.charCodeAt(0)===35){const sp=bodySprite(c,r,p.num);g.drawImage(sp,-sp.hw,-sp.hw,sp.hw*2,sp.hw*2)}
       else{g.fillStyle=bodyGrad(c,r);g.beginPath();g.ellipse(0,0,r*.62,r*.95,0,0,7);g.fill();
@@ -12963,25 +12944,27 @@ function arMatch(cfg,onEnd){
     drawMini(g,al)}
   /* ---------- bucle: paso fijo + interpolación ---------- */
   let raf=0,acc=0,destroyed=false;const gate=PERF.gate();
-  const FPS={n:0,t0:performance.now(),v:0,dts:[]};
+  const FPS={n:0,t0:performance.now(),v:0,dts:[],low:0};
   function frame(now){if(destroyed)return;raf=requestAnimationFrame(frame);pollPad();if(!gate(now))return;let dt=Math.min(.1,(now-last)/1000);last=now;
-    FPS.n++;if(now-FPS.t0>=1000){FPS.v=FPS.n*1000/(now-FPS.t0);FPS.n=0;FPS.t0=now}
+    FPS.n++;if(now-FPS.t0>=1000){FPS.v=FPS.n*1000/(now-FPS.t0);FPS.n=0;FPS.t0=now;
+      /* resolución dinámica: si en 3 segundos seguidos no se llega a ~50 fps, se baja la resolución del lienzo (una vez por escalón) */
+      if(FPS.v<50&&!G.paused&&!document.hidden){if(++FPS.low>=3&&V.dpr>1){FPS.low=0;V.cap=V.dpr>1.25?1.25:1;try{resize()}catch(e){}}}else FPS.low=0}
     if(cfg.net){if(window.__AR_BOTF)try{window.__AR_BOTF(G)}catch(e){}const al=cfg.net.frame(dt);evT=Math.max(0,evT-dt);if(evT<=0){const e=$("#arEv");e&&e.classList.remove("on")}
       if(G.parts.length){let j=0;for(let i=0;i<G.parts.length;i++){const q=G.parts[i];q.vz-=9.8*dt;q.x+=q.vx*dt;q.y+=q.vy*dt;q.z=Math.max(0,q.z+q.vz*dt);q.l-=dt*.6;if(q.l>0)G.parts[j++]=q}G.parts.length=j}
-      syncBtns();drawR(al);return}
-    if(G.paused||G.rot){if(!G.skill)drawR(1);return}
+      syncBtns();draw(al);return}
+    if(G.paused||G.rot){if(!G.skill)draw(1);return}
     const spd=window.__AR_SPEED||1;dt*=spd;
     if(window.__AR_BOTF)try{window.__AR_BOTF(G)}catch(e){}
     if(G.skill){G.skill.update(dt);return}
     evT=Math.max(0,evT-dt);if(evT<=0){const e=$("#arEv");e&&e.classList.remove("on")}
     acc+=dt*G.slow;let n=0;while(acc>=H&&n<24*spd){tick(null);acc-=H;n++}if(n>=24*spd)acc=0;
     if(G.parts.length){let j=0;for(let i=0;i<G.parts.length;i++){const q=G.parts[i];q.vz-=9.8*dt;q.x+=q.vx*dt;q.y+=q.vy*dt;q.z=Math.max(0,q.z+q.vz*dt);q.l-=dt*.6;if(q.l>0)G.parts[j++]=q}G.parts.length=j}
-    syncBtns();drawR(G.state==="ready"?1:clamp(acc/H,0,1))}
+    syncBtns();draw(G.state==="ready"?1:clamp(acc/H,0,1))}
   let lastSec=-1;
   /* un tick de simulación. inp: entrada externa (repetición/red); si es null se muestrea la local */
   const REC=window.__AR_REC?[]:null,ZIN={mx:0,my:0,b:0,e:0};
   function tick(inp,inp1,inp2,inp3){
-    {const o=(G.tick%RPN)*43;for(let i=0;i<10;i++){const p=P[i];p.px=p.x;p.py=p.y;RPB[o+i*4]=p.x;RPB[o+i*4+1]=p.y;RPB[o+i*4+2]=p.fx;RPB[o+i*4+3]=p.fy}RPB[o+40]=ball.x;RPB[o+41]=ball.y;RPB[o+42]=ball.z}ball.px=ball.x;ball.py=ball.y;ball.pz=ball.z;
+    for(let i=0;i<10;i++){const p=P[i];p.px=p.x;p.py=p.y}ball.px=ball.x;ball.py=ball.y;ball.pz=ball.z;
     if(!inp){if(window.__AR_BOTT&&G.state==="play")try{window.__AR_BOTT(G,H)}catch(e){}inp=sampleInput()}
     if(REC)REC.push(inp.mx,inp.my,inp.b|inp.e);
     G.tick++;
@@ -13015,7 +12998,7 @@ function arMatch(cfg,onEnd){
   const onLay=()=>{applyLay();resize()};window.addEventListener("arlay",onLay);$("#arRotP").onclick=pause;
   const qb=$("#arQuit");if(qb)qb.onclick=()=>{if(!qb.dataset.c){qb.dataset.c=1;qb.textContent="Toca otra vez para abandonar";return}if(cfg.net){cfg.net.quit();return}close({abandon:true,gf:G.score[0],ga:G.score[1]})};
   const sk=$("#arSkipTut");if(sk)sk.onclick=()=>close({tutSkip:true});
-  function close(res){if(destroyed)return;destroyed=true;cancelAnimationFrame(raf);ro.disconnect();window.removeEventListener("arlay",onLay);document.removeEventListener("keydown",kd,true);document.removeEventListener("keyup",ku,true);window.removeEventListener("blur",blur);document.removeEventListener("visibilitychange",vis);
+  function close(res){if(destroyed)return;destroyed=true;document.body.classList.remove("ar-on");cancelAnimationFrame(raf);ro.disconnect();window.removeEventListener("arlay",onLay);document.removeEventListener("keydown",kd,true);document.removeEventListener("keyup",ku,true);window.removeEventListener("blur",blur);document.removeEventListener("visibilitychange",vis);
     if(ctlP)ctlP.close();if(G.skill&&G.skill.destroy)G.skill.destroy();window.__AR_G=null;L.innerHTML="";arExitLandscape();res.stats=G.stats;onEnd&&onEnd(res)}
   /* ---------- estado serializable, simulación sin dibujo y resumen (para red, repeticiones y pruebas) ---------- */
   const PK=["x","y","vx","vy","fx","fy","stun","tackleT","tackleCd","skillT","skillCd","skillK","skillS","kickT","kickK","dcd","tac","boostT","boostCd","cool","dive","anim","off","prot","safe","sax","say","sbx","sby","sox","soy","stc","ord","ordT","ordCd"],AK=["t","hold","recv","sw","react","err","gg","tx","ty","st"];
@@ -15372,7 +15355,6 @@ function pxSheet(tab){PX.tab=tab||PX.tab||"mis";const M=pxMis(),P=pxPass(),lv=px
     body=`<div class="px-prof"><div class="mn-crest">${myCrest()}</div><div><b>${esc(S.club||"Tu club")}</b><small>${S.alias?"@"+esc(S.alias):"Invitado"}</small></div></div>
      <div class="px-stats">${[["Partidos",st.pj+A.w+A.l],["Victorias",st.g+A.w],["Goles",st.gf+(A.gf|0)],["Títulos",totalTitles()],["Cartas",uniq().length],["Trofeos Arena",A.tr|0],["Victorias online",(S.rk.olW|0)+((S.duo&&S.duo.w)|0)],["Logros",PX_ACH.reduce((a,x)=>a+pxAchTier(x),0)+"/"+PX_ACH.length*4]].map(x=>`<div><b class="num">${typeof x[1]==="number"?fmt(x[1]):x[1]}</b><small>${x[0]}</small></div>`).join("")}</div>
      ${best.length?`<h4 class="ol-h4">Mejores cartas</h4><div class="px-best">${best.map(p=>cardHTML(p,{cw:92})).join("")}</div>`:""}
-     <div class="px-notif"><div><b>Celebración de gol</b><small>Cómo celebra tu jugador cuando marcas en la Arena.</small></div><div class="px-cel">${["Giro","Salto","Deslizar","Baile"].map((n,i)=>`<button class="chip" data-pxcel="${i}" aria-pressed="${(S.set.celeb|0)===i}">${n}</button>`).join("")}</div></div>
      <div class="px-notif"><div><b>Avisos en el dispositivo</b><small>${nOk?"Te avisa de retos recibidos cuando el juego está abierto en segundo plano.":"Tu navegador no admite avisos."}</small></div>${nOk?`<button class="btn small${nOn?"":" primary"}" id="pxNotif">${nOn?"Desactivar":"Activar"}</button>`:""}</div>`}
   const html=`<div class="px-sheet"><div class="sheet-h"><h3>${t==="mis"?"Misiones":t==="pase"?"Pase de temporada":t==="logros"?"Logros":"Perfil de mánager"}</h3><button class="btn small" data-close>Cerrar</button></div>${seg}${body}</div>`;
   const cur=document.querySelector("#layer .px-sheet");
@@ -15382,7 +15364,6 @@ function pxSheet(tab){PX.tab=tab||PX.tab||"mis";const M=pxMis(),P=pxPass(),lv=px
   S0.querySelectorAll("[data-pxm]").forEach(b=>b.onclick=()=>{const m=M.l[+b.dataset.pxm];if(!m||m.c||pxMisProg(m)<m.n)return;m.c=1;S.misW.n++;pxXP(40);addCoins(Math.round(600*pxEM()));save();pxSheet()});
   S0.querySelectorAll("[data-pxl]").forEach(b=>b.onclick=()=>pxClaimLv(+b.dataset.pxl));
   S0.querySelectorAll("[data-pxa]").forEach(b=>b.onclick=()=>{const a=PX_ACH.find(x=>x.id===b.dataset.pxa),ti=pxAchTier(a);if(ti>=a.g.length||a.get()<a.g[ti])return;S.ach=S.ach||{};S.ach[a.id]=ti+1;addCoins(pxAchPrize(a,ti));save();pxSheet()});
-  S0.querySelectorAll("[data-pxcel]").forEach(b=>b.onclick=()=>{S.set.celeb=+b.dataset.pxcel;save();pxSheet()});
   const ch=$("#pxChest");if(ch)ch.onclick=()=>{const W2=S.misW;if(W2.c||W2.n<PX_WEEK_N)return;W2.c=1;pxXP(150);save();closeSheet();const pk=pxBestPack();S.packs++;openPackFlow(pk,openPackCards(pk),()=>render())};
   const nb=$("#pxNotif");if(nb)nb.onclick=async()=>{if(S.set.notif&&Notification.permission==="granted"){S.set.notif=false}else{let p=Notification.permission;if(p!=="granted")try{p=await Notification.requestPermission()}catch(e){}if(p!=="granted"){toast("El navegador no ha dado permiso para los avisos.");return}S.set.notif=true}save();pxSheet()};
 }
