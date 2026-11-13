@@ -9337,7 +9337,7 @@ function penPicker(title,onPick,L){
 function startPenCup(id){
   if(!uniq().length){toast("Necesitas al menos una carta.");return}
   const cup=PEN_CUPS.find(c=>c.id===id);
-  penPicker(`Elige tu lanzador · ${cup.name}`,pid=>{S.pen={cup:id,round:0,card:pid,seed:Math.floor(Math.random()*1e9)};save();JUG="penaltis";render(true)},cup.L);
+  penPicker(`Elige tu lanzador · ${cup.name}`,pid=>{/* copa ya ganada: al repetirla se entra directamente en la semifinal */const rep=(S.titles[id]|0)>0;S.pen={cup:id,round:rep?1:0,card:pid,seed:Math.floor(Math.random()*1e9)};save();JUG="penaltis";render(true);if(rep)toast("Ya ganaste esta copa: empiezas en la semifinal.")},cup.L);
 }
 function bindPenaltis(m){
   const on=(id,fn)=>{const e=m.querySelector(id);if(e)e.onclick=fn};
